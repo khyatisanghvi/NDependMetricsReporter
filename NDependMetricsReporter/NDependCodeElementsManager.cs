@@ -18,11 +18,11 @@ namespace NDependMetricsReporter
 
         public enum AssemblyMetrics {
             NbNamespaces, NbTypes, NbMethods, NbFields,
-            AssembliesUsed, AssembliesUsingMe, Level,
-            NbILInstructions, NbLinesOfCode,
+            AsmCe, AsmCa, Level,
+            NbILInst, NbLinesOfCode,
             NbLinesOfCodeCovered, NbLinesOfCodeNotCovered, PercentageCoverage,
             NbLinesOfComment, PercentageComment,
-            NbTypesUsed, NbTypesUsingMe, RelationalCohesion,
+            NbTypesUsed, NbTypesUsingMe, TypeCe, TypeCa, RelationalCohesion,
             Abstractness, Instability, DistFromMainSeq, NormDistFromMainSeq
         };
 
@@ -92,14 +92,45 @@ namespace NDependMetricsReporter
         {
             Dictionary<string, string> assemblyMetrics = new Dictionary<string, string>();
             PropertyInfo property;
+            //PropertyInfo[] p = assembly.GetType().GetProperties();
 
             foreach ( string assemblyMetricName in Enum.GetNames(typeof(AssemblyMetrics)))
             {
                 string metricValue = null;
-                property = typeof(IAssembly).GetProperty(assemblyMetricName);
+                property = assembly.GetType().GetProperty(assemblyMetricName);
                 if (property != null) metricValue = property.GetValue(assembly).ToString();
                 assemblyMetrics.Add(assemblyMetricName, metricValue);
             }
+            
+            return assemblyMetrics;
+        }
+
+        public Dictionary<string, string> GetAssemblyMetrics_NoReflection(IAssembly assembly)
+        {
+            Dictionary<string, string> assemblyMetrics = new Dictionary<string, string>();
+
+            assemblyMetrics.Add("NbNamespaces", assembly.NbNamespaces.ToString());
+            assemblyMetrics.Add("NbTypes", assembly.NbTypes.ToString());
+            assemblyMetrics.Add("NbMethods", assembly.NbMethods.ToString());
+            assemblyMetrics.Add("NbFields", assembly.NbFields.ToString());
+            assemblyMetrics.Add("AssembliesUsingMe", assembly.AssembliesUsingMe.Count(p=>true).ToString());
+            assemblyMetrics.Add("AssembliesUsed", assembly.AssembliesUsed.Count(p => true).ToString());
+            assemblyMetrics.Add("Level", assembly.Level.ToString());
+            assemblyMetrics.Add("NbILInstructions", assembly.NbILInstructions.ToString());
+            assemblyMetrics.Add("NbLinesOfCode", assembly.NbLinesOfCode.ToString());
+            assemblyMetrics.Add("NbLinesOfCodeCovered", assembly.NbLinesOfCodeCovered.ToString());
+            assemblyMetrics.Add("NbLinesOfCodeNotCovered", assembly.NbLinesOfCodeNotCovered.ToString());
+            assemblyMetrics.Add("PercentageCoverage", assembly.PercentageCoverage.ToString());
+            assemblyMetrics.Add("NbLinesOfComment", assembly.NbLinesOfComment.ToString());
+            assemblyMetrics.Add("PercentageComment", assembly.PercentageComment.ToString());
+            assemblyMetrics.Add("NbTypesUsed", assembly.NbTypesUsed.ToString());
+            assemblyMetrics.Add("NbTypesUsingMe", assembly.NbTypesUsingMe.ToString());
+            assemblyMetrics.Add("RelationalCohesion", assembly.RelationalCohesion.ToString());
+            assemblyMetrics.Add("Abstractness", assembly.Abstractness.ToString());
+            assemblyMetrics.Add("Instability", assembly.Instability.ToString());
+            assemblyMetrics.Add("DistFromMainSeq", assembly.DistFromMainSeq.ToString());
+            assemblyMetrics.Add("NormDistFromMainSeq", assembly.NormDistFromMainSeq.ToString());
+
             return assemblyMetrics;
         }
     }

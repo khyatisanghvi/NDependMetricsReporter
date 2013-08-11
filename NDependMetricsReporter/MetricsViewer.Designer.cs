@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnLoadCodeBase = new System.Windows.Forms.Button();
             this.btnHistoryChart = new System.Windows.Forms.Button();
             this.chrtLineChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -54,6 +54,9 @@
             this.MethodName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblMethodsList = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lvwMetricsList2 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.chrtLineChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,18 +82,18 @@
             // 
             // chrtLineChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chrtLineChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chrtLineChart.Legends.Add(legend2);
-            this.chrtLineChart.Location = new System.Drawing.Point(791, 263);
+            chartArea1.Name = "ChartArea1";
+            this.chrtLineChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chrtLineChart.Legends.Add(legend1);
+            this.chrtLineChart.Location = new System.Drawing.Point(791, 572);
             this.chrtLineChart.Name = "chrtLineChart";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "Lines Of Code";
-            this.chrtLineChart.Series.Add(series2);
-            this.chrtLineChart.Size = new System.Drawing.Size(423, 300);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Lines Of Code";
+            this.chrtLineChart.Series.Add(series1);
+            this.chrtLineChart.Size = new System.Drawing.Size(423, 110);
             this.chrtLineChart.TabIndex = 3;
             this.chrtLineChart.Text = "LineChart";
             // 
@@ -197,7 +200,7 @@
             // MetricName
             // 
             this.MetricName.Text = "Metric Name";
-            this.MetricName.Width = 155;
+            this.MetricName.Width = 141;
             // 
             // MetricValue
             // 
@@ -266,11 +269,36 @@
             this.textBox1.Size = new System.Drawing.Size(214, 80);
             this.textBox1.TabIndex = 18;
             // 
+            // lvwMetricsList2
+            // 
+            this.lvwMetricsList2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.lvwMetricsList2.GridLines = true;
+            this.lvwMetricsList2.Location = new System.Drawing.Point(791, 178);
+            this.lvwMetricsList2.Name = "lvwMetricsList2";
+            this.lvwMetricsList2.Size = new System.Drawing.Size(214, 385);
+            this.lvwMetricsList2.TabIndex = 19;
+            this.lvwMetricsList2.UseCompatibleStateImageBehavior = false;
+            this.lvwMetricsList2.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Metric Name";
+            this.columnHeader1.Width = 141;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Value";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader2.Width = 55;
+            // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 694);
+            this.Controls.Add(this.lvwMetricsList2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblMethodsList);
             this.Controls.Add(this.lvwMethodsList);
@@ -320,6 +348,9 @@
         private System.Windows.Forms.ColumnHeader MethodName;
         private System.Windows.Forms.Label lblMethodsList;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListView lvwMetricsList2;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 

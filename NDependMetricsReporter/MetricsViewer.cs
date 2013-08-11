@@ -69,7 +69,7 @@ namespace NDependMetricsReporter
 
         private void FillMethodsListView(IEnumerable<IMethod> methodsList)
         {
-            this.lvwMethodsList.Clear(); ;
+            this.lvwMethodsList.Items.Clear(); ;
             foreach (IMethod m in methodsList)
             {
                 ListViewItem lvi = new ListViewItem(new string[] { m.Name });
@@ -79,12 +79,23 @@ namespace NDependMetricsReporter
 
         private void FillMetricsListView<T>(T codeElement, Dictionary<string, string> metrics)
         {
-            this.lvwMetricsList.Clear(); ;
+            this.lvwMetricsList.Items.Clear();
             foreach (KeyValuePair<string, string> metric in metrics)
             {
                 //ListViewItem lvi = new ListViewItem(new [] { metric.Key, metric.Value });
-                ListViewItem lvi = new ListViewItem(new[] { metric.Key });
+                ListViewItem lvi = new ListViewItem(new[] { metric.Key, metric.Value });
                 this.lvwMetricsList.Items.Add(lvi);
+            }
+        }
+
+        private void FillMetricsListView2<T>(T codeElement, Dictionary<string, string> metrics)
+        {
+            this.lvwMetricsList2.Items.Clear();
+            foreach (KeyValuePair<string, string> metric in metrics)
+            {
+                //ListViewItem lvi = new ListViewItem(new [] { metric.Key, metric.Value });
+                ListViewItem lvi = new ListViewItem(new[] { metric.Key, metric.Value });
+                this.lvwMetricsList2.Items.Add(lvi);
             }
         }
 
@@ -145,6 +156,8 @@ namespace NDependMetricsReporter
                 FillNamespacesListView(assembly.ChildNamespaces);
                 Dictionary<string, string> assemblyMetrics = codeElementsManager.GetAssemblyMetrics(assembly);
                 FillMetricsListView<IAssembly>(assembly, assemblyMetrics);
+                Dictionary<string, string> assemblyMetrics2 = codeElementsManager.GetAssemblyMetrics_NoReflection(assembly);
+                FillMetricsListView2<IAssembly>(assembly, assemblyMetrics2);
             }
         }
 
