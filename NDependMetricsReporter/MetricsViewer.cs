@@ -49,10 +49,20 @@ namespace NDependMetricsReporter
 
         private void FillNamespacesListView(IEnumerable<INamespace> namespacesList)
         {
-            lvwNamespacesList.Items.Clear(); ;
+            this.lvwNamespacesList.Items.Clear(); ;
             foreach (INamespace nspc in namespacesList)
             {
                 ListViewItem lvi = new ListViewItem(new string[] { nspc.Name });
+                this.lvwNamespacesList.Items.Add(lvi);
+            }
+        }
+
+        private void FillTypesListView(IEnumerable<IType> typesList)
+        {
+            this.lvwTypesList.Items.Clear(); ;
+            foreach (IType tp in typesList)
+            {
+                ListViewItem lvi = new ListViewItem(new string[] { tp.Name });
                 this.lvwNamespacesList.Items.Add(lvi);
             }
         }
@@ -104,23 +114,29 @@ namespace NDependMetricsReporter
             
         }
 
-
-
-
-
-        private void lvwAssembliesMetricsList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedAssemblyName=lvwAssembliesMetricsList.SelectedItems[0].Text;
-            var namespacesList = new NDependCodeElementsManager(lastAnalysisCodebase).GetNamespacesInAssembly(selectedAssemblyName);
-            FillNamespacesListView(namespacesList);            
-        }
-
         private void lvwAssembliesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedAssemblyName = lvwAssembliesList.SelectedItems[0].Text;
-            var namespacesList = new NDependCodeElementsManager(lastAnalysisCodebase).GetNamespacesInAssembly(selectedAssemblyName);
+            string selectedAssemblyName = this.lvwAssembliesList.SelectedItems[0].Text;
+            var namespacesList = new NDependCodeElementsManager(lastAnalysisCodebase).GetAssemblyByName(selectedAssemblyName).ChildNamespaces;
             FillNamespacesListView(namespacesList); 
         }
+
+        private void lvwNamespacesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedNamespaceName = this.lvwNamespacesList.SelectedItems[0].Text;
+            var typesList = new NDependCodeElementsManager(lastAnalysisCodebase).GetNamespaceByName(selectedNamespaceName).ChildTypes;
+            FillTypesListView(typesList); 
+
+        }
+
+        private void lvwTypesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedAssemblyName = lvwAssembliesList.SelectedItems[0].Text;
+           // var namespacesList = new NDependCodeElementsManager(lastAnalysisCodebase).GetNamespacesInAssembly(selectedAssemblyName);
+            //FillNamespacesListView(namespacesList); 
+        }
+
+
 
 
     }
