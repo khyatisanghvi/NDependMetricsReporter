@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnLoadCodeBase = new System.Windows.Forms.Button();
             this.btnHistoryChart = new System.Windows.Forms.Button();
             this.chrtLineChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -44,13 +44,13 @@
             this.lvwNamespacesList = new System.Windows.Forms.ListView();
             this.NamespaceName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblNamespacesList = new System.Windows.Forms.Label();
-            this.lvwMetrics = new System.Windows.Forms.ListView();
+            this.lvwMetricsList = new System.Windows.Forms.ListView();
             this.MetricName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MetricValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwTypesList = new System.Windows.Forms.ListView();
             this.TypeName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblTypesList = new System.Windows.Forms.Label();
-            this.lvsMethodsList = new System.Windows.Forms.ListView();
+            this.lvwMethodsList = new System.Windows.Forms.ListView();
             this.MethodName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblMethodsList = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -79,17 +79,17 @@
             // 
             // chrtLineChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chrtLineChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chrtLineChart.Legends.Add(legend3);
+            chartArea2.Name = "ChartArea1";
+            this.chrtLineChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chrtLineChart.Legends.Add(legend2);
             this.chrtLineChart.Location = new System.Drawing.Point(791, 263);
             this.chrtLineChart.Name = "chrtLineChart";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Legend = "Legend1";
-            series3.Name = "Lines Of Code";
-            this.chrtLineChart.Series.Add(series3);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Lines Of Code";
+            this.chrtLineChart.Series.Add(series2);
             this.chrtLineChart.Size = new System.Drawing.Size(423, 300);
             this.chrtLineChart.TabIndex = 3;
             this.chrtLineChart.Text = "LineChart";
@@ -181,18 +181,18 @@
             this.lblNamespacesList.TabIndex = 11;
             this.lblNamespacesList.Text = "Namespaces in selected assembly";
             // 
-            // lvwMetrics
+            // lvwMetricsList
             // 
-            this.lvwMetrics.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvwMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.MetricName,
             this.MetricValue});
-            this.lvwMetrics.GridLines = true;
-            this.lvwMetrics.Location = new System.Drawing.Point(554, 178);
-            this.lvwMetrics.Name = "lvwMetrics";
-            this.lvwMetrics.Size = new System.Drawing.Size(214, 385);
-            this.lvwMetrics.TabIndex = 13;
-            this.lvwMetrics.UseCompatibleStateImageBehavior = false;
-            this.lvwMetrics.View = System.Windows.Forms.View.Details;
+            this.lvwMetricsList.GridLines = true;
+            this.lvwMetricsList.Location = new System.Drawing.Point(554, 178);
+            this.lvwMetricsList.Name = "lvwMetricsList";
+            this.lvwMetricsList.Size = new System.Drawing.Size(214, 385);
+            this.lvwMetricsList.TabIndex = 13;
+            this.lvwMetricsList.UseCompatibleStateImageBehavior = false;
+            this.lvwMetricsList.View = System.Windows.Forms.View.Details;
             // 
             // MetricName
             // 
@@ -232,17 +232,17 @@
             this.lblTypesList.TabIndex = 15;
             this.lblTypesList.Text = "Types in selected Namespace";
             // 
-            // lvsMethodsList
+            // lvwMethodsList
             // 
-            this.lvsMethodsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvwMethodsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.MethodName});
-            this.lvsMethodsList.GridLines = true;
-            this.lvsMethodsList.Location = new System.Drawing.Point(28, 531);
-            this.lvsMethodsList.Name = "lvsMethodsList";
-            this.lvsMethodsList.Size = new System.Drawing.Size(498, 150);
-            this.lvsMethodsList.TabIndex = 16;
-            this.lvsMethodsList.UseCompatibleStateImageBehavior = false;
-            this.lvsMethodsList.View = System.Windows.Forms.View.Details;
+            this.lvwMethodsList.GridLines = true;
+            this.lvwMethodsList.Location = new System.Drawing.Point(28, 531);
+            this.lvwMethodsList.Name = "lvwMethodsList";
+            this.lvwMethodsList.Size = new System.Drawing.Size(498, 150);
+            this.lvwMethodsList.TabIndex = 16;
+            this.lvwMethodsList.UseCompatibleStateImageBehavior = false;
+            this.lvwMethodsList.View = System.Windows.Forms.View.Details;
             // 
             // MethodName
             // 
@@ -273,10 +273,10 @@
             this.ClientSize = new System.Drawing.Size(1227, 694);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblMethodsList);
-            this.Controls.Add(this.lvsMethodsList);
+            this.Controls.Add(this.lvwMethodsList);
             this.Controls.Add(this.lblTypesList);
             this.Controls.Add(this.lvwTypesList);
-            this.Controls.Add(this.lvwMetrics);
+            this.Controls.Add(this.lvwMetricsList);
             this.Controls.Add(this.lblNamespacesList);
             this.Controls.Add(this.lvwNamespacesList);
             this.Controls.Add(this.lblAssembliesList);
@@ -310,13 +310,13 @@
         private System.Windows.Forms.ListView lvwNamespacesList;
         private System.Windows.Forms.Label lblNamespacesList;
         private System.Windows.Forms.ColumnHeader NamespaceName;
-        private System.Windows.Forms.ListView lvwMetrics;
+        private System.Windows.Forms.ListView lvwMetricsList;
         private System.Windows.Forms.ColumnHeader MetricName;
         private System.Windows.Forms.ColumnHeader MetricValue;
         private System.Windows.Forms.ListView lvwTypesList;
         private System.Windows.Forms.ColumnHeader TypeName;
         private System.Windows.Forms.Label lblTypesList;
-        private System.Windows.Forms.ListView lvsMethodsList;
+        private System.Windows.Forms.ListView lvwMethodsList;
         private System.Windows.Forms.ColumnHeader MethodName;
         private System.Windows.Forms.Label lblMethodsList;
         private System.Windows.Forms.TextBox textBox1;

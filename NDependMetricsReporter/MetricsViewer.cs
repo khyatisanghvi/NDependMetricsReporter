@@ -63,7 +63,28 @@ namespace NDependMetricsReporter
             foreach (IType tp in typesList)
             {
                 ListViewItem lvi = new ListViewItem(new string[] { tp.Name });
-                this.lvwNamespacesList.Items.Add(lvi);
+                this.lvwTypesList.Items.Add(lvi);
+            }
+        }
+
+        private void FillMethodsListView(IEnumerable<IMethod> methodsList)
+        {
+            this.lvwMethodsList.Clear(); ;
+            foreach (IMethod m in methodsList)
+            {
+                ListViewItem lvi = new ListViewItem(new string[] { m.Name });
+                this.lvwMethodsList.Items.Add(lvi);
+            }
+        }
+
+        private void FillMetricsListView<T>(T codeElement, Dictionary<string, string> metrics)
+        {
+            this.lvwMetricsList.Clear(); ;
+            foreach (KeyValuePair<string, string> metric in metrics)
+            {
+                //ListViewItem lvi = new ListViewItem(new [] { metric.Key, metric.Value });
+                ListViewItem lvi = new ListViewItem(new[] { metric.Key });
+                this.lvwMetricsList.Items.Add(lvi);
             }
         }
 
@@ -116,28 +137,35 @@ namespace NDependMetricsReporter
 
         private void lvwAssembliesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedAssemblyName = this.lvwAssembliesList.SelectedItems[0].Text;
-            var namespacesList = new NDependCodeElementsManager(lastAnalysisCodebase).GetAssemblyByName(selectedAssemblyName).ChildNamespaces;
-            FillNamespacesListView(namespacesList); 
+            if (this.lvwAssembliesList.SelectedItems.Count > 0)
+            {
+                NDependCodeElementsManager codeElementsManager = new NDependCodeElementsManager(lastAnalysisCodebase);
+                string selectedAssemblyName = this.lvwAssembliesList.SelectedItems[0].Text;
+                IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
+                FillNamespacesListView(assembly.ChildNamespaces);
+                Dictionary<string, string> assemblyMetrics = codeElementsManager.GetAssemblyMetrics(assembly);
+                FillMetricsListView<IAssembly>(assembly, assemblyMetrics);
+            }
         }
 
         private void lvwNamespacesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedNamespaceName = this.lvwNamespacesList.SelectedItems[0].Text;
-            var typesList = new NDependCodeElementsManager(lastAnalysisCodebase).GetNamespaceByName(selectedNamespaceName).ChildTypes;
-            FillTypesListView(typesList); 
-
+            if (this.lvwNamespacesList.SelectedItems.Count > 0)
+            {
+                string selectedNamespaceName = this.lvwNamespacesList.SelectedItems[0].Text;
+                var typesList = new NDependCodeElementsManager(lastAnalysisCodebase).GetNamespaceByName(selectedNamespaceName).ChildTypes;
+                FillTypesListView(typesList);
+            }
         }
 
         private void lvwTypesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedAssemblyName = lvwAssembliesList.SelectedItems[0].Text;
-           // var namespacesList = new NDependCodeElementsManager(lastAnalysisCodebase).GetNamespacesInAssembly(selectedAssemblyName);
-            //FillNamespacesListView(namespacesList); 
+            if (this.lvwTypesList.SelectedItems.Count > 0)
+            {
+                string selectedTypeName = this.lvwTypesList.SelectedItems[0].Text;
+                var methodsList = new NDependCodeElementsManager(lastAnalysisCodebase).GetTypeByName(selectedTypeName).MethodsAndContructors;
+                FillMethodsListView(methodsList);
+            }
         }
-
-
-
-
     }
 }

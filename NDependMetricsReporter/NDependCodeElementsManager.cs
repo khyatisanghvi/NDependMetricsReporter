@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace NDependMetricsReporter
             this.codeBase = codeBase;
         }
 
-        enum AssemblyMetrics {
+        public enum AssemblyMetrics {
             NbNamespaces, NbTypes, NbMethods, NbFields,
             AssembliesUsed, AssembliesUsingMe, Level,
             NbILInstructions, NbLinesOfCode,
@@ -25,7 +26,7 @@ namespace NDependMetricsReporter
             Abstractness, Instability, DistFromMainSeq, NormDistFromMainSeq
         };
 
-        enum NamespaceMetrics {
+        public enum NamespaceMetrics {
             NbTypes, NbMethods, NbFields,
             NbNamespacesUsed, NbNamespacesUsingMe, Level,
             NbILInstructions, NbLinesOfCode,
@@ -33,7 +34,7 @@ namespace NDependMetricsReporter
             NbLinesOfComment, PercentageComment
         };
 
-        enum TypeMetrics {
+        public enum TypeMetrics {
             NbMethods, NbFields, LCOM, LCOMHS,
             NbTypesUsed, NbTypesUsingMe, Level, Rank,
             NbILInstructions, NbLinesOfCode,
@@ -45,7 +46,7 @@ namespace NDependMetricsReporter
             NbChildren, DepthOfInheritance
         };
 
-        enum MethodMetrics
+        public enum MethodMetrics
         {
             NbVariables, NbParameters,
             NbOverloads,
@@ -72,21 +73,6 @@ namespace NDependMetricsReporter
             return nonThirPartyAssemblies;
         }
 
-        public IEnumerable<INamespace> GetNamespacesInAssembly(string assemblyName)
-        {
-            return GetAssemblyByName(assemblyName).ChildNamespaces;
-        }
-
-        public IEnumerable<IType> GetTypesInAssembly(string assemblyName)
-        {
-            return GetAssemblyByName(assemblyName).ChildTypes;
-        }
-
-        public IEnumerable<IType> GetTypesInNamespace(string namespaceName)
-        {
-            return GetNamespaceByName(namespaceName).ChildTypes;
-        }
-
         public IAssembly GetAssemblyByName(string assemblyName)
         {
             return codeBase.Application.Assemblies.Where(a => a.Name == assemblyName).First();
@@ -102,10 +88,19 @@ namespace NDependMetricsReporter
             return codeBase.Application.Types.Where(t => t.Name == typeName).First();
         }
 
-        public IEnumerable<INamespace> GetNamespaces(string basePropertyName, string propertyToGetName)
+        public Dictionary<string, string> GetAssemblyMetrics(IAssembly assembly)
         {
-            
-            return null;
+            Dictionary<string, string> assemblyMetrics = new Dictionary<string, string>();
+            PropertyInfo property;
+
+            foreach ( string assemblyMetricName in Enum.GetNames(typeof(AssemblyMetrics)))
+            {
+                string metricValue = null;
+                property = typeof(IAssembly).GetProperty(assemblyMetricName);
+                if (property != null) metricValue = property.GetValue(assembly).ToString();
+                assemblyMetrics.Add(assemblyMetricName, metricValue);
+            }
+            return assemblyMetrics;
         }
     }
 }
