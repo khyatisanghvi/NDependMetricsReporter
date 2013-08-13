@@ -81,7 +81,7 @@ namespace NDependMetricsReporter
 
         private void FillMetricsListView<T>(T codeElement, Dictionary<NDependMetricDefinition, double> metrics)
         {
-            this.lvwAssembliesList.Tag = codeElement;
+            this.lvwMetricsList.Tag = codeElement;
             this.lvwMetricsList.Items.Clear();
             foreach (KeyValuePair<NDependMetricDefinition, double> metric in metrics)
             {
@@ -188,9 +188,16 @@ namespace NDependMetricsReporter
         {
             if (this.lvwMetricsList.SelectedItems.Count > 0)
             {
+                List<uint> nbLinesOfCodeList = new List<uint>();
                 ListViewItem lvi = this.lvwMetricsList.SelectedItems[0];
-                NDependAnalysisHistoryManager nDependAnalisysHistoryManager = new NDependAnalysisHistoryManager(nDependProject);
-                List<uint> nbLinesOfCodeList = nDependAnalisysHistoryManager.GetAssemblyMetricHistory<uint>("", "NbLinesOfCode");
+                string metricType = ((NDependMetricDefinition)lvi.Tag).NDependMetricType;
+                string metricInernalPorpertyName= ((NDependMetricDefinition)lvi.Tag).InternalPropertyName;
+                if (metricType == "Assembly")
+                {
+                    string assemblyName = ((IAssembly)this.lvwMetricsList.Tag).Name;
+                    NDependAnalysisHistoryManager nDependAnalisysHistoryManager = new NDependAnalysisHistoryManager(nDependProject);
+                    nbLinesOfCodeList = nDependAnalisysHistoryManager.GetAssemblyMetricHistory<uint>(assemblyName, metricInernalPorpertyName);
+                }
 
 
                 this.chrtLineChart.DataSource = new BindingList<uint>(nbLinesOfCodeList);

@@ -46,7 +46,8 @@ namespace NDependMetricsReporter
                 {
                     IAnalysisResult analisysResult = m.Load();
                     ICodeBase codeBase = analisysResult.CodeBase;
-                    IAssembly selectedAssembly = codeBase.Application.Assemblies.ElementAt<IAssembly>(0);
+                    //IAssembly selectedAssembly = codeBase.Application.Assemblies.ElementAt<IAssembly>(0);
+                    IAssembly selectedAssembly = codeBase.Application.Assemblies.Where(a => a.Name == assemblyName).First();
                     metricValues.Add((T)selectedAssembly.GetType().GetProperty(metricName).GetValue(selectedAssembly));
                 }
                 catch (AnalysisException analysisException)
