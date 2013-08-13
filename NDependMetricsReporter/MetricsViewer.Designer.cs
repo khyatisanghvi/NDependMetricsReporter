@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnLoadCodeBase = new System.Windows.Forms.Button();
             this.btnHistoryChart = new System.Windows.Forms.Button();
             this.chrtLineChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -82,17 +82,17 @@
             // 
             // chrtLineChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chrtLineChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chrtLineChart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chrtLineChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chrtLineChart.Legends.Add(legend3);
             this.chrtLineChart.Location = new System.Drawing.Point(791, 572);
             this.chrtLineChart.Name = "chrtLineChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Lines Of Code";
-            this.chrtLineChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Lines Of Code";
+            this.chrtLineChart.Series.Add(series3);
             this.chrtLineChart.Size = new System.Drawing.Size(423, 110);
             this.chrtLineChart.TabIndex = 3;
             this.chrtLineChart.Text = "LineChart";
@@ -196,6 +196,7 @@
             this.lvwMetricsList.TabIndex = 13;
             this.lvwMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwMetricsList_SelectedIndexChanged);
             // 
             // MetricName
             // 

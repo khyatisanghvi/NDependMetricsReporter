@@ -59,6 +59,8 @@
     <Compile Include="NDependAnalysisHistoryManager.cs" />
     <Compile Include="NDependCodeBaseManager.cs" />
     <Compile Include="NDependCodeElementsManager.cs" />
+    <Compile Include="NDependMetricDefinition.cs" />
+    <Compile Include="NDependXMLMetricsDefinitionLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MetricsViewer.resx">
@@ -85,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="XMLMetricDefinitions\AssemblyMetrics.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

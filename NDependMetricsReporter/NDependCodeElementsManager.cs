@@ -16,7 +16,7 @@ namespace NDependMetricsReporter
             this.codeBase = codeBase;
         }
 
-        public enum AssemblyMetrics {
+/*        public enum AssemblyMetrics {
             NbNamespaces, NbTypes, NbMethods, NbFields,
             AsmCe, AsmCa, Level,
             NbILInst, NbLinesOfCode,
@@ -24,7 +24,7 @@ namespace NDependMetricsReporter
             NbLinesOfComment, PercentageComment,
             NbTypesUsed, NbTypesUsingMe, TypeCe, TypeCa, RelationalCohesion,
             Abstractness, Instability, DistFromMainSeq, NormDistFromMainSeq
-        };
+        };*/
 
         public enum NamespaceMetrics {
             NbTypes, NbMethods, NbFields,
@@ -88,20 +88,20 @@ namespace NDependMetricsReporter
             return codeBase.Application.Types.Where(t => t.Name == typeName).First();
         }
 
-        public Dictionary<string, string> GetAssemblyMetrics(IAssembly assembly)
+        public Dictionary<NDependMetricDefinition, double> GetAssemblyMetrics(IAssembly assembly)
         {
-            Dictionary<string, string> assemblyMetrics = new Dictionary<string, string>();
+            Dictionary<NDependMetricDefinition, double> assemblyMetrics = new Dictionary<NDependMetricDefinition, double>();
+            List<NDependMetricDefinition> assemblyMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadAssemblyMetrics();
             PropertyInfo property;
-            //PropertyInfo[] p = assembly.GetType().GetProperties();
-
-            foreach ( string assemblyMetricName in Enum.GetNames(typeof(AssemblyMetrics)))
+            foreach (NDependMetricDefinition assemblyMetricDefinition in assemblyMetricsDefinitionsList)
             {
-                string metricValue = null;
-                property = assembly.GetType().GetProperty(assemblyMetricName);
-                if (property != null) metricValue = property.GetValue(assembly).ToString();
-                assemblyMetrics.Add(assemblyMetricName, metricValue);
+                Double metricValue = 0;
+                property = assembly.GetType().GetProperty(assemblyMetricDefinition.InternalPropertyName);
+                //if (property != null) metricValue = property.GetValue(assembly).ToString();
+                if (property != null) metricValue = Convert.ToDouble(property.GetValue(assembly));
+                assemblyMetrics.Add(assemblyMetricDefinition, metricValue);
             }
-            
+
             return assemblyMetrics;
         }
 

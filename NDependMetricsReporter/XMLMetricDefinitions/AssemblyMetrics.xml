@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ArrayOfNDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbNamespaces</PropertyName>
+    <InternalPropertyName>NbNamespaces</InternalPropertyName>
+    <MetricName>Namespaces in Assembly</MetricName>
+    <Description>Number of Namespaces in current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbTypes</PropertyName>
+    <InternalPropertyName>NbTypes</InternalPropertyName>
+    <MetricName>Types in Assembly</MetricName>
+    <Description>Number of Types in current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbMethods</PropertyName>
+    <InternalPropertyName>NbMethods</InternalPropertyName>
+    <MetricName>Methods in Assembly</MetricName>
+    <Description>Number methods in current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbFields</PropertyName>
+    <InternalPropertyName>NbFields</InternalPropertyName>
+    <MetricName>Fields in Assembly</MetricName>
+    <Description>Number of fields in current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>Level</PropertyName>
+    <InternalPropertyName>Level</InternalPropertyName>
+    <MetricName>Assembly Level</MetricName>
+    <Description>Level of assembly. 0 = Uses no other assembly. 1 = Uses only third-party assemblies. n = 1 + Max level of used assemblies</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbILInstructions</PropertyName>
+    <InternalPropertyName>NbILInst</InternalPropertyName>
+    <MetricName>Number of Instructions</MetricName>
+    <Description>Number of instructions in current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbLinesOfCode</PropertyName>
+    <InternalPropertyName>NbLinesOfCode</InternalPropertyName>
+    <MetricName>Lines of Code</MetricName>
+    <Description>Number of lines of code for the current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbLinesOfCodeCovered</PropertyName>
+    <InternalPropertyName>NbLinesOfCodeCovered</InternalPropertyName>
+    <MetricName>Lines of Code Covered</MetricName>
+    <Description>Number of lines of code covered by tests in current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbLinesOfCodeNotCovered</PropertyName>
+    <InternalPropertyName>NbLinesOfCodeNotCovered</InternalPropertyName>
+    <MetricName>Lines of Code Not Covered</MetricName>
+    <Description>Number of lines of code not covered by tests in current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>PercentageCoverage</PropertyName>
+    <InternalPropertyName>PercentageCoverage</InternalPropertyName>
+    <MetricName>Percentage of Coverage</MetricName>
+    <Description>Percentage of code coverage by tests in current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbLinesOfComment</PropertyName>
+    <InternalPropertyName>NbLinesOfComment</InternalPropertyName>
+    <MetricName>Lines of Comment</MetricName>
+    <Description>Number of comment lines in the current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>PercentageComment</PropertyName>
+    <InternalPropertyName>PercentageComment</InternalPropertyName>
+    <MetricName>Percentage of comment</MetricName>
+    <Description>Percentage of comment lines in the current assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbTypesUsed</PropertyName>
+    <InternalPropertyName>AsmCe</InternalPropertyName>
+    <MetricName>Efferent Coupling (Ce)</MetricName>
+    <Description>The number of types outside this assembly used by child types of this assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NbTypesUsingMe</PropertyName>
+    <InternalPropertyName>AsmCa</InternalPropertyName>
+    <MetricName>Afferent Coupling (Ca)</MetricName>
+    <Description>The number of types outside this assembly that depend on types within this assembly</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+  <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>RelationalCohesion</PropertyName>
+    <InternalPropertyName>RelationalCohesion</InternalPropertyName>
+    <MetricName>Relational Cohesion (H)</MetricName>
+    <Description>Average number of internal relationships per type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>Instability</PropertyName>
+    <InternalPropertyName>Instability</InternalPropertyName>
+    <MetricName>Instability (I)</MetricName>
+    <Description>The ratio of efferent coupling (Ce) to total coupling.</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>Abstractness</PropertyName>
+    <InternalPropertyName>Abstractness</InternalPropertyName>
+    <MetricName>Abstractness (A)</MetricName>
+    <Description>The ratio of the number of internal abstract types (abstract classes and interfaces) to the number of internal types</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>DistFromMainSeq</PropertyName>
+    <InternalPropertyName>DistFromMainSeq</InternalPropertyName>
+    <MetricName>Distance Form Main Sequence (D)</MetricName>
+    <Description>The perpendicular distance of an assembly from the idealized line A + I = 1 (called main sequence). This metric is an indicator of the assembly's balance between abstractness and stability.</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependMetricType>Assembly</NDependMetricType>
+    <PropertyName>NormDistFromMainSeq</PropertyName>
+    <InternalPropertyName>NormDistFromMainSeq</InternalPropertyName>
+    <MetricName>Normalized Distance From Main Sequence (Dn)</MetricName>
+    <Description>Normalized (D) to 0..1</Description>
+  </NDependMetricDefinition>
+</ArrayOfNDependMetricDefinition>

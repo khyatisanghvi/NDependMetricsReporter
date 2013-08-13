@@ -13,6 +13,8 @@ using NDepend.Analysis;
 using NDepend.Project;
 using NDepend.CodeModel;
 using NDepend.PowerTools;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace NDependMetricsReporter
 {
@@ -77,13 +79,15 @@ namespace NDependMetricsReporter
             }
         }
 
-        private void FillMetricsListView<T>(T codeElement, Dictionary<string, string> metrics)
+        private void FillMetricsListView<T>(T codeElement, Dictionary<NDependMetricDefinition, double> metrics)
         {
+            this.lvwAssembliesList.Tag = codeElement;
             this.lvwMetricsList.Items.Clear();
-            foreach (KeyValuePair<string, string> metric in metrics)
+            foreach (KeyValuePair<NDependMetricDefinition, double> metric in metrics)
             {
-                //ListViewItem lvi = new ListViewItem(new [] { metric.Key, metric.Value });
-                ListViewItem lvi = new ListViewItem(new[] { metric.Key, metric.Value });
+                string formatSpecifier = "0.####";
+                ListViewItem lvi = new ListViewItem(new[] { metric.Key.PropertyName, Math.Round(metric.Value, 4, MidpointRounding.AwayFromZero).ToString(formatSpecifier) });
+                lvi.Tag = metric.Key;
                 this.lvwMetricsList.Items.Add(lvi);
             }
         }
@@ -93,7 +97,6 @@ namespace NDependMetricsReporter
             this.lvwMetricsList2.Items.Clear();
             foreach (KeyValuePair<string, string> metric in metrics)
             {
-                //ListViewItem lvi = new ListViewItem(new [] { metric.Key, metric.Value });
                 ListViewItem lvi = new ListViewItem(new[] { metric.Key, metric.Value });
                 this.lvwMetricsList2.Items.Add(lvi);
             }
@@ -154,7 +157,7 @@ namespace NDependMetricsReporter
                 string selectedAssemblyName = this.lvwAssembliesList.SelectedItems[0].Text;
                 IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
                 FillNamespacesListView(assembly.ChildNamespaces);
-                Dictionary<string, string> assemblyMetrics = codeElementsManager.GetAssemblyMetrics(assembly);
+                Dictionary<NDependMetricDefinition, double> assemblyMetrics = codeElementsManager.GetAssemblyMetrics(assembly);
                 FillMetricsListView<IAssembly>(assembly, assemblyMetrics);
                 Dictionary<string, string> assemblyMetrics2 = codeElementsManager.GetAssemblyMetrics_NoReflection(assembly);
                 FillMetricsListView2<IAssembly>(assembly, assemblyMetrics2);
@@ -178,6 +181,22 @@ namespace NDependMetricsReporter
                 string selectedTypeName = this.lvwTypesList.SelectedItems[0].Text;
                 var methodsList = new NDependCodeElementsManager(lastAnalysisCodebase).GetTypeByName(selectedTypeName).MethodsAndContructors;
                 FillMethodsListView(methodsList);
+            }
+        }
+
+        private void lvwMetricsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.lvwMetricsList.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = this.lvwMetricsList.SelectedItems[0];
+                NDependAnalysisHistoryManager nDependAnalisysHistoryManager = new NDependAnalysisHistoryManager(nDependProject);
+                List<uint> nbLinesOfCodeList = nDependAnalisysHistoryManager.GetAssemblyMetricHistory<uint>("", "NbLinesOfCode");
+
+
+                this.chrtLineChart.DataSource = new BindingList<uint>(nbLinesOfCodeList);
+                this.chrtLineChart.Series["Lines Of Code"].YValueMembers = "Y";
+                this.chrtLineChart.DataBind();
+                this.chrtLineChart.Update();
             }
         }
     }
