@@ -2,7 +2,9 @@
 
 [System.Serializable()]
 public class NDependMetricDefinition {
-    
+
+    private string nDependCodeElementTypeField;
+
     private string nDependMetricTypeField;
     
     private string propertyNameField;
@@ -12,6 +14,19 @@ public class NDependMetricDefinition {
     private string metricNameField;
     
     private string descriptionField;
+
+    [XmlElement("NDependCodeElementType")]
+    public string NDependCodeElementType
+    {
+        get
+        {
+            return this.nDependCodeElementTypeField;
+        }
+        set
+        {
+            this.nDependCodeElementTypeField = value;
+        }
+    }
 
     [XmlElement("NDependMetricType")]
     public string NDependMetricType {

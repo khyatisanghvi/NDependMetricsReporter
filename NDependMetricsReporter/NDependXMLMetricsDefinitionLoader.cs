@@ -17,7 +17,7 @@ namespace NDependMetricsReporter
             this.pathToXMLMetrics = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"\XMLMetricDefinitions\";
         }
 
-        public List<NDependMetricDefinition> LoadAssemblyMetrics()
+        public List<NDependMetricDefinition> LoadAssemblyMetricsDefinitions()
         {
             return DeseralizeMetricsList(this.pathToXMLMetrics + "AssemblyMetrics.xml");
         }

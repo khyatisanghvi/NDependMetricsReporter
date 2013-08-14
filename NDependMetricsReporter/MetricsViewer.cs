@@ -190,16 +190,15 @@ namespace NDependMetricsReporter
             {
                 List<uint> nbLinesOfCodeList = new List<uint>();
                 ListViewItem lvi = this.lvwMetricsList.SelectedItems[0];
-                string metricType = ((NDependMetricDefinition)lvi.Tag).NDependMetricType;
+                string metricType = ((NDependMetricDefinition)lvi.Tag).NDependCodeElementType;
                 string metricInernalPorpertyName= ((NDependMetricDefinition)lvi.Tag).InternalPropertyName;
-                if (metricType == "Assembly")
+                if (metricType == "NDepend.CodeModel.IAssembly")
                 {
                     string assemblyName = ((IAssembly)this.lvwMetricsList.Tag).Name;
                     NDependAnalysisHistoryManager nDependAnalisysHistoryManager = new NDependAnalysisHistoryManager(nDependProject);
-                    nbLinesOfCodeList = nDependAnalisysHistoryManager.GetAssemblyMetricHistory<uint>(assemblyName, metricInernalPorpertyName);
+                    //nbLinesOfCodeList = nDependAnalisysHistoryManager.GetAssemblyMetricHistory<uint>(assemblyName, metricInernalPorpertyName);
+                    nbLinesOfCodeList = nDependAnalisysHistoryManager.GetMetricHistory<uint,IAssembly>(assemblyName, metricInernalPorpertyName);
                 }
-
-
                 this.chrtLineChart.DataSource = new BindingList<uint>(nbLinesOfCodeList);
                 this.chrtLineChart.Series["Lines Of Code"].YValueMembers = "Y";
                 this.chrtLineChart.DataBind();

@@ -91,13 +91,12 @@ namespace NDependMetricsReporter
         public Dictionary<NDependMetricDefinition, double> GetAssemblyMetrics(IAssembly assembly)
         {
             Dictionary<NDependMetricDefinition, double> assemblyMetrics = new Dictionary<NDependMetricDefinition, double>();
-            List<NDependMetricDefinition> assemblyMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadAssemblyMetrics();
+            List<NDependMetricDefinition> assemblyMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadAssemblyMetricsDefinitions();
             PropertyInfo property;
             foreach (NDependMetricDefinition assemblyMetricDefinition in assemblyMetricsDefinitionsList)
             {
                 Double metricValue = 0;
                 property = assembly.GetType().GetProperty(assemblyMetricDefinition.InternalPropertyName);
-                //if (property != null) metricValue = property.GetValue(assembly).ToString();
                 if (property != null) metricValue = Convert.ToDouble(property.GetValue(assembly));
                 assemblyMetrics.Add(assemblyMetricDefinition, metricValue);
             }

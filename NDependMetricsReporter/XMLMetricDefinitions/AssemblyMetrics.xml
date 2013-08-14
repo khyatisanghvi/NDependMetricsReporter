@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <ArrayOfNDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbNamespaces</PropertyName>
     <InternalPropertyName>NbNamespaces</InternalPropertyName>
@@ -8,6 +9,7 @@
     <Description>Number of Namespaces in current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbTypes</PropertyName>
     <InternalPropertyName>NbTypes</InternalPropertyName>
@@ -15,6 +17,7 @@
     <Description>Number of Types in current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbMethods</PropertyName>
     <InternalPropertyName>NbMethods</InternalPropertyName>
@@ -22,6 +25,7 @@
     <Description>Number methods in current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbFields</PropertyName>
     <InternalPropertyName>NbFields</InternalPropertyName>
@@ -29,6 +33,7 @@
     <Description>Number of fields in current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>Level</PropertyName>
     <InternalPropertyName>Level</InternalPropertyName>
@@ -36,6 +41,7 @@
     <Description>Level of assembly. 0 = Uses no other assembly. 1 = Uses only third-party assemblies. n = 1 + Max level of used assemblies</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbILInstructions</PropertyName>
     <InternalPropertyName>NbILInst</InternalPropertyName>
@@ -43,6 +49,7 @@
     <Description>Number of instructions in current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbLinesOfCode</PropertyName>
     <InternalPropertyName>NbLinesOfCode</InternalPropertyName>
@@ -50,6 +57,7 @@
     <Description>Number of lines of code for the current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbLinesOfCodeCovered</PropertyName>
     <InternalPropertyName>NbLinesOfCodeCovered</InternalPropertyName>
@@ -57,6 +65,7 @@
     <Description>Number of lines of code covered by tests in current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbLinesOfCodeNotCovered</PropertyName>
     <InternalPropertyName>NbLinesOfCodeNotCovered</InternalPropertyName>
@@ -64,6 +73,7 @@
     <Description>Number of lines of code not covered by tests in current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>PercentageCoverage</PropertyName>
     <InternalPropertyName>PercentageCoverage</InternalPropertyName>
@@ -71,6 +81,7 @@
     <Description>Percentage of code coverage by tests in current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbLinesOfComment</PropertyName>
     <InternalPropertyName>NbLinesOfComment</InternalPropertyName>
@@ -78,6 +89,7 @@
     <Description>Number of comment lines in the current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>PercentageComment</PropertyName>
     <InternalPropertyName>PercentageComment</InternalPropertyName>
@@ -85,6 +97,7 @@
     <Description>Percentage of comment lines in the current assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbTypesUsed</PropertyName>
     <InternalPropertyName>AsmCe</InternalPropertyName>
@@ -92,6 +105,7 @@
     <Description>The number of types outside this assembly used by child types of this assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NbTypesUsingMe</PropertyName>
     <InternalPropertyName>AsmCa</InternalPropertyName>
@@ -99,13 +113,15 @@
     <Description>The number of types outside this assembly that depend on types within this assembly</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
-  <NDependMetricType>Assembly</NDependMetricType>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
+    <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>RelationalCohesion</PropertyName>
     <InternalPropertyName>RelationalCohesion</InternalPropertyName>
     <MetricName>Relational Cohesion (H)</MetricName>
     <Description>Average number of internal relationships per type</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>Instability</PropertyName>
     <InternalPropertyName>Instability</InternalPropertyName>
@@ -113,6 +129,7 @@
     <Description>The ratio of efferent coupling (Ce) to total coupling.</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>Abstractness</PropertyName>
     <InternalPropertyName>Abstractness</InternalPropertyName>
@@ -120,6 +137,7 @@
     <Description>The ratio of the number of internal abstract types (abstract classes and interfaces) to the number of internal types</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>DistFromMainSeq</PropertyName>
     <InternalPropertyName>DistFromMainSeq</InternalPropertyName>
@@ -127,6 +145,7 @@
     <Description>The perpendicular distance of an assembly from the idealized line A + I = 1 (called main sequence). This metric is an indicator of the assembly's balance between abstractness and stability.</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <NDependMetricType>Assembly</NDependMetricType>
     <PropertyName>NormDistFromMainSeq</PropertyName>
     <InternalPropertyName>NormDistFromMainSeq</InternalPropertyName>

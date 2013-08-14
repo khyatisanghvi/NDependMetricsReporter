@@ -46,7 +46,6 @@ namespace NDependMetricsReporter
                 {
                     IAnalysisResult analisysResult = m.Load();
                     ICodeBase codeBase = analisysResult.CodeBase;
-                    //IAssembly selectedAssembly = codeBase.Application.Assemblies.ElementAt<IAssembly>(0);
                     IAssembly selectedAssembly = codeBase.Application.Assemblies.Where(a => a.Name == assemblyName).First();
                     metricValues.Add((T)selectedAssembly.GetType().GetProperty(metricName).GetValue(selectedAssembly));
                 }
@@ -58,6 +57,43 @@ namespace NDependMetricsReporter
             return metricValues;
         }
 
+        public List<MetricType> GetMetricHistory<MetricType, CodeElementType>(string codeElementName, string metricName)
+        {
+            List<MetricType> metricValues = new List<MetricType>();
+
+            foreach (var m in analysisResultRefsList)
+            {
+                try
+                {
+                    IAnalysisResult analisysResult = m.Load();
+                    ICodeBase codeBase = analisysResult.CodeBase;
+                    switch (typeof(CodeElementType).ToString())
+                    {
+                        case "NDepend.CodeModel.IAssembly":
+                            IAssembly selectedAssembly = codeBase.Application.Assemblies.Where(a => a.Name == codeElementName).First();
+                            metricValues.Add((MetricType)selectedAssembly.GetType().GetProperty(metricName).GetValue(selectedAssembly));
+                            break;
+                        case "NDepend.CodeModel.INamespace":
+                            INamespace selectedNamespace = codeBase.Application.Namespaces.Where(a => a.Name == codeElementName).First();
+                            metricValues.Add((MetricType)selectedNamespace.GetType().GetProperty(metricName).GetValue(selectedNamespace));
+                            break;
+                        case "NDepend.CodeModel.IType":
+                            IType selectedType = codeBase.Application.Types.Where(a => a.Name == codeElementName).First();
+                            metricValues.Add((MetricType)selectedType.GetType().GetProperty(metricName).GetValue(selectedType));
+                            break;
+                        case "NDepend.CodeModel.IModule":
+                            IMethod selectedMethod = codeBase.Application.Methods.Where(a => a.Name == codeElementName).First();
+                            metricValues.Add((MetricType)selectedMethod.GetType().GetProperty(metricName).GetValue(selectedMethod));
+                            break;
+                    }
+                }
+                catch (AnalysisException analysisException)
+                {
+                    string exceptionString = analysisException.ToString();
+                }
+            }
+            return metricValues;
+        }
 
     }
 }
