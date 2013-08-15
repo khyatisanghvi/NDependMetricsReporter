@@ -38,7 +38,10 @@
     <PropertyName>Level</PropertyName>
     <InternalPropertyName>Level</InternalPropertyName>
     <MetricName>Assembly Level</MetricName>
-    <Description>Level of assembly. 0 = Uses no other assembly. 1 = Uses only third-party assemblies. n = 1 + Max level of used assemblies</Description>
+    <Description xml:space="preserve">Level of assembly.
+    0 = Uses no other assembly.
+    1 = Uses only third-party assemblies
+    n = 1 + Max level of used assemblies</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>

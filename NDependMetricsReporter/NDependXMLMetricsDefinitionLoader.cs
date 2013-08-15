@@ -22,6 +22,11 @@ namespace NDependMetricsReporter
             return DeseralizeMetricsList(this.pathToXMLMetrics + "AssemblyMetrics.xml");
         }
 
+        public List<NDependMetricDefinition> LoadNamespaceMetricsDefinitions()
+        {
+            return DeseralizeMetricsList(this.pathToXMLMetrics + "NamespaceMetrics.xml");
+        }
+
         private List<NDependMetricDefinition> DeseralizeMetricsList(string filePath)
         {
             XmlSerializer deserializer = new XmlSerializer(typeof(List<NDependMetricDefinition>));

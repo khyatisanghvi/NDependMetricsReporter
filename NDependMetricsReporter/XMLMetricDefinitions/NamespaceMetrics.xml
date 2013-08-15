@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ArrayOfNDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbTypes</PropertyName>
+    <InternalPropertyName>NbTypes</InternalPropertyName>
+    <MetricName>Types in Namespace</MetricName>
+    <Description>Number of Types in current namespace</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbMethods</PropertyName>
+    <InternalPropertyName>NbMethods</InternalPropertyName>
+    <MetricName>Methods in Namespace</MetricName>
+    <Description>Number methods in current namespace</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbFields</PropertyName>
+    <InternalPropertyName>NbFields</InternalPropertyName>
+    <MetricName>Fields in Namespace</MetricName>
+    <Description>Number of fields in current namespace</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbNamespacesUsed</PropertyName>
+    <InternalPropertyName>NamespaceCe</InternalPropertyName>
+    <MetricName>Namespaces Efferent Coupling</MetricName>
+    <Description>The number of namespaces this namespace directly depends on</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbTypesUsingMe</PropertyName>
+    <InternalPropertyName>NamespaceCa</InternalPropertyName>
+    <MetricName>Namespaces Afferent Coupling</MetricName>
+    <Description>The number of namespaces that depend directly on this namespace</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt16</NDependMetricType>
+    <PropertyName>Level</PropertyName>
+    <InternalPropertyName>Level</InternalPropertyName>
+    <MetricName>Namespace Level</MetricName>
+    <Description xml:space="preserve">Level of Namespace.
+    0 = Uses no other namespace.
+    1 = Uses only third-party namespaces
+    n = 1 + Max level of used namespaces</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbILInstructions</PropertyName>
+    <InternalPropertyName>NbILInst</InternalPropertyName>
+    <MetricName>Number of Instructions</MetricName>
+    <Description>Number of instructions in current namespace</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfCode</PropertyName>
+    <InternalPropertyName>NbLinesOfCode</InternalPropertyName>
+    <MetricName>Lines of Code</MetricName>
+    <Description>Number of lines of code for the current namespace</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfCodeCovered</PropertyName>
+    <InternalPropertyName>NbLinesOfCodeCovered</InternalPropertyName>
+    <MetricName>Lines of Code Covered</MetricName>
+    <Description>Number of lines of code covered by tests in current namespace</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfCodeNotCovered</PropertyName>
+    <InternalPropertyName>NbLinesOfCodeNotCovered</InternalPropertyName>
+    <MetricName>Lines of Code Not Covered</MetricName>
+    <Description>Number of lines of code not covered by tests in current namespace</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.Byte</NDependMetricType>
+    <PropertyName>PercentageCoverage</PropertyName>
+    <InternalPropertyName>PercentageCoverage</InternalPropertyName>
+    <MetricName>Percentage of Coverage</MetricName>
+    <Description>Percentage of code coverage by tests in current namespace</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfComment</PropertyName>
+    <InternalPropertyName>NbLinesOfComment</InternalPropertyName>
+    <MetricName>Lines of Comment</MetricName>
+    <Description>Number of comment lines in the current namespace</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
+    <NDependMetricType>System.Byte</NDependMetricType>
+    <PropertyName>PercentageComment</PropertyName>
+    <InternalPropertyName>PercentageComment</InternalPropertyName>
+    <MetricName>Percentage of comment</MetricName>
+    <Description>Percentage of comment lines in the current namespace</Description>
+  </NDependMetricDefinition>
+</ArrayOfNDependMetricDefinition>

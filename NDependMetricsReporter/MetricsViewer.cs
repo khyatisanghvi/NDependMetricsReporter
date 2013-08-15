@@ -94,6 +94,18 @@ namespace NDependMetricsReporter
             }
         }
 
+        private void FillMetricDescriptionRTFBox(NDependMetricDefinition nDependMetricDefinition)
+        {
+            this.rtfMetricProperties.Clear();
+            this.rtfMetricProperties.AppendText(nDependMetricDefinition.MetricName);
+            this.rtfMetricProperties.Find(nDependMetricDefinition.MetricName);
+            this.rtfMetricProperties.SelectionFont = new Font(rtfMetricProperties.Font, rtfMetricProperties.Font.Style ^ FontStyle.Bold);
+            this.rtfMetricProperties.SelectionStart = this.rtfMetricProperties.Text.Length;
+            this.rtfMetricProperties.SelectionLength = 0;
+            this.rtfMetricProperties.SelectionFont = rtfMetricProperties.Font;
+            this.rtfMetricProperties.AppendText(Environment.NewLine + nDependMetricDefinition.Description);
+        }
+
         private void FillMetricsListView2<T>(T codeElement, Dictionary<string, string> metrics)
         {
             this.lvwMetricsList2.Items.Clear();
@@ -144,9 +156,14 @@ namespace NDependMetricsReporter
         {
             if (this.lvwNamespacesList.SelectedItems.Count > 0)
             {
+                NDependCodeElementsManager codeElementsManager = new NDependCodeElementsManager(lastAnalysisCodebase);
                 string selectedNamespaceName = this.lvwNamespacesList.SelectedItems[0].Text;
-                var typesList = new NDependCodeElementsManager(lastAnalysisCodebase).GetNamespaceByName(selectedNamespaceName).ChildTypes;
-                FillTypesListView(typesList);
+                INamespace nNamespace = codeElementsManager.GetNamespaceByName(selectedNamespaceName);
+                FillTypesListView(nNamespace.ChildTypes);
+                Dictionary<NDependMetricDefinition, double> namespaceMetrics = codeElementsManager.GetNamespaceMetrics(nNamespace);
+                FillMetricsListView<INamespace>(nNamespace, namespaceMetrics);
+                Dictionary<string, string> namespaceMetrics2 = codeElementsManager.GetNamespaceMetrics_NoReflection(nNamespace);
+                FillMetricsListView2<INamespace>(nNamespace, namespaceMetrics2);
             }
         }
 
@@ -165,8 +182,10 @@ namespace NDependMetricsReporter
             if (this.lvwMetricsList.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = this.lvwMetricsList.SelectedItems[0];
-                IList metricValues = new NDependAnalysisHistoryManager(nDependProject).GetMetricHistory(lvwMetricsList.Tag, lvi.Tag);
-                ShowMetricChart(((NDependMetricDefinition)lvi.Tag).MetricName, metricValues);
+                NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
+                IList metricValues = new NDependAnalysisHistoryManager(nDependProject).GetMetricHistory(lvwMetricsList.Tag, nDependMetricDefinition);
+                FillMetricDescriptionRTFBox(nDependMetricDefinition);
+                ShowMetricChart(nDependMetricDefinition.MetricName, metricValues);
             }
         }
     }
