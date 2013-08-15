@@ -2,7 +2,7 @@
 <ArrayOfNDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbNamespaces</PropertyName>
     <InternalPropertyName>NbNamespaces</InternalPropertyName>
     <MetricName>Namespaces in Assembly</MetricName>
@@ -10,7 +10,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbTypes</PropertyName>
     <InternalPropertyName>NbTypes</InternalPropertyName>
     <MetricName>Types in Assembly</MetricName>
@@ -18,7 +18,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbMethods</PropertyName>
     <InternalPropertyName>NbMethods</InternalPropertyName>
     <MetricName>Methods in Assembly</MetricName>
@@ -26,7 +26,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbFields</PropertyName>
     <InternalPropertyName>NbFields</InternalPropertyName>
     <MetricName>Fields in Assembly</MetricName>
@@ -34,7 +34,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt16</NDependMetricType>
     <PropertyName>Level</PropertyName>
     <InternalPropertyName>Level</InternalPropertyName>
     <MetricName>Assembly Level</MetricName>
@@ -42,7 +42,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbILInstructions</PropertyName>
     <InternalPropertyName>NbILInst</InternalPropertyName>
     <MetricName>Number of Instructions</MetricName>
@@ -50,7 +50,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbLinesOfCode</PropertyName>
     <InternalPropertyName>NbLinesOfCode</InternalPropertyName>
     <MetricName>Lines of Code</MetricName>
@@ -58,7 +58,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbLinesOfCodeCovered</PropertyName>
     <InternalPropertyName>NbLinesOfCodeCovered</InternalPropertyName>
     <MetricName>Lines of Code Covered</MetricName>
@@ -66,7 +66,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbLinesOfCodeNotCovered</PropertyName>
     <InternalPropertyName>NbLinesOfCodeNotCovered</InternalPropertyName>
     <MetricName>Lines of Code Not Covered</MetricName>
@@ -74,7 +74,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.Byte</NDependMetricType>
     <PropertyName>PercentageCoverage</PropertyName>
     <InternalPropertyName>PercentageCoverage</InternalPropertyName>
     <MetricName>Percentage of Coverage</MetricName>
@@ -82,7 +82,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbLinesOfComment</PropertyName>
     <InternalPropertyName>NbLinesOfComment</InternalPropertyName>
     <MetricName>Lines of Comment</MetricName>
@@ -90,7 +90,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.Byte</NDependMetricType>
     <PropertyName>PercentageComment</PropertyName>
     <InternalPropertyName>PercentageComment</InternalPropertyName>
     <MetricName>Percentage of comment</MetricName>
@@ -98,7 +98,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbTypesUsed</PropertyName>
     <InternalPropertyName>AsmCe</InternalPropertyName>
     <MetricName>Efferent Coupling (Ce)</MetricName>
@@ -106,7 +106,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbTypesUsingMe</PropertyName>
     <InternalPropertyName>AsmCa</InternalPropertyName>
     <MetricName>Afferent Coupling (Ca)</MetricName>
@@ -114,7 +114,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.Single</NDependMetricType>
     <PropertyName>RelationalCohesion</PropertyName>
     <InternalPropertyName>RelationalCohesion</InternalPropertyName>
     <MetricName>Relational Cohesion (H)</MetricName>
@@ -122,7 +122,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.Single</NDependMetricType>
     <PropertyName>Instability</PropertyName>
     <InternalPropertyName>Instability</InternalPropertyName>
     <MetricName>Instability (I)</MetricName>
@@ -130,7 +130,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.Single</NDependMetricType>
     <PropertyName>Abstractness</PropertyName>
     <InternalPropertyName>Abstractness</InternalPropertyName>
     <MetricName>Abstractness (A)</MetricName>
@@ -138,7 +138,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.Single</NDependMetricType>
     <PropertyName>DistFromMainSeq</PropertyName>
     <InternalPropertyName>DistFromMainSeq</InternalPropertyName>
     <MetricName>Distance Form Main Sequence (D)</MetricName>
@@ -146,7 +146,7 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
-    <NDependMetricType>Assembly</NDependMetricType>
+    <NDependMetricType>System.Single</NDependMetricType>
     <PropertyName>NormDistFromMainSeq</PropertyName>
     <InternalPropertyName>NormDistFromMainSeq</InternalPropertyName>
     <MetricName>Normalized Distance From Main Sequence (Dn)</MetricName>

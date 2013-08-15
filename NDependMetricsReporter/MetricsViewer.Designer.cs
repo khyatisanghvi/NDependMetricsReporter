@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.btnLoadCodeBase = new System.Windows.Forms.Button();
-            this.btnHistoryChart = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chrtLineChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lvwAssembliesList = new System.Windows.Forms.ListView();
             this.asmLstAssemblyName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -60,39 +58,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.chrtLineChart)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnLoadCodeBase
-            // 
-            this.btnLoadCodeBase.Location = new System.Drawing.Point(791, 103);
-            this.btnLoadCodeBase.Name = "btnLoadCodeBase";
-            this.btnLoadCodeBase.Size = new System.Drawing.Size(116, 23);
-            this.btnLoadCodeBase.TabIndex = 0;
-            this.btnLoadCodeBase.Text = "Load Codebase";
-            this.btnLoadCodeBase.UseVisualStyleBackColor = true;
-            this.btnLoadCodeBase.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnHistoryChart
-            // 
-            this.btnHistoryChart.Location = new System.Drawing.Point(554, 658);
-            this.btnHistoryChart.Name = "btnHistoryChart";
-            this.btnHistoryChart.Size = new System.Drawing.Size(75, 23);
-            this.btnHistoryChart.TabIndex = 2;
-            this.btnHistoryChart.Text = "History Chart";
-            this.btnHistoryChart.UseVisualStyleBackColor = true;
-            this.btnHistoryChart.Click += new System.EventHandler(this.btnHistoryChart_Click);
-            // 
             // chrtLineChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chrtLineChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chrtLineChart.Legends.Add(legend3);
+            chartArea2.Name = "ChartArea1";
+            this.chrtLineChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chrtLineChart.Legends.Add(legend2);
             this.chrtLineChart.Location = new System.Drawing.Point(791, 572);
             this.chrtLineChart.Name = "chrtLineChart";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Legend = "Legend1";
-            series3.Name = "Lines Of Code";
-            this.chrtLineChart.Series.Add(series3);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Lines Of Code";
+            this.chrtLineChart.Series.Add(series2);
             this.chrtLineChart.Size = new System.Drawing.Size(423, 110);
             this.chrtLineChart.TabIndex = 3;
             this.chrtLineChart.Text = "LineChart";
@@ -314,8 +292,6 @@
             this.Controls.Add(this.tboxProjectName);
             this.Controls.Add(this.lvwAssembliesList);
             this.Controls.Add(this.chrtLineChart);
-            this.Controls.Add(this.btnHistoryChart);
-            this.Controls.Add(this.btnLoadCodeBase);
             this.Name = "MetricsViewer";
             this.Text = "Metrics Viewer";
             ((System.ComponentModel.ISupportInitialize)(this.chrtLineChart)).EndInit();
@@ -326,8 +302,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnLoadCodeBase;
-        private System.Windows.Forms.Button btnHistoryChart;
         private System.Windows.Forms.DataVisualization.Charting.Chart chrtLineChart;
         private System.Windows.Forms.ListView lvwAssembliesList;
         private System.Windows.Forms.TextBox tboxProjectName;

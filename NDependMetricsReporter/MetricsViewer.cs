@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ using NDepend.CodeModel;
 using NDepend.PowerTools;
 using System.Xml.Serialization;
 using System.IO;
+using System.Reflection;
 
 namespace NDependMetricsReporter
 {
@@ -102,51 +104,25 @@ namespace NDependMetricsReporter
             }
         }
 
+        private void ShowMetricChart(string serieName, IList chartData)
+        {
+            MetricTrendChart metricTrendChart;
+            if (Application.OpenForms["metricTrendChart"] == null)
+            {
+                metricTrendChart = new MetricTrendChart();
+            }
+            else
+            {
+                metricTrendChart = (MetricTrendChart)Application.OpenForms["metricTrendChart"];
+            }
+            metricTrendChart.RefreshData(serieName, chartData);
+        }
+
         private void btnOpenProject_Click(object sender, EventArgs e)
         {
             nDependServicesProvider.ProjectManager.ShowDialogChooseAnExistingProject(out nDependProject);
             this.lastAnalysisCodebase = new NDependCodeBaseManager(nDependProject).LoadLastCodebase();
             FillBaseControls();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            NDependCodeBaseManager codebaseLoader = new NDependCodeBaseManager(nDependProject);
-            ICodeBase codeBase = codebaseLoader.LoadLastCodebase();
-            IAssembly myAssembly = codeBase.Application.Assemblies.ElementAt<IAssembly>(0);
-
-
-            //var allNameSpaces = (from n in codeBase.Application.Namespaces select n).ToArray();
-            var allPropertiesInGivenAssembly = codeBase.Application.Assemblies.ElementAt<IAssembly>(0).GetType().GetProperties();
-            string propertyName = allPropertiesInGivenAssembly[0].Name;
-
-            /*foreach (var t in allTypesInGiveNamespace)
-            {
-                this.lboxNamespacesList.Items.Add(t.Name);
-            }
-
-            foreach (var m in allNameSpaces)
-            {
-                this.lboxNamespacesList.Items.Add(m.Name);
-            }
-            var complexMethods = (from m in codeBase.Application.Methods 
-                               where m.ILCyclomaticComplexity > 10 
-                               orderby m.ILCyclomaticComplexity descending 
-                               select m).ToArray();*/
-
-        }
-
-        private void btnHistoryChart_Click(object sender, EventArgs e)
-        {
-            NDependAnalysisHistoryManager nDependAnalisysHistoryManager = new NDependAnalysisHistoryManager(nDependProject);
-            List<uint> nbLinesOfCodeList = nDependAnalisysHistoryManager.GetAssemblyMetricHistory<uint>("", "NbLinesOfCode"); 
-            
-
-            this.chrtLineChart.DataSource = new BindingList<uint>(nbLinesOfCodeList);
-            this.chrtLineChart.Series["Lines Of Code"].YValueMembers = "Y";
-            this.chrtLineChart.DataBind();
-            this.chrtLineChart.Update();
-            
         }
 
         private void lvwAssembliesList_SelectedIndexChanged(object sender, EventArgs e)
@@ -188,21 +164,9 @@ namespace NDependMetricsReporter
         {
             if (this.lvwMetricsList.SelectedItems.Count > 0)
             {
-                List<uint> nbLinesOfCodeList = new List<uint>();
                 ListViewItem lvi = this.lvwMetricsList.SelectedItems[0];
-                string metricType = ((NDependMetricDefinition)lvi.Tag).NDependCodeElementType;
-                string metricInernalPorpertyName= ((NDependMetricDefinition)lvi.Tag).InternalPropertyName;
-                if (metricType == "NDepend.CodeModel.IAssembly")
-                {
-                    string assemblyName = ((IAssembly)this.lvwMetricsList.Tag).Name;
-                    NDependAnalysisHistoryManager nDependAnalisysHistoryManager = new NDependAnalysisHistoryManager(nDependProject);
-                    //nbLinesOfCodeList = nDependAnalisysHistoryManager.GetAssemblyMetricHistory<uint>(assemblyName, metricInernalPorpertyName);
-                    nbLinesOfCodeList = nDependAnalisysHistoryManager.GetMetricHistory<uint,IAssembly>(assemblyName, metricInernalPorpertyName);
-                }
-                this.chrtLineChart.DataSource = new BindingList<uint>(nbLinesOfCodeList);
-                this.chrtLineChart.Series["Lines Of Code"].YValueMembers = "Y";
-                this.chrtLineChart.DataBind();
-                this.chrtLineChart.Update();
+                IList metricValues = new NDependAnalysisHistoryManager(nDependProject).GetMetricHistory(lvwMetricsList.Tag, lvi.Tag);
+                ShowMetricChart(((NDependMetricDefinition)lvi.Tag).MetricName, metricValues);
             }
         }
     }
