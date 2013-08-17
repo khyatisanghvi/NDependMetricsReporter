@@ -12,11 +12,11 @@ using NDepend.PowerTools;
 
 namespace NDependMetricsReporter
 {
-    class NDependCodeBaseManager
+    class CodeBaseManager
     {
         IProject nDependProject;
 
-        public NDependCodeBaseManager(IProject nDependProject)
+        public CodeBaseManager(IProject nDependProject)
         {
             this.nDependProject = nDependProject;
         }

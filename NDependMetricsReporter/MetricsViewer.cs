@@ -133,7 +133,7 @@ namespace NDependMetricsReporter
         private void btnOpenProject_Click(object sender, EventArgs e)
         {
             nDependServicesProvider.ProjectManager.ShowDialogChooseAnExistingProject(out nDependProject);
-            this.lastAnalysisCodebase = new NDependCodeBaseManager(nDependProject).LoadLastCodebase();
+            this.lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
             FillBaseControls();
         }
 
@@ -141,7 +141,7 @@ namespace NDependMetricsReporter
         {
             if (this.lvwAssembliesList.SelectedItems.Count > 0)
             {
-                NDependCodeElementsManager codeElementsManager = new NDependCodeElementsManager(lastAnalysisCodebase);
+                CodeElementsManager codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
                 string selectedAssemblyName = this.lvwAssembliesList.SelectedItems[0].Text;
                 IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
                 FillNamespacesListView(assembly.ChildNamespaces);
@@ -156,7 +156,7 @@ namespace NDependMetricsReporter
         {
             if (this.lvwNamespacesList.SelectedItems.Count > 0)
             {
-                NDependCodeElementsManager codeElementsManager = new NDependCodeElementsManager(lastAnalysisCodebase);
+                CodeElementsManager codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
                 string selectedNamespaceName = this.lvwNamespacesList.SelectedItems[0].Text;
                 INamespace nNamespace = codeElementsManager.GetNamespaceByName(selectedNamespaceName);
                 FillTypesListView(nNamespace.ChildTypes);
@@ -172,7 +172,7 @@ namespace NDependMetricsReporter
             if (this.lvwTypesList.SelectedItems.Count > 0)
             {
                 string selectedTypeName = this.lvwTypesList.SelectedItems[0].Text;
-                var methodsList = new NDependCodeElementsManager(lastAnalysisCodebase).GetTypeByName(selectedTypeName).MethodsAndContructors;
+                var methodsList = new CodeElementsManager(lastAnalysisCodebase).GetTypeByName(selectedTypeName).MethodsAndContructors;
                 FillMethodsListView(methodsList);
             }
         }
@@ -183,7 +183,7 @@ namespace NDependMetricsReporter
             {
                 ListViewItem lvi = this.lvwMetricsList.SelectedItems[0];
                 NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
-                IList metricValues = new NDependAnalysisHistoryManager(nDependProject).GetMetricHistory(lvwMetricsList.Tag, nDependMetricDefinition);
+                IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(lvwMetricsList.Tag, nDependMetricDefinition);
                 FillMetricDescriptionRTFBox(nDependMetricDefinition);
                 ShowMetricChart(nDependMetricDefinition.MetricName, metricValues);
             }

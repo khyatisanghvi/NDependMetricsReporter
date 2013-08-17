@@ -8,10 +8,10 @@ using NDepend.CodeModel;
 
 namespace NDependMetricsReporter
 {
-    class NDependCodeElementsManager
+    class CodeElementsManager
     {
         ICodeBase codeBase;
-        public NDependCodeElementsManager(ICodeBase codeBase)
+        public CodeElementsManager(ICodeBase codeBase)
         {
             this.codeBase = codeBase;
         }
@@ -56,21 +56,9 @@ namespace NDependMetricsReporter
             NbLinesOfComment, PercentageComment,
             CyclomaticComplexity, ILCyclomaticComplexity, ILNestingDepth
         };
-        /*
-        public IEnumerable<IAssembly> GetAssembliesInApplication()
-        {
-            return codeBase.Application.Assemblies;
-        }*/
 
         public IEnumerable<IAssembly> GetNonThirPartyAssembliesInApplication()
         {
-            /*List<IAssembly> nonThirPartyAssemblies = new List<IAssembly>();
-            foreach (IAssembly assembly in codeBase.Application.Assemblies)
-            {
-                if (assembly.IsThirdParty) continue;
-                nonThirPartyAssemblies.Add(assembly);
-            }
-            return nonThirPartyAssemblies;*/
             return codeBase.Application.Assemblies.Where(a => !a.IsThirdParty);
         }
 
@@ -99,6 +87,16 @@ namespace NDependMetricsReporter
         {
             IEnumerable<IMethod> selectedMethods = codeBase.Application.Methods.Where(a => a.Name == methodName);
             if (selectedMethods.Any()) return selectedMethods.First();
+            return null;
+        }
+
+/*        public MetricType GetCodeElementMetric<CodeElementType, MetricType>(CodeElementType codeElement, string metricname)
+        {
+            return (MetricType)codeElement.GetType().GetProperty(metricname).GetValue(codeElement);
+        }*/
+
+        public Dictionary<NDependMetricDefinition, double> GetCodeElementMetrics(IAssembly assembly)
+        {
             return null;
         }
 

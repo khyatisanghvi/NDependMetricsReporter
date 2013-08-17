@@ -62,14 +62,14 @@
     <Compile Include="MetricTrendChart.Designer.cs">
       <DependentUpon>MetricTrendChart.cs</DependentUpon>
     </Compile>
-    <Compile Include="NDependAnalysisHistoryManager.cs" />
-    <Compile Include="NDependCodeBaseManager.cs" />
-    <Compile Include="NDependCodeElementsManager.cs" />
+    <Compile Include="AnalysisHistoryManager.cs" />
+    <Compile Include="CodeBaseManager.cs" />
+    <Compile Include="CodeElementsManager.cs" />
     <Compile Include="NDependMetricDefinition.cs" />
     <Compile Include="NDependXMLMetricsDefinitionLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CodeElementReflectionHelper.cs" />
+    <Compile Include="ReflectionHelper.cs" />
     <EmbeddedResource Include="MetricsViewer.resx">
       <DependentUpon>MetricsViewer.cs</DependentUpon>
     </EmbeddedResource>
