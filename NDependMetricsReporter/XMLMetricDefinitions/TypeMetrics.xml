@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ArrayOfNDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbMethods</PropertyName>
+    <InternalPropertyName>NbMethods</InternalPropertyName>
+    <MetricName>Methods in Type</MetricName>
+    <Description>Number methods in current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbFields</PropertyName>
+    <InternalPropertyName>NbFields</InternalPropertyName>
+    <MetricName>Fields in Type</MetricName>
+    <Description>Number of fields in current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.Single</NDependMetricType>
+    <PropertyName>LCOM</PropertyName>
+    <InternalPropertyName>LCOM</InternalPropertyName>
+    <MetricName>Lack of Cohesion of Methods</MetricName>
+    <Description xml:space="preserve">Indicates how much cohesion is cohecion between methods an instance fields
+    0 = Maximal cohesion
+    1 = Minimal cohesion</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.Single</NDependMetricType>
+    <PropertyName>LCOMHS</PropertyName>
+    <InternalPropertyName>LCOMHS</InternalPropertyName>
+    <MetricName>LCOM Henderson-Sellers</MetricName>
+    <Description xml:space="preserve">Indicates how much cohesion is cohecion between methods an instance fields
+    0 = Maximal cohesion
+    1 = Minimal cohesion</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbTypesUsed</PropertyName>
+    <InternalPropertyName>AsmCe</InternalPropertyName>
+    <MetricName>Efferent Coupling (Ce)</MetricName>
+    <Description>The number of types used by this type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbTypesUsingMe</PropertyName>
+    <InternalPropertyName>AsmCa</InternalPropertyName>
+    <MetricName>Afferent Coupling (Ca)</MetricName>
+    <Description>The number of types that depend on this type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt16</NDependMetricType>
+    <PropertyName>Level</PropertyName>
+    <InternalPropertyName>Level</InternalPropertyName>
+    <MetricName>Type Level</MetricName>
+    <Description xml:space="preserve">Level of type.
+    0 = Uses no other type.
+    1 = Uses only third-party type
+    n = 1 + Max level of used type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.Single</NDependMetricType>
+    <PropertyName>Rank</PropertyName>
+    <InternalPropertyName>Rank</InternalPropertyName>
+    <MetricName>Type Rank</MetricName>
+    <Description>Type rank computed by applying the Google PageRank algorithm on the graph of types' dependencies</Description>
+  </NDependMetricDefinition>
+  
+  
+  
+  
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbILInstructions</PropertyName>
+    <InternalPropertyName>NbILInst</InternalPropertyName>
+    <MetricName>Number of Instructions</MetricName>
+    <Description>Number of instructions in current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfCode</PropertyName>
+    <InternalPropertyName>NbLinesOfCode</InternalPropertyName>
+    <MetricName>Lines of Code</MetricName>
+    <Description>Number of lines of code for the current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfCodeCovered</PropertyName>
+    <InternalPropertyName>NbLinesOfCodeCovered</InternalPropertyName>
+    <MetricName>Lines of Code Covered</MetricName>
+    <Description>Number of lines of code covered by tests in current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfCodeNotCovered</PropertyName>
+    <InternalPropertyName>NbLinesOfCodeNotCovered</InternalPropertyName>
+    <MetricName>Lines of Code Not Covered</MetricName>
+    <Description>Number of lines of code not covered by tests in current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.Byte</NDependMetricType>
+    <PropertyName>PercentageCoverage</PropertyName>
+    <InternalPropertyName>PercentageCoverage</InternalPropertyName>
+    <MetricName>Percentage of Coverage</MetricName>
+    <Description>Percentage of code coverage by tests in current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfComment</PropertyName>
+    <InternalPropertyName>NbLinesOfComment</InternalPropertyName>
+    <MetricName>Lines of Comment</MetricName>
+    <Description>Number of comment lines in the current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.Byte</NDependMetricType>
+    <PropertyName>PercentageComment</PropertyName>
+    <InternalPropertyName>PercentageComment</InternalPropertyName>
+    <MetricName>Percentage of comment</MetricName>
+    <Description>Percentage of comment lines in the current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.Single</NDependMetricType>
+    <PropertyName>RelationalCohesion</PropertyName>
+    <InternalPropertyName>RelationalCohesion</InternalPropertyName>
+    <MetricName>Relational Cohesion (H)</MetricName>
+    <Description>Average number of internal relationships per type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.Single</NDependMetricType>
+    <PropertyName>Instability</PropertyName>
+    <InternalPropertyName>Instability</InternalPropertyName>
+    <MetricName>Instability (I)</MetricName>
+    <Description>The ratio of efferent coupling (Ce) to total coupling.</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.Single</NDependMetricType>
+    <PropertyName>Abstractness</PropertyName>
+    <InternalPropertyName>Abstractness</InternalPropertyName>
+    <MetricName>Abstractness (A)</MetricName>
+    <Description>The ratio of the number of internal abstract types (abstract classes and interfaces) to the number of internal types</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.Single</NDependMetricType>
+    <PropertyName>DistFromMainSeq</PropertyName>
+    <InternalPropertyName>DistFromMainSeq</InternalPropertyName>
+    <MetricName>Distance Form Main Sequence (D)</MetricName>
+    <Description>The perpendicular distance of an assembly from the idealized line A + I = 1 (called main sequence). This metric is an indicator of the assembly's balance between abstractness and stability.</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.Single</NDependMetricType>
+    <PropertyName>NormDistFromMainSeq</PropertyName>
+    <InternalPropertyName>NormDistFromMainSeq</InternalPropertyName>
+    <MetricName>Normalized Distance From Main Sequence (Dn)</MetricName>
+    <Description>Normalized (D) to 0..1</Description>
+  </NDependMetricDefinition>
+</ArrayOfNDependMetricDefinition>

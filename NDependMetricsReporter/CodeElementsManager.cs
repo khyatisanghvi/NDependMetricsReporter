@@ -138,19 +138,27 @@ namespace NDependMetricsReporter
         {
             Dictionary<string, string> typeMetrics = new Dictionary<string, string>();
 
-            typeMetrics.Add("NbTypes", nType.NbTypes.ToString());
             typeMetrics.Add("NbMethods", nType.NbMethods.ToString());
             typeMetrics.Add("NbFields", nType.NbFields.ToString());
-            typeMetrics.Add("NbNamespacesUsed", nType.NbNamespacesUsed.ToString());
-            typeMetrics.Add("NbNamespacesUsingMe", nType.NbNamespacesUsingMe.ToString());
+            typeMetrics.Add("LCOM", nType.LCOM.ToString());
+            typeMetrics.Add("LCOMHS", nType.LCOMHS.ToString());
+            typeMetrics.Add("NbTypesUsed", nType.NbTypesUsed.ToString());
+            typeMetrics.Add("NbTypesUsingMe", nType.NbTypesUsingMe.ToString());
             typeMetrics.Add("Level", nType.Level.ToString());
+            typeMetrics.Add("Rank", nType.Rank.ToString());
+            typeMetrics.Add("ABT", nType.ABT.ToString());
             typeMetrics.Add("NbILInstructions", nType.NbILInstructions.ToString());
             typeMetrics.Add("NbLinesOfCode", nType.NbLinesOfCode.ToString());
             typeMetrics.Add("NbLinesOfCodeCovered", nType.NbLinesOfCodeCovered.ToString());
             typeMetrics.Add("NbLinesOfCodeNotCovered", nType.NbLinesOfCodeNotCovered.ToString());
             typeMetrics.Add("PercentageCoverage", nType.PercentageCoverage.ToString());
-            typeMetrics.Add("NbLinesOfComment", nType.NbLinesOfComment.ToString());
             typeMetrics.Add("PercentageComment", nType.PercentageComment.ToString());
+            typeMetrics.Add("NbLinesOfComment", nType.NbLinesOfComment.ToString());
+            typeMetrics.Add("CyclomaticComplexity", nType.CyclomaticComplexity.ToString());
+            typeMetrics.Add("ILCyclomaticComplexity", nType.ILCyclomaticComplexity.ToString());
+            typeMetrics.Add("SizeOfInst", nType.SizeOfInst.ToString());
+            typeMetrics.Add("NBChildren", nType.NbChildren.ToString());
+            typeMetrics.Add("DepthOfInheritance", nType.DepthOfInheritance.ToString());
 
             return typeMetrics;
         }
@@ -166,7 +174,6 @@ namespace NDependMetricsReporter
                 if (property != null) metricValue = Convert.ToDouble(property.GetValue(codeElement));
                 codeElementMetrics.Add(codeElementMetricDefinition, metricValue);
             }
-
             return codeElementMetrics;
         }
     }
