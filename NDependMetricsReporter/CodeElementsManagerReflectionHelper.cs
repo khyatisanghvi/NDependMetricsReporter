@@ -7,9 +7,9 @@ using System.Reflection;
 
 namespace NDependMetricsReporter
 {
-    class ReflectionHelper
+    class CodeElementsManagerReflectionHelper
     {
-        public ReflectionHelper()
+        public CodeElementsManagerReflectionHelper()
         {
         }
 

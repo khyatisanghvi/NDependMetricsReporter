@@ -40,11 +40,9 @@ namespace NDependMetricsReporter
 
         public IList GetMetricHistory(object codeElement, NDependMetricDefinition metricDefinition)
         {
-            string codeElementType = metricDefinition.NDependCodeElementType;
-            string metricInternalPorpertyName = metricDefinition.InternalPropertyName;
+            CodeElementsManagerReflectionHelper reflectionHelper = new CodeElementsManagerReflectionHelper();
             Type metricType = Type.GetType(metricDefinition.NDependMetricType);
             IList metricValues = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(metricType));
-            ReflectionHelper reflectionHelper= new ReflectionHelper();
 
             foreach (var m in analysisResultRefsList)
             {
@@ -53,9 +51,8 @@ namespace NDependMetricsReporter
                     IAnalysisResult currentAnalysisResult = m.Load();
                     ICodeBase currentAnalysisResultCodeBase = currentAnalysisResult.CodeBase;
                     CodeElementsManager currenAnalysisResultCodeBaseManager =  new CodeElementsManager(currentAnalysisResultCodeBase);
-                    string codeElementName = "";
 
-                    switch (codeElementType)
+                    switch (metricDefinition.NDependCodeElementType)
                     {
                         case "NDepend.CodeModel.IAssembly":
                             string assemblyName = ((IAssembly)codeElement).Name;
@@ -76,25 +73,36 @@ namespace NDependMetricsReporter
                                     typeof(INamespace),
                                     metricDefinition.InternalPropertyName,
                                     metricDefinition.NDependMetricType));
-                            /*codeElementName = ((INamespace)codeElement).Name;
-                            IEnumerable<INamespace> selectedNamespaces = currentAnalysisResultCodeBase.Application.Namespaces.Where(a => a.Name == codeElementName);
-                            if (!selectedNamespaces.Any()) break;
-                            INamespace selectedNamespace = selectedNamespaces.First();
-                            metricValues.Add(selectedNamespace.GetType().GetProperty(metricInternalPorpertyName).GetValue(selectedNamespace));*/
                             break;
                         case "NDepend.CodeModel.IType":
-                            codeElementName = ((IType)codeElement).Name;
+                            string typeName = ((IType)codeElement).Name;
+                            IType selectedTypeFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetTypeByName(typeName);
+                            if (selectedTypeFromCurrentAnalysisResultCodebase != null)
+                                metricValues.Add(reflectionHelper.GetCodeElementMetric(
+                                    selectedTypeFromCurrentAnalysisResultCodebase,
+                                    typeof(IType),
+                                    metricDefinition.InternalPropertyName,
+                                    metricDefinition.NDependMetricType));
+                           /* codeElementName = ((IType)codeElement).Name;
                             IEnumerable<IType> selectedTypes = currentAnalysisResultCodeBase.Application.Types.Where(a => a.Name == codeElementName);
                             if (!selectedTypes.Any()) break;
                             IType selectedType = selectedTypes.First();
-                            metricValues.Add(selectedType.GetType().GetProperty(metricInternalPorpertyName).GetValue(selectedType));
+                            metricValues.Add(selectedType.GetType().GetProperty(metricInternalPorpertyName).GetValue(selectedType));*/
                             break;
                         case "NDepend.CodeModel.IMethod":
-                            codeElementName = ((IMethod)codeElement).Name;
+                            string methodName = ((IMethod)codeElement).Name;
+                            IMethod selectedMethodFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetMethodByName(methodName);
+                            if (selectedMethodFromCurrentAnalysisResultCodebase != null)
+                                metricValues.Add(reflectionHelper.GetCodeElementMetric(
+                                    selectedMethodFromCurrentAnalysisResultCodebase,
+                                    typeof(IMethod),
+                                    metricDefinition.InternalPropertyName,
+                                    metricDefinition.NDependMetricType));
+                            /*codeElementName = ((IMethod)codeElement).Name;
                             IEnumerable<IMethod> selectedMethods = currentAnalysisResultCodeBase.Application.Methods.Where(a => a.Name == codeElementName);
                             if (!selectedMethods.Any()) break;
                             IMethod selectedMethod = selectedMethods.First();
-                            metricValues.Add(selectedMethod.GetType().GetProperty(metricInternalPorpertyName).GetValue(selectedMethod));
+                            metricValues.Add(selectedMethod.GetType().GetProperty(metricInternalPorpertyName).GetValue(selectedMethod));*/
                             break;
                     }
                 }

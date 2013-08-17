@@ -16,24 +16,6 @@ namespace NDependMetricsReporter
             this.codeBase = codeBase;
         }
 
-/*        public enum AssemblyMetrics {
-            NbNamespaces, NbTypes, NbMethods, NbFields,
-            AsmCe, AsmCa, Level,
-            NbILInst, NbLinesOfCode,
-            NbLinesOfCodeCovered, NbLinesOfCodeNotCovered, PercentageCoverage,
-            NbLinesOfComment, PercentageComment,
-            NbTypesUsed, NbTypesUsingMe, TypeCe, TypeCa, RelationalCohesion,
-            Abstractness, Instability, DistFromMainSeq, NormDistFromMainSeq
-        };*/
-
-        public enum NamespaceMetrics {
-            NbTypes, NbMethods, NbFields,
-            NbNamespacesUsed, NbNamespacesUsingMe, Level,
-            NbILInstructions, NbLinesOfCode,
-            NbLinesOfCodeCovered, NbLinesOfCodeNotCovered, PercentageCoverage,
-            NbLinesOfComment, PercentageComment
-        };
-
         public enum TypeMetrics {
             NbMethods, NbFields, LCOM, LCOMHS,
             NbTypesUsed, NbTypesUsingMe, Level, Rank,
@@ -57,7 +39,7 @@ namespace NDependMetricsReporter
             CyclomaticComplexity, ILCyclomaticComplexity, ILNestingDepth
         };
 
-        public IEnumerable<IAssembly> GetNonThirPartyAssembliesInApplication()
+        public IEnumerable<IAssembly> GetNonThirdPartyAssembliesInApplication()
         {
             return codeBase.Application.Assemblies.Where(a => !a.IsThirdParty);
         }
@@ -90,47 +72,16 @@ namespace NDependMetricsReporter
             return null;
         }
 
-/*        public MetricType GetCodeElementMetric<CodeElementType, MetricType>(CodeElementType codeElement, string metricname)
-        {
-            return (MetricType)codeElement.GetType().GetProperty(metricname).GetValue(codeElement);
-        }*/
-
-        public Dictionary<NDependMetricDefinition, double> GetCodeElementMetrics(IAssembly assembly)
-        {
-            return null;
-        }
-
         public Dictionary<NDependMetricDefinition, double> GetAssemblyMetrics(IAssembly assembly)
         {
-            Dictionary<NDependMetricDefinition, double> assemblyMetrics = new Dictionary<NDependMetricDefinition, double>();
             List<NDependMetricDefinition> assemblyMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadAssemblyMetricsDefinitions();
-            PropertyInfo property;
-            foreach (NDependMetricDefinition assemblyMetricDefinition in assemblyMetricsDefinitionsList)
-            {
-                Double metricValue = 0;
-                property = assembly.GetType().GetProperty(assemblyMetricDefinition.InternalPropertyName);
-                if (property != null) metricValue = Convert.ToDouble(property.GetValue(assembly));
-                assemblyMetrics.Add(assemblyMetricDefinition, metricValue);
-            }
-
-            return assemblyMetrics;
+            return GetCodeElementMetrics<IAssembly>(assembly, assemblyMetricsDefinitionsList);
         }
 
         public Dictionary<NDependMetricDefinition, double> GetNamespaceMetrics(INamespace nNamespace)
         {
-            Dictionary<NDependMetricDefinition, double> namespaceMetrics = new Dictionary<NDependMetricDefinition, double>();
             List<NDependMetricDefinition> namespaceMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadNamespaceMetricsDefinitions();
-            PropertyInfo property;
-            PropertyInfo[] pi = nNamespace.GetType().GetProperties();
-            foreach (NDependMetricDefinition namespaceMetricDefinition in namespaceMetricsDefinitionsList)
-            {
-                Double metricValue = 0;
-                property = nNamespace.GetType().GetProperty(namespaceMetricDefinition.InternalPropertyName);
-                if (property != null) metricValue = Convert.ToDouble(property.GetValue(nNamespace));
-                namespaceMetrics.Add(namespaceMetricDefinition, metricValue);
-            }
-
-            return namespaceMetrics;
+            return GetCodeElementMetrics<INamespace>(nNamespace, namespaceMetricsDefinitionsList);
         }
 
         public Dictionary<string, string> GetAssemblyMetrics_NoReflection(IAssembly assembly)
@@ -164,23 +115,59 @@ namespace NDependMetricsReporter
 
         public Dictionary<string, string> GetNamespaceMetrics_NoReflection(INamespace nNamespace)
         {
-            Dictionary<string, string> assemblyMetrics = new Dictionary<string, string>();
+            Dictionary<string, string> namespaceMetrics = new Dictionary<string, string>();
 
-            assemblyMetrics.Add("NbTypes", nNamespace.NbTypes.ToString());
-            assemblyMetrics.Add("NbMethods", nNamespace.NbMethods.ToString());
-            assemblyMetrics.Add("NbFields", nNamespace.NbFields.ToString());
-            assemblyMetrics.Add("NbNamespacesUsed", nNamespace.NbNamespacesUsed.ToString());
-            assemblyMetrics.Add("NbNamespacesUsingMe", nNamespace.NbNamespacesUsingMe.ToString());
-            assemblyMetrics.Add("Level", nNamespace.Level.ToString());
-            assemblyMetrics.Add("NbILInstructions", nNamespace.NbILInstructions.ToString());
-            assemblyMetrics.Add("NbLinesOfCode", nNamespace.NbLinesOfCode.ToString());
-            assemblyMetrics.Add("NbLinesOfCodeCovered", nNamespace.NbLinesOfCodeCovered.ToString());
-            assemblyMetrics.Add("NbLinesOfCodeNotCovered", nNamespace.NbLinesOfCodeNotCovered.ToString());
-            assemblyMetrics.Add("PercentageCoverage", nNamespace.PercentageCoverage.ToString());
-            assemblyMetrics.Add("NbLinesOfComment", nNamespace.NbLinesOfComment.ToString());
-            assemblyMetrics.Add("PercentageComment", nNamespace.PercentageComment.ToString());
+            namespaceMetrics.Add("NbTypes", nNamespace.NbTypes.ToString());
+            namespaceMetrics.Add("NbMethods", nNamespace.NbMethods.ToString());
+            namespaceMetrics.Add("NbFields", nNamespace.NbFields.ToString());
+            namespaceMetrics.Add("NbNamespacesUsed", nNamespace.NbNamespacesUsed.ToString());
+            namespaceMetrics.Add("NbNamespacesUsingMe", nNamespace.NbNamespacesUsingMe.ToString());
+            namespaceMetrics.Add("Level", nNamespace.Level.ToString());
+            namespaceMetrics.Add("NbILInstructions", nNamespace.NbILInstructions.ToString());
+            namespaceMetrics.Add("NbLinesOfCode", nNamespace.NbLinesOfCode.ToString());
+            namespaceMetrics.Add("NbLinesOfCodeCovered", nNamespace.NbLinesOfCodeCovered.ToString());
+            namespaceMetrics.Add("NbLinesOfCodeNotCovered", nNamespace.NbLinesOfCodeNotCovered.ToString());
+            namespaceMetrics.Add("PercentageCoverage", nNamespace.PercentageCoverage.ToString());
+            namespaceMetrics.Add("NbLinesOfComment", nNamespace.NbLinesOfComment.ToString());
+            namespaceMetrics.Add("PercentageComment", nNamespace.PercentageComment.ToString());
 
-            return assemblyMetrics;
+            return namespaceMetrics;
+        }
+
+        public Dictionary<string, string> GetTypeMetrics_NoReflection(IType nType)
+        {
+            Dictionary<string, string> typeMetrics = new Dictionary<string, string>();
+
+            typeMetrics.Add("NbTypes", nType.NbTypes.ToString());
+            typeMetrics.Add("NbMethods", nType.NbMethods.ToString());
+            typeMetrics.Add("NbFields", nType.NbFields.ToString());
+            typeMetrics.Add("NbNamespacesUsed", nType.NbNamespacesUsed.ToString());
+            typeMetrics.Add("NbNamespacesUsingMe", nType.NbNamespacesUsingMe.ToString());
+            typeMetrics.Add("Level", nType.Level.ToString());
+            typeMetrics.Add("NbILInstructions", nType.NbILInstructions.ToString());
+            typeMetrics.Add("NbLinesOfCode", nType.NbLinesOfCode.ToString());
+            typeMetrics.Add("NbLinesOfCodeCovered", nType.NbLinesOfCodeCovered.ToString());
+            typeMetrics.Add("NbLinesOfCodeNotCovered", nType.NbLinesOfCodeNotCovered.ToString());
+            typeMetrics.Add("PercentageCoverage", nType.PercentageCoverage.ToString());
+            typeMetrics.Add("NbLinesOfComment", nType.NbLinesOfComment.ToString());
+            typeMetrics.Add("PercentageComment", nType.PercentageComment.ToString());
+
+            return typeMetrics;
+        }
+
+        private Dictionary<NDependMetricDefinition, double> GetCodeElementMetrics<T>(T codeElement, List<NDependMetricDefinition> nDependMetricsDefinitions)
+        {
+            Dictionary<NDependMetricDefinition, double> codeElementMetrics = new Dictionary<NDependMetricDefinition, double>();
+            PropertyInfo property;
+            foreach (NDependMetricDefinition codeElementMetricDefinition in nDependMetricsDefinitions)
+            {
+                Double metricValue = 0;
+                property = codeElement.GetType().GetProperty(codeElementMetricDefinition.InternalPropertyName);
+                if (property != null) metricValue = Convert.ToDouble(property.GetValue(codeElement));
+                codeElementMetrics.Add(codeElementMetricDefinition, metricValue);
+            }
+
+            return codeElementMetrics;
         }
     }
 }
