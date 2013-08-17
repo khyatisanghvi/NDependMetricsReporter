@@ -56,36 +56,50 @@ namespace NDependMetricsReporter
             NbLinesOfComment, PercentageComment,
             CyclomaticComplexity, ILCyclomaticComplexity, ILNestingDepth
         };
-
+        /*
         public IEnumerable<IAssembly> GetAssembliesInApplication()
         {
             return codeBase.Application.Assemblies;
-        }
+        }*/
 
         public IEnumerable<IAssembly> GetNonThirPartyAssembliesInApplication()
         {
-            List<IAssembly> nonThirPartyAssemblies = new List<IAssembly>();
+            /*List<IAssembly> nonThirPartyAssemblies = new List<IAssembly>();
             foreach (IAssembly assembly in codeBase.Application.Assemblies)
             {
                 if (assembly.IsThirdParty) continue;
                 nonThirPartyAssemblies.Add(assembly);
             }
-            return nonThirPartyAssemblies;
+            return nonThirPartyAssemblies;*/
+            return codeBase.Application.Assemblies.Where(a => !a.IsThirdParty);
         }
 
         public IAssembly GetAssemblyByName(string assemblyName)
         {
-            return codeBase.Application.Assemblies.Where(a => a.Name == assemblyName).First();
+            IEnumerable<IAssembly> selectedAssemblies = codeBase.Application.Assemblies.Where(a => a.Name == assemblyName);
+            if (selectedAssemblies.Any()) return selectedAssemblies.First();
+            return null;
         }
 
         public INamespace GetNamespaceByName(string namespaceName)
         {
-            return codeBase.Application.Namespaces.Where(n => n.Name == namespaceName).First();
+            IEnumerable<INamespace> selectedNamespaces = codeBase.Application.Namespaces.Where(a => a.Name == namespaceName);
+            if (selectedNamespaces.Any()) return selectedNamespaces.First();
+            return null;
         }
 
         public IType GetTypeByName(string typeName)
         {
-            return codeBase.Application.Types.Where(t => t.Name == typeName).First();
+            IEnumerable<IType> selectedTypes = codeBase.Application.Types.Where(a => a.Name == typeName);
+            if (selectedTypes.Any()) return selectedTypes.First();
+            return null;
+        }
+
+        public IMethod GetMethodByName(string methodName)
+        {
+            IEnumerable<IMethod> selectedMethods = codeBase.Application.Methods.Where(a => a.Name == methodName);
+            if (selectedMethods.Any()) return selectedMethods.First();
+            return null;
         }
 
         public Dictionary<NDependMetricDefinition, double> GetAssemblyMetrics(IAssembly assembly)
