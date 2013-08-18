@@ -133,6 +133,7 @@ namespace NDependMetricsReporter
         private void btnOpenProject_Click(object sender, EventArgs e)
         {
             nDependServicesProvider.ProjectManager.ShowDialogChooseAnExistingProject(out nDependProject);
+            if (nDependProject == null) return;
             this.lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
             FillBaseControls();
         }
@@ -179,9 +180,20 @@ namespace NDependMetricsReporter
                 FillMetricsListView<IType>(nType, typeMetrics);
                 Dictionary<string, string> typeMetrics2 = codeElementsManager.GetTypeMetrics_NoReflection(nType);
                 FillMetricsListView2<IType>(nType, typeMetrics2);
-                /*string selectedTypeName = this.lvwTypesList.SelectedItems[0].Text;
-                var methodsList = new CodeElementsManager(lastAnalysisCodebase).GetTypeByName(selectedTypeName).MethodsAndContructors;
-                FillMethodsListView(methodsList);*/
+            }
+        }
+
+        private void lvwMethodsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.lvwMethodsList.SelectedItems.Count > 0)
+            {
+                CodeElementsManager codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
+                string selectedMethodName = this.lvwMethodsList.SelectedItems[0].Text;
+                IMethod nMethod = codeElementsManager.GetMethodByName(selectedMethodName);
+                Dictionary<NDependMetricDefinition, double> methodMetrics = codeElementsManager.GetMethodMetrics(nMethod);
+                FillMetricsListView<IMethod>(nMethod, methodMetrics);
+                Dictionary<string, string> typeMetrics2 = codeElementsManager.GetMethodMetrics_NoReflection(nMethod);
+                FillMetricsListView2<IMethod>(nMethod, typeMetrics2);
             }
         }
 
@@ -196,5 +208,7 @@ namespace NDependMetricsReporter
                 ShowMetricChart(nDependMetricDefinition.MetricName, metricValues);
             }
         }
+
+
     }
 }

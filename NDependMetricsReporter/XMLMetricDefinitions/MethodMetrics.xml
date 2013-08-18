@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ArrayOfNDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbVariables</PropertyName>
+    <InternalPropertyName>NbVariables</InternalPropertyName>
+    <MetricName>Variables in Method</MetricName>
+    <Description>The number of variables declared in the body of a method</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbParameters</PropertyName>
+    <InternalPropertyName>NbParameters</InternalPropertyName>
+    <MetricName>Parameters in Method</MetricName>
+    <Description> The number of parameters of a method. Ref and Out are also counted.</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbOverloads</PropertyName>
+    <InternalPropertyName>NbOverloads</InternalPropertyName>
+    <MetricName>Overload of a Method</MetricName>
+    <Description>The number of overloads of a method.</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbMethodsCalled</PropertyName>
+    <InternalPropertyName>MethodCe</InternalPropertyName>
+    <MetricName>Efferent Coupling (Ce)</MetricName>
+    <Description>The number of methods used by this method</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbMethodsCallingMe</PropertyName>
+    <InternalPropertyName>MethodCa</InternalPropertyName>
+    <MetricName>Afferent Coupling (Ca)</MetricName>
+    <Description>The number of methods that depend on this method</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt16</NDependMetricType>
+    <PropertyName>Level</PropertyName>
+    <InternalPropertyName>MethodLevel</InternalPropertyName>
+    <MetricName>Method Level</MetricName>
+    <Description xml:space="preserve">Level of type.
+    0 = Uses no other type.
+    1 = Uses only third-party type
+    n = 1 + Max level of used type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.Single</NDependMetricType>
+    <PropertyName>Rank</PropertyName>
+    <InternalPropertyName>MethodRank</InternalPropertyName>
+    <MetricName>Method Rank</MetricName>
+    <Description>Method rank computed by applying the Google PageRank algorithm on the graph of methods' dependencies</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbILInstructions</PropertyName>
+    <InternalPropertyName>NbILInst</InternalPropertyName>
+    <MetricName>Number of Instructions</MetricName>
+    <Description>Number of instructions in current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfCode</PropertyName>
+    <InternalPropertyName>NbLinesOfCode</InternalPropertyName>
+    <MetricName>Lines of Code</MetricName>
+    <Description>Number of lines of code for the current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfCodeCovered</PropertyName>
+    <InternalPropertyName>NbLinesOfCodeCovered</InternalPropertyName>
+    <MetricName>Lines of Code Covered</MetricName>
+    <Description>Number of lines of code covered by tests in current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfCodeNotCovered</PropertyName>
+    <InternalPropertyName>NbLinesOfCodeNotCovered</InternalPropertyName>
+    <MetricName>Lines of Code Not Covered</MetricName>
+    <Description>Number of lines of code not covered by tests in current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.Byte</NDependMetricType>
+    <PropertyName>PercentageCoverage</PropertyName>
+    <InternalPropertyName>PercentageCoverage</InternalPropertyName>
+    <MetricName>Percentage of Coverage</MetricName>
+    <Description>Percentage of code coverage by tests in current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbLinesOfComment</PropertyName>
+    <InternalPropertyName>NbLinesOfComment</InternalPropertyName>
+    <MetricName>Lines of Comment</MetricName>
+    <Description>Number of comment lines in the current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.Byte</NDependMetricType>
+    <PropertyName>PercentageComment</PropertyName>
+    <InternalPropertyName>PercentageComment</InternalPropertyName>
+    <MetricName>Percentage of comment</MetricName>
+    <Description>Percentage of comment lines in the current type</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>CyclomaticComplexity</PropertyName>
+    <InternalPropertyName>CC</InternalPropertyName>
+    <MetricName>Cyclomatic Complexity</MetricName>
+    <Description>Is the number of decisions that can be taken in a procedure. Normally defined for method, the CC in a type is the sum of the CC of its methods</Description>
+  </NDependMetricDefinition>
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>ILCyclomaticComplexity</PropertyName>
+    <InternalPropertyName>ILCC</InternalPropertyName>
+    <MetricName>IL Cyclomatic Complexity</MetricName>
+    <Description>Independent of Language Cyclomatic Complexity</Description>
+  </NDependMetricDefinition>    
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>ILNestingDepth</PropertyName>
+    <InternalPropertyName>ILNestingDepth</InternalPropertyName>
+    <MetricName>Nesting Depth</MetricName>
+    <Description>The maximum number of encapsulated scopes inside the body of the method</Description>
+  </NDependMetricDefinition>
+</ArrayOfNDependMetricDefinition>

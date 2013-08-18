@@ -43,8 +43,8 @@ namespace NDependMetricsReporter
             CodeElementsManagerReflectionHelper reflectionHelper = new CodeElementsManagerReflectionHelper();
             Type metricType = Type.GetType(metricDefinition.NDependMetricType);
             Type nullableMetricType = typeof(Nullable<>).MakeGenericType(metricType);
-            IList metricValues = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(nullableMetricType));
             var metricValue = Activator.CreateInstance(nullableMetricType);
+            IList metricValues = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(nullableMetricType));
 
             foreach (var m in analysisResultRefsList)
             {
@@ -53,8 +53,6 @@ namespace NDependMetricsReporter
                     IAnalysisResult currentAnalysisResult = m.Load();
                     ICodeBase currentAnalysisResultCodeBase = currentAnalysisResult.CodeBase;
                     CodeElementsManager currenAnalysisResultCodeBaseManager =  new CodeElementsManager(currentAnalysisResultCodeBase);
-                    //var metricValue = Convert.ChangeType(0, metricType);
-                    //var metricValue = Convert.ChangeType(0, nullableMetricType);
                     metricValue = null;
 
                     switch (metricDefinition.NDependCodeElementType)

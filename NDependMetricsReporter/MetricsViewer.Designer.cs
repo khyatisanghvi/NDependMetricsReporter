@@ -203,6 +203,7 @@
             this.lvwMethodsList.TabIndex = 16;
             this.lvwMethodsList.UseCompatibleStateImageBehavior = false;
             this.lvwMethodsList.View = System.Windows.Forms.View.Details;
+            this.lvwMethodsList.SelectedIndexChanged += new System.EventHandler(this.lvwMethodsList_SelectedIndexChanged);
             // 
             // MethodName
             // 

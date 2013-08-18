@@ -16,18 +16,6 @@ namespace NDependMetricsReporter
             this.codeBase = codeBase;
         }
 
-        public enum TypeMetrics {
-            NbMethods, NbFields, LCOM, LCOMHS,
-            NbTypesUsed, NbTypesUsingMe, Level, Rank,
-            NbILInstructions, NbLinesOfCode,
-            NbLinesOfCodeCovered, NbLinesOfCodeNotCovered, PercentageCoverage,
-            NbLinesOfComment, PercentageComment,
-            CyclomaticComplexity, ILCyclomaticComplexity,
-            SizeOfInst,
-            ABT,
-            NbChildren, DepthOfInheritance
-        };
-
         public enum MethodMetrics
         {
             NbVariables, NbParameters,
@@ -87,9 +75,14 @@ namespace NDependMetricsReporter
 
         public Dictionary<NDependMetricDefinition, double> GetTypeMetrics(IType nType)
         {
-            List<NDependMetricDefinition> namespaceMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadTypeMetricsDefinitions();
-            PropertyInfo[] pi = codeBase.Application.Types.First().GetType().GetProperties();
-            return GetCodeElementMetrics<IType>(nType, namespaceMetricsDefinitionsList);
+            List<NDependMetricDefinition> typeMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadTypeMetricsDefinitions();
+            return GetCodeElementMetrics<IType>(nType, typeMetricsDefinitionsList);
+        }
+
+        public Dictionary<NDependMetricDefinition, double> GetMethodMetrics(IMethod nMethod)
+        {
+            List<NDependMetricDefinition> methodMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadMethodMetricsDefinitions();
+            return GetCodeElementMetrics<IMethod>(nMethod, methodMetricsDefinitionsList);
         }
 
         public Dictionary<string, string> GetAssemblyMetrics_NoReflection(IAssembly assembly)
@@ -168,6 +161,30 @@ namespace NDependMetricsReporter
             typeMetrics.Add("DepthOfInheritance", nType.DepthOfInheritance.ToString());
 
             return typeMetrics;
+        }
+
+        public Dictionary<string, string> GetMethodMetrics_NoReflection(IMethod nMethod)
+        {
+            Dictionary<string, string> methodMetrics = new Dictionary<string, string>();
+            methodMetrics.Add("NbVariables", nMethod.NbVariables.ToString());
+            methodMetrics.Add("NbParameters", nMethod.NbParameters.ToString());
+            methodMetrics.Add("NbOverloads", nMethod.NbOverloads.ToString());
+            methodMetrics.Add("NbMethodsCalled", nMethod.NbMethodsCalled.ToString());
+            methodMetrics.Add("NbMethodsCallingMe", nMethod.NbMethodsCallingMe.ToString());
+            methodMetrics.Add("Level", nMethod.Level.ToString());
+            methodMetrics.Add("Rank", nMethod.Rank.ToString());
+            methodMetrics.Add("NbILInstructions", nMethod.NbILInstructions.ToString());
+            methodMetrics.Add("NbLinesOfCode", nMethod.NbLinesOfCode.ToString());
+            methodMetrics.Add("NbLinesOfCodeCovered", nMethod.NbLinesOfCodeCovered.ToString());
+            methodMetrics.Add("NbLinesOfCodeNotCovered", nMethod.NbLinesOfCodeNotCovered.ToString());
+            methodMetrics.Add("PercentageCoverage", nMethod.PercentageCoverage.ToString());
+            methodMetrics.Add("NbLinesOfComment", nMethod.NbLinesOfComment.ToString());
+            methodMetrics.Add("PercentageComment", nMethod.PercentageComment.ToString());
+            methodMetrics.Add("CyclomaticComplexity", nMethod.CyclomaticComplexity.ToString());
+            methodMetrics.Add("ILCyclomaticComplexity", nMethod.ILCyclomaticComplexity.ToString());
+            methodMetrics.Add("ILNestingDepth", nMethod.ILNestingDepth.ToString());
+
+            return methodMetrics;
         }
 
         private Dictionary<NDependMetricDefinition, double> GetCodeElementMetrics<T>(T codeElement, List<NDependMetricDefinition> nDependMetricsDefinitions)
