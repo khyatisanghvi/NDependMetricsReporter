@@ -60,7 +60,8 @@ namespace NDependMetricsReporter
 
         public IType GetTypeByName(string typeName)
         {
-            IEnumerable<IType> selectedTypes = codeBase.Application.Types.Where(a => a.Name == typeName);
+            string typeWithoutNamespace = typeName.Substring(typeName.LastIndexOf(".") + 1);
+            IEnumerable<IType> selectedTypes = codeBase.Application.Types.Where(a => a.Name == typeWithoutNamespace);
             if (selectedTypes.Any()) return selectedTypes.First();
             return null;
         }
@@ -82,6 +83,13 @@ namespace NDependMetricsReporter
         {
             List<NDependMetricDefinition> namespaceMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadNamespaceMetricsDefinitions();
             return GetCodeElementMetrics<INamespace>(nNamespace, namespaceMetricsDefinitionsList);
+        }
+
+        public Dictionary<NDependMetricDefinition, double> GetTypeMetrics(IType nType)
+        {
+            List<NDependMetricDefinition> namespaceMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadTypeMetricsDefinitions();
+            PropertyInfo[] pi = codeBase.Application.Types.First().GetType().GetProperties();
+            return GetCodeElementMetrics<IType>(nType, namespaceMetricsDefinitionsList);
         }
 
         public Dictionary<string, string> GetAssemblyMetrics_NoReflection(IAssembly assembly)
@@ -137,7 +145,6 @@ namespace NDependMetricsReporter
         public Dictionary<string, string> GetTypeMetrics_NoReflection(IType nType)
         {
             Dictionary<string, string> typeMetrics = new Dictionary<string, string>();
-
             typeMetrics.Add("NbMethods", nType.NbMethods.ToString());
             typeMetrics.Add("NbFields", nType.NbFields.ToString());
             typeMetrics.Add("LCOM", nType.LCOM.ToString());
@@ -152,12 +159,12 @@ namespace NDependMetricsReporter
             typeMetrics.Add("NbLinesOfCodeCovered", nType.NbLinesOfCodeCovered.ToString());
             typeMetrics.Add("NbLinesOfCodeNotCovered", nType.NbLinesOfCodeNotCovered.ToString());
             typeMetrics.Add("PercentageCoverage", nType.PercentageCoverage.ToString());
-            typeMetrics.Add("PercentageComment", nType.PercentageComment.ToString());
             typeMetrics.Add("NbLinesOfComment", nType.NbLinesOfComment.ToString());
+            typeMetrics.Add("PercentageComment", nType.PercentageComment.ToString());
             typeMetrics.Add("CyclomaticComplexity", nType.CyclomaticComplexity.ToString());
             typeMetrics.Add("ILCyclomaticComplexity", nType.ILCyclomaticComplexity.ToString());
             typeMetrics.Add("SizeOfInst", nType.SizeOfInst.ToString());
-            typeMetrics.Add("NBChildren", nType.NbChildren.ToString());
+            typeMetrics.Add("NbChildren", nType.NbChildren.ToString());
             typeMetrics.Add("DepthOfInheritance", nType.DepthOfInheritance.ToString());
 
             return typeMetrics;

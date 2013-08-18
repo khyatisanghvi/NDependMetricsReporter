@@ -109,6 +109,7 @@
     </Content>
     <Content Include="XMLMetricDefinitions\TypeMetrics.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

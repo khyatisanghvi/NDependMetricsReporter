@@ -40,7 +40,7 @@
     <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
     <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbTypesUsed</PropertyName>
-    <InternalPropertyName>AsmCe</InternalPropertyName>
+    <InternalPropertyName>TypeCe</InternalPropertyName>
     <MetricName>Efferent Coupling (Ce)</MetricName>
     <Description>The number of types used by this type</Description>
   </NDependMetricDefinition>
@@ -48,7 +48,7 @@
     <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
     <NDependMetricType>System.UInt32</NDependMetricType>
     <PropertyName>NbTypesUsingMe</PropertyName>
-    <InternalPropertyName>AsmCa</InternalPropertyName>
+    <InternalPropertyName>TypeCa</InternalPropertyName>
     <MetricName>Afferent Coupling (Ca)</MetricName>
     <Description>The number of types that depend on this type</Description>
   </NDependMetricDefinition>
@@ -56,7 +56,7 @@
     <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
     <NDependMetricType>System.UInt16</NDependMetricType>
     <PropertyName>Level</PropertyName>
-    <InternalPropertyName>Level</InternalPropertyName>
+    <InternalPropertyName>TypeLevel</InternalPropertyName>
     <MetricName>Type Level</MetricName>
     <Description xml:space="preserve">Level of type.
     0 = Uses no other type.
@@ -67,14 +67,18 @@
     <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
     <NDependMetricType>System.Single</NDependMetricType>
     <PropertyName>Rank</PropertyName>
-    <InternalPropertyName>Rank</InternalPropertyName>
+    <InternalPropertyName>TypeRank</InternalPropertyName>
     <MetricName>Type Rank</MetricName>
     <Description>Type rank computed by applying the Google PageRank algorithm on the graph of types' dependencies</Description>
   </NDependMetricDefinition>
-  
-  
-  
-  
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>ABT</PropertyName>
+    <InternalPropertyName>ABT</InternalPropertyName>
+    <MetricName>Association Between Classes (ABT)</MetricName>
+    <Description>The number of members of others types that this type directly uses in the body of its methods</Description>
+  </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
     <NDependMetricType>System.UInt32</NDependMetricType>
@@ -133,42 +137,42 @@
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
-    <NDependMetricType>System.Single</NDependMetricType>
-    <PropertyName>RelationalCohesion</PropertyName>
-    <InternalPropertyName>RelationalCohesion</InternalPropertyName>
-    <MetricName>Relational Cohesion (H)</MetricName>
-    <Description>Average number of internal relationships per type</Description>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>CyclomaticComplexity</PropertyName>
+    <InternalPropertyName>CC</InternalPropertyName>
+    <MetricName>Cyclomatic Complexity</MetricName>
+    <Description>Is the number of decisions that can be taken in a procedure. Normally defined for method, the CC in a type is the sum of the CC of its methods</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
-    <NDependMetricType>System.Single</NDependMetricType>
-    <PropertyName>Instability</PropertyName>
-    <InternalPropertyName>Instability</InternalPropertyName>
-    <MetricName>Instability (I)</MetricName>
-    <Description>The ratio of efferent coupling (Ce) to total coupling.</Description>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>ILCyclomaticComplexity</PropertyName>
+    <InternalPropertyName>ILCC</InternalPropertyName>
+    <MetricName>IL Cyclomatic Complexity</MetricName>
+    <Description>Independent of Language Cyclomatic Complexity</Description>
+  </NDependMetricDefinition>    
+  <NDependMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>SizeOfInst</PropertyName>
+    <InternalPropertyName>SizeOfInst</InternalPropertyName>
+    <MetricName>Size of Instance</MetricName>
+    <Description>The size, in bytes, of instances of this type</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
-    <NDependMetricType>System.Single</NDependMetricType>
-    <PropertyName>Abstractness</PropertyName>
-    <InternalPropertyName>Abstractness</InternalPropertyName>
-    <MetricName>Abstractness (A)</MetricName>
-    <Description>The ratio of the number of internal abstract types (abstract classes and interfaces) to the number of internal types</Description>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>NbChildren</PropertyName>
+    <InternalPropertyName>NbChildren</InternalPropertyName>
+    <MetricName>Children Types</MetricName>
+    <Description>The number of sub-classes, whatever their positions in the sub branch of the inheritance tree</Description>
   </NDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
-    <NDependMetricType>System.Single</NDependMetricType>
-    <PropertyName>DistFromMainSeq</PropertyName>
-    <InternalPropertyName>DistFromMainSeq</InternalPropertyName>
-    <MetricName>Distance Form Main Sequence (D)</MetricName>
-    <Description>The perpendicular distance of an assembly from the idealized line A + I = 1 (called main sequence). This metric is an indicator of the assembly's balance between abstractness and stability.</Description>
-  </NDependMetricDefinition>
-  <NDependMetricDefinition>
-    <NDependCodeElementType>NDepend.CodeModel.IType</NDependCodeElementType>
-    <NDependMetricType>System.Single</NDependMetricType>
-    <PropertyName>NormDistFromMainSeq</PropertyName>
-    <InternalPropertyName>NormDistFromMainSeq</InternalPropertyName>
-    <MetricName>Normalized Distance From Main Sequence (Dn)</MetricName>
-    <Description>Normalized (D) to 0..1</Description>
+    <NDependMetricType>System.UInt32</NDependMetricType>
+    <PropertyName>DepthOfInheritance</PropertyName>
+    <InternalPropertyName>DepthOfInheritance</InternalPropertyName>
+    <MetricName>Depth of Inheritance</MetricName>
+    <Description> The number of its base classes</Description>
   </NDependMetricDefinition>
 </ArrayOfNDependMetricDefinition>

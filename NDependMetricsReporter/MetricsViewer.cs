@@ -171,9 +171,17 @@ namespace NDependMetricsReporter
         {
             if (this.lvwTypesList.SelectedItems.Count > 0)
             {
+                CodeElementsManager codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
                 string selectedTypeName = this.lvwTypesList.SelectedItems[0].Text;
+                IType nType = codeElementsManager.GetTypeByName(selectedTypeName);
+                FillMethodsListView(nType.MethodsAndContructors);
+                Dictionary<NDependMetricDefinition, double> typeMetrics = codeElementsManager.GetTypeMetrics(nType);
+                FillMetricsListView<IType>(nType, typeMetrics);
+                Dictionary<string, string> typeMetrics2 = codeElementsManager.GetTypeMetrics_NoReflection(nType);
+                FillMetricsListView2<IType>(nType, typeMetrics2);
+                /*string selectedTypeName = this.lvwTypesList.SelectedItems[0].Text;
                 var methodsList = new CodeElementsManager(lastAnalysisCodebase).GetTypeByName(selectedTypeName).MethodsAndContructors;
-                FillMethodsListView(methodsList);
+                FillMethodsListView(methodsList);*/
             }
         }
 

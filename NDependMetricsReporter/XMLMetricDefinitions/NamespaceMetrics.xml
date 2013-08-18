@@ -2,7 +2,7 @@
 <ArrayOfNDependMetricDefinition>
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
-    <NDependMetricType>System.UInt32</NDependMetricType>
+    <NDependMetricType>System.Nullable&lt;System.UInt32&gt;</NDependMetricType>
     <PropertyName>NbTypes</PropertyName>
     <InternalPropertyName>NbTypes</InternalPropertyName>
     <MetricName>Types in Namespace</MetricName>
