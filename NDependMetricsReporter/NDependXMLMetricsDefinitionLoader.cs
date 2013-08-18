@@ -17,6 +17,11 @@ namespace NDependMetricsReporter
             this.pathToXMLMetrics = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"\XMLMetricDefinitions\";
         }
 
+        public List<NDependMetricDefinition> LoadMetricsDefinitions(string xmlMetricsDefinitionFile)
+        {
+            return DeseralizeMetricsList(this.pathToXMLMetrics + xmlMetricsDefinitionFile);
+        }
+/*
         public List<NDependMetricDefinition> LoadAssemblyMetricsDefinitions()
         {
             return DeseralizeMetricsList(this.pathToXMLMetrics + "AssemblyMetrics.xml");
@@ -36,6 +41,8 @@ namespace NDependMetricsReporter
         {
             return DeseralizeMetricsList(this.pathToXMLMetrics + "MethodMetrics.xml");
         }
+ 
+ */
         private List<NDependMetricDefinition> DeseralizeMetricsList(string filePath)
         {
             XmlSerializer deserializer = new XmlSerializer(typeof(List<NDependMetricDefinition>));

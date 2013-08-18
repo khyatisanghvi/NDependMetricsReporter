@@ -106,16 +106,6 @@ namespace NDependMetricsReporter
             this.rtfMetricProperties.AppendText(Environment.NewLine + nDependMetricDefinition.Description);
         }
 
-        private void FillMetricsListView2<T>(T codeElement, Dictionary<string, string> metrics)
-        {
-            this.lvwMetricsList2.Items.Clear();
-            foreach (KeyValuePair<string, string> metric in metrics)
-            {
-                ListViewItem lvi = new ListViewItem(new[] { metric.Key, metric.Value });
-                this.lvwMetricsList2.Items.Add(lvi);
-            }
-        }
-
         private void ShowMetricChart(string serieName, IList chartData)
         {
             MetricTrendChart metricTrendChart;
@@ -146,10 +136,8 @@ namespace NDependMetricsReporter
                 string selectedAssemblyName = this.lvwAssembliesList.SelectedItems[0].Text;
                 IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
                 FillNamespacesListView(assembly.ChildNamespaces);
-                Dictionary<NDependMetricDefinition, double> assemblyMetrics = codeElementsManager.GetAssemblyMetrics(assembly);
+                Dictionary<NDependMetricDefinition, double> assemblyMetrics = codeElementsManager.GetCodeElementMetrics<IAssembly>(assembly,"AssemblyMetrics.xml");
                 FillMetricsListView<IAssembly>(assembly, assemblyMetrics);
-                Dictionary<string, string> assemblyMetrics2 = codeElementsManager.GetAssemblyMetrics_NoReflection(assembly);
-                FillMetricsListView2<IAssembly>(assembly, assemblyMetrics2);
             }
         }
 
@@ -161,10 +149,8 @@ namespace NDependMetricsReporter
                 string selectedNamespaceName = this.lvwNamespacesList.SelectedItems[0].Text;
                 INamespace nNamespace = codeElementsManager.GetNamespaceByName(selectedNamespaceName);
                 FillTypesListView(nNamespace.ChildTypes);
-                Dictionary<NDependMetricDefinition, double> namespaceMetrics = codeElementsManager.GetNamespaceMetrics(nNamespace);
+                Dictionary<NDependMetricDefinition, double> namespaceMetrics = codeElementsManager.GetCodeElementMetrics<INamespace>(nNamespace, "NamespaceMetrics.xml");
                 FillMetricsListView<INamespace>(nNamespace, namespaceMetrics);
-                Dictionary<string, string> namespaceMetrics2 = codeElementsManager.GetNamespaceMetrics_NoReflection(nNamespace);
-                FillMetricsListView2<INamespace>(nNamespace, namespaceMetrics2);
             }
         }
 
@@ -176,10 +162,8 @@ namespace NDependMetricsReporter
                 string selectedTypeName = this.lvwTypesList.SelectedItems[0].Text;
                 IType nType = codeElementsManager.GetTypeByName(selectedTypeName);
                 FillMethodsListView(nType.MethodsAndContructors);
-                Dictionary<NDependMetricDefinition, double> typeMetrics = codeElementsManager.GetTypeMetrics(nType);
+                Dictionary<NDependMetricDefinition, double> typeMetrics = codeElementsManager.GetCodeElementMetrics<IType>(nType, "TypeMetrics.xml");
                 FillMetricsListView<IType>(nType, typeMetrics);
-                Dictionary<string, string> typeMetrics2 = codeElementsManager.GetTypeMetrics_NoReflection(nType);
-                FillMetricsListView2<IType>(nType, typeMetrics2);
             }
         }
 
@@ -190,10 +174,8 @@ namespace NDependMetricsReporter
                 CodeElementsManager codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
                 string selectedMethodName = this.lvwMethodsList.SelectedItems[0].Text;
                 IMethod nMethod = codeElementsManager.GetMethodByName(selectedMethodName);
-                Dictionary<NDependMetricDefinition, double> methodMetrics = codeElementsManager.GetMethodMetrics(nMethod);
+                Dictionary<NDependMetricDefinition, double> methodMetrics = codeElementsManager.GetCodeElementMetrics<IMethod>(nMethod, "MethodMetrics.xml");
                 FillMetricsListView<IMethod>(nMethod, methodMetrics);
-                Dictionary<string, string> typeMetrics2 = codeElementsManager.GetMethodMetrics_NoReflection(nMethod);
-                FillMetricsListView2<IMethod>(nMethod, typeMetrics2);
             }
         }
 
@@ -208,7 +190,5 @@ namespace NDependMetricsReporter
                 ShowMetricChart(nDependMetricDefinition.MetricName, metricValues);
             }
         }
-
-
     }
 }

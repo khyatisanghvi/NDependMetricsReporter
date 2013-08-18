@@ -47,9 +47,6 @@
             this.lvwMethodsList = new System.Windows.Forms.ListView();
             this.MethodName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblMethodsList = new System.Windows.Forms.Label();
-            this.lvwMetricsList2 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.rtfMetricProperties = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -219,30 +216,6 @@
             this.lblMethodsList.TabIndex = 17;
             this.lblMethodsList.Text = "Methods in selected Type";
             // 
-            // lvwMetricsList2
-            // 
-            this.lvwMetricsList2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.lvwMetricsList2.GridLines = true;
-            this.lvwMetricsList2.Location = new System.Drawing.Point(791, 178);
-            this.lvwMetricsList2.Name = "lvwMetricsList2";
-            this.lvwMetricsList2.Size = new System.Drawing.Size(214, 385);
-            this.lvwMetricsList2.TabIndex = 19;
-            this.lvwMetricsList2.UseCompatibleStateImageBehavior = false;
-            this.lvwMetricsList2.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Metric Name";
-            this.columnHeader1.Width = 141;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Value";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader2.Width = 55;
-            // 
             // rtfMetricProperties
             // 
             this.rtfMetricProperties.Location = new System.Drawing.Point(554, 572);
@@ -255,9 +228,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1227, 694);
+            this.ClientSize = new System.Drawing.Size(785, 694);
             this.Controls.Add(this.rtfMetricProperties);
-            this.Controls.Add(this.lvwMetricsList2);
             this.Controls.Add(this.lblMethodsList);
             this.Controls.Add(this.lvwMethodsList);
             this.Controls.Add(this.lblTypesList);
@@ -298,9 +270,6 @@
         private System.Windows.Forms.ListView lvwMethodsList;
         private System.Windows.Forms.ColumnHeader MethodName;
         private System.Windows.Forms.Label lblMethodsList;
-        private System.Windows.Forms.ListView lvwMetricsList2;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.RichTextBox rtfMetricProperties;
     }
 }
