@@ -53,10 +53,10 @@ namespace NDependMetricsReporter
         public Dictionary<NDependMetricDefinition, double> GetCodeElementMetrics<CodeElementType>(CodeElementType codeElement, string xmlMetricDefinitionFile)
         {
             List<NDependMetricDefinition> codeElementMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions(xmlMetricDefinitionFile);
-            return GetCodeElementMetricsGetMetricsValues<CodeElementType>(codeElement, codeElementMetricsDefinitionsList);
+            return GetCodeElementMetricsValues<CodeElementType>(codeElement, codeElementMetricsDefinitionsList);
         }
 
-        private Dictionary<NDependMetricDefinition, double> GetCodeElementMetricsGetMetricsValues<T>(T codeElement, List<NDependMetricDefinition> nDependMetricsDefinitions)
+        private Dictionary<NDependMetricDefinition, double> GetCodeElementMetricsValues<T>(T codeElement, List<NDependMetricDefinition> nDependMetricsDefinitions)
         {
             Dictionary<NDependMetricDefinition, double> codeElementMetrics = new Dictionary<NDependMetricDefinition, double>();
             PropertyInfo property;

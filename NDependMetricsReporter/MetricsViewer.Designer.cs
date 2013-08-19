@@ -48,6 +48,9 @@
             this.MethodName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblMethodsList = new System.Windows.Forms.Label();
             this.rtfMetricProperties = new System.Windows.Forms.RichTextBox();
+            this.lblCodeElementType = new System.Windows.Forms.Label();
+            this.lblCodeElementName = new System.Windows.Forms.Label();
+            this.TestColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lvwAssembliesList
@@ -58,7 +61,7 @@
             this.lvwAssembliesList.GridLines = true;
             this.lvwAssembliesList.Location = new System.Drawing.Point(28, 73);
             this.lvwAssembliesList.Name = "lvwAssembliesList";
-            this.lvwAssembliesList.Size = new System.Drawing.Size(740, 78);
+            this.lvwAssembliesList.Size = new System.Drawing.Size(773, 78);
             this.lvwAssembliesList.TabIndex = 4;
             this.lvwAssembliesList.UseCompatibleStateImageBehavior = false;
             this.lvwAssembliesList.View = System.Windows.Forms.View.Details;
@@ -113,7 +116,8 @@
             // lvwNamespacesList
             // 
             this.lvwNamespacesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.NamespaceName});
+            this.NamespaceName,
+            this.TestColumn});
             this.lvwNamespacesList.GridLines = true;
             this.lvwNamespacesList.Location = new System.Drawing.Point(28, 178);
             this.lvwNamespacesList.Name = "lvwNamespacesList";
@@ -121,12 +125,13 @@
             this.lvwNamespacesList.TabIndex = 10;
             this.lvwNamespacesList.UseCompatibleStateImageBehavior = false;
             this.lvwNamespacesList.View = System.Windows.Forms.View.Details;
+            this.lvwNamespacesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwNamespacesList_ColumnClick);
             this.lvwNamespacesList.SelectedIndexChanged += new System.EventHandler(this.lvwNamespacesList_SelectedIndexChanged);
             // 
             // NamespaceName
             // 
             this.NamespaceName.Text = "Namespace name";
-            this.NamespaceName.Width = 245;
+            this.NamespaceName.Width = 315;
             // 
             // lblNamespacesList
             // 
@@ -143,9 +148,9 @@
             this.MetricName,
             this.MetricValue});
             this.lvwMetricsList.GridLines = true;
-            this.lvwMetricsList.Location = new System.Drawing.Point(554, 178);
+            this.lvwMetricsList.Location = new System.Drawing.Point(554, 207);
             this.lvwMetricsList.Name = "lvwMetricsList";
-            this.lvwMetricsList.Size = new System.Drawing.Size(214, 385);
+            this.lvwMetricsList.Size = new System.Drawing.Size(247, 381);
             this.lvwMetricsList.TabIndex = 13;
             this.lvwMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwMetricsList.View = System.Windows.Forms.View.Details;
@@ -154,13 +159,12 @@
             // MetricName
             // 
             this.MetricName.Text = "Metric Name";
-            this.MetricName.Width = 141;
+            this.MetricName.Width = 182;
             // 
             // MetricValue
             // 
             this.MetricValue.Text = "Value";
             this.MetricValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.MetricValue.Width = 55;
             // 
             // lvwTypesList
             // 
@@ -173,6 +177,7 @@
             this.lvwTypesList.TabIndex = 14;
             this.lvwTypesList.UseCompatibleStateImageBehavior = false;
             this.lvwTypesList.View = System.Windows.Forms.View.Details;
+            this.lvwTypesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwTypesList_ColumnClick);
             this.lvwTypesList.SelectedIndexChanged += new System.EventHandler(this.lvwTypesList_SelectedIndexChanged);
             // 
             // TypeName
@@ -218,17 +223,43 @@
             // 
             // rtfMetricProperties
             // 
-            this.rtfMetricProperties.Location = new System.Drawing.Point(554, 572);
+            this.rtfMetricProperties.Location = new System.Drawing.Point(554, 594);
             this.rtfMetricProperties.Name = "rtfMetricProperties";
-            this.rtfMetricProperties.Size = new System.Drawing.Size(214, 109);
+            this.rtfMetricProperties.Size = new System.Drawing.Size(247, 87);
             this.rtfMetricProperties.TabIndex = 20;
             this.rtfMetricProperties.Text = "";
+            // 
+            // lblCodeElementType
+            // 
+            this.lblCodeElementType.AutoSize = true;
+            this.lblCodeElementType.Location = new System.Drawing.Point(551, 178);
+            this.lblCodeElementType.Name = "lblCodeElementType";
+            this.lblCodeElementType.Size = new System.Drawing.Size(100, 13);
+            this.lblCodeElementType.TabIndex = 21;
+            this.lblCodeElementType.Text = "Code Element Type";
+            // 
+            // lblCodeElementName
+            // 
+            this.lblCodeElementName.AutoSize = true;
+            this.lblCodeElementName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodeElementName.Location = new System.Drawing.Point(551, 192);
+            this.lblCodeElementName.Name = "lblCodeElementName";
+            this.lblCodeElementName.Size = new System.Drawing.Size(104, 13);
+            this.lblCodeElementName.TabIndex = 22;
+            this.lblCodeElementName.Text = "Code Element Name";
+            // 
+            // TestColumn
+            // 
+            this.TestColumn.Text = "TestColumn";
+            this.TestColumn.Width = 93;
             // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(785, 694);
+            this.ClientSize = new System.Drawing.Size(813, 694);
+            this.Controls.Add(this.lblCodeElementName);
+            this.Controls.Add(this.lblCodeElementType);
             this.Controls.Add(this.rtfMetricProperties);
             this.Controls.Add(this.lblMethodsList);
             this.Controls.Add(this.lvwMethodsList);
@@ -271,6 +302,9 @@
         private System.Windows.Forms.ColumnHeader MethodName;
         private System.Windows.Forms.Label lblMethodsList;
         private System.Windows.Forms.RichTextBox rtfMetricProperties;
+        private System.Windows.Forms.Label lblCodeElementType;
+        private System.Windows.Forms.Label lblCodeElementName;
+        private System.Windows.Forms.ColumnHeader TestColumn;
     }
 }
 

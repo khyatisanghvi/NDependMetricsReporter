@@ -25,17 +25,9 @@ namespace NDependMetricsReporter
         {
             IAnalysisResultRef lastAnalysisResultRef;
             bool result = nDependProject.TryGetMostRecentAnalysisResultRef(out lastAnalysisResultRef);
-            try
-            {
-                IAnalysisResult analisysResult = lastAnalysisResultRef.Load();
-                ICodeBase codeBase = analisysResult.CodeBase;
-                return codeBase;
-            }
-            catch (AnalysisException analysisException)
-            {
-                string exceptionString = analysisException.ToString();
-                return null;
-            }
+            IAnalysisResult analisysResult = lastAnalysisResultRef.Load();
+            ICodeBase codeBase = analisysResult.CodeBase;
+            return codeBase;
         }
     }
 }

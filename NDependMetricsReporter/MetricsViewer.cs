@@ -22,6 +22,8 @@ namespace NDependMetricsReporter
 {
     public partial class MetricsViewer : Form
     {
+        ListViewColumnSorter lvwColumnSorter;
+
         NDependServicesProvider nDependServicesProvider;
         IProject nDependProject;
         ICodeBase lastAnalysisCodebase;
@@ -29,8 +31,11 @@ namespace NDependMetricsReporter
         public MetricsViewer()
         {
             InitializeComponent();
+            lvwColumnSorter = new ListViewColumnSorter();
+            this.lvwNamespacesList.ListViewItemSorter = lvwColumnSorter;
+            this.lvwTypesList.ListViewItemSorter = lvwColumnSorter;
 
-            nDependServicesProvider = new NDependServicesProvider();
+            nDependServicesProvider = new NDependServicesProvider();           
         }
 
         private void FillBaseControls()
@@ -53,17 +58,19 @@ namespace NDependMetricsReporter
 
         private void FillNamespacesListView(IEnumerable<INamespace> namespacesList)
         {
-            this.lvwNamespacesList.Items.Clear(); ;
+            double d = -21;
+            this.lvwNamespacesList.Items.Clear();
             foreach (INamespace nspc in namespacesList)
             {
-                ListViewItem lvi = new ListViewItem(new string[] { nspc.Name });
+                d = d / (-4);
+                ListViewItem lvi = new ListViewItem(new string[] { nspc.Name, d.ToString() });
                 this.lvwNamespacesList.Items.Add(lvi);
             }
         }
 
         private void FillTypesListView(IEnumerable<IType> typesList)
         {
-            this.lvwTypesList.Items.Clear(); ;
+            this.lvwTypesList.Items.Clear();
             foreach (IType tp in typesList)
             {
                 ListViewItem lvi = new ListViewItem(new string[] { tp.Name });
@@ -73,7 +80,7 @@ namespace NDependMetricsReporter
 
         private void FillMethodsListView(IEnumerable<IMethod> methodsList)
         {
-            this.lvwMethodsList.Items.Clear(); ;
+            this.lvwMethodsList.Items.Clear();
             foreach (IMethod m in methodsList)
             {
                 ListViewItem lvi = new ListViewItem(new string[] { m.Name });
@@ -106,7 +113,7 @@ namespace NDependMetricsReporter
             this.rtfMetricProperties.AppendText(Environment.NewLine + nDependMetricDefinition.Description);
         }
 
-        private void ShowMetricChart(string serieName, IList chartData)
+        private void ShowMetricChart(string chartTitle, string serieName, IList chartData)
         {
             MetricTrendChart metricTrendChart;
             if (Application.OpenForms["metricTrendChart"] == null)
@@ -117,7 +124,7 @@ namespace NDependMetricsReporter
             {
                 metricTrendChart = (MetricTrendChart)Application.OpenForms["metricTrendChart"];
             }
-            metricTrendChart.RefreshData(serieName, chartData);
+            metricTrendChart.RefreshData(chartTitle, serieName, chartData);
         }
 
         private void btnOpenProject_Click(object sender, EventArgs e)
@@ -138,6 +145,8 @@ namespace NDependMetricsReporter
                 FillNamespacesListView(assembly.ChildNamespaces);
                 Dictionary<NDependMetricDefinition, double> assemblyMetrics = codeElementsManager.GetCodeElementMetrics<IAssembly>(assembly,"AssemblyMetrics.xml");
                 FillMetricsListView<IAssembly>(assembly, assemblyMetrics);
+                this.lblCodeElementType.Text = "Assembly";
+                this.lblCodeElementName.Text = selectedAssemblyName;
             }
         }
 
@@ -151,6 +160,8 @@ namespace NDependMetricsReporter
                 FillTypesListView(nNamespace.ChildTypes);
                 Dictionary<NDependMetricDefinition, double> namespaceMetrics = codeElementsManager.GetCodeElementMetrics<INamespace>(nNamespace, "NamespaceMetrics.xml");
                 FillMetricsListView<INamespace>(nNamespace, namespaceMetrics);
+                this.lblCodeElementType.Text = "Namespace";
+                this.lblCodeElementName.Text = selectedNamespaceName;
             }
         }
 
@@ -164,6 +175,8 @@ namespace NDependMetricsReporter
                 FillMethodsListView(nType.MethodsAndContructors);
                 Dictionary<NDependMetricDefinition, double> typeMetrics = codeElementsManager.GetCodeElementMetrics<IType>(nType, "TypeMetrics.xml");
                 FillMetricsListView<IType>(nType, typeMetrics);
+                this.lblCodeElementType.Text = "Type";
+                this.lblCodeElementName.Text = selectedTypeName;
             }
         }
 
@@ -176,6 +189,8 @@ namespace NDependMetricsReporter
                 IMethod nMethod = codeElementsManager.GetMethodByName(selectedMethodName);
                 Dictionary<NDependMetricDefinition, double> methodMetrics = codeElementsManager.GetCodeElementMetrics<IMethod>(nMethod, "MethodMetrics.xml");
                 FillMetricsListView<IMethod>(nMethod, methodMetrics);
+                this.lblCodeElementType.Text = "Method";
+                this.lblCodeElementName.Text = selectedMethodName;
             }
         }
 
@@ -187,8 +202,61 @@ namespace NDependMetricsReporter
                 NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
                 IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(lvwMetricsList.Tag, nDependMetricDefinition);
                 FillMetricDescriptionRTFBox(nDependMetricDefinition);
-                ShowMetricChart(nDependMetricDefinition.MetricName, metricValues);
+                string chartTitle = this.lblCodeElementType.Text.ToUpper() + ": " + this.lblCodeElementName.Text;
+                ShowMetricChart(chartTitle, nDependMetricDefinition.MetricName, metricValues);
             }
+        }
+
+        private void lvwNamespacesList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine if clicked column is already the column that is being sorted.
+            if (e.Column == lvwColumnSorter.SortColumn)
+            {
+                // Reverse the current sort direction for this column.
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                {
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.lvwNamespacesList.Sort();
+        }
+
+        private void lvwTypesList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine if clicked column is already the column that is being sorted.
+            if (e.Column == lvwColumnSorter.SortColumn)
+            {
+                // Reverse the current sort direction for this column.
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                {
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.lvwTypesList.Sort();
         }
     }
 }
