@@ -21,28 +21,7 @@ namespace NDependMetricsReporter
         {
             return DeseralizeMetricsList(this.pathToXMLMetrics + xmlMetricsDefinitionFile);
         }
-/*
-        public List<NDependMetricDefinition> LoadAssemblyMetricsDefinitions()
-        {
-            return DeseralizeMetricsList(this.pathToXMLMetrics + "AssemblyMetrics.xml");
-        }
 
-        public List<NDependMetricDefinition> LoadNamespaceMetricsDefinitions()
-        {
-            return DeseralizeMetricsList(this.pathToXMLMetrics + "NamespaceMetrics.xml");
-        }
-
-        public List<NDependMetricDefinition> LoadTypeMetricsDefinitions()
-        {
-            return DeseralizeMetricsList(this.pathToXMLMetrics + "TypeMetrics.xml");
-        }
-
-        public List<NDependMetricDefinition> LoadMethodMetricsDefinitions()
-        {
-            return DeseralizeMetricsList(this.pathToXMLMetrics + "MethodMetrics.xml");
-        }
- 
- */
         private List<NDependMetricDefinition> DeseralizeMetricsList(string filePath)
         {
             XmlSerializer deserializer = new XmlSerializer(typeof(List<NDependMetricDefinition>));

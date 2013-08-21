@@ -50,7 +50,8 @@
             this.rtfMetricProperties = new System.Windows.Forms.RichTextBox();
             this.lblCodeElementType = new System.Windows.Forms.Label();
             this.lblCodeElementName = new System.Windows.Forms.Label();
-            this.TestColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dgvNamespaces = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNamespaces)).BeginInit();
             this.SuspendLayout();
             // 
             // lvwAssembliesList
@@ -61,7 +62,7 @@
             this.lvwAssembliesList.GridLines = true;
             this.lvwAssembliesList.Location = new System.Drawing.Point(28, 73);
             this.lvwAssembliesList.Name = "lvwAssembliesList";
-            this.lvwAssembliesList.Size = new System.Drawing.Size(773, 78);
+            this.lvwAssembliesList.Size = new System.Drawing.Size(498, 78);
             this.lvwAssembliesList.TabIndex = 4;
             this.lvwAssembliesList.UseCompatibleStateImageBehavior = false;
             this.lvwAssembliesList.View = System.Windows.Forms.View.Details;
@@ -75,7 +76,7 @@
             // assembyPath
             // 
             this.assembyPath.Text = "Assembly Path";
-            this.assembyPath.Width = 395;
+            this.assembyPath.Width = 228;
             // 
             // tboxProjectName
             // 
@@ -116,8 +117,7 @@
             // lvwNamespacesList
             // 
             this.lvwNamespacesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.NamespaceName,
-            this.TestColumn});
+            this.NamespaceName});
             this.lvwNamespacesList.GridLines = true;
             this.lvwNamespacesList.Location = new System.Drawing.Point(28, 178);
             this.lvwNamespacesList.Name = "lvwNamespacesList";
@@ -144,6 +144,7 @@
             // 
             // lvwMetricsList
             // 
+            this.lvwMetricsList.CheckBoxes = true;
             this.lvwMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.MetricName,
             this.MetricValue});
@@ -154,7 +155,10 @@
             this.lvwMetricsList.TabIndex = 13;
             this.lvwMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwMetricsList.View = System.Windows.Forms.View.Details;
-            this.lvwMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwMetricsList_SelectedIndexChanged);
+            this.lvwMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwMetricsList_ItemCheck);
+            this.lvwMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwMetricsList_MouseDoubleClick);
+            this.lvwMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwMetricsList_MouseDown);
+            this.lvwMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwMetricsList_MouseUp);
             // 
             // MetricName
             // 
@@ -248,16 +252,20 @@
             this.lblCodeElementName.TabIndex = 22;
             this.lblCodeElementName.Text = "Code Element Name";
             // 
-            // TestColumn
+            // dgvNamespaces
             // 
-            this.TestColumn.Text = "TestColumn";
-            this.TestColumn.Width = 93;
+            this.dgvNamespaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvNamespaces.Location = new System.Drawing.Point(661, 51);
+            this.dgvNamespaces.Name = "dgvNamespaces";
+            this.dgvNamespaces.Size = new System.Drawing.Size(423, 150);
+            this.dgvNamespaces.TabIndex = 23;
             // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 694);
+            this.ClientSize = new System.Drawing.Size(1122, 694);
+            this.Controls.Add(this.dgvNamespaces);
             this.Controls.Add(this.lblCodeElementName);
             this.Controls.Add(this.lblCodeElementType);
             this.Controls.Add(this.rtfMetricProperties);
@@ -275,6 +283,7 @@
             this.Controls.Add(this.lvwAssembliesList);
             this.Name = "MetricsViewer";
             this.Text = "Metrics Viewer";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNamespaces)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,7 +313,7 @@
         private System.Windows.Forms.RichTextBox rtfMetricProperties;
         private System.Windows.Forms.Label lblCodeElementType;
         private System.Windows.Forms.Label lblCodeElementName;
-        private System.Windows.Forms.ColumnHeader TestColumn;
+        private System.Windows.Forms.DataGridView dgvNamespaces;
     }
 }
 

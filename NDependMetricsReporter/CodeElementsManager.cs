@@ -16,6 +16,11 @@ namespace NDependMetricsReporter
             this.codeBase = codeBase;
         }
 
+        public ICodeBase CodeBase
+        {
+            get { return codeBase; }
+        }
+
         public IEnumerable<IAssembly> GetNonThirdPartyAssembliesInApplication()
         {
             return codeBase.Application.Assemblies.Where(a => !a.IsThirdParty);
@@ -50,13 +55,21 @@ namespace NDependMetricsReporter
             return null;
         }
 
+        public double GetCodeElementMetricValue<CodeElementType>(CodeElementType codeElement, NDependMetricDefinition codeElementMetricDefinition)
+        {
+            Double metricValue = 0;
+            PropertyInfo property = codeElement.GetType().GetProperty(codeElementMetricDefinition.InternalPropertyName);
+            if (property != null) metricValue = Convert.ToDouble(property.GetValue(codeElement));
+            return metricValue;
+        }
+
         public Dictionary<NDependMetricDefinition, double> GetCodeElementMetrics<CodeElementType>(CodeElementType codeElement, string xmlMetricDefinitionFile)
         {
             List<NDependMetricDefinition> codeElementMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions(xmlMetricDefinitionFile);
             return GetCodeElementMetricsValues<CodeElementType>(codeElement, codeElementMetricsDefinitionsList);
         }
 
-        private Dictionary<NDependMetricDefinition, double> GetCodeElementMetricsValues<T>(T codeElement, List<NDependMetricDefinition> nDependMetricsDefinitions)
+        private Dictionary<NDependMetricDefinition, double> GetCodeElementMetricsValues<CodeElementType>(CodeElementType codeElement, List<NDependMetricDefinition> nDependMetricsDefinitions)
         {
             Dictionary<NDependMetricDefinition, double> codeElementMetrics = new Dictionary<NDependMetricDefinition, double>();
             PropertyInfo property;
@@ -69,5 +82,7 @@ namespace NDependMetricsReporter
             }
             return codeElementMetrics;
         }
+
+
     }
 }
