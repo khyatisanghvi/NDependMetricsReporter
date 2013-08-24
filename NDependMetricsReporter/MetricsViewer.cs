@@ -23,6 +23,10 @@ namespace NDependMetricsReporter
 {
     public partial class MetricsViewer : Form
     {
+        List<string> checkedAssemblyMetrics;
+        List<string> checkedNamespaceMetrics;
+        List<string> checkedTypeMetrics;
+        List<string> checkedMethodMetrics;
         ListViewColumnSorter lvwColumnSorter;
         bool inhibitAutocheckOnDoubleClick;
 
@@ -36,6 +40,10 @@ namespace NDependMetricsReporter
             lvwColumnSorter = new ListViewColumnSorter();
             this.lvwNamespacesList.ListViewItemSorter = lvwColumnSorter;
             this.lvwTypesList.ListViewItemSorter = lvwColumnSorter;
+            checkedAssemblyMetrics = new List<string>();
+            checkedNamespaceMetrics = new List<string>();
+            checkedTypeMetrics = new List<string>();
+            checkedMethodMetrics = new List<string>();
 
             nDependServicesProvider = new NDependServicesProvider();           
         }
@@ -45,6 +53,19 @@ namespace NDependMetricsReporter
             this.tboxProjectName.Text = nDependProject.Properties.Name;
             IEnumerable<IAssembly> lastAnalysisAssembliesList = codeElementsManager.CodeBase.Assemblies;
             FillAssembliesListView(lastAnalysisAssembliesList);
+        }
+
+        private void FillMetricDataGridView(DataGridView codeElementMetricsDataGridView, DataTable codeElementMetricsDataTable)
+        {
+            codeElementMetricsDataGridView.DataSource = codeElementMetricsDataTable;
+            codeElementMetricsDataGridView.RowHeadersWidth = 25;
+            foreach (DataGridViewColumn dvgc in codeElementMetricsDataGridView.Columns)
+            {
+                dvgc.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dvgc.Visible = false;
+            }
+            codeElementMetricsDataGridView.Columns[0].Visible = true;
+            codeElementMetricsDataGridView.Columns[0].Frozen = true;
         }
 
         private void FillAssembliesListView(IEnumerable<IAssembly> assembliesList)
@@ -75,10 +96,10 @@ namespace NDependMetricsReporter
             foreach (DataGridViewColumn dvgc in dgvNamespaces.Columns)
             {
                 dvgc.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                if (dvgc.Index != 0) dvgc.Visible = false;
+                dvgc.Visible = false;
             }
-            //dgvNamespaces.Rows[0].Visible = true;
-            //dgvNamespaces.Rows[0].Frozen = true;
+            dgvNamespaces.Columns[0].Visible = true;
+            dgvNamespaces.Columns[0].Frozen = true;
         }
 
         private void FillTypesListView(IEnumerable<IType> typesList)
@@ -91,6 +112,19 @@ namespace NDependMetricsReporter
             }
         }
 
+        private void FillTypesGridView(DataTable typesMetricTable, List<string> rowHeaders)
+        {
+            this.dgvTypes.DataSource = typesMetricTable;
+            dgvTypes.RowHeadersWidth = 25;
+            foreach (DataGridViewColumn dvgc in dgvTypes.Columns)
+            {
+                dvgc.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dvgc.Visible = false;
+            }
+            dgvTypes.Columns[0].Visible = true;
+            dgvTypes.Columns[0].Frozen = true;
+        }
+
         private void FillMethodsListView(IEnumerable<IMethod> methodsList)
         {
             this.lvwMethodsList.Items.Clear();
@@ -101,7 +135,7 @@ namespace NDependMetricsReporter
             }
         }
 
-        private void FillMetricsListView<T>(T codeElement, Dictionary<NDependMetricDefinition, double> metrics)
+        private void FillMetricsListView<T>(T codeElement, Dictionary<NDependMetricDefinition, double> metrics, List<string> visibleDataGridColumns)
         {
             string formatSpecifier = "0.####";
             this.lvwMetricsList.Tag = codeElement;
@@ -110,6 +144,7 @@ namespace NDependMetricsReporter
             {
                 ListViewItem lvi = new ListViewItem(new[] { metric.Key.PropertyName, Math.Round(metric.Value, 4, MidpointRounding.AwayFromZero).ToString(formatSpecifier) });
                 lvi.Tag = metric.Key;
+                if (visibleDataGridColumns.Contains(metric.Key.PropertyName)) lvi.Checked=true;
                 this.lvwMetricsList.Items.Add(lvi);
             }
         }
@@ -262,6 +297,12 @@ namespace NDependMetricsReporter
             return table;
         }
 
+        private List<string> GetVisbleMetricColumnNames(DataGridViewColumnCollection columnCollection)
+        {
+            return (columnCollection.Cast<DataGridViewColumn>())
+                .Where(column => column.Index != 0 && column.Visible)
+                .Select(column => column.Name).ToList();
+        }
 
         private void btnOpenProject_Click(object sender, EventArgs e)
         {
@@ -278,17 +319,22 @@ namespace NDependMetricsReporter
             {
                 string selectedAssemblyName = this.lvwAssembliesList.SelectedItems[0].Text;
                 IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
-                FillNamespacesListView(assembly.ChildNamespaces);
+
+                //FillNamespacesListView(assembly.ChildNamespaces);
+
                 Dictionary<NDependMetricDefinition, double> assemblyMetrics = codeElementsManager.GetCodeElementMetrics<IAssembly>(assembly,"AssemblyMetrics.xml");
-                FillMetricsListView<IAssembly>(assembly, assemblyMetrics);
+                FillMetricsListView<IAssembly>(assembly, assemblyMetrics, new List<string>());
+                
                 this.lblCodeElementType.Text = "Assembly";
                 this.lblCodeElementName.Text = selectedAssemblyName;
 
                 //DataTable namespacesMetricsDataTable = CreateNamespacesDataTable(assembly);
                 List<NDependMetricDefinition> namespaceMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("NamespaceMetrics.xml");
-                List<string> namespacesNamesList = assembly.ChildNamespaces.Select(a => a.Name).ToList();
+                //List<string> namespacesNamesList = assembly.ChildNamespaces.Select(a => a.Name).ToList();
                 DataTable namespacesMetricsDataTable = CreateCodeElemetMetricsDataTable<INamespace>(assembly.ChildNamespaces, namespaceMetricsDefinionsList);
-                FillNamespacesGridView(namespacesMetricsDataTable, namespacesNamesList);
+                //FillNamespacesGridView(namespacesMetricsDataTable, namespacesNamesList);
+                FillMetricDataGridView(dgvNamespaces, namespacesMetricsDataTable); 
+
             }
         }
 
@@ -298,11 +344,19 @@ namespace NDependMetricsReporter
             {
                 string selectedNamespaceName = this.lvwNamespacesList.SelectedItems[0].Text;
                 INamespace nNamespace = codeElementsManager.GetNamespaceByName(selectedNamespaceName);
+                
                 FillTypesListView(nNamespace.ChildTypes);
+                
                 Dictionary<NDependMetricDefinition, double> namespaceMetrics = codeElementsManager.GetCodeElementMetrics<INamespace>(nNamespace, "NamespaceMetrics.xml");
-                FillMetricsListView<INamespace>(nNamespace, namespaceMetrics);
+                FillMetricsListView<INamespace>(nNamespace, namespaceMetrics, new List<string>());
+                
                 this.lblCodeElementType.Text = "Namespace";
                 this.lblCodeElementName.Text = selectedNamespaceName;
+
+                List<NDependMetricDefinition> typeMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("TypeMetrics.xml");
+                List<string> typesList = nNamespace.ChildTypes.Select(a => a.Name).ToList();
+                DataTable typesMetricsDataTable = CreateCodeElemetMetricsDataTable<IType>(nNamespace.ChildTypes, typeMetricsDefinionsList);
+                FillNamespacesGridView(typesMetricsDataTable, typesList);
             }
         }
 
@@ -314,7 +368,7 @@ namespace NDependMetricsReporter
                 IType nType = codeElementsManager.GetTypeByName(selectedTypeName);
                 FillMethodsListView(nType.MethodsAndContructors);
                 Dictionary<NDependMetricDefinition, double> typeMetrics = codeElementsManager.GetCodeElementMetrics<IType>(nType, "TypeMetrics.xml");
-                FillMetricsListView<IType>(nType, typeMetrics);
+                FillMetricsListView<IType>(nType, typeMetrics, new List<string>());
                 this.lblCodeElementType.Text = "Type";
                 this.lblCodeElementName.Text = selectedTypeName;
             }
@@ -327,7 +381,7 @@ namespace NDependMetricsReporter
                 string selectedMethodName = this.lvwMethodsList.SelectedItems[0].Text;
                 IMethod nMethod = codeElementsManager.GetMethodByName(selectedMethodName);
                 Dictionary<NDependMetricDefinition, double> methodMetrics = codeElementsManager.GetCodeElementMetrics<IMethod>(nMethod, "MethodMetrics.xml");
-                FillMetricsListView<IMethod>(nMethod, methodMetrics);
+                FillMetricsListView<IMethod>(nMethod, methodMetrics, new List<string>());
                 this.lblCodeElementType.Text = "Method";
                 this.lblCodeElementName.Text = selectedMethodName;
             }
@@ -408,6 +462,7 @@ namespace NDependMetricsReporter
             {
                 if (e.NewValue == CheckState.Checked)
                 {
+
                     AddMetricColumn((NDependMetricDefinition)this.lvwMetricsList.Items[e.Index].Tag);
                 }
                 else
@@ -430,7 +485,55 @@ namespace NDependMetricsReporter
 
         private void dgvNamespaces_SelectionChanged(object sender, EventArgs e)
         {
-            
+            DataGridView thisDataGridView = (DataGridView)sender;
+            if (thisDataGridView.SelectedRows.Count>0)
+            {
+                string selectedNamespaceName = thisDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                INamespace nNamespace = codeElementsManager.GetNamespaceByName(selectedNamespaceName);
+
+                //FillTypesListView(nNamespace.ChildTypes);
+
+                Dictionary<NDependMetricDefinition, double> namespaceMetrics = codeElementsManager.GetCodeElementMetrics<INamespace>(nNamespace, "NamespaceMetrics.xml");
+                List<string> visibleColumnNames = GetVisbleMetricColumnNames(dgvNamespaces.Columns);
+                FillMetricsListView<INamespace>(nNamespace, namespaceMetrics, visibleColumnNames);
+
+                this.lblCodeElementType.Text = "Namespace";
+                this.lblCodeElementName.Text = selectedNamespaceName;
+
+                //DataTable namespacesMetricsDataTable = CreateNamespacesDataTable(assembly);
+                List<NDependMetricDefinition> typeMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("TypeMetrics.xml");
+                //List<string> namespacesNamesList = assembly.ChildNamespaces.Select(a => a.Name).ToList();
+                DataTable typeMetricsDataTable = CreateCodeElemetMetricsDataTable<IType>(nNamespace.ChildTypes, typeMetricsDefinionsList);
+                //FillNamespacesGridView(namespacesMetricsDataTable, namespacesNamesList);
+                FillMetricDataGridView(dgvTypes, typeMetricsDataTable); 
+            }
+        }
+
+        private void dgvTypes_SelectionChanged(object sender, EventArgs e)
+        {
+            DataGridView thisDataGridView = (DataGridView)sender;
+            if (thisDataGridView.SelectedRows.Count > 0)
+            {
+                string selectedType = thisDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                IType nType = codeElementsManager.GetTypeByName(selectedType);
+
+                //FillTypesListView(nNamespace.ChildTypes);
+
+                Dictionary<NDependMetricDefinition, double> namespaceMetrics = codeElementsManager.GetCodeElementMetrics<IType>(nType, "TypeMetrics.xml");
+                List<string> visibleColumnNames = GetVisbleMetricColumnNames(dgvNamespaces.Columns);
+                FillMetricsListView<INamespace>(nType, namespaceMetrics, visibleColumnNames);
+
+                this.lblCodeElementType.Text = "Type";
+                this.lblCodeElementName.Text = selectedType;
+
+                //DataTable namespacesMetricsDataTable = CreateNamespacesDataTable(assembly);
+                List<NDependMetricDefinition> typeMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("TypeMetrics.xml");
+                //List<string> namespacesNamesList = assembly.ChildNamespaces.Select(a => a.Name).ToList();
+                DataTable typeMetricsDataTable = CreateCodeElemetMetricsDataTable<IType>(nType.ChildTypes, typeMetricsDefinionsList);
+                //FillNamespacesGridView(namespacesMetricsDataTable, namespacesNamesList);
+                FillMetricDataGridView(dgvTypes, typeMetricsDataTable);
+            }
+
         }
     }
 }

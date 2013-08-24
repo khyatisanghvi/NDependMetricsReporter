@@ -51,7 +51,11 @@
             this.lblCodeElementType = new System.Windows.Forms.Label();
             this.lblCodeElementName = new System.Windows.Forms.Label();
             this.dgvNamespaces = new System.Windows.Forms.DataGridView();
+            this.dgvTypes = new System.Windows.Forms.DataGridView();
+            this.dgvMethods = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNamespaces)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTypes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMethods)).BeginInit();
             this.SuspendLayout();
             // 
             // lvwAssembliesList
@@ -261,15 +265,43 @@
             this.dgvNamespaces.MultiSelect = false;
             this.dgvNamespaces.Name = "dgvNamespaces";
             this.dgvNamespaces.ReadOnly = true;
+            this.dgvNamespaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvNamespaces.Size = new System.Drawing.Size(841, 150);
             this.dgvNamespaces.TabIndex = 23;
             this.dgvNamespaces.SelectionChanged += new System.EventHandler(this.dgvNamespaces_SelectionChanged);
+            // 
+            // dgvTypes
+            // 
+            this.dgvTypes.AllowUserToAddRows = false;
+            this.dgvTypes.AllowUserToDeleteRows = false;
+            this.dgvTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTypes.Location = new System.Drawing.Point(825, 353);
+            this.dgvTypes.MultiSelect = false;
+            this.dgvTypes.Name = "dgvTypes";
+            this.dgvTypes.ReadOnly = true;
+            this.dgvTypes.Size = new System.Drawing.Size(633, 150);
+            this.dgvTypes.TabIndex = 24;
+            this.dgvTypes.SelectionChanged += new System.EventHandler(this.dgvTypes_SelectionChanged);
+            // 
+            // dgvMethods
+            // 
+            this.dgvMethods.AllowUserToAddRows = false;
+            this.dgvMethods.AllowUserToDeleteRows = false;
+            this.dgvMethods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMethods.Location = new System.Drawing.Point(825, 531);
+            this.dgvMethods.MultiSelect = false;
+            this.dgvMethods.Name = "dgvMethods";
+            this.dgvMethods.ReadOnly = true;
+            this.dgvMethods.Size = new System.Drawing.Size(633, 143);
+            this.dgvMethods.TabIndex = 25;
             // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1470, 694);
+            this.Controls.Add(this.dgvMethods);
+            this.Controls.Add(this.dgvTypes);
             this.Controls.Add(this.dgvNamespaces);
             this.Controls.Add(this.lblCodeElementName);
             this.Controls.Add(this.lblCodeElementType);
@@ -289,6 +321,8 @@
             this.Name = "MetricsViewer";
             this.Text = "Metrics Viewer";
             ((System.ComponentModel.ISupportInitialize)(this.dgvNamespaces)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTypes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMethods)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,6 +353,8 @@
         private System.Windows.Forms.Label lblCodeElementType;
         private System.Windows.Forms.Label lblCodeElementName;
         private System.Windows.Forms.DataGridView dgvNamespaces;
+        private System.Windows.Forms.DataGridView dgvTypes;
+        private System.Windows.Forms.DataGridView dgvMethods;
     }
 }
 
