@@ -254,17 +254,22 @@
             // 
             // dgvNamespaces
             // 
+            this.dgvNamespaces.AllowUserToAddRows = false;
+            this.dgvNamespaces.AllowUserToDeleteRows = false;
             this.dgvNamespaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvNamespaces.Location = new System.Drawing.Point(661, 51);
+            this.dgvNamespaces.Location = new System.Drawing.Point(617, 25);
+            this.dgvNamespaces.MultiSelect = false;
             this.dgvNamespaces.Name = "dgvNamespaces";
-            this.dgvNamespaces.Size = new System.Drawing.Size(423, 150);
+            this.dgvNamespaces.ReadOnly = true;
+            this.dgvNamespaces.Size = new System.Drawing.Size(841, 150);
             this.dgvNamespaces.TabIndex = 23;
+            this.dgvNamespaces.SelectionChanged += new System.EventHandler(this.dgvNamespaces_SelectionChanged);
             // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1122, 694);
+            this.ClientSize = new System.Drawing.Size(1470, 694);
             this.Controls.Add(this.dgvNamespaces);
             this.Controls.Add(this.lblCodeElementName);
             this.Controls.Add(this.lblCodeElementType);
