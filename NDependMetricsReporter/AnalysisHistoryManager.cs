@@ -38,7 +38,7 @@ namespace NDependMetricsReporter
             get { return analysisResultRefsList; }
         }
 
-        public IList GetMetricHistory(object codeElement, NDependMetricDefinition metricDefinition)
+        public IList GetMetricHistory(string codeElementName, NDependMetricDefinition metricDefinition)
         {
             CodeElementsManagerReflectionHelper reflectionHelper = new CodeElementsManagerReflectionHelper();
             Type metricType = Type.GetType(metricDefinition.NDependMetricType);
@@ -56,8 +56,8 @@ namespace NDependMetricsReporter
                 switch (metricDefinition.NDependCodeElementType)
                 {
                     case "NDepend.CodeModel.IAssembly":
-                        string assemblyName = ((IAssembly)codeElement).Name;
-                        IAssembly selectedAssemblyFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetAssemblyByName(assemblyName);
+                        //string assemblyName = ((IAssembly)codeElement).Name;
+                        IAssembly selectedAssemblyFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetAssemblyByName(codeElementName);
                         if (selectedAssemblyFromCurrentAnalysisResultCodebase != null)
                             metricValue = reflectionHelper.GetCodeElementMetric(
                                 selectedAssemblyFromCurrentAnalysisResultCodebase,
@@ -67,8 +67,8 @@ namespace NDependMetricsReporter
                         break;
 
                     case "NDepend.CodeModel.INamespace":
-                        string namespaceName = ((INamespace)codeElement).Name;
-                        INamespace selectedNamespaceFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetNamespaceByName(namespaceName);
+                        //string namespaceName = ((INamespace)codeElement).Name;
+                        INamespace selectedNamespaceFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetNamespaceByName(codeElementName);
                         if (selectedNamespaceFromCurrentAnalysisResultCodebase != null)
                             metricValue = reflectionHelper.GetCodeElementMetric(
                                 selectedNamespaceFromCurrentAnalysisResultCodebase,
@@ -77,8 +77,8 @@ namespace NDependMetricsReporter
                                 metricDefinition.NDependMetricType);
                         break;
                     case "NDepend.CodeModel.IType":
-                        string typeName = ((IType)codeElement).Name;
-                        IType selectedTypeFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetTypeByName(typeName);
+                        //string typeName = ((IType)codeElement).Name;
+                        IType selectedTypeFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetTypeByName(codeElementName);
                         if (selectedTypeFromCurrentAnalysisResultCodebase != null)
                             metricValue = reflectionHelper.GetCodeElementMetric(
                                 selectedTypeFromCurrentAnalysisResultCodebase,
@@ -87,8 +87,8 @@ namespace NDependMetricsReporter
                                 metricDefinition.NDependMetricType);
                         break;
                     case "NDepend.CodeModel.IMethod":
-                        string methodName = ((IMethod)codeElement).Name;
-                        IMethod selectedMethodFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetMethodByName(methodName);
+                        //string methodName = ((IMethod)codeElement).Name;
+                        IMethod selectedMethodFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetMethodByName(codeElementName);
                         if (selectedMethodFromCurrentAnalysisResultCodebase != null)
                             metricValue = (reflectionHelper.GetCodeElementMetric(
                                 selectedMethodFromCurrentAnalysisResultCodebase,

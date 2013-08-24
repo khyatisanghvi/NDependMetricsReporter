@@ -160,6 +160,7 @@
             this.lvwMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwMetricsList.View = System.Windows.Forms.View.Details;
             this.lvwMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwMetricsList_ItemCheck);
+            this.lvwMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwMetricsList_SelectedIndexChanged);
             this.lvwMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwMetricsList_MouseDoubleClick);
             this.lvwMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwMetricsList_MouseDown);
             this.lvwMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwMetricsList_MouseUp);
@@ -279,6 +280,7 @@
             this.dgvTypes.MultiSelect = false;
             this.dgvTypes.Name = "dgvTypes";
             this.dgvTypes.ReadOnly = true;
+            this.dgvTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTypes.Size = new System.Drawing.Size(633, 150);
             this.dgvTypes.TabIndex = 24;
             this.dgvTypes.SelectionChanged += new System.EventHandler(this.dgvTypes_SelectionChanged);
@@ -292,6 +294,7 @@
             this.dgvMethods.MultiSelect = false;
             this.dgvMethods.Name = "dgvMethods";
             this.dgvMethods.ReadOnly = true;
+            this.dgvMethods.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMethods.Size = new System.Drawing.Size(633, 143);
             this.dgvMethods.TabIndex = 25;
             // 

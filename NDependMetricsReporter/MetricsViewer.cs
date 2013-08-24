@@ -55,7 +55,7 @@ namespace NDependMetricsReporter
             FillAssembliesListView(lastAnalysisAssembliesList);
         }
 
-        private void FillMetricDataGridView(DataGridView codeElementMetricsDataGridView, DataTable codeElementMetricsDataTable)
+        private void FillCodeElementsDataGridView(DataGridView codeElementMetricsDataGridView, DataTable codeElementMetricsDataTable)
         {
             codeElementMetricsDataGridView.DataSource = codeElementMetricsDataTable;
             codeElementMetricsDataGridView.RowHeadersWidth = 25;
@@ -133,6 +133,30 @@ namespace NDependMetricsReporter
                 ListViewItem lvi = new ListViewItem(new string[] { m.Name });
                 this.lvwMethodsList.Items.Add(lvi);
             }
+        }
+
+        private void FillMetricsListView(DataGridViewRow selectedDataGridViewRow, List<NDependMetricDefinition> metricDefinitionsList)
+        {
+            string formatSpecifier = "0.####";
+            DataGridView sourceDataGridView = selectedDataGridViewRow.DataGridView;
+            this.lvwMetricsList.Tag = sourceDataGridView;
+            this.lvwMetricsList.Items.Clear();
+            foreach (NDependMetricDefinition metricDefinition in metricDefinitionsList)
+            {
+                double cellValue =  Double.Parse(selectedDataGridViewRow.Cells[metricDefinition.PropertyName].Value.ToString());
+                string formatedCellValue = cellValue.ToString(formatSpecifier);
+                ListViewItem lvi = new ListViewItem(new[] {metricDefinition.PropertyName, formatedCellValue});
+                lvi.Tag = metricDefinition;
+                lvi.Checked = selectedDataGridViewRow.Cells[metricDefinition.PropertyName].Displayed;
+                this.lvwMetricsList.Items.Add(lvi);
+            }
+            /*foreach (KeyValuePair<NDependMetricDefinition, double> metric in metrics)
+            {
+                ListViewItem lvi = new ListViewItem(new[] { metric.Key.PropertyName, Math.Round(metric.Value, 4, MidpointRounding.AwayFromZero).ToString(formatSpecifier) });
+                lvi.Tag = metric.Key;
+                if (visibleDataGridColumns.Contains(metric.Key.PropertyName)) lvi.Checked = true;
+                this.lvwMetricsList.Items.Add(lvi);
+            }*/
         }
 
         private void FillMetricsListView<T>(T codeElement, Dictionary<NDependMetricDefinition, double> metrics, List<string> visibleDataGridColumns)
@@ -324,7 +348,7 @@ namespace NDependMetricsReporter
 
                 Dictionary<NDependMetricDefinition, double> assemblyMetrics = codeElementsManager.GetCodeElementMetrics<IAssembly>(assembly,"AssemblyMetrics.xml");
                 FillMetricsListView<IAssembly>(assembly, assemblyMetrics, new List<string>());
-                
+
                 this.lblCodeElementType.Text = "Assembly";
                 this.lblCodeElementName.Text = selectedAssemblyName;
 
@@ -333,8 +357,7 @@ namespace NDependMetricsReporter
                 //List<string> namespacesNamesList = assembly.ChildNamespaces.Select(a => a.Name).ToList();
                 DataTable namespacesMetricsDataTable = CreateCodeElemetMetricsDataTable<INamespace>(assembly.ChildNamespaces, namespaceMetricsDefinionsList);
                 //FillNamespacesGridView(namespacesMetricsDataTable, namespacesNamesList);
-                FillMetricDataGridView(dgvNamespaces, namespacesMetricsDataTable); 
-
+                FillCodeElementsDataGridView(dgvNamespaces, namespacesMetricsDataTable); 
             }
         }
 
@@ -445,8 +468,8 @@ namespace NDependMetricsReporter
             {
                 ListViewItem lvi = this.lvwMetricsList.SelectedItems[0];
                 NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
-                IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(lvwMetricsList.Tag, nDependMetricDefinition);
-                FillMetricDescriptionRTFBox(nDependMetricDefinition);
+                IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(this.lblCodeElementName.Text, nDependMetricDefinition);
+                //FillMetricDescriptionRTFBox(nDependMetricDefinition);
                 string chartTitle = this.lblCodeElementType.Text.ToUpper() + ": " + this.lblCodeElementName.Text;
                 ShowMetricChart(chartTitle, nDependMetricDefinition.MetricName, metricValues);
             }
@@ -460,7 +483,7 @@ namespace NDependMetricsReporter
             }
             else
             {
-                if (e.NewValue == CheckState.Checked)
+                /*if (e.NewValue == CheckState.Checked)
                 {
 
                     AddMetricColumn((NDependMetricDefinition)this.lvwMetricsList.Items[e.Index].Tag);
@@ -468,7 +491,7 @@ namespace NDependMetricsReporter
                 else
                 {
                     RemoveMetricColumn((NDependMetricDefinition)this.lvwMetricsList.Items[e.Index].Tag);
-                }
+                }*/
                 this.dgvNamespaces.Columns[this.lvwMetricsList.Items[e.Index].Text].Visible = (e.NewValue==CheckState.Checked);
             }
         }
@@ -493,9 +516,11 @@ namespace NDependMetricsReporter
 
                 //FillTypesListView(nNamespace.ChildTypes);
 
-                Dictionary<NDependMetricDefinition, double> namespaceMetrics = codeElementsManager.GetCodeElementMetrics<INamespace>(nNamespace, "NamespaceMetrics.xml");
-                List<string> visibleColumnNames = GetVisbleMetricColumnNames(dgvNamespaces.Columns);
-                FillMetricsListView<INamespace>(nNamespace, namespaceMetrics, visibleColumnNames);
+                //Dictionary<NDependMetricDefinition, double> namespaceMetrics = codeElementsManager.GetCodeElementMetrics<INamespace>(nNamespace, "NamespaceMetrics.xml");
+                //List<string> visibleColumnNames = GetVisbleMetricColumnNames(this.dgvNamespaces.Columns);
+                //FillMetricsListView<INamespace>(nNamespace, namespaceMetrics, visibleColumnNames);
+                List<NDependMetricDefinition> namespaceMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("NamespaceMetrics.xml");
+                FillMetricsListView(thisDataGridView.SelectedRows[0], namespaceMetricsDefinionsList);
 
                 this.lblCodeElementType.Text = "Namespace";
                 this.lblCodeElementName.Text = selectedNamespaceName;
@@ -505,7 +530,7 @@ namespace NDependMetricsReporter
                 //List<string> namespacesNamesList = assembly.ChildNamespaces.Select(a => a.Name).ToList();
                 DataTable typeMetricsDataTable = CreateCodeElemetMetricsDataTable<IType>(nNamespace.ChildTypes, typeMetricsDefinionsList);
                 //FillNamespacesGridView(namespacesMetricsDataTable, namespacesNamesList);
-                FillMetricDataGridView(dgvTypes, typeMetricsDataTable); 
+                //FillCodeElementsDataGridView(this.dgvTypes, typeMetricsDataTable); 
             }
         }
 
@@ -519,21 +544,30 @@ namespace NDependMetricsReporter
 
                 //FillTypesListView(nNamespace.ChildTypes);
 
-                Dictionary<NDependMetricDefinition, double> namespaceMetrics = codeElementsManager.GetCodeElementMetrics<IType>(nType, "TypeMetrics.xml");
-                List<string> visibleColumnNames = GetVisbleMetricColumnNames(dgvNamespaces.Columns);
-                FillMetricsListView<INamespace>(nType, namespaceMetrics, visibleColumnNames);
+                Dictionary<NDependMetricDefinition, double> typeMetrics = codeElementsManager.GetCodeElementMetrics<IType>(nType, "TypeMetrics.xml");
+                List<string> visibleColumnNames = GetVisbleMetricColumnNames(this.dgvTypes.Columns);
+                FillMetricsListView<IType>(nType, typeMetrics, visibleColumnNames);
 
                 this.lblCodeElementType.Text = "Type";
                 this.lblCodeElementName.Text = selectedType;
 
                 //DataTable namespacesMetricsDataTable = CreateNamespacesDataTable(assembly);
-                List<NDependMetricDefinition> typeMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("TypeMetrics.xml");
+                List<NDependMetricDefinition> methodMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("MethodMetrics.xml");
                 //List<string> namespacesNamesList = assembly.ChildNamespaces.Select(a => a.Name).ToList();
-                DataTable typeMetricsDataTable = CreateCodeElemetMetricsDataTable<IType>(nType.ChildTypes, typeMetricsDefinionsList);
+                DataTable methodMetricsDataTable = CreateCodeElemetMetricsDataTable<IMethod>(nType.MethodsAndContructors, methodMetricsDefinionsList);
                 //FillNamespacesGridView(namespacesMetricsDataTable, namespacesNamesList);
-                FillMetricDataGridView(dgvTypes, typeMetricsDataTable);
+                FillCodeElementsDataGridView(this.dgvMethods, methodMetricsDataTable);
             }
+        }
 
+        private void lvwMetricsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.lvwMetricsList.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = this.lvwMetricsList.SelectedItems[0];
+                NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
+                FillMetricDescriptionRTFBox(nDependMetricDefinition);
+            }
         }
     }
 }
