@@ -53,9 +53,11 @@
             this.dgvNamespaces = new System.Windows.Forms.DataGridView();
             this.dgvTypes = new System.Windows.Forms.DataGridView();
             this.dgvMethods = new System.Windows.Forms.DataGridView();
+            this.dgvAssemblies = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNamespaces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMethods)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAssemblies)).BeginInit();
             this.SuspendLayout();
             // 
             // lvwAssembliesList
@@ -262,12 +264,11 @@
             this.dgvNamespaces.AllowUserToAddRows = false;
             this.dgvNamespaces.AllowUserToDeleteRows = false;
             this.dgvNamespaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvNamespaces.Location = new System.Drawing.Point(617, 25);
+            this.dgvNamespaces.Location = new System.Drawing.Point(825, 178);
             this.dgvNamespaces.MultiSelect = false;
             this.dgvNamespaces.Name = "dgvNamespaces";
             this.dgvNamespaces.ReadOnly = true;
-            this.dgvNamespaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvNamespaces.Size = new System.Drawing.Size(841, 150);
+            this.dgvNamespaces.Size = new System.Drawing.Size(633, 150);
             this.dgvNamespaces.TabIndex = 23;
             this.dgvNamespaces.SelectionChanged += new System.EventHandler(this.dgvNamespaces_SelectionChanged);
             // 
@@ -280,7 +281,6 @@
             this.dgvTypes.MultiSelect = false;
             this.dgvTypes.Name = "dgvTypes";
             this.dgvTypes.ReadOnly = true;
-            this.dgvTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTypes.Size = new System.Drawing.Size(633, 150);
             this.dgvTypes.TabIndex = 24;
             this.dgvTypes.SelectionChanged += new System.EventHandler(this.dgvTypes_SelectionChanged);
@@ -294,15 +294,28 @@
             this.dgvMethods.MultiSelect = false;
             this.dgvMethods.Name = "dgvMethods";
             this.dgvMethods.ReadOnly = true;
-            this.dgvMethods.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMethods.Size = new System.Drawing.Size(633, 143);
             this.dgvMethods.TabIndex = 25;
+            // 
+            // dgvAssemblies
+            // 
+            this.dgvAssemblies.AllowUserToAddRows = false;
+            this.dgvAssemblies.AllowUserToDeleteRows = false;
+            this.dgvAssemblies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAssemblies.Location = new System.Drawing.Point(825, 73);
+            this.dgvAssemblies.MultiSelect = false;
+            this.dgvAssemblies.Name = "dgvAssemblies";
+            this.dgvAssemblies.ReadOnly = true;
+            this.dgvAssemblies.Size = new System.Drawing.Size(633, 89);
+            this.dgvAssemblies.TabIndex = 26;
+            this.dgvAssemblies.SelectionChanged += new System.EventHandler(this.dgvAssemblies_SelectionChanged);
             // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1470, 694);
+            this.Controls.Add(this.dgvAssemblies);
             this.Controls.Add(this.dgvMethods);
             this.Controls.Add(this.dgvTypes);
             this.Controls.Add(this.dgvNamespaces);
@@ -326,6 +339,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvNamespaces)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTypes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMethods)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAssemblies)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -358,6 +372,7 @@
         private System.Windows.Forms.DataGridView dgvNamespaces;
         private System.Windows.Forms.DataGridView dgvTypes;
         private System.Windows.Forms.DataGridView dgvMethods;
+        private System.Windows.Forms.DataGridView dgvAssemblies;
     }
 }
 
