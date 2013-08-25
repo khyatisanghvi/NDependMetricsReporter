@@ -296,6 +296,7 @@
             this.dgvMethods.ReadOnly = true;
             this.dgvMethods.Size = new System.Drawing.Size(633, 143);
             this.dgvMethods.TabIndex = 25;
+            this.dgvMethods.SelectionChanged += new System.EventHandler(this.dgvMethods_SelectionChanged);
             // 
             // dgvAssemblies
             // 
