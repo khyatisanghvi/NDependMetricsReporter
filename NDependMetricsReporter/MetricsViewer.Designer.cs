@@ -28,24 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lvwAssembliesList = new System.Windows.Forms.ListView();
-            this.asmLstAssemblyName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.assembyPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tboxProjectName = new System.Windows.Forms.TextBox();
             this.lblNDependProjectSelector = new System.Windows.Forms.Label();
             this.btnOpenProject = new System.Windows.Forms.Button();
             this.lblAssembliesList = new System.Windows.Forms.Label();
-            this.lvwNamespacesList = new System.Windows.Forms.ListView();
-            this.NamespaceName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblNamespacesList = new System.Windows.Forms.Label();
             this.lvwMetricsList = new System.Windows.Forms.ListView();
             this.MetricName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MetricValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwTypesList = new System.Windows.Forms.ListView();
-            this.TypeName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblTypesList = new System.Windows.Forms.Label();
-            this.lvwMethodsList = new System.Windows.Forms.ListView();
-            this.MethodName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblMethodsList = new System.Windows.Forms.Label();
             this.rtfMetricProperties = new System.Windows.Forms.RichTextBox();
             this.lblCodeElementType = new System.Windows.Forms.Label();
@@ -54,35 +45,12 @@
             this.dgvTypes = new System.Windows.Forms.DataGridView();
             this.dgvMethods = new System.Windows.Forms.DataGridView();
             this.dgvAssemblies = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNamespaces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMethods)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAssemblies)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lvwAssembliesList
-            // 
-            this.lvwAssembliesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.asmLstAssemblyName,
-            this.assembyPath});
-            this.lvwAssembliesList.GridLines = true;
-            this.lvwAssembliesList.Location = new System.Drawing.Point(28, 73);
-            this.lvwAssembliesList.Name = "lvwAssembliesList";
-            this.lvwAssembliesList.Size = new System.Drawing.Size(498, 78);
-            this.lvwAssembliesList.TabIndex = 4;
-            this.lvwAssembliesList.UseCompatibleStateImageBehavior = false;
-            this.lvwAssembliesList.View = System.Windows.Forms.View.Details;
-            this.lvwAssembliesList.SelectedIndexChanged += new System.EventHandler(this.lvwAssembliesList_SelectedIndexChanged);
-            // 
-            // asmLstAssemblyName
-            // 
-            this.asmLstAssemblyName.Text = "Assembly Name";
-            this.asmLstAssemblyName.Width = 212;
-            // 
-            // assembyPath
-            // 
-            this.assembyPath.Text = "Assembly Path";
-            this.assembyPath.Width = 228;
             // 
             // tboxProjectName
             // 
@@ -114,30 +82,11 @@
             // lblAssembliesList
             // 
             this.lblAssembliesList.AutoSize = true;
-            this.lblAssembliesList.Location = new System.Drawing.Point(25, 57);
+            this.lblAssembliesList.Location = new System.Drawing.Point(25, 54);
             this.lblAssembliesList.Name = "lblAssembliesList";
             this.lblAssembliesList.Size = new System.Drawing.Size(193, 13);
             this.lblAssembliesList.TabIndex = 9;
             this.lblAssembliesList.Text = "Assemblies analyzed in selected project";
-            // 
-            // lvwNamespacesList
-            // 
-            this.lvwNamespacesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.NamespaceName});
-            this.lvwNamespacesList.GridLines = true;
-            this.lvwNamespacesList.Location = new System.Drawing.Point(28, 178);
-            this.lvwNamespacesList.Name = "lvwNamespacesList";
-            this.lvwNamespacesList.Size = new System.Drawing.Size(498, 150);
-            this.lvwNamespacesList.TabIndex = 10;
-            this.lvwNamespacesList.UseCompatibleStateImageBehavior = false;
-            this.lvwNamespacesList.View = System.Windows.Forms.View.Details;
-            this.lvwNamespacesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwNamespacesList_ColumnClick);
-            this.lvwNamespacesList.SelectedIndexChanged += new System.EventHandler(this.lvwNamespacesList_SelectedIndexChanged);
-            // 
-            // NamespaceName
-            // 
-            this.NamespaceName.Text = "Namespace name";
-            this.NamespaceName.Width = 315;
             // 
             // lblNamespacesList
             // 
@@ -155,9 +104,9 @@
             this.MetricName,
             this.MetricValue});
             this.lvwMetricsList.GridLines = true;
-            this.lvwMetricsList.Location = new System.Drawing.Point(554, 207);
+            this.lvwMetricsList.Location = new System.Drawing.Point(710, 70);
             this.lvwMetricsList.Name = "lvwMetricsList";
-            this.lvwMetricsList.Size = new System.Drawing.Size(247, 381);
+            this.lvwMetricsList.Size = new System.Drawing.Size(262, 497);
             this.lvwMetricsList.TabIndex = 13;
             this.lvwMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwMetricsList.View = System.Windows.Forms.View.Details;
@@ -170,31 +119,12 @@
             // MetricName
             // 
             this.MetricName.Text = "Metric Name";
-            this.MetricName.Width = 182;
+            this.MetricName.Width = 195;
             // 
             // MetricValue
             // 
             this.MetricValue.Text = "Value";
             this.MetricValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lvwTypesList
-            // 
-            this.lvwTypesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.TypeName});
-            this.lvwTypesList.GridLines = true;
-            this.lvwTypesList.Location = new System.Drawing.Point(28, 353);
-            this.lvwTypesList.Name = "lvwTypesList";
-            this.lvwTypesList.Size = new System.Drawing.Size(498, 150);
-            this.lvwTypesList.TabIndex = 14;
-            this.lvwTypesList.UseCompatibleStateImageBehavior = false;
-            this.lvwTypesList.View = System.Windows.Forms.View.Details;
-            this.lvwTypesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwTypesList_ColumnClick);
-            this.lvwTypesList.SelectedIndexChanged += new System.EventHandler(this.lvwTypesList_SelectedIndexChanged);
-            // 
-            // TypeName
-            // 
-            this.TypeName.Text = "Type Name";
-            this.TypeName.Width = 245;
             // 
             // lblTypesList
             // 
@@ -204,24 +134,6 @@
             this.lblTypesList.Size = new System.Drawing.Size(150, 13);
             this.lblTypesList.TabIndex = 15;
             this.lblTypesList.Text = "Types in selected Namespace";
-            // 
-            // lvwMethodsList
-            // 
-            this.lvwMethodsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.MethodName});
-            this.lvwMethodsList.GridLines = true;
-            this.lvwMethodsList.Location = new System.Drawing.Point(28, 531);
-            this.lvwMethodsList.Name = "lvwMethodsList";
-            this.lvwMethodsList.Size = new System.Drawing.Size(498, 150);
-            this.lvwMethodsList.TabIndex = 16;
-            this.lvwMethodsList.UseCompatibleStateImageBehavior = false;
-            this.lvwMethodsList.View = System.Windows.Forms.View.Details;
-            this.lvwMethodsList.SelectedIndexChanged += new System.EventHandler(this.lvwMethodsList_SelectedIndexChanged);
-            // 
-            // MethodName
-            // 
-            this.MethodName.Text = "MethodName";
-            this.MethodName.Width = 245;
             // 
             // lblMethodsList
             // 
@@ -234,16 +146,17 @@
             // 
             // rtfMetricProperties
             // 
-            this.rtfMetricProperties.Location = new System.Drawing.Point(554, 594);
+            this.rtfMetricProperties.Location = new System.Drawing.Point(710, 573);
             this.rtfMetricProperties.Name = "rtfMetricProperties";
-            this.rtfMetricProperties.Size = new System.Drawing.Size(247, 87);
+            this.rtfMetricProperties.Size = new System.Drawing.Size(262, 108);
             this.rtfMetricProperties.TabIndex = 20;
             this.rtfMetricProperties.Text = "";
             // 
             // lblCodeElementType
             // 
             this.lblCodeElementType.AutoSize = true;
-            this.lblCodeElementType.Location = new System.Drawing.Point(551, 178);
+            this.lblCodeElementType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodeElementType.Location = new System.Drawing.Point(816, 40);
             this.lblCodeElementType.Name = "lblCodeElementType";
             this.lblCodeElementType.Size = new System.Drawing.Size(100, 13);
             this.lblCodeElementType.TabIndex = 21;
@@ -253,7 +166,7 @@
             // 
             this.lblCodeElementName.AutoSize = true;
             this.lblCodeElementName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCodeElementName.Location = new System.Drawing.Point(551, 192);
+            this.lblCodeElementName.Location = new System.Drawing.Point(710, 55);
             this.lblCodeElementName.Name = "lblCodeElementName";
             this.lblCodeElementName.Size = new System.Drawing.Size(104, 13);
             this.lblCodeElementName.TabIndex = 22;
@@ -263,12 +176,14 @@
             // 
             this.dgvNamespaces.AllowUserToAddRows = false;
             this.dgvNamespaces.AllowUserToDeleteRows = false;
+            this.dgvNamespaces.AllowUserToOrderColumns = true;
+            this.dgvNamespaces.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dgvNamespaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvNamespaces.Location = new System.Drawing.Point(825, 178);
+            this.dgvNamespaces.Location = new System.Drawing.Point(30, 178);
             this.dgvNamespaces.MultiSelect = false;
             this.dgvNamespaces.Name = "dgvNamespaces";
             this.dgvNamespaces.ReadOnly = true;
-            this.dgvNamespaces.Size = new System.Drawing.Size(633, 150);
+            this.dgvNamespaces.Size = new System.Drawing.Size(674, 150);
             this.dgvNamespaces.TabIndex = 23;
             this.dgvNamespaces.SelectionChanged += new System.EventHandler(this.dgvNamespaces_SelectionChanged);
             // 
@@ -276,12 +191,13 @@
             // 
             this.dgvTypes.AllowUserToAddRows = false;
             this.dgvTypes.AllowUserToDeleteRows = false;
+            this.dgvTypes.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dgvTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTypes.Location = new System.Drawing.Point(825, 353);
+            this.dgvTypes.Location = new System.Drawing.Point(30, 353);
             this.dgvTypes.MultiSelect = false;
             this.dgvTypes.Name = "dgvTypes";
             this.dgvTypes.ReadOnly = true;
-            this.dgvTypes.Size = new System.Drawing.Size(633, 150);
+            this.dgvTypes.Size = new System.Drawing.Size(674, 150);
             this.dgvTypes.TabIndex = 24;
             this.dgvTypes.SelectionChanged += new System.EventHandler(this.dgvTypes_SelectionChanged);
             // 
@@ -289,12 +205,13 @@
             // 
             this.dgvMethods.AllowUserToAddRows = false;
             this.dgvMethods.AllowUserToDeleteRows = false;
+            this.dgvMethods.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dgvMethods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMethods.Location = new System.Drawing.Point(825, 531);
+            this.dgvMethods.Location = new System.Drawing.Point(30, 530);
             this.dgvMethods.MultiSelect = false;
             this.dgvMethods.Name = "dgvMethods";
             this.dgvMethods.ReadOnly = true;
-            this.dgvMethods.Size = new System.Drawing.Size(633, 143);
+            this.dgvMethods.Size = new System.Drawing.Size(674, 151);
             this.dgvMethods.TabIndex = 25;
             this.dgvMethods.SelectionChanged += new System.EventHandler(this.dgvMethods_SelectionChanged);
             // 
@@ -302,20 +219,31 @@
             // 
             this.dgvAssemblies.AllowUserToAddRows = false;
             this.dgvAssemblies.AllowUserToDeleteRows = false;
+            this.dgvAssemblies.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dgvAssemblies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAssemblies.Location = new System.Drawing.Point(825, 73);
+            this.dgvAssemblies.Location = new System.Drawing.Point(30, 70);
             this.dgvAssemblies.MultiSelect = false;
             this.dgvAssemblies.Name = "dgvAssemblies";
             this.dgvAssemblies.ReadOnly = true;
-            this.dgvAssemblies.Size = new System.Drawing.Size(633, 89);
+            this.dgvAssemblies.Size = new System.Drawing.Size(674, 89);
             this.dgvAssemblies.TabIndex = 26;
             this.dgvAssemblies.SelectionChanged += new System.EventHandler(this.dgvAssemblies_SelectionChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(710, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 13);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Code Element Type:";
             // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1470, 694);
+            this.ClientSize = new System.Drawing.Size(984, 694);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvAssemblies);
             this.Controls.Add(this.dgvMethods);
             this.Controls.Add(this.dgvTypes);
@@ -324,17 +252,13 @@
             this.Controls.Add(this.lblCodeElementType);
             this.Controls.Add(this.rtfMetricProperties);
             this.Controls.Add(this.lblMethodsList);
-            this.Controls.Add(this.lvwMethodsList);
             this.Controls.Add(this.lblTypesList);
-            this.Controls.Add(this.lvwTypesList);
             this.Controls.Add(this.lvwMetricsList);
             this.Controls.Add(this.lblNamespacesList);
-            this.Controls.Add(this.lvwNamespacesList);
             this.Controls.Add(this.lblAssembliesList);
             this.Controls.Add(this.btnOpenProject);
             this.Controls.Add(this.lblNDependProjectSelector);
             this.Controls.Add(this.tboxProjectName);
-            this.Controls.Add(this.lvwAssembliesList);
             this.Name = "MetricsViewer";
             this.Text = "Metrics Viewer";
             ((System.ComponentModel.ISupportInitialize)(this.dgvNamespaces)).EndInit();
@@ -348,24 +272,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView lvwAssembliesList;
         private System.Windows.Forms.TextBox tboxProjectName;
         private System.Windows.Forms.Label lblNDependProjectSelector;
         private System.Windows.Forms.Button btnOpenProject;
-        private System.Windows.Forms.ColumnHeader asmLstAssemblyName;
-        private System.Windows.Forms.ColumnHeader assembyPath;
         private System.Windows.Forms.Label lblAssembliesList;
-        private System.Windows.Forms.ListView lvwNamespacesList;
         private System.Windows.Forms.Label lblNamespacesList;
-        private System.Windows.Forms.ColumnHeader NamespaceName;
         private System.Windows.Forms.ListView lvwMetricsList;
         private System.Windows.Forms.ColumnHeader MetricName;
         private System.Windows.Forms.ColumnHeader MetricValue;
-        private System.Windows.Forms.ListView lvwTypesList;
-        private System.Windows.Forms.ColumnHeader TypeName;
         private System.Windows.Forms.Label lblTypesList;
-        private System.Windows.Forms.ListView lvwMethodsList;
-        private System.Windows.Forms.ColumnHeader MethodName;
         private System.Windows.Forms.Label lblMethodsList;
         private System.Windows.Forms.RichTextBox rtfMetricProperties;
         private System.Windows.Forms.Label lblCodeElementType;
@@ -374,6 +289,7 @@
         private System.Windows.Forms.DataGridView dgvTypes;
         private System.Windows.Forms.DataGridView dgvMethods;
         private System.Windows.Forms.DataGridView dgvAssemblies;
+        private System.Windows.Forms.Label label1;
     }
 }
 

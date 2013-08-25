@@ -72,13 +72,9 @@ namespace NDependMetricsReporter
         private Dictionary<NDependMetricDefinition, double> GetCodeElementMetricsValues<CodeElementType>(CodeElementType codeElement, List<NDependMetricDefinition> nDependMetricsDefinitions)
         {
             Dictionary<NDependMetricDefinition, double> codeElementMetrics = new Dictionary<NDependMetricDefinition, double>();
-            PropertyInfo property;
             foreach (NDependMetricDefinition codeElementMetricDefinition in nDependMetricsDefinitions)
             {
-                Double metricValue = 0;
-                property = codeElement.GetType().GetProperty(codeElementMetricDefinition.InternalPropertyName);
-                if (property != null) metricValue = Convert.ToDouble(property.GetValue(codeElement));
-                codeElementMetrics.Add(codeElementMetricDefinition, metricValue);
+                codeElementMetrics.Add(codeElementMetricDefinition, GetCodeElementMetricValue<CodeElementType>(codeElement, codeElementMetricDefinition));
             }
             return codeElementMetrics;
         }

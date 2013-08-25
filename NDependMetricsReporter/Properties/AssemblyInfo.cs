@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // conjunto de atributos. Cambie estos atributos para modificar la información
 // asociada con un ensamblado.
 [assembly: AssemblyTitle("NDependMetricsReporter")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Code Metrics Trend Graphs using NDepend API")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NDependMetricsReporter")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright ©  2013 Francisco Gómez-Caldito Viseas")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

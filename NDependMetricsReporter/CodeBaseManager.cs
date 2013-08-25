@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,12 @@ namespace NDependMetricsReporter
             IAnalysisResult analisysResult = lastAnalysisResultRef.Load();
             ICodeBase codeBase = analisysResult.CodeBase;
             return codeBase;
+        }
+
+        public ICodeBase LoadCodeBase(IAnalysisResultRef analysisResultRef)
+        {
+            IAnalysisResult currentAnalysisResult = analysisResultRef.Load();
+            return currentAnalysisResult.CodeBase;
         }
     }
 }

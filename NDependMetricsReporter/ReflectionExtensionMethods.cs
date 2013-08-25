@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,9 @@ namespace ExtensionMethods
 {
     public static class ReflectionExtensionMethods
     {
+        //Extension method similar to GetProperties() that gets ALL PUBLIC properties from a type, INCLUDING INTERFACES
+        //Provided by Marc Gravell and Mythz
+        //http://stackoverflow.com/questions/358835/getproperties-to-return-all-properties-for-an-interface-inheritance-hierarchy
         public static PropertyInfo[] GetPublicProperties(this Type type)
         {
             if (type.IsInterface)
@@ -48,6 +52,7 @@ namespace ExtensionMethods
                 | BindingFlags.Public | BindingFlags.Instance);
         }
 
+        //Extension method similar to GetProperty() that gets ANY PUBLIC property, including the INTERFACE ones
         public static PropertyInfo GetPublicProperty(this Type type, string propertyName)
         {
             List<PropertyInfo> allPublicProperties = type.GetPublicProperties().ToList();

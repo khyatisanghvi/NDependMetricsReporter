@@ -35,7 +35,7 @@
   <NDependMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.INamespace</NDependCodeElementType>
     <NDependMetricType>System.UInt32</NDependMetricType>
-    <PropertyName>NbTypesUsingMe</PropertyName>
+    <PropertyName>NbNamespacesUsingMe</PropertyName>
     <InternalPropertyName>NamespaceCa</InternalPropertyName>
     <MetricName>Namespaces Afferent Coupling</MetricName>
     <Description>The number of namespaces that depend directly on this namespace</Description>
