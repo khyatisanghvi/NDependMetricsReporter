@@ -1,8 +1,8 @@
 ﻿using System.Xml.Serialization;
 
 [System.Serializable()]
-public class NDependMetricDefinition {
-
+public class NDependMetricDefinition
+{
     private string nDependCodeElementTypeField;
     private string nDependMetricTypeField; 
     private string propertyNameField;    
@@ -51,12 +51,4 @@ public class NDependMetricDefinition {
         get { return this.descriptionField; }
         set { this.descriptionField = value; }
     }
-    
-/*
-    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-    public string Description
-    {
-        get { return this.descriptionField; }
-        set { this.descriptionField = value; }
-    }*/
 }

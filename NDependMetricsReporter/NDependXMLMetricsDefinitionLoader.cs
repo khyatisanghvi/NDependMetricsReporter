@@ -31,6 +31,5 @@ namespace NDependMetricsReporter
             textReader.Close();
             return metricsList;
         }
-
     }
 }

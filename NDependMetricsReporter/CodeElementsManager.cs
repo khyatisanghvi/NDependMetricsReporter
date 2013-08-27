@@ -78,7 +78,5 @@ namespace NDependMetricsReporter
             }
             return codeElementMetrics;
         }
-
-
     }
 }

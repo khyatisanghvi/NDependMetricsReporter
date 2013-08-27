@@ -53,7 +53,6 @@ namespace NDependMetricsReporter
                 ICodeBase currentAnalysisResultCodeBase = codeBaseManager.LoadCodeBase(analysisResultRef);
                 CodeElementsManager currenAnalysisResultCodeBaseManager = new CodeElementsManager(currentAnalysisResultCodeBase);
                 metricValue = null;
-
                 switch (metricDefinition.NDependCodeElementType)
                 {
                     case "NDepend.CodeModel.IAssembly":
@@ -65,7 +64,6 @@ namespace NDependMetricsReporter
                                 metricDefinition.InternalPropertyName,
                                 metricDefinition.NDependMetricType);
                         break;
-
                     case "NDepend.CodeModel.INamespace":
                         INamespace selectedNamespaceFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetNamespaceByName(codeElementName);
                         if (selectedNamespaceFromCurrentAnalysisResultCodebase != null)

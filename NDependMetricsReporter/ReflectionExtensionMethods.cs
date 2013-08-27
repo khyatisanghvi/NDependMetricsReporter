@@ -58,6 +58,5 @@ namespace ExtensionMethods
             List<PropertyInfo> allPublicProperties = type.GetPublicProperties().ToList();
             return allPublicProperties.Where(propertyInfo => propertyInfo.Name == propertyName).First();
         }
-
     }
 }
