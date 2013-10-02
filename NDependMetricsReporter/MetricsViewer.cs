@@ -29,12 +29,39 @@ namespace NDependMetricsReporter
             nDependServicesProvider = new NDependServicesProvider();           
         }
 
+        private void OpenNdependProject()
+        {
+            nDependServicesProvider.ProjectManager.ShowDialogChooseAnExistingProject(out nDependProject);
+            if (nDependProject == null) return;
+            ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
+            codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
+            FillBaseControls();
+        }
+
         private void FillBaseControls()
         {
-            this.tboxProjectName.Text = nDependProject.Properties.Name;
+            FillNDependProjectInfo();
             List<NDependMetricDefinition> assemblyMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("AssemblyMetrics.xml");
             IEnumerable<IAssembly> lastAnalysisAssembliesList = codeElementsManager.GetNonThirdPartyAssembliesInApplication();
             DataTable assemblyMetricsDataTable = CreateCodeElemetMetricsDataTable<IAssembly>(lastAnalysisAssembliesList, assemblyMetricsDefinionsList);
+            //FillCodeAsembliestDataGridView(assemblyMetricsDataTable);
+            FillCodeElementsDataGridView(this.dgvAssemblies, assemblyMetricsDataTable);
+        }
+
+        private void FillNDependProjectInfo()
+        {
+            this.tboxProjectName.Text = nDependProject.Properties.Name;
+            this.tBoxProjectPath.Text = nDependProject.Properties.FilePath.ToString();
+        }
+
+        private void FillCodeAsembliestDataGridView(DataTable assemblyMetricsDataTable)
+        {
+            DataRow[] selectedDataRows = assemblyMetricsDataTable.Select("(detailID = 1) AND (detailTypeID = 2)");
+            DataTable onlyCodeAsemblies = assemblyMetricsDataTable.Clone();
+            foreach (DataRow d in selectedDataRows)
+            {
+                onlyCodeAsemblies.ImportRow(d);
+            }
             FillCodeElementsDataGridView(this.dgvAssemblies, assemblyMetricsDataTable);
         }
 
@@ -139,14 +166,10 @@ namespace NDependMetricsReporter
             }
         }
 
-        private void btnOpenProject_Click(object sender, EventArgs e)
+/*        private void btnOpenProject_Click(object sender, EventArgs e)
         {
-            nDependServicesProvider.ProjectManager.ShowDialogChooseAnExistingProject(out nDependProject);
-            if (nDependProject == null) return;
-            ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
-            codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
-            FillBaseControls();
-        }
+            OpenNdependProject();
+        }*/
 
         private void lvwMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -268,6 +291,16 @@ namespace NDependMetricsReporter
                 NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
                 FillMetricDescriptionRTFBox(nDependMetricDefinition);
             }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenNdependProject();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
