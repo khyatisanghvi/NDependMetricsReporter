@@ -30,13 +30,13 @@
         {
             this.tboxProjectName = new System.Windows.Forms.TextBox();
             this.lblNDependProjectName = new System.Windows.Forms.Label();
-            this.lblAssembliesList = new System.Windows.Forms.Label();
-            this.lblNamespacesList = new System.Windows.Forms.Label();
+            this.lblCodeAssembliesDataGridView = new System.Windows.Forms.Label();
+            this.lblCodeNamespacesDataGridView = new System.Windows.Forms.Label();
             this.lvwCodeMetricsList = new System.Windows.Forms.ListView();
             this.MetricName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MetricValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lblTypesList = new System.Windows.Forms.Label();
-            this.lblMethodsList = new System.Windows.Forms.Label();
+            this.lblCodeTypesDataGridView = new System.Windows.Forms.Label();
+            this.lblCodeMethodsDataGridView = new System.Windows.Forms.Label();
             this.rtfCodeMetricProperties = new System.Windows.Forms.RichTextBox();
             this.lblCodeElementType = new System.Windows.Forms.Label();
             this.lblCodeElementName = new System.Windows.Forms.Label();
@@ -48,6 +48,21 @@
             this.codeSectionsTabs = new System.Windows.Forms.TabControl();
             this.tabCodeMetrics = new System.Windows.Forms.TabPage();
             this.tabUnitTests = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgvUnitTestsAssemblies = new System.Windows.Forms.DataGridView();
+            this.dgvUnitTestsMethods = new System.Windows.Forms.DataGridView();
+            this.lblUnitTestsAssembliesDataGridView = new System.Windows.Forms.Label();
+            this.dgvUnitTestsTypes = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dgvUnitTestsNamespaces = new System.Windows.Forms.DataGridView();
+            this.lvwUnitTestsMetricsList = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.rtfUnitTestsMetricProperties = new System.Windows.Forms.RichTextBox();
             this.tabSpecFlowBDD = new System.Windows.Forms.TabPage();
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.ndependProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,21 +70,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tBoxProjectPath = new System.Windows.Forms.TextBox();
             this.lblNDependProjectPath = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeNamespaces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeMethods)).BeginInit();
@@ -77,11 +77,11 @@
             this.codeSectionsTabs.SuspendLayout();
             this.tabCodeMetrics.SuspendLayout();
             this.tabUnitTests.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsAssemblies)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsMethods)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsTypes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsNamespaces)).BeginInit();
             this.menuMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // tboxProjectName
@@ -101,23 +101,23 @@
             this.lblNDependProjectName.TabIndex = 7;
             this.lblNDependProjectName.Text = "Project Name";
             // 
-            // lblAssembliesList
+            // lblCodeAssembliesDataGridView
             // 
-            this.lblAssembliesList.AutoSize = true;
-            this.lblAssembliesList.Location = new System.Drawing.Point(1, 3);
-            this.lblAssembliesList.Name = "lblAssembliesList";
-            this.lblAssembliesList.Size = new System.Drawing.Size(193, 13);
-            this.lblAssembliesList.TabIndex = 9;
-            this.lblAssembliesList.Text = "Assemblies analyzed in selected project";
+            this.lblCodeAssembliesDataGridView.AutoSize = true;
+            this.lblCodeAssembliesDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.lblCodeAssembliesDataGridView.Name = "lblCodeAssembliesDataGridView";
+            this.lblCodeAssembliesDataGridView.Size = new System.Drawing.Size(193, 13);
+            this.lblCodeAssembliesDataGridView.TabIndex = 9;
+            this.lblCodeAssembliesDataGridView.Text = "Assemblies analyzed in selected project";
             // 
-            // lblNamespacesList
+            // lblCodeNamespacesDataGridView
             // 
-            this.lblNamespacesList.AutoSize = true;
-            this.lblNamespacesList.Location = new System.Drawing.Point(1, 113);
-            this.lblNamespacesList.Name = "lblNamespacesList";
-            this.lblNamespacesList.Size = new System.Drawing.Size(169, 13);
-            this.lblNamespacesList.TabIndex = 11;
-            this.lblNamespacesList.Text = "Namespaces in selected assembly";
+            this.lblCodeNamespacesDataGridView.AutoSize = true;
+            this.lblCodeNamespacesDataGridView.Location = new System.Drawing.Point(3, 113);
+            this.lblCodeNamespacesDataGridView.Name = "lblCodeNamespacesDataGridView";
+            this.lblCodeNamespacesDataGridView.Size = new System.Drawing.Size(169, 13);
+            this.lblCodeNamespacesDataGridView.TabIndex = 11;
+            this.lblCodeNamespacesDataGridView.Text = "Namespaces in selected assembly";
             // 
             // lvwCodeMetricsList
             // 
@@ -148,23 +148,23 @@
             this.MetricValue.Text = "Value";
             this.MetricValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // lblTypesList
+            // lblCodeTypesDataGridView
             // 
-            this.lblTypesList.AutoSize = true;
-            this.lblTypesList.Location = new System.Drawing.Point(1, 224);
-            this.lblTypesList.Name = "lblTypesList";
-            this.lblTypesList.Size = new System.Drawing.Size(150, 13);
-            this.lblTypesList.TabIndex = 15;
-            this.lblTypesList.Text = "Types in selected Namespace";
+            this.lblCodeTypesDataGridView.AutoSize = true;
+            this.lblCodeTypesDataGridView.Location = new System.Drawing.Point(3, 224);
+            this.lblCodeTypesDataGridView.Name = "lblCodeTypesDataGridView";
+            this.lblCodeTypesDataGridView.Size = new System.Drawing.Size(150, 13);
+            this.lblCodeTypesDataGridView.TabIndex = 15;
+            this.lblCodeTypesDataGridView.Text = "Types in selected Namespace";
             // 
-            // lblMethodsList
+            // lblCodeMethodsDataGridView
             // 
-            this.lblMethodsList.AutoSize = true;
-            this.lblMethodsList.Location = new System.Drawing.Point(3, 379);
-            this.lblMethodsList.Name = "lblMethodsList";
-            this.lblMethodsList.Size = new System.Drawing.Size(129, 13);
-            this.lblMethodsList.TabIndex = 17;
-            this.lblMethodsList.Text = "Methods in selected Type";
+            this.lblCodeMethodsDataGridView.AutoSize = true;
+            this.lblCodeMethodsDataGridView.Location = new System.Drawing.Point(3, 376);
+            this.lblCodeMethodsDataGridView.Name = "lblCodeMethodsDataGridView";
+            this.lblCodeMethodsDataGridView.Size = new System.Drawing.Size(129, 13);
+            this.lblCodeMethodsDataGridView.TabIndex = 17;
+            this.lblCodeMethodsDataGridView.Text = "Methods in selected Type";
             // 
             // rtfCodeMetricProperties
             // 
@@ -229,11 +229,11 @@
             this.dgvCodeMethods.AllowUserToDeleteRows = false;
             this.dgvCodeMethods.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dgvCodeMethods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCodeMethods.Location = new System.Drawing.Point(6, 395);
+            this.dgvCodeMethods.Location = new System.Drawing.Point(6, 392);
             this.dgvCodeMethods.MultiSelect = false;
             this.dgvCodeMethods.Name = "dgvCodeMethods";
             this.dgvCodeMethods.ReadOnly = true;
-            this.dgvCodeMethods.Size = new System.Drawing.Size(674, 154);
+            this.dgvCodeMethods.Size = new System.Drawing.Size(674, 157);
             this.dgvCodeMethods.TabIndex = 25;
             this.dgvCodeMethods.SelectionChanged += new System.EventHandler(this.dgvCodeMethods_SelectionChanged);
             // 
@@ -278,15 +278,15 @@
             this.tabCodeMetrics.Controls.Add(this.label1);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeAssemblies);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeMethods);
-            this.tabCodeMetrics.Controls.Add(this.lblAssembliesList);
+            this.tabCodeMetrics.Controls.Add(this.lblCodeAssembliesDataGridView);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeTypes);
-            this.tabCodeMetrics.Controls.Add(this.lblNamespacesList);
+            this.tabCodeMetrics.Controls.Add(this.lblCodeNamespacesDataGridView);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeNamespaces);
             this.tabCodeMetrics.Controls.Add(this.lvwCodeMetricsList);
             this.tabCodeMetrics.Controls.Add(this.lblCodeElementName);
-            this.tabCodeMetrics.Controls.Add(this.lblTypesList);
+            this.tabCodeMetrics.Controls.Add(this.lblCodeTypesDataGridView);
             this.tabCodeMetrics.Controls.Add(this.lblCodeElementType);
-            this.tabCodeMetrics.Controls.Add(this.lblMethodsList);
+            this.tabCodeMetrics.Controls.Add(this.lblCodeMethodsDataGridView);
             this.tabCodeMetrics.Controls.Add(this.rtfCodeMetricProperties);
             this.tabCodeMetrics.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabCodeMetrics.Location = new System.Drawing.Point(4, 4);
@@ -298,35 +298,185 @@
             // 
             // tabUnitTests
             // 
+            this.tabUnitTests.BackColor = System.Drawing.SystemColors.Control;
             this.tabUnitTests.Controls.Add(this.label2);
-            this.tabUnitTests.Controls.Add(this.dataGridView1);
-            this.tabUnitTests.Controls.Add(this.dataGridView2);
-            this.tabUnitTests.Controls.Add(this.label3);
-            this.tabUnitTests.Controls.Add(this.dataGridView3);
+            this.tabUnitTests.Controls.Add(this.dgvUnitTestsAssemblies);
+            this.tabUnitTests.Controls.Add(this.dgvUnitTestsMethods);
+            this.tabUnitTests.Controls.Add(this.lblUnitTestsAssembliesDataGridView);
+            this.tabUnitTests.Controls.Add(this.dgvUnitTestsTypes);
             this.tabUnitTests.Controls.Add(this.label4);
-            this.tabUnitTests.Controls.Add(this.dataGridView4);
-            this.tabUnitTests.Controls.Add(this.listView1);
+            this.tabUnitTests.Controls.Add(this.dgvUnitTestsNamespaces);
+            this.tabUnitTests.Controls.Add(this.lvwUnitTestsMetricsList);
             this.tabUnitTests.Controls.Add(this.label5);
             this.tabUnitTests.Controls.Add(this.label6);
             this.tabUnitTests.Controls.Add(this.label7);
             this.tabUnitTests.Controls.Add(this.label8);
-            this.tabUnitTests.Controls.Add(this.richTextBox1);
+            this.tabUnitTests.Controls.Add(this.rtfUnitTestsMetricProperties);
             this.tabUnitTests.Location = new System.Drawing.Point(4, 4);
             this.tabUnitTests.Name = "tabUnitTests";
             this.tabUnitTests.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUnitTests.Size = new System.Drawing.Size(958, 640);
+            this.tabUnitTests.Size = new System.Drawing.Size(958, 558);
             this.tabUnitTests.TabIndex = 1;
             this.tabUnitTests.Text = "Unit Tests";
-            this.tabUnitTests.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(686, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 13);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "Code Element Type:";
+            // 
+            // dgvUnitTestsAssemblies
+            // 
+            this.dgvUnitTestsAssemblies.AllowUserToAddRows = false;
+            this.dgvUnitTestsAssemblies.AllowUserToDeleteRows = false;
+            this.dgvUnitTestsAssemblies.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvUnitTestsAssemblies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUnitTestsAssemblies.Location = new System.Drawing.Point(6, 19);
+            this.dgvUnitTestsAssemblies.MultiSelect = false;
+            this.dgvUnitTestsAssemblies.Name = "dgvUnitTestsAssemblies";
+            this.dgvUnitTestsAssemblies.ReadOnly = true;
+            this.dgvUnitTestsAssemblies.Size = new System.Drawing.Size(674, 89);
+            this.dgvUnitTestsAssemblies.TabIndex = 39;
+            // 
+            // dgvUnitTestsMethods
+            // 
+            this.dgvUnitTestsMethods.AllowUserToAddRows = false;
+            this.dgvUnitTestsMethods.AllowUserToDeleteRows = false;
+            this.dgvUnitTestsMethods.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvUnitTestsMethods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUnitTestsMethods.Location = new System.Drawing.Point(6, 392);
+            this.dgvUnitTestsMethods.MultiSelect = false;
+            this.dgvUnitTestsMethods.Name = "dgvUnitTestsMethods";
+            this.dgvUnitTestsMethods.ReadOnly = true;
+            this.dgvUnitTestsMethods.Size = new System.Drawing.Size(674, 156);
+            this.dgvUnitTestsMethods.TabIndex = 38;
+            // 
+            // lblUnitTestsAssembliesDataGridView
+            // 
+            this.lblUnitTestsAssembliesDataGridView.AutoSize = true;
+            this.lblUnitTestsAssembliesDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.lblUnitTestsAssembliesDataGridView.Name = "lblUnitTestsAssembliesDataGridView";
+            this.lblUnitTestsAssembliesDataGridView.Size = new System.Drawing.Size(171, 13);
+            this.lblUnitTestsAssembliesDataGridView.TabIndex = 28;
+            this.lblUnitTestsAssembliesDataGridView.Text = "Test assemblies in selected project";
+            // 
+            // dgvUnitTestsTypes
+            // 
+            this.dgvUnitTestsTypes.AllowUserToAddRows = false;
+            this.dgvUnitTestsTypes.AllowUserToDeleteRows = false;
+            this.dgvUnitTestsTypes.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvUnitTestsTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUnitTestsTypes.Location = new System.Drawing.Point(6, 240);
+            this.dgvUnitTestsTypes.MultiSelect = false;
+            this.dgvUnitTestsTypes.Name = "dgvUnitTestsTypes";
+            this.dgvUnitTestsTypes.ReadOnly = true;
+            this.dgvUnitTestsTypes.Size = new System.Drawing.Size(674, 131);
+            this.dgvUnitTestsTypes.TabIndex = 37;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 113);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(191, 13);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Test namespaces in selected assembly";
+            // 
+            // dgvUnitTestsNamespaces
+            // 
+            this.dgvUnitTestsNamespaces.AllowUserToAddRows = false;
+            this.dgvUnitTestsNamespaces.AllowUserToDeleteRows = false;
+            this.dgvUnitTestsNamespaces.AllowUserToOrderColumns = true;
+            this.dgvUnitTestsNamespaces.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvUnitTestsNamespaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUnitTestsNamespaces.Location = new System.Drawing.Point(6, 129);
+            this.dgvUnitTestsNamespaces.MultiSelect = false;
+            this.dgvUnitTestsNamespaces.Name = "dgvUnitTestsNamespaces";
+            this.dgvUnitTestsNamespaces.ReadOnly = true;
+            this.dgvUnitTestsNamespaces.Size = new System.Drawing.Size(674, 88);
+            this.dgvUnitTestsNamespaces.TabIndex = 36;
+            // 
+            // lvwUnitTestsMetricsList
+            // 
+            this.lvwUnitTestsMetricsList.CheckBoxes = true;
+            this.lvwUnitTestsMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.lvwUnitTestsMetricsList.GridLines = true;
+            this.lvwUnitTestsMetricsList.Location = new System.Drawing.Point(686, 49);
+            this.lvwUnitTestsMetricsList.Name = "lvwUnitTestsMetricsList";
+            this.lvwUnitTestsMetricsList.Size = new System.Drawing.Size(262, 386);
+            this.lvwUnitTestsMetricsList.TabIndex = 30;
+            this.lvwUnitTestsMetricsList.UseCompatibleStateImageBehavior = false;
+            this.lvwUnitTestsMetricsList.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Metric Name";
+            this.columnHeader1.Width = 195;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Value";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(686, 33);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(104, 13);
+            this.label5.TabIndex = 35;
+            this.label5.Text = "Code Element Name";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 224);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(175, 13);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "Test groups in selected namespace";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(792, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 13);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Code Element Type";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 376);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(139, 13);
+            this.label8.TabIndex = 32;
+            this.label8.Text = "Unit Tests in selected group";
+            // 
+            // rtfUnitTestsMetricProperties
+            // 
+            this.rtfUnitTestsMetricProperties.Location = new System.Drawing.Point(685, 440);
+            this.rtfUnitTestsMetricProperties.Name = "rtfUnitTestsMetricProperties";
+            this.rtfUnitTestsMetricProperties.Size = new System.Drawing.Size(262, 108);
+            this.rtfUnitTestsMetricProperties.TabIndex = 33;
+            this.rtfUnitTestsMetricProperties.Text = "";
             // 
             // tabSpecFlowBDD
             // 
+            this.tabSpecFlowBDD.BackColor = System.Drawing.SystemColors.Control;
             this.tabSpecFlowBDD.Location = new System.Drawing.Point(4, 4);
             this.tabSpecFlowBDD.Name = "tabSpecFlowBDD";
-            this.tabSpecFlowBDD.Size = new System.Drawing.Size(958, 694);
+            this.tabSpecFlowBDD.Size = new System.Drawing.Size(958, 558);
             this.tabSpecFlowBDD.TabIndex = 2;
             this.tabSpecFlowBDD.Text = "SpecFlow BDD";
-            this.tabSpecFlowBDD.UseVisualStyleBackColor = true;
             // 
             // menuMain
             // 
@@ -378,156 +528,6 @@
             this.lblNDependProjectPath.TabIndex = 31;
             this.lblNDependProjectPath.Text = "Project Path";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(691, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 13);
-            this.label2.TabIndex = 40;
-            this.label2.Text = "Code Element Type:";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(11, 23);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(674, 89);
-            this.dataGridView1.TabIndex = 39;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(11, 483);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(674, 151);
-            this.dataGridView2.TabIndex = 38;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(193, 13);
-            this.label3.TabIndex = 28;
-            this.label3.Text = "Assemblies analyzed in selected project";
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(11, 306);
-            this.dataGridView3.MultiSelect = false;
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.ReadOnly = true;
-            this.dataGridView3.Size = new System.Drawing.Size(674, 150);
-            this.dataGridView3.TabIndex = 37;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 115);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(169, 13);
-            this.label4.TabIndex = 29;
-            this.label4.Text = "Namespaces in selected assembly";
-            // 
-            // dataGridView4
-            // 
-            this.dataGridView4.AllowUserToAddRows = false;
-            this.dataGridView4.AllowUserToDeleteRows = false;
-            this.dataGridView4.AllowUserToOrderColumns = true;
-            this.dataGridView4.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(11, 131);
-            this.dataGridView4.MultiSelect = false;
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.ReadOnly = true;
-            this.dataGridView4.Size = new System.Drawing.Size(674, 150);
-            this.dataGridView4.TabIndex = 36;
-            // 
-            // listView1
-            // 
-            this.listView1.CheckBoxes = true;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(691, 53);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(262, 386);
-            this.listView1.TabIndex = 30;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Metric Name";
-            this.columnHeader1.Width = 195;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Value";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(691, 37);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 13);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "Code Element Name";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 290);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(150, 13);
-            this.label6.TabIndex = 31;
-            this.label6.Text = "Types in selected Namespace";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(797, 22);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 13);
-            this.label7.TabIndex = 34;
-            this.label7.Text = "Code Element Type";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 467);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(129, 13);
-            this.label8.TabIndex = 32;
-            this.label8.Text = "Methods in selected Type";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(691, 526);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(262, 108);
-            this.richTextBox1.TabIndex = 33;
-            this.richTextBox1.Text = "";
-            // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -552,12 +552,12 @@
             this.tabCodeMetrics.PerformLayout();
             this.tabUnitTests.ResumeLayout(false);
             this.tabUnitTests.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsAssemblies)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsMethods)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsTypes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsNamespaces)).EndInit();
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -567,13 +567,13 @@
 
         private System.Windows.Forms.TextBox tboxProjectName;
         private System.Windows.Forms.Label lblNDependProjectName;
-        private System.Windows.Forms.Label lblAssembliesList;
-        private System.Windows.Forms.Label lblNamespacesList;
+        private System.Windows.Forms.Label lblCodeAssembliesDataGridView;
+        private System.Windows.Forms.Label lblCodeNamespacesDataGridView;
         private System.Windows.Forms.ListView lvwCodeMetricsList;
         private System.Windows.Forms.ColumnHeader MetricName;
         private System.Windows.Forms.ColumnHeader MetricValue;
-        private System.Windows.Forms.Label lblTypesList;
-        private System.Windows.Forms.Label lblMethodsList;
+        private System.Windows.Forms.Label lblCodeTypesDataGridView;
+        private System.Windows.Forms.Label lblCodeMethodsDataGridView;
         private System.Windows.Forms.RichTextBox rtfCodeMetricProperties;
         private System.Windows.Forms.Label lblCodeElementType;
         private System.Windows.Forms.Label lblCodeElementName;
@@ -593,20 +593,20 @@
         private System.Windows.Forms.TextBox tBoxProjectPath;
         private System.Windows.Forms.Label lblNDependProjectPath;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView dgvUnitTestsAssemblies;
+        private System.Windows.Forms.DataGridView dgvUnitTestsMethods;
+        private System.Windows.Forms.Label lblUnitTestsAssembliesDataGridView;
+        private System.Windows.Forms.DataGridView dgvUnitTestsTypes;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridView4;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.DataGridView dgvUnitTestsNamespaces;
+        private System.Windows.Forms.ListView lvwUnitTestsMetricsList;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtfUnitTestsMetricProperties;
     }
 }
 
