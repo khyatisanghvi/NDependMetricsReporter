@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyResolverHelper.cs" />
+    <Compile Include="DataTableHelper.cs" />
     <Compile Include="ReflectionExtensionMethods.cs" />
     <Compile Include="MetricsViewer.cs">
       <SubType>Form</SubType>
