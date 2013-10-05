@@ -58,9 +58,9 @@
             this.lvwUnitTestsMetricsList = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblUnitTestCodeElementName = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblUnitTestCodeElementType = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.rtfUnitTestsMetricProperties = new System.Windows.Forms.RichTextBox();
             this.tabSpecFlowBDD = new System.Windows.Forms.TabPage();
@@ -307,9 +307,9 @@
             this.tabUnitTests.Controls.Add(this.label4);
             this.tabUnitTests.Controls.Add(this.dgvUnitTestsNamespaces);
             this.tabUnitTests.Controls.Add(this.lvwUnitTestsMetricsList);
-            this.tabUnitTests.Controls.Add(this.label5);
+            this.tabUnitTests.Controls.Add(this.lblUnitTestCodeElementName);
             this.tabUnitTests.Controls.Add(this.label6);
-            this.tabUnitTests.Controls.Add(this.label7);
+            this.tabUnitTests.Controls.Add(this.lblUnitTestCodeElementType);
             this.tabUnitTests.Controls.Add(this.label8);
             this.tabUnitTests.Controls.Add(this.rtfUnitTestsMetricProperties);
             this.tabUnitTests.Location = new System.Drawing.Point(4, 4);
@@ -340,6 +340,7 @@
             this.dgvUnitTestsAssemblies.ReadOnly = true;
             this.dgvUnitTestsAssemblies.Size = new System.Drawing.Size(674, 89);
             this.dgvUnitTestsAssemblies.TabIndex = 39;
+            this.dgvUnitTestsAssemblies.SelectionChanged += new System.EventHandler(this.dgvUnitTestsAssemblies_SelectionChanged);
             // 
             // dgvUnitTestsMethods
             // 
@@ -423,15 +424,15 @@
             this.columnHeader2.Text = "Value";
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label5
+            // lblUnitTestCodeElementName
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(686, 33);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 13);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "Code Element Name";
+            this.lblUnitTestCodeElementName.AutoSize = true;
+            this.lblUnitTestCodeElementName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUnitTestCodeElementName.Location = new System.Drawing.Point(686, 33);
+            this.lblUnitTestCodeElementName.Name = "lblUnitTestCodeElementName";
+            this.lblUnitTestCodeElementName.Size = new System.Drawing.Size(104, 13);
+            this.lblUnitTestCodeElementName.TabIndex = 35;
+            this.lblUnitTestCodeElementName.Text = "Code Element Name";
             // 
             // label6
             // 
@@ -442,15 +443,15 @@
             this.label6.TabIndex = 31;
             this.label6.Text = "Test groups in selected namespace";
             // 
-            // label7
+            // lblUnitTestCodeElementType
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(792, 18);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 13);
-            this.label7.TabIndex = 34;
-            this.label7.Text = "Code Element Type";
+            this.lblUnitTestCodeElementType.AutoSize = true;
+            this.lblUnitTestCodeElementType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUnitTestCodeElementType.Location = new System.Drawing.Point(792, 18);
+            this.lblUnitTestCodeElementType.Name = "lblUnitTestCodeElementType";
+            this.lblUnitTestCodeElementType.Size = new System.Drawing.Size(100, 13);
+            this.lblUnitTestCodeElementType.TabIndex = 34;
+            this.lblUnitTestCodeElementType.Text = "Code Element Type";
             // 
             // label8
             // 
@@ -602,9 +603,9 @@
         private System.Windows.Forms.ListView lvwUnitTestsMetricsList;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblUnitTestCodeElementName;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblUnitTestCodeElementType;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RichTextBox rtfUnitTestsMetricProperties;
     }

@@ -99,7 +99,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ExtensionMethods\ExtensionMethods.csproj">
+      <Project>{2e312eb2-9bb0-4338-901b-3aa51ae6de3e}</Project>
+      <Name>ExtensionMethods</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="XMLMetricDefinitions\AssemblyMetrics.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -57,24 +57,16 @@ namespace NDependMetricsReporter
 
         private void FillCodeAsembliestDataGridView(DataTable assemblyMetricsDataTable)
         {
-            DataRow[] selectedDataRows = assemblyMetricsDataTable.Select("([Code Element] NOT LIKE '*UnitTest*') AND ([Code Element] NOT LIKE '*SpecFlowBDD*')");
-            DataTable onlyCodeAsemblies = assemblyMetricsDataTable.Clone();
-            foreach (DataRow d in selectedDataRows)
-            {
-                onlyCodeAsemblies.ImportRow(d);
-            }
+            string rowSelectionFiler = "([Code Element] NOT LIKE '*UnitTest*') AND ([Code Element] NOT LIKE '*SpecFlowBDD*')";
+            DataTable onlyCodeAsemblies = assemblyMetricsDataTable.CloneSelection(rowSelectionFiler);
             FillCodeElementsDataGridView(this.dgvCodeAssemblies, onlyCodeAsemblies);
         }
 
         private void FillTestAssembliesDataGridView(DataTable assemblyMetricsDataTable)
         {
-            DataRow[] selectedDataRows = assemblyMetricsDataTable.Select("([Code Element] LIKE '*UnitTest*')");
-            DataTable onlyTestAssemblies = assemblyMetricsDataTable.Clone();
-            foreach (DataRow d in selectedDataRows)
-            {
-                onlyTestAssemblies.ImportRow(d);
-            }
-            FillCodeElementsDataGridView(this.dgvCodeAssemblies, onlyTestAssemblies);
+            string rowSelectionFiler = "([Code Element] LIKE '*UnitTest*')";
+            DataTable onlyTestAssemblies = assemblyMetricsDataTable.CloneSelection(rowSelectionFiler);
+            FillCodeElementsDataGridView(this.dgvUnitTestsAssemblies, onlyTestAssemblies);
         }
 
         private void FillCodeElementsDataGridView(DataGridView codeElementMetricsDataGridView, DataTable codeElementMetricsDataTable)
@@ -94,7 +86,7 @@ namespace NDependMetricsReporter
             }
         }
 
-        private void FillMetricsListView(DataGridViewRow selectedDataGridViewRow, List<NDependMetricDefinition> metricDefinitionsList)
+        private void FillCodeMetricsListView(DataGridViewRow selectedDataGridViewRow, List<NDependMetricDefinition> metricDefinitionsList)
         {
             string formatSpecifier = "0.####";
             DataGridView sourceDataGridView = selectedDataGridViewRow.DataGridView;
@@ -108,6 +100,23 @@ namespace NDependMetricsReporter
                 lvi.Tag = metricDefinition;
                 lvi.Checked = selectedDataGridViewRow.Cells[metricDefinition.PropertyName].Displayed;
                 this.lvwCodeMetricsList.Items.Add(lvi);
+            }
+        }
+
+        private void FillUnitTestsMetricsListView(DataGridViewRow selectedDataGridViewRow, List<NDependMetricDefinition> metricDefinitionsList)
+        {
+            string formatSpecifier = "0.####";
+            DataGridView sourceDataGridView = selectedDataGridViewRow.DataGridView;
+            this.lvwUnitTestsMetricsList.Tag = sourceDataGridView;
+            this.lvwUnitTestsMetricsList.Items.Clear();
+            foreach (NDependMetricDefinition metricDefinition in metricDefinitionsList)
+            {
+                double cellValue = Double.Parse(selectedDataGridViewRow.Cells[metricDefinition.PropertyName].Value.ToString());
+                string formatedCellValue = cellValue.ToString(formatSpecifier);
+                ListViewItem lvi = new ListViewItem(new[] { metricDefinition.PropertyName, formatedCellValue });
+                lvi.Tag = metricDefinition;
+                lvi.Checked = selectedDataGridViewRow.Cells[metricDefinition.PropertyName].Displayed;
+                this.lvwUnitTestsMetricsList.Items.Add(lvi);
             }
         }
 
@@ -178,11 +187,6 @@ namespace NDependMetricsReporter
             }
         }
 
-/*        private void btnOpenProject_Click(object sender, EventArgs e)
-        {
-            OpenNdependProject();
-        }*/
-
         private void lvwCodeMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.lvwCodeMetricsList.SelectedItems.Count > 0)
@@ -227,7 +231,7 @@ namespace NDependMetricsReporter
                 IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
 
                 List<NDependMetricDefinition> assemblyMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("AssemblyMetrics.xml");
-                FillMetricsListView(thisDataGridView.SelectedRows[0], assemblyMetricsDefinionsList);
+                FillCodeMetricsListView(thisDataGridView.SelectedRows[0], assemblyMetricsDefinionsList);
 
                 this.lblCodeElementType.Text = "Assembly";
                 this.lblCodeElementName.Text = selectedAssemblyName;
@@ -239,6 +243,26 @@ namespace NDependMetricsReporter
 
         }
 
+        private void dgvUnitTestsAssemblies_SelectionChanged(object sender, EventArgs e)
+        {
+            DataGridView thisDataGridView = (DataGridView)sender;
+            if (thisDataGridView.SelectedRows.Count > 0)
+            {
+                string selectedAssemblyName = thisDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
+
+                List<NDependMetricDefinition> assemblyMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("AssemblyMetrics.xml");
+                FillUnitTestsMetricsListView(thisDataGridView.SelectedRows[0], assemblyMetricsDefinionsList);
+
+                this.lblUnitTestCodeElementType.Text = "Assembly";
+                this.lblUnitTestCodeElementName.Text = selectedAssemblyName;
+
+                List<NDependMetricDefinition> namespaceMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("NamespaceMetrics.xml");
+                DataTable namespaceMetricsDataTable = CreateCodeElemetMetricsDataTable<INamespace>(assembly.ChildNamespaces, namespaceMetricsDefinionsList);
+                FillCodeElementsDataGridView(this.dgvUnitTestsNamespaces, namespaceMetricsDataTable);
+            }
+        }
+
         private void dgvCodeNamespaces_SelectionChanged(object sender, EventArgs e)
         {
             DataGridView thisDataGridView = (DataGridView)sender;
@@ -248,7 +272,7 @@ namespace NDependMetricsReporter
                 INamespace nNamespace = codeElementsManager.GetNamespaceByName(selectedNamespaceName);
 
                 List<NDependMetricDefinition> namespaceMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("NamespaceMetrics.xml");
-                FillMetricsListView(thisDataGridView.SelectedRows[0], namespaceMetricsDefinionsList);
+                FillCodeMetricsListView(thisDataGridView.SelectedRows[0], namespaceMetricsDefinionsList);
 
                 this.lblCodeElementType.Text = "Namespace";
                 this.lblCodeElementName.Text = selectedNamespaceName;
@@ -268,7 +292,7 @@ namespace NDependMetricsReporter
                 IType nType = codeElementsManager.GetTypeByName(selectedType);
 
                 List<NDependMetricDefinition> typesMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("TypeMetrics.xml");
-                FillMetricsListView(thisDataGridView.SelectedRows[0], typesMetricsDefinionsList);
+                FillCodeMetricsListView(thisDataGridView.SelectedRows[0], typesMetricsDefinionsList);
 
                 this.lblCodeElementType.Text = "Type";
                 this.lblCodeElementName.Text = selectedType;
@@ -288,7 +312,7 @@ namespace NDependMetricsReporter
                 IType nType = codeElementsManager.GetTypeByName(selectedType);
 
                 List<NDependMetricDefinition> typesMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("MethodMetrics.xml");
-                FillMetricsListView(thisDataGridView.SelectedRows[0], typesMetricsDefinionsList);
+                FillCodeMetricsListView(thisDataGridView.SelectedRows[0], typesMetricsDefinionsList);
 
                 this.lblCodeElementType.Text = "Type";
                 this.lblCodeElementName.Text = selectedType;
@@ -314,5 +338,7 @@ namespace NDependMetricsReporter
         {
             this.Close();
         }
+
+
     }
 }
