@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDependMetricsReporter", "NDependMetricsReporter\NDependMetricsReporter.csproj", "{D80646E3-E033-4432-BEDF-88F50EDFD59F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionMethods", "ExtensionMethods\ExtensionMethods.csproj", "{2E312EB2-9BB0-4338-901B-3AA51AE6DE3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionMethodsTests", "ExtensionMethodsTests\ExtensionMethodsTests.csproj", "{4ABCFD34-92AB-44AE-9226-62B02DD97E56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{D80646E3-E033-4432-BEDF-88F50EDFD59F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D80646E3-E033-4432-BEDF-88F50EDFD59F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D80646E3-E033-4432-BEDF-88F50EDFD59F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E312EB2-9BB0-4338-901B-3AA51AE6DE3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E312EB2-9BB0-4338-901B-3AA51AE6DE3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E312EB2-9BB0-4338-901B-3AA51AE6DE3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E312EB2-9BB0-4338-901B-3AA51AE6DE3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ABCFD34-92AB-44AE-9226-62B02DD97E56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ABCFD34-92AB-44AE-9226-62B02DD97E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ABCFD34-92AB-44AE-9226-62B02DD97E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ABCFD34-92AB-44AE-9226-62B02DD97E56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -45,6 +45,7 @@ namespace NDependMetricsReporter
             IEnumerable<IAssembly> lastAnalysisAssembliesList = codeElementsManager.GetNonThirdPartyAssembliesInApplication();
             DataTable assemblyMetricsDataTable = CreateCodeElemetMetricsDataTable<IAssembly>(lastAnalysisAssembliesList, assemblyMetricsDefinionsList);
             FillCodeAsembliestDataGridView(assemblyMetricsDataTable);
+            FillTestAssembliesDataGridView(assemblyMetricsDataTable);
             //FillCodeElementsDataGridView(this.dgvAssemblies, assemblyMetricsDataTable);
         }
 
@@ -63,6 +64,17 @@ namespace NDependMetricsReporter
                 onlyCodeAsemblies.ImportRow(d);
             }
             FillCodeElementsDataGridView(this.dgvCodeAssemblies, onlyCodeAsemblies);
+        }
+
+        private void FillTestAssembliesDataGridView(DataTable assemblyMetricsDataTable)
+        {
+            DataRow[] selectedDataRows = assemblyMetricsDataTable.Select("([Code Element] LIKE '*UnitTest*')");
+            DataTable onlyTestAssemblies = assemblyMetricsDataTable.Clone();
+            foreach (DataRow d in selectedDataRows)
+            {
+                onlyTestAssemblies.ImportRow(d);
+            }
+            FillCodeElementsDataGridView(this.dgvCodeAssemblies, onlyTestAssemblies);
         }
 
         private void FillCodeElementsDataGridView(DataGridView codeElementMetricsDataGridView, DataTable codeElementMetricsDataTable)
