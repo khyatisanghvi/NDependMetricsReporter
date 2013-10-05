@@ -48,6 +48,7 @@ namespace NDependMetricsReporter
             DataTable assemblyMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IAssembly>(lastAnalysisAssembliesList, assemblyMetricsDefinionsList);
             FillCodeAsembliestDataGridView(assemblyMetricsDataTable);
             FillTestAssembliesDataGridView(assemblyMetricsDataTable);
+            FillSpecFlowBDDAssembliesDataGridView(assemblyMetricsDataTable);
         }
 
         private void FillNDependProjectInfo()
@@ -70,6 +71,13 @@ namespace NDependMetricsReporter
             FillCodeElementsDataGridView(this.dgvUnitTestsAssemblies, onlyTestAssemblies);
         }
 
+        private void FillSpecFlowBDDAssembliesDataGridView(DataTable assemblyMetricsDataTable)
+        {
+            string rowSelectionFiler = "([Code Element] LIKE '*SpecFlowBDD*')";
+            DataTable onlySpecFlowBDDAssemblies = assemblyMetricsDataTable.CloneSelection(rowSelectionFiler);
+            FillCodeElementsDataGridView(this.dgvBDDAssemblies, onlySpecFlowBDDAssemblies);
+        }
+
         private void FillCodeElementsDataGridView(DataGridView codeElementMetricsDataGridView, DataTable codeElementMetricsDataTable)
         {
             bool filledForFirstTime = (codeElementMetricsDataGridView.DataSource == null);
@@ -85,16 +93,6 @@ namespace NDependMetricsReporter
                 codeElementMetricsDataGridView.Columns[0].Visible = true;
                 codeElementMetricsDataGridView.Columns[0].Frozen = true;
             }
-        }
-
-        private void FillCodeMetricsListView(DataGridViewRow selectedDataGridViewRow, List<NDependMetricDefinition> metricDefinitionsList)
-        {
-            FillMetricsListView(this.lvwCodeMetricsList, selectedDataGridViewRow, metricDefinitionsList);
-        }
-
-        private void FillUnitTestsMetricsListView(DataGridViewRow selectedDataGridViewRow, List<NDependMetricDefinition> metricDefinitionsList)
-        {
-            FillMetricsListView(this.lvwUnitTestsMetricsList, selectedDataGridViewRow, metricDefinitionsList);
         }
 
         private void FillMetricsListView(ListView targetListview, DataGridViewRow selectedDataGridViewRow, List<NDependMetricDefinition> metricDefinitionsList)
@@ -131,10 +129,6 @@ namespace NDependMetricsReporter
             targetRichBox.AppendText(Environment.NewLine + nDependMetricDefinition.Description);
         }
 
-        private void UptadeNamespacesList()
-        {
-        }
-
         private void ShowMetricChart(string chartTitle, string serieName, IList chartData)
         {
             MetricTrendChart metricTrendChart;
@@ -147,41 +141,6 @@ namespace NDependMetricsReporter
                 metricTrendChart = (MetricTrendChart)Application.OpenForms["metricTrendChart"];
             }
             metricTrendChart.RefreshData(chartTitle, serieName, chartData);
-        }
-
-        private void lvwCodeMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (this.lvwCodeMetricsList.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = this.lvwCodeMetricsList.SelectedItems[0];
-                NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
-                IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(this.lblCodeElementName.Text, nDependMetricDefinition);
-                string chartTitle = this.lblCodeElementType.Text.ToUpper() + ": " + this.lblCodeElementName.Text;
-                ShowMetricChart(chartTitle, nDependMetricDefinition.MetricName, metricValues);
-            }
-        }
-
-        private void lvwCodeMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            if (inhibitAutocheckOnDoubleClick)
-            {
-                e.NewValue = e.CurrentValue;
-            }
-            else
-            {
-                DataGridView sourceDataGridView = (DataGridView)lvwCodeMetricsList.Tag;
-                sourceDataGridView.Columns[this.lvwCodeMetricsList.Items[e.Index].Text].Visible = (e.NewValue == CheckState.Checked);
-            }
-        }
-
-        private void lvwCodeMetricsList_MouseDown(object sender, MouseEventArgs e)
-        {
-            inhibitAutocheckOnDoubleClick = true;
-        }
-
-        private void lvwCodeMetricsList_MouseUp(object sender, MouseEventArgs e)
-        {
-            inhibitAutocheckOnDoubleClick = false;
         }
 
         private void dgvCodeAssemblies_SelectionChanged(object sender, EventArgs e)
@@ -301,8 +260,6 @@ namespace NDependMetricsReporter
             }
         }
 
-
-
         private void MethodsDataGridViewSelectionChangedEventManager(DataGridView senderDataGridView, ListView targetMetricsListView, Label targetElementTypeLabel, Label targetElementNameLabel)
         {
             if (senderDataGridView.SelectedRows.Count > 0)
@@ -319,12 +276,115 @@ namespace NDependMetricsReporter
 
         private void lvwCodeMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.lvwCodeMetricsList.SelectedItems.Count > 0)
+            ListViewSelectedIndexEventManager(this.lvwCodeMetricsList, this.rtfCodeMetricProperties);
+        }
+
+        private void lvwUnitTestsMetricsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListViewSelectedIndexEventManager(this.lvwUnitTestsMetricsList, this.rtfUnitTestsMetricProperties);
+        }
+
+        private void lvwBDDMetricsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListViewSelectedIndexEventManager(this.lvwBDDMetricsList, this.rtfBDDMetricProperties);
+        }
+
+        private void ListViewSelectedIndexEventManager(ListView senderListView, RichTextBox targetRichTextBox)
+        {
+            if (senderListView.SelectedItems.Count > 0)
             {
-                ListViewItem lvi = this.lvwCodeMetricsList.SelectedItems[0];
+                ListViewItem lvi = senderListView.SelectedItems[0];
                 NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
-                FillCodeMetricDescriptionRTFBox(nDependMetricDefinition);
+                FillMetricDescriptionRTFBox(targetRichTextBox, nDependMetricDefinition);
             }
+        }
+
+        private void lvwCodeMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string selectedCodeElementName = this.lblCodeElementName.Text;
+            ListViewMouseDoubleClickEventManager(this.lvwCodeMetricsList, selectedCodeElementName);
+        }
+
+        private void lvwUnitTestsMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string selectedCodeElementName = this.lblUnitTestsCodeElementName.Text;
+            ListViewMouseDoubleClickEventManager(this.lvwUnitTestsMetricsList, selectedCodeElementName);
+        }
+
+        private void lvwBDDMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string selectedCodeElementName = this.lblBDDCodeElementName.Text;
+            ListViewMouseDoubleClickEventManager(this.lvwBDDMetricsList, selectedCodeElementName);
+        }
+
+        private void ListViewMouseDoubleClickEventManager(ListView senderListView, string codeElementName)
+        {
+            if (senderListView.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = senderListView.SelectedItems[0];
+                NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
+                IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
+                string chartTitle = codeElementName.ToUpper() + ": " + codeElementName;
+                ShowMetricChart(chartTitle, nDependMetricDefinition.MetricName, metricValues);
+            }
+        }
+
+        private void lvwCodeMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ListViewmCheckEventManager(this.lvwCodeMetricsList, e);
+        }
+
+        private void lvwUnitTestsMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ListViewmCheckEventManager(this.lvwUnitTestsMetricsList, e);
+        }
+
+        private void lvwBDDMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ListViewmCheckEventManager(this.lvwBDDMetricsList, e);
+        }
+
+        private void ListViewmCheckEventManager(ListView senderListView, ItemCheckEventArgs eventArguments)
+        {
+            if (inhibitAutocheckOnDoubleClick)
+            {
+                eventArguments.NewValue = eventArguments.CurrentValue;
+            }
+            else
+            {
+                DataGridView sourceDataGridView = (DataGridView)senderListView.Tag;
+                sourceDataGridView.Columns[senderListView.Items[eventArguments.Index].Text].Visible = (eventArguments.NewValue == CheckState.Checked);
+            }
+        }
+
+        private void lvwCodeMetricsList_MouseDown(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = true;
+        }
+
+        private void lvwCodeMetricsList_MouseUp(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = false;
+        }
+
+        private void lvwUnitTestsMetricsList_MouseDown(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = true;
+        }
+
+        private void lvwUnitTestsMetricsList_MouseUp(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = false;
+        }
+
+        private void lvwBDDMetricsList_MouseDown(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = true;
+        }
+
+        private void lvwBDDMetricsList_MouseUp(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = false;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -336,15 +396,5 @@ namespace NDependMetricsReporter
         {
             this.Close();
         }
-
-
-
-
-
-
-
-
-
-
     }
 }

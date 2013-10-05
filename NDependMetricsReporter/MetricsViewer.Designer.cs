@@ -436,6 +436,11 @@
             this.lvwUnitTestsMetricsList.TabIndex = 30;
             this.lvwUnitTestsMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwUnitTestsMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwUnitTestsMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwUnitTestsMetricsList_ItemCheck);
+            this.lvwUnitTestsMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwUnitTestsMetricsList_SelectedIndexChanged);
+            this.lvwUnitTestsMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsMetricsList_MouseDoubleClick);
+            this.lvwUnitTestsMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsMetricsList_MouseDown);
+            this.lvwUnitTestsMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsMetricsList_MouseUp);
             // 
             // columnHeader1
             // 
@@ -662,6 +667,11 @@
             this.lvwBDDMetricsList.TabIndex = 43;
             this.lvwBDDMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwBDDMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwBDDMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwBDDMetricsList_ItemCheck);
+            this.lvwBDDMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwBDDMetricsList_SelectedIndexChanged);
+            this.lvwBDDMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwBDDMetricsList_MouseDoubleClick);
+            this.lvwBDDMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwBDDMetricsList_MouseDown);
+            this.lvwBDDMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwBDDMetricsList_MouseUp);
             // 
             // columnHeader3
             // 
