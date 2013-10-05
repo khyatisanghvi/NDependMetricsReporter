@@ -201,7 +201,27 @@ namespace NDependMetricsReporter
 
         private void dgvUnitTestsNamespaces_SelectionChanged(object sender, EventArgs e)
         {
-            NamespacesDataGridViewSelectionChangedEventManager((DataGridView)sender, this.dgvUnitTestsTypes, lvwUnitTestsMetricsList, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
+            NamespacesDataGridViewSelectionChangedEventManager((DataGridView)sender, dgvUnitTestsTypes, lvwUnitTestsMetricsList, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
+        }
+
+        private void dgvCodeTypes_SelectionChanged(object sender, EventArgs e)
+        {
+            TypesDataGridViewSelectionChangedEventManager((DataGridView)sender, dgvCodeMethods, lvwCodeMetricsList, lblCodeElementType, lblCodeElementName);
+        }
+
+        private void dgvUnitTestsTypes_SelectionChanged(object sender, EventArgs e)
+        {
+            TypesDataGridViewSelectionChangedEventManager((DataGridView)sender, dgvUnitTestsMethods, lvwUnitTestsMetricsList, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
+        }
+
+        private void dgvCodeMethods_SelectionChanged(object sender, EventArgs e)
+        {
+            MethodsDataGridViewSelectionChangedEventManager((DataGridView)sender, lvwCodeMetricsList, lblCodeElementType, lblCodeElementName);
+        }
+
+        private void dgvUnitTestsMethods_SelectionChanged(object sender, EventArgs e)
+        {
+            MethodsDataGridViewSelectionChangedEventManager((DataGridView)sender, lvwUnitTestsMetricsList, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
         }
 
         private void AssembliesDataGridViewSelectionChangedEventManager(DataGridView senderDataGridView, DataGridView targetNamespacesDataGridView, ListView targetMetricsListView, Label targetElementTypeLabel, Label targetElementNameLabel)
@@ -212,7 +232,6 @@ namespace NDependMetricsReporter
                 IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
 
                 List<NDependMetricDefinition> assemblyMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("AssemblyMetrics.xml");
-                //FillCodeMetricsListView(senderDataGridView.SelectedRows[0], assemblyMetricsDefinionsList);
                 FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], assemblyMetricsDefinionsList);
 
                 targetElementTypeLabel.Text = "Assembly";
@@ -223,8 +242,6 @@ namespace NDependMetricsReporter
                 FillCodeElementsDataGridView(targetNamespacesDataGridView, namespaceMetricsDataTable);
             }
         }
-
-
 
         private void NamespacesDataGridViewSelectionChangedEventManager(DataGridView senderDataGridView, DataGridView targetTypesDataGridView, ListView targetMetricsListView, Label targetElementTypeLabel, Label targetElementNameLabel)
         {
@@ -245,39 +262,38 @@ namespace NDependMetricsReporter
             }
         }
 
-        private void dgvCodeTypes_SelectionChanged(object sender, EventArgs e)
+        private void TypesDataGridViewSelectionChangedEventManager(DataGridView senderDataGridView, DataGridView targetMethodsDataGridView, ListView targetMetricsListView, Label targetElementTypeLabel, Label targetElementNameLabel)
         {
-            DataGridView thisDataGridView = (DataGridView)sender;
-            if (thisDataGridView.SelectedRows.Count > 0)
+            if (senderDataGridView.SelectedRows.Count > 0)
             {
-                string selectedType = thisDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                string selectedType = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 IType nType = codeElementsManager.GetTypeByName(selectedType);
 
                 List<NDependMetricDefinition> typesMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("TypeMetrics.xml");
-                FillCodeMetricsListView(thisDataGridView.SelectedRows[0], typesMetricsDefinionsList);
+                FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], typesMetricsDefinionsList);
 
-                this.lblCodeElementType.Text = "Type";
-                this.lblCodeElementName.Text = selectedType;
+                targetElementTypeLabel.Text = "Type";
+                targetElementNameLabel.Text = selectedType;
 
                 List<NDependMetricDefinition> methodMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("MethodMetrics.xml");
                 DataTable methodMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IMethod>(nType.MethodsAndContructors, methodMetricsDefinionsList);
-                FillCodeElementsDataGridView(this.dgvCodeMethods, methodMetricsDataTable);
+                FillCodeElementsDataGridView(targetMethodsDataGridView, methodMetricsDataTable);
             }
         }
 
-        private void dgvCodeMethods_SelectionChanged(object sender, EventArgs e)
+
+
+        private void MethodsDataGridViewSelectionChangedEventManager(DataGridView senderDataGridView, ListView targetMetricsListView, Label targetElementTypeLabel, Label targetElementNameLabel)
         {
-            DataGridView thisDataGridView = (DataGridView)sender;
-            if (thisDataGridView.SelectedRows.Count > 0)
+            if (senderDataGridView.SelectedRows.Count > 0)
             {
-                string selectedType = thisDataGridView.SelectedRows[0].Cells[0].Value.ToString();
-                IType nType = codeElementsManager.GetTypeByName(selectedType);
+                string selectedMethod = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
 
-                List<NDependMetricDefinition> typesMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("MethodMetrics.xml");
-                FillCodeMetricsListView(thisDataGridView.SelectedRows[0], typesMetricsDefinionsList);
+                List<NDependMetricDefinition> methodsMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("MethodMetrics.xml");
+                FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], methodsMetricsDefinionsList);
 
-                this.lblCodeElementType.Text = "Type";
-                this.lblCodeElementName.Text = selectedType;
+                targetElementTypeLabel.Text = "Method";
+                targetElementNameLabel.Text = selectedMethod;
             }
         }
 
@@ -300,6 +316,10 @@ namespace NDependMetricsReporter
         {
             this.Close();
         }
+
+
+
+
 
 
 

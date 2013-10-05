@@ -354,6 +354,7 @@
             this.dgvUnitTestsMethods.ReadOnly = true;
             this.dgvUnitTestsMethods.Size = new System.Drawing.Size(674, 156);
             this.dgvUnitTestsMethods.TabIndex = 38;
+            this.dgvUnitTestsMethods.SelectionChanged += new System.EventHandler(this.dgvUnitTestsMethods_SelectionChanged);
             // 
             // lblUnitTestsAssembliesDataGridView
             // 
@@ -376,6 +377,7 @@
             this.dgvUnitTestsTypes.ReadOnly = true;
             this.dgvUnitTestsTypes.Size = new System.Drawing.Size(674, 131);
             this.dgvUnitTestsTypes.TabIndex = 37;
+            this.dgvUnitTestsTypes.SelectionChanged += new System.EventHandler(this.dgvUnitTestsTypes_SelectionChanged);
             // 
             // label4
             // 
