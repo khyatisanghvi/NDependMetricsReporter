@@ -224,6 +224,26 @@ namespace NDependMetricsReporter
             MethodsDataGridViewSelectionChangedEventManager((DataGridView)sender, lvwUnitTestsMetricsList, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
         }
 
+        private void dgvBDDAssemblies_SelectionChanged(object sender, EventArgs e)
+        {
+            AssembliesDataGridViewSelectionChangedEventManager((DataGridView)sender, dgvBDDNamespaces, lvwBDDMetricsList, lblBDDCodeElementType, lblBDDCodeElementName);
+        }
+
+        private void dgvBDDNamespaces_SelectionChanged(object sender, EventArgs e)
+        {
+            NamespacesDataGridViewSelectionChangedEventManager((DataGridView)sender, dgvBDDTypes, lvwBDDMetricsList, lblBDDCodeElementType, lblBDDCodeElementName);
+        }
+
+        private void dgvBDDTypes_SelectionChanged(object sender, EventArgs e)
+        {
+            TypesDataGridViewSelectionChangedEventManager((DataGridView)sender, dgvBDDMethods, lvwBDDMetricsList, lblBDDCodeElementType, lblBDDCodeElementName);
+        }
+
+        private void dgvBDDMethods_SelectionChanged(object sender, EventArgs e)
+        {
+            MethodsDataGridViewSelectionChangedEventManager((DataGridView)sender, lvwBDDMetricsList, lblBDDCodeElementType, lblBDDCodeElementName);
+        }
+
         private void AssembliesDataGridViewSelectionChangedEventManager(DataGridView senderDataGridView, DataGridView targetNamespacesDataGridView, ListView targetMetricsListView, Label targetElementTypeLabel, Label targetElementNameLabel)
         {
             if (senderDataGridView.SelectedRows.Count > 0)
@@ -316,6 +336,8 @@ namespace NDependMetricsReporter
         {
             this.Close();
         }
+
+
 
 
 
