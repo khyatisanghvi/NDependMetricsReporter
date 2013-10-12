@@ -40,6 +40,33 @@ namespace NDependMetricsReporter
             FillBaseControls();
         }
 
+        private void LinkAllDataGrids()
+        {
+            //Code tab DataGridViews
+            LinkDataGrid(this.dgvCodeAssemblies, null, this.dgvCodeNamespaces);
+            LinkDataGrid(this.dgvCodeNamespaces, this.dgvCodeAssemblies, this.dgvCodeTypes);
+            LinkDataGrid(this.dgvCodeTypes, this.dgvCodeNamespaces, this.dgvCodeMethods);
+            LinkDataGrid(this.dgvCodeMethods, this.dgvCodeTypes, null);
+
+            //UnitTests tab DataGridViews
+            LinkDataGrid(this.dgvUnitTestsAssemblies, null, this.dgvUnitTestsNamespaces);
+            LinkDataGrid(this.dgvUnitTestsNamespaces, this.dgvUnitTestsAssemblies, this.dgvUnitTestsTypes);
+            LinkDataGrid(this.dgvUnitTestsTypes, this.dgvUnitTestsNamespaces, this.dgvUnitTestsMethods);
+            LinkDataGrid(this.dgvUnitTestsMethods, this.dgvUnitTestsTypes, null);
+
+            //SpecFlow tab DataGridViews
+            LinkDataGrid(this.dgvBDDAssemblies, null, this.dgvBDDNamespaces);
+            LinkDataGrid(this.dgvBDDNamespaces, this.dgvBDDAssemblies, this.dgvBDDTypes);
+            LinkDataGrid(this.dgvBDDTypes, this.dgvBDDNamespaces, this.dgvBDDMethods);
+            LinkDataGrid(this.dgvBDDMethods, this.dgvBDDTypes, null);
+        }
+
+        private void LinkDataGrid(DataGridView dataGridViewToLink, DataGridView parentDataGridView, DataGridView childDataGridView)
+        {
+            LinkedDatagrids linkedDatagrids = new LinkedDatagrids(parentDataGridView, childDataGridView);
+            dataGridViewToLink.Tag = linkedDatagrids;
+        }
+
         private void FillBaseControls()
         {
             FillNDependProjectInfo();
@@ -127,12 +154,19 @@ namespace NDependMetricsReporter
         private void ShowMetricChart(string chartTitle, string serieName, IList chartData)
         {
             MetricsChart metricChart = new MetricsChart();
-            //metricChart.RenderSingleLineTrendChartNoXValues(chartTitle, serieName, chartData);
+            metricChart.RenderSingleLineTrendChartNoXValues(chartTitle, serieName, chartData);
+        }
 
-            List<uint> xValues = new List<uint> { 1, 2, 5, 10, 15, 4 };
-            List<uint> yValues = new List<uint> { 1, 2, 3, 3, 2, 4 };
-            metricChart.RenderSingleVerticalBarChart(chartTitle, serieName, xValues, yValues);
+        private void ShowMetricHistoricTrendChart(string chartTitle, string serieName, IList chartData)
+        {
+            MetricsChart metricChart = new MetricsChart();
+            metricChart.RenderSingleLineTrendChartNoXValues(chartTitle, serieName, chartData);
+        }
 
+        private void ShowMetricFrequencyBarChart(string chartTitle, string serieName, IList xData, IList yData)
+        {
+            MetricsChart metricChart = new MetricsChart();
+            metricChart.RenderSingleVerticalBarChart(chartTitle, serieName, xData, yData);
         }
 
         private void dgvCodeAssemblies_SelectionChanged(object sender, EventArgs e)
@@ -315,9 +349,44 @@ namespace NDependMetricsReporter
             {
                 ListViewItem lvi = senderListView.SelectedItems[0];
                 NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
-                IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
+                
+                //Get Trend History
+                /*IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
                 string chartTitle = codeElementName.ToUpper() + ": " + codeElementName;
-                ShowMetricChart(chartTitle, nDependMetricDefinition.MetricName, metricValues);
+                ShowMetricHistoricTrendChart(chartTitle, nDependMetricDefinition.MetricName, metricValues);*/
+
+                //Get Frquency Bar Chart
+                string columnName = nDependMetricDefinition.PropertyName;
+                string caseSwitch = nDependMetricDefinition.NDependCodeElementType;
+                switch (caseSwitch)
+                {
+                    case "NDepend.CodeModel.IAssembly":
+                        Console.WriteLine("Case 1");
+                        break;
+                    case "NDepend.CodeModel.INamespace":
+                        Console.WriteLine("Case 2");
+                        break;
+                    case "NDepend.CodeModel.IType":
+                        Console.WriteLine("Case 2");
+                        break;
+                    case "NDepend.CodeModel.IMethod":
+                        Console.WriteLine("Case 2");
+                        break;
+                    default:
+                        Console.WriteLine("Default case");
+                        break;
+                }
+                Type metricType= Type.GetType(nDependMetricDefinition.NDependMetricType);
+                DataGridView sourceDataGridView = (DataGridView)senderListView.Tag;
+                DataTable metricsDataTable = (DataTable)sourceDataGridView.DataSource;
+                List<uint> metricsValues = metricsDataTable.AsEnumerable().Select(s => s.Field<uint>(columnName)).ToList<uint>();
+                Dictionary<uint, int> metricsFrequencies= Statistics.FrequencesList<uint>(metricsValues);
+                IList xValues = metricsFrequencies.Keys.ToList();
+                IList yValues = metricsFrequencies.Values.ToList();
+                ShowMetricFrequencyBarChart(nDependMetricDefinition.MetricName, "Frequecies", xValues, yValues);
+                //IList metricValues = DataTableHelper.GetDataTableColumn<metricType>(metricsDataTable, columnName);
+                //List<metricType> metricsList = DataTableHelper.GetDataTableColumn<metricType>(metricsDataTable, columnName);
+                //List<tmp.GetType()> metricsList = DataTableHelper.GetDataTableColumn<tmp.GetType()>(metricsDataTable, columnName);
             }
         }
 
@@ -397,8 +466,32 @@ namespace NDependMetricsReporter
             userDefinedMetrics.CheckStringCodeQuery(lastAnalysisCodebase);*/
             //userDefinedMetrics.GetDistribition(lastAnalysisCodebase, "");
 
+            /*
             List<int> list = new List<int> { 1, 1, 2, 4, 4, 4, 5, 7, 7, 7, 9, 10 };
-            Dictionary <int,int> frequenceList = Statistics.FrequencesList(list);
+            Dictionary <int,int> frequenceList = Statistics.FrequencesList(list);*/
+
+        }
+
+        class LinkedDatagrids
+        {
+            DataGridView parentDataGridView;
+            DataGridView childDataGridView;
+
+            public LinkedDatagrids(DataGridView parent, DataGridView child)
+            {
+                this.parentDataGridView = parent;
+                this.childDataGridView = child;
+            }
+
+            public DataGridView ParentDataGridView
+            {
+                get{return parentDataGridView;}
+            }
+
+            public DataGridView ChildDataGridView
+            {
+                get { return childDataGridView; }
+            }
         }
     }
 }

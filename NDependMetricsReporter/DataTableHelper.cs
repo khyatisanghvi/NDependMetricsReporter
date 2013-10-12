@@ -26,6 +26,11 @@ namespace NDependMetricsReporter
             return metricsTable;
         }
 
+        public static List<T> GetDataTableColumn<T>(DataTable metricsDataTable, string columnName)
+        {
+            return metricsDataTable.AsEnumerable().Select(s => s.Field<T>(columnName)).ToList<T>();
+        }
+
         private void AddCodeElementsColumnToTable(DataTable metricsTable)
         {
             DataColumn codeElementNameColumn = new DataColumn("Code Element");

@@ -30,7 +30,7 @@ namespace NDependMetricsReporter
             //chart.DataBind();
         }
 
-        public void SetSingleVerticalBarChart(string chartTitle, string seriesName, List<uint> xValues, List<uint> yValues)
+        public void SetSingleVerticalBarChart(string chartTitle, string seriesName, IList xValues, IList yValues)
         {
             chart.Titles[0].Text = chartTitle;
             chart.Series.Clear();

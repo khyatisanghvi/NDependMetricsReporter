@@ -26,6 +26,5 @@ namespace NDependMetricsReporter
             MethodInfo genericMethod = method.MakeGenericMethod(new Type[] { codeElementType, metricType });
             return genericMethod.Invoke(this, new[] { codeElement, metricName });
         }
-
     }
 }

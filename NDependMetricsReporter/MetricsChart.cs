@@ -26,7 +26,7 @@ namespace NDependMetricsReporter
             this.Show();
         }
 
-        public void RenderSingleVerticalBarChart(string chartTitle, string seriesName, List<uint> xValues, List<uint> yValues)
+        public void RenderSingleVerticalBarChart(string chartTitle, string seriesName, IList xValues, IList yValues)
         {
             Charter chart = new Charter(this.chartMetricChart);
             chart.SetSingleVerticalBarChart(chartTitle, seriesName, xValues, yValues);

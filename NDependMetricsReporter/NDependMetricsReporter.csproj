@@ -53,6 +53,7 @@
     <Compile Include="Charter.cs" />
     <Compile Include="CQLINQParser.cs" />
     <Compile Include="DataTableHelper.cs" />
+    <Compile Include="GenericsHelper.cs" />
     <Compile Include="MetricsChart.cs">
       <SubType>Form</SubType>
     </Compile>
