@@ -50,7 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyResolverHelper.cs" />
+    <Compile Include="Charter.cs" />
+    <Compile Include="CQLINQParser.cs" />
     <Compile Include="DataTableHelper.cs" />
+    <Compile Include="MetricsChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MetricsChart.Designer.cs">
+      <DependentUpon>MetricsChart.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReflectionExtensionMethods.cs" />
     <Compile Include="MetricsViewer.cs">
       <SubType>Form</SubType>
@@ -72,6 +80,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeElementsManagerReflectionHelper.cs" />
+    <Compile Include="Statistics.cs" />
+    <Compile Include="UserDefinedMetrics.cs" />
+    <EmbeddedResource Include="MetricsChart.resx">
+      <DependentUpon>MetricsChart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MetricsViewer.resx">
       <DependentUpon>MetricsViewer.cs</DependentUpon>
     </EmbeddedResource>

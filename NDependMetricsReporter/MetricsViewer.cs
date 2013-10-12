@@ -27,7 +27,7 @@ namespace NDependMetricsReporter
         public MetricsViewer()
         {
             InitializeComponent();
-            nDependServicesProvider = new NDependServicesProvider();           
+            nDependServicesProvider = new NDependServicesProvider();
         }
 
         private void OpenNdependProject()
@@ -112,11 +112,6 @@ namespace NDependMetricsReporter
             }
         }
 
-        private void FillCodeMetricDescriptionRTFBox(NDependMetricDefinition nDependMetricDefinition)
-        {
-            FillMetricDescriptionRTFBox(rtfCodeMetricProperties, nDependMetricDefinition);
-        }
-
         private void FillMetricDescriptionRTFBox(RichTextBox targetRichBox, NDependMetricDefinition nDependMetricDefinition)
         {
             targetRichBox.Clear();
@@ -131,16 +126,13 @@ namespace NDependMetricsReporter
 
         private void ShowMetricChart(string chartTitle, string serieName, IList chartData)
         {
-            MetricTrendChart metricTrendChart;
-            if (Application.OpenForms["metricTrendChart"] == null)
-            {
-                metricTrendChart = new MetricTrendChart();
-            }
-            else
-            {
-                metricTrendChart = (MetricTrendChart)Application.OpenForms["metricTrendChart"];
-            }
-            metricTrendChart.RefreshData(chartTitle, serieName, chartData);
+            MetricsChart metricChart = new MetricsChart();
+            //metricChart.RenderSingleLineTrendChartNoXValues(chartTitle, serieName, chartData);
+
+            List<uint> xValues = new List<uint> { 1, 2, 5, 10, 15, 4 };
+            List<uint> yValues = new List<uint> { 1, 2, 3, 3, 2, 4 };
+            metricChart.RenderSingleVerticalBarChart(chartTitle, serieName, xValues, yValues);
+
         }
 
         private void dgvCodeAssemblies_SelectionChanged(object sender, EventArgs e)
@@ -395,6 +387,18 @@ namespace NDependMetricsReporter
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            /*
+            ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
+            UserDefinedMetrics userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
+            userDefinedMetrics.CheckStringCodeQuery(lastAnalysisCodebase);*/
+            //userDefinedMetrics.GetDistribition(lastAnalysisCodebase, "");
+
+            List<int> list = new List<int> { 1, 1, 2, 4, 4, 4, 5, 7, 7, 7, 9, 10 };
+            Dictionary <int,int> frequenceList = Statistics.FrequencesList(list);
         }
     }
 }

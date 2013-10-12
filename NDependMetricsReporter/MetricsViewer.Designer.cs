@@ -64,12 +64,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.rtfUnitTestsMetricProperties = new System.Windows.Forms.RichTextBox();
             this.tabSpecFlowBDD = new System.Windows.Forms.TabPage();
-            this.menuMain = new System.Windows.Forms.MenuStrip();
-            this.ndependProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tBoxProjectPath = new System.Windows.Forms.TextBox();
-            this.lblNDependProjectPath = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvBDDAssemblies = new System.Windows.Forms.DataGridView();
             this.dgvBDDMethods = new System.Windows.Forms.DataGridView();
@@ -85,6 +79,13 @@
             this.lblBDDCodeElementType = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.rtfBDDMetricProperties = new System.Windows.Forms.RichTextBox();
+            this.menuMain = new System.Windows.Forms.MenuStrip();
+            this.ndependProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tBoxProjectPath = new System.Windows.Forms.TextBox();
+            this.lblNDependProjectPath = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeNamespaces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeMethods)).BeginInit();
@@ -97,11 +98,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsNamespaces)).BeginInit();
             this.tabSpecFlowBDD.SuspendLayout();
-            this.menuMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDAssemblies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDMethods)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDNamespaces)).BeginInit();
+            this.menuMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tboxProjectName
@@ -295,6 +296,7 @@
             // tabCodeMetrics
             // 
             this.tabCodeMetrics.BackColor = System.Drawing.SystemColors.Control;
+            this.tabCodeMetrics.Controls.Add(this.button1);
             this.tabCodeMetrics.Controls.Add(this.label1);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeAssemblies);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeMethods);
@@ -520,56 +522,6 @@
             this.tabSpecFlowBDD.TabIndex = 2;
             this.tabSpecFlowBDD.Text = "SpecFlow BDD";
             // 
-            // menuMain
-            // 
-            this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ndependProjectToolStripMenuItem,
-            this.exitToolStripMenuItem});
-            this.menuMain.Location = new System.Drawing.Point(0, 0);
-            this.menuMain.Name = "menuMain";
-            this.menuMain.Size = new System.Drawing.Size(989, 24);
-            this.menuMain.TabIndex = 29;
-            this.menuMain.Text = "menuStrip1";
-            // 
-            // ndependProjectToolStripMenuItem
-            // 
-            this.ndependProjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
-            this.ndependProjectToolStripMenuItem.Name = "ndependProjectToolStripMenuItem";
-            this.ndependProjectToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
-            this.ndependProjectToolStripMenuItem.Text = "Ndepend Project";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.openToolStripMenuItem.Text = "Open...";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // tBoxProjectPath
-            // 
-            this.tBoxProjectPath.Location = new System.Drawing.Point(466, 30);
-            this.tBoxProjectPath.Name = "tBoxProjectPath";
-            this.tBoxProjectPath.ReadOnly = true;
-            this.tBoxProjectPath.Size = new System.Drawing.Size(508, 20);
-            this.tBoxProjectPath.TabIndex = 30;
-            // 
-            // lblNDependProjectPath
-            // 
-            this.lblNDependProjectPath.AutoSize = true;
-            this.lblNDependProjectPath.Location = new System.Drawing.Point(389, 33);
-            this.lblNDependProjectPath.Name = "lblNDependProjectPath";
-            this.lblNDependProjectPath.Size = new System.Drawing.Size(65, 13);
-            this.lblNDependProjectPath.TabIndex = 31;
-            this.lblNDependProjectPath.Text = "Project Path";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -729,6 +681,66 @@
             this.rtfBDDMetricProperties.TabIndex = 46;
             this.rtfBDDMetricProperties.Text = "";
             // 
+            // menuMain
+            // 
+            this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ndependProjectToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.menuMain.Location = new System.Drawing.Point(0, 0);
+            this.menuMain.Name = "menuMain";
+            this.menuMain.Size = new System.Drawing.Size(989, 24);
+            this.menuMain.TabIndex = 29;
+            this.menuMain.Text = "menuStrip1";
+            // 
+            // ndependProjectToolStripMenuItem
+            // 
+            this.ndependProjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem});
+            this.ndependProjectToolStripMenuItem.Name = "ndependProjectToolStripMenuItem";
+            this.ndependProjectToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.ndependProjectToolStripMenuItem.Text = "Ndepend Project";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.Text = "Open...";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // tBoxProjectPath
+            // 
+            this.tBoxProjectPath.Location = new System.Drawing.Point(466, 30);
+            this.tBoxProjectPath.Name = "tBoxProjectPath";
+            this.tBoxProjectPath.ReadOnly = true;
+            this.tBoxProjectPath.Size = new System.Drawing.Size(508, 20);
+            this.tBoxProjectPath.TabIndex = 30;
+            // 
+            // lblNDependProjectPath
+            // 
+            this.lblNDependProjectPath.AutoSize = true;
+            this.lblNDependProjectPath.Location = new System.Drawing.Point(389, 33);
+            this.lblNDependProjectPath.Name = "lblNDependProjectPath";
+            this.lblNDependProjectPath.Size = new System.Drawing.Size(65, 13);
+            this.lblNDependProjectPath.TabIndex = 31;
+            this.lblNDependProjectPath.Text = "Project Path";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(899, 10);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 23);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -759,12 +771,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsNamespaces)).EndInit();
             this.tabSpecFlowBDD.ResumeLayout(false);
             this.tabSpecFlowBDD.PerformLayout();
-            this.menuMain.ResumeLayout(false);
-            this.menuMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDAssemblies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDMethods)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDTypes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDNamespaces)).EndInit();
+            this.menuMain.ResumeLayout(false);
+            this.menuMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -829,6 +841,7 @@
         private System.Windows.Forms.Label lblBDDCodeElementType;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.RichTextBox rtfBDDMetricProperties;
+        private System.Windows.Forms.Button button1;
     }
 }
 
