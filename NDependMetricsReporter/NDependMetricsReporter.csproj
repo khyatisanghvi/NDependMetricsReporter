@@ -54,6 +54,12 @@
     <Compile Include="CQLINQParser.cs" />
     <Compile Include="DataTableHelper.cs" />
     <Compile Include="GenericsHelper.cs" />
+    <Compile Include="MetricProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MetricProperties.Designer.cs">
+      <DependentUpon>MetricProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="MetricsChart.cs">
       <SubType>Form</SubType>
     </Compile>

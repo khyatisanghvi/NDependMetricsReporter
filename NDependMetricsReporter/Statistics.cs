@@ -11,13 +11,12 @@ namespace NDependMetricsReporter
     {
         public static Dictionary<T, int> FrequencesList<T>(List<T> valueList)
         {
-            //Dictionary<T, int> frequencesDictionary = valueList.GroupBy(n => n).Select(n => new { Value = n.Key, Count = n.Count() });
-
-            //var frequencesEnumerable = valueList.GroupBy(n => n).Select(n => new { Value = n.Key, Count = n.Count() });
-            //Dictionary<T, int> frequencesDictionary = new Dictionary<T, int>();
             return valueList.GroupBy(n => n).ToDictionary(n => n.Key, n => n.Count());
-            //return strings.SelectMany(s => s.Split(' ')).GroupBy(w => w).ToDictionary(g => g.Key, g => g.Count());
-            //return frequencesDictionary;
+        }
+
+        public static IDictionary FrequencesList2<T>(IList valueList)
+        {
+            return ((List<T>)valueList).GroupBy(n => n).ToDictionary(n => n.Key, n => n.Count());
         }
     }
 }

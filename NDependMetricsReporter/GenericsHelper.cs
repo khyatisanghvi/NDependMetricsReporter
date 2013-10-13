@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace NDependMetricsReporter
 {
-    public static class GenericsHelper
+    public class GenericsHelper
     {
         public static IList CreateListOfType(string typeName)
         {
@@ -18,12 +18,12 @@ namespace NDependMetricsReporter
         }
 
         //Another way that works
-        /*public static IList CreateGenericList(string typeName)
+        public static IList CreateGenericList2(string typeName)
         {
             Type list = typeof(List<>);
             Type listOfTypename = list.MakeGenericType(Type.GetType("People"));
             return (IList)listOfTypename.GetConstructor(Type.EmptyTypes).Invoke(null);
-        }*/
+        }
 
         public static IList CreateNulableListOfType(string typeName)
         {

@@ -356,7 +356,13 @@ namespace NDependMetricsReporter
             {
                 ListViewItem lvi = senderListView.SelectedItems[0];
                 NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
-                
+                string metricName = nDependMetricDefinition.MetricName;
+                Type metricType = Type.GetType(nDependMetricDefinition.NDependMetricType);
+                DataGridView sourceDataGridView = (DataGridView)senderListView.Tag;
+                DataTable metricsDataTable = (DataTable)sourceDataGridView.DataSource;
+                DataGridViewTagInfo dataGridViewTagInfo = ((DataGridViewTagInfo)sourceDataGridView.Tag);
+                string parentCodeElementName = dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+
                 //Get Trend History
                 /*IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
                 string chartTitle = codeElementName.ToUpper() + ": " + codeElementName;
@@ -364,39 +370,39 @@ namespace NDependMetricsReporter
 
                 //Get Frquency Bar Chart
                 string columnName = nDependMetricDefinition.PropertyName;
-                /*string caseSwitch = nDependMetricDefinition.NDependCodeElementType;
-                switch (caseSwitch)
-                {
-                    case "NDepend.CodeModel.IAssembly":
-                        Console.WriteLine("Case 1");
-                        break;
-                    case "NDepend.CodeModel.INamespace":
-                        Console.WriteLine("Case 2");
-                        break;
-                    case "NDepend.CodeModel.IType":
-                        Console.WriteLine("Case 2");
-                        break;
-                    case "NDepend.CodeModel.IMethod":
-                        Console.WriteLine("Case 2");
-                        break;
-                    default:
-                        Console.WriteLine("Default case");
-                        break;
-                }*/
-                Type metricType= Type.GetType(nDependMetricDefinition.NDependMetricType);
-                DataGridView sourceDataGridView = (DataGridView)senderListView.Tag;
-                DataGridViewTagInfo dataGridViewTagInfo = ((DataGridViewTagInfo)sourceDataGridView.Tag);
-                string parentCodeElementName = dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 string chartTitle = parentCodeElementName + ": " + nDependMetricDefinition.PropertyName;
-                DataTable metricsDataTable = (DataTable)sourceDataGridView.DataSource;
-                List<uint> metricsValues = metricsDataTable.AsEnumerable().Select(s => s.Field<uint>(columnName)).ToList<uint>();
+                object[] methodParameters = new object[] { metricsDataTable, columnName, null, null };
+                GenericsHelper.InvokeStaticGenericMethod("NDependMetricsReporter.DataTableHelper", "GetDataTableColumnFrequencies", metricType, methodParameters);
+                IList xValues = (IList)methodParameters[2]; //null passed as parameter is replaced by 'out xValue' method parameter
+                IList yValues = (IList)methodParameters[3]; //null passed as parameter is replaced by 'out yValue' method parameter
+
+
+                //Not Generic Solution - only uint -
+                /*
+                List<uint> metricsValues = DataTableHelper.GetDataTableColumn<uint>(metricsDataTable, columnName);
                 Dictionary<uint, int> metricsFrequencies= Statistics.FrequencesList<uint>(metricsValues);
                 IList xValues = metricsFrequencies.Keys.ToList();
-                IList yValues = metricsFrequencies.Values.ToList();
+                IList yValues = metricsFrequencies.Values.ToList();*/
+
+                //Almost!!
+                /*
+                IList metricsValues = (IList)GenericsHelper.InvokeStaticGenericMethod("NDependMetricsReporter.DataTableHelper", "GetDataTableColumn", metricType, new object[] { metricsDataTable, columnName });
+                IDictionary metricsFrequencies = (IDictionary)GenericsHelper.InvokeStaticGenericMethod("NDependMetricsReporter.Statistics", "FrequencesList2", metricType, new object[] { metricsValues });
+                IList xValues = (IList)metricsFrequencies.Keys;
+                IList yValues = (IList)metricsFrequencies.Values;
+                */
+
+                //Even nearer!
+                /*
+                var metricsValues = GenericsHelper.InvokeStaticGenericMethod("NDependMetricsReporter.DataTableHelper", "GetDataTableColumn", metricType, new object[] { metricsDataTable, columnName });
+                var metricsFrequencies = GenericsHelper.InvokeStaticGenericMethod("NDependMetricsReporter.Statistics", "FrequencesList", metricType, new object[] { metricsValues });
+                IList xValues = (IList)((IDictionary)metricsFrequencies).Keys;
+                IList yValues = (IList)((IDictionary)metricsFrequencies).Values;
+                */ 
+
                 ShowMetricFrequencyBarChart(chartTitle, "Frequecies", xValues, yValues);
+                
                 //IList metricValues = DataTableHelper.GetDataTableColumn<metricType>(metricsDataTable, columnName);
-                //List<metricType> metricsList = DataTableHelper.GetDataTableColumn<metricType>(metricsDataTable, columnName);
-                //List<tmp.GetType()> metricsList = DataTableHelper.GetDataTableColumn<tmp.GetType()>(metricsDataTable, columnName);
             }
         }
 
