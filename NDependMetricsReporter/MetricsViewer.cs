@@ -28,6 +28,7 @@ namespace NDependMetricsReporter
         {
             InitializeComponent();
             nDependServicesProvider = new NDependServicesProvider();
+            TagAllDataGridViews();
         }
 
         private void OpenNdependProject()
@@ -40,31 +41,37 @@ namespace NDependMetricsReporter
             FillBaseControls();
         }
 
-        private void LinkAllDataGrids()
+        private void TagAllDataGridViews()
         {
+            Type asemblyType = Type.GetType("NDepend.CodeModel.IAssembly");
+            Type namespaceType = Type.GetType("NDepend.CodeModel.INamespace");
+            Type typeType = Type.GetType("NDepend.CodeModel.IMethod");
+            Type methodType = Type.GetType("NDepend.CodeModel.IType");
+
             //Code tab DataGridViews
-            LinkDataGrid(this.dgvCodeAssemblies, null, this.dgvCodeNamespaces);
-            LinkDataGrid(this.dgvCodeNamespaces, this.dgvCodeAssemblies, this.dgvCodeTypes);
-            LinkDataGrid(this.dgvCodeTypes, this.dgvCodeNamespaces, this.dgvCodeMethods);
-            LinkDataGrid(this.dgvCodeMethods, this.dgvCodeTypes, null);
+            TagDataGridView(this.dgvCodeAssemblies, null, this.dgvCodeNamespaces, asemblyType);
+            TagDataGridView(this.dgvCodeNamespaces, this.dgvCodeAssemblies, this.dgvCodeTypes, namespaceType);
+            TagDataGridView(this.dgvCodeTypes, this.dgvCodeNamespaces, this.dgvCodeMethods, typeType);
+            TagDataGridView(this.dgvCodeMethods, this.dgvCodeTypes, null, methodType);
 
             //UnitTests tab DataGridViews
-            LinkDataGrid(this.dgvUnitTestsAssemblies, null, this.dgvUnitTestsNamespaces);
-            LinkDataGrid(this.dgvUnitTestsNamespaces, this.dgvUnitTestsAssemblies, this.dgvUnitTestsTypes);
-            LinkDataGrid(this.dgvUnitTestsTypes, this.dgvUnitTestsNamespaces, this.dgvUnitTestsMethods);
-            LinkDataGrid(this.dgvUnitTestsMethods, this.dgvUnitTestsTypes, null);
+            TagDataGridView(this.dgvUnitTestsAssemblies, null, this.dgvUnitTestsNamespaces, asemblyType);
+            TagDataGridView(this.dgvUnitTestsNamespaces, this.dgvUnitTestsAssemblies, this.dgvUnitTestsTypes, namespaceType);
+            TagDataGridView(this.dgvUnitTestsTypes, this.dgvUnitTestsNamespaces, this.dgvUnitTestsMethods, typeType);
+            TagDataGridView(this.dgvUnitTestsMethods, this.dgvUnitTestsTypes, null, methodType);
 
             //SpecFlow tab DataGridViews
-            LinkDataGrid(this.dgvBDDAssemblies, null, this.dgvBDDNamespaces);
-            LinkDataGrid(this.dgvBDDNamespaces, this.dgvBDDAssemblies, this.dgvBDDTypes);
-            LinkDataGrid(this.dgvBDDTypes, this.dgvBDDNamespaces, this.dgvBDDMethods);
-            LinkDataGrid(this.dgvBDDMethods, this.dgvBDDTypes, null);
+            TagDataGridView(this.dgvBDDAssemblies, null, this.dgvBDDNamespaces, asemblyType);
+            TagDataGridView(this.dgvBDDNamespaces, this.dgvBDDAssemblies, this.dgvBDDTypes, namespaceType);
+            TagDataGridView(this.dgvBDDTypes, this.dgvBDDNamespaces, this.dgvBDDMethods, typeType);
+            TagDataGridView(this.dgvBDDMethods, this.dgvBDDTypes, null, methodType);
         }
 
-        private void LinkDataGrid(DataGridView dataGridViewToLink, DataGridView parentDataGridView, DataGridView childDataGridView)
+        private void TagDataGridView(DataGridView dataGridViewToTag, DataGridView parentDataGridView, DataGridView childDataGridView, Type codeElementType)
         {
             LinkedDatagrids linkedDatagrids = new LinkedDatagrids(parentDataGridView, childDataGridView);
-            dataGridViewToLink.Tag = linkedDatagrids;
+            DataGridViewTagInfo dataGridViewTagInfo = new DataGridViewTagInfo(codeElementType, linkedDatagrids);
+            dataGridViewToTag.Tag = dataGridViewTagInfo;
         }
 
         private void FillBaseControls()
@@ -357,7 +364,7 @@ namespace NDependMetricsReporter
 
                 //Get Frquency Bar Chart
                 string columnName = nDependMetricDefinition.PropertyName;
-                string caseSwitch = nDependMetricDefinition.NDependCodeElementType;
+                /*string caseSwitch = nDependMetricDefinition.NDependCodeElementType;
                 switch (caseSwitch)
                 {
                     case "NDepend.CodeModel.IAssembly":
@@ -375,15 +382,18 @@ namespace NDependMetricsReporter
                     default:
                         Console.WriteLine("Default case");
                         break;
-                }
+                }*/
                 Type metricType= Type.GetType(nDependMetricDefinition.NDependMetricType);
                 DataGridView sourceDataGridView = (DataGridView)senderListView.Tag;
+                DataGridViewTagInfo dataGridViewTagInfo = ((DataGridViewTagInfo)sourceDataGridView.Tag);
+                string parentCodeElementName = dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                string chartTitle = parentCodeElementName + ": " + nDependMetricDefinition.PropertyName;
                 DataTable metricsDataTable = (DataTable)sourceDataGridView.DataSource;
                 List<uint> metricsValues = metricsDataTable.AsEnumerable().Select(s => s.Field<uint>(columnName)).ToList<uint>();
                 Dictionary<uint, int> metricsFrequencies= Statistics.FrequencesList<uint>(metricsValues);
                 IList xValues = metricsFrequencies.Keys.ToList();
                 IList yValues = metricsFrequencies.Values.ToList();
-                ShowMetricFrequencyBarChart(nDependMetricDefinition.MetricName, "Frequecies", xValues, yValues);
+                ShowMetricFrequencyBarChart(chartTitle, "Frequecies", xValues, yValues);
                 //IList metricValues = DataTableHelper.GetDataTableColumn<metricType>(metricsDataTable, columnName);
                 //List<metricType> metricsList = DataTableHelper.GetDataTableColumn<metricType>(metricsDataTable, columnName);
                 //List<tmp.GetType()> metricsList = DataTableHelper.GetDataTableColumn<tmp.GetType()>(metricsDataTable, columnName);
@@ -472,6 +482,30 @@ namespace NDependMetricsReporter
 
         }
 
+
+        class DataGridViewTagInfo
+        {
+            Type codeElementsType;
+            LinkedDatagrids linkedDataGrids;
+
+            public DataGridViewTagInfo(Type codeElementsType, LinkedDatagrids linkedDataGrids)
+            {
+                this.codeElementsType = codeElementsType;
+                this.linkedDataGrids = linkedDataGrids;
+            }
+
+            public Type CodeElementsType
+            {
+                get { return codeElementsType; }
+            }
+
+            public LinkedDatagrids LinkedDataGrids
+            {
+                get { return linkedDataGrids; }
+            }
+        }
+        
+        
         class LinkedDatagrids
         {
             DataGridView parentDataGridView;
