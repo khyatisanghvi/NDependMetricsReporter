@@ -13,10 +13,5 @@ namespace NDependMetricsReporter
         {
             return valueList.GroupBy(n => n).ToDictionary(n => n.Key, n => n.Count());
         }
-
-        public static IDictionary FrequencesList2<T>(IList valueList)
-        {
-            return ((List<T>)valueList).GroupBy(n => n).ToDictionary(n => n.Key, n => n.Count());
-        }
     }
 }

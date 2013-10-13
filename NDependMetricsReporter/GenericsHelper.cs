@@ -17,6 +17,15 @@ namespace NDependMetricsReporter
             return list;
         }
 
+        public static IDictionary CreateDictionaryOfTypes(string keyType, string valueType)
+        {
+            Type userDefinedKeyType = Type.GetType(keyType);
+            Type userDefinedValueType = Type.GetType(valueType);
+            Type[] types = new Type[] {userDefinedKeyType, userDefinedValueType};
+            IDictionary dictionary = (IDictionary)Activator.CreateInstance(typeof(Dictionary<,>).MakeGenericType(types));
+            return dictionary;
+        }
+
         //Another way that works
         public static IList CreateGenericList2(string typeName)
         {
@@ -33,6 +42,16 @@ namespace NDependMetricsReporter
             return metricValues;
         }
 
+        public static List<KeyType> GetDictionaryKeys<KeyType, ValueType>(Dictionary<KeyType, ValueType> myDictionary)
+        {
+            return myDictionary.Keys.ToList<KeyType>();
+        }
+
+        public static List<ValueType> GetDictionaryValues<KeyType, ValueType>(Dictionary<KeyType, ValueType> myDictionary)
+        {
+            return myDictionary.Values.ToList<ValueType>();
+        }
+
         public static object InvokeInstanceGenericMethod(string className, string methodName, Type genericType, object[] parameters)
         {
             Type classType = Type.GetType(className);
@@ -42,11 +61,11 @@ namespace NDependMetricsReporter
             return genericMethodInfo.Invoke(tmpInstance, parameters);
         }
 
-        public static object InvokeStaticGenericMethod(string className, string methodName, Type genericType, object[] parameters)
+        public static object InvokeStaticGenericMethod(string className, string methodName, Type[] genericTypes, object[] parameters)
         {
             Type classType = Type.GetType(className);
             MethodInfo methodInfo = classType.GetMethod(methodName);
-            MethodInfo genericMethodInfo = methodInfo.MakeGenericMethod(genericType);
+            MethodInfo genericMethodInfo = methodInfo.MakeGenericMethod(genericTypes);
             return genericMethodInfo.Invoke(null, parameters);
         }
     }

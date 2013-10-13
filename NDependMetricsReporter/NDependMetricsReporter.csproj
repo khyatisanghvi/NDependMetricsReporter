@@ -89,6 +89,9 @@
     <Compile Include="CodeElementsManagerReflectionHelper.cs" />
     <Compile Include="Statistics.cs" />
     <Compile Include="UserDefinedMetrics.cs" />
+    <EmbeddedResource Include="MetricProperties.resx">
+      <DependentUpon>MetricProperties.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MetricsChart.resx">
       <DependentUpon>MetricsChart.cs</DependentUpon>
     </EmbeddedResource>

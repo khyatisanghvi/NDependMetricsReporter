@@ -31,14 +31,11 @@ namespace NDependMetricsReporter
             return metricsDataTable.AsEnumerable().Select(s => s.Field<T>(columnName)).ToList<T>();
         }
 
-        public static void GetDataTableColumnFrequencies<ColumnType>(DataTable metricsDataTable, string columnName, out List<ColumnType> values, out List<int> frequencies)
+        public static Dictionary<ColumnType, int> GetDataTableColumnFrequencies<ColumnType>(DataTable metricsDataTable, string columnName)
         {
-            values = new List<ColumnType>();
-            frequencies = new List<int>();
             List<ColumnType> metricsValues = DataTableHelper.GetDataTableColumn<ColumnType>(metricsDataTable, columnName);
             Dictionary<ColumnType, int> metricsFrequencies = Statistics.FrequencesList<ColumnType>(metricsValues);
-            values = metricsFrequencies.Keys.ToList<ColumnType>();
-            frequencies = metricsFrequencies.Values.ToList<int>();
+            return metricsFrequencies;
         }
 
         private void AddCodeElementsColumnToTable(DataTable metricsTable)
@@ -53,7 +50,7 @@ namespace NDependMetricsReporter
             foreach (NDependMetricDefinition metricDefinition in metricsDefinitionList)
             {
                 DataColumn metricColumn = new DataColumn(metricDefinition.PropertyName);
-                metricColumn.DataType = Type.GetType(metricDefinition.NDependMetricType); //typeof(double)
+                metricColumn.DataType = Type.GetType(metricDefinition.NDependMetricType);
                 metricsTable.Columns.Add(metricColumn);
             }
         }
