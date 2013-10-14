@@ -43,10 +43,10 @@ namespace NDependMetricsReporter
 
         private void TagAllDataGridViews()
         {
-            Type asemblyType = Type.GetType("NDepend.CodeModel.IAssembly");
-            Type namespaceType = Type.GetType("NDepend.CodeModel.INamespace");
-            Type typeType = Type.GetType("NDepend.CodeModel.IMethod");
-            Type methodType = Type.GetType("NDepend.CodeModel.IType");
+            Type asemblyType = typeof(IAssembly);
+            Type namespaceType = typeof(INamespace);
+            Type typeType = typeof(IType);
+            Type methodType = typeof(IMethod);
 
             //Code tab DataGridViews
             TagDataGridView(this.dgvCodeAssemblies, null, this.dgvCodeNamespaces, asemblyType);
@@ -156,6 +156,13 @@ namespace NDependMetricsReporter
             targetRichBox.SelectionLength = 0;
             targetRichBox.SelectionFont = rtfCodeMetricProperties.Font;
             targetRichBox.AppendText(Environment.NewLine + nDependMetricDefinition.Description);
+        }
+
+        private DataGridView GetAssebliesDataGridView(DataGridView selectedDataGridView)
+        {
+            string dataGridViewCodeElementsType = ((DataGridViewTagInfo)selectedDataGridView.Tag).CodeElementsType.Name;
+            if (dataGridViewCodeElementsType == "IAssembly") return selectedDataGridView;
+            return GetAssebliesDataGridView(((DataGridViewTagInfo)selectedDataGridView.Tag).LinkedDataGrids.ParentDataGridView);
         }
 
         private void dgvCodeAssemblies_SelectionChanged(object sender, EventArgs e)
@@ -342,12 +349,14 @@ namespace NDependMetricsReporter
                 DataTable metricsDataTable = (DataTable)sourceDataGridView.DataSource;
                 DataGridViewTagInfo dataGridViewTagInfo = ((DataGridViewTagInfo)sourceDataGridView.Tag);
                 string parentCodeElementName = dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
-
+                DataGridView assembliesDatagrid = GetAssebliesDataGridView(sourceDataGridView);
+                string assemblyName = assembliesDatagrid.SelectedRows[0].Cells[0].Value.ToString();
                 MetricProperties metricProperties = new MetricProperties(
                     nDependMetricDefinition,
                     codeElementName,
                     metricsDataTable,
                     parentCodeElementName,
+                    assemblyName,
                     nDependProject);
 
                 metricProperties.Show();
