@@ -162,7 +162,6 @@ namespace NDependMetricsReporter
             IList xValues = frequencies.Keys.ToList();
             IList yValues = frequencies.Values.ToList();
 
-            //Generic types solution
             /*Type metricType = Type.GetType(nDependMetricDefinition.NDependMetricType);
             object[] methodParameters = new object[] { selectedCodeElementMatricsDataTable, columnName };
             var frequencies = GenericsHelper.InvokeStaticGenericMethod("NDependMetricsReporter.DataTableHelper", "GetDataTableColumnFrequencies", new Type[] {metricType}, methodParameters);

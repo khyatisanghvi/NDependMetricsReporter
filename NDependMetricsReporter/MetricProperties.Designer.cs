@@ -174,7 +174,7 @@
             // gbxMetricHistory
             // 
             this.gbxMetricHistory.Controls.Add(this.btnDrawTrendChart);
-            this.gbxMetricHistory.Location = new System.Drawing.Point(12, 258);
+            this.gbxMetricHistory.Location = new System.Drawing.Point(12, 238);
             this.gbxMetricHistory.Name = "gbxMetricHistory";
             this.gbxMetricHistory.Size = new System.Drawing.Size(462, 48);
             this.gbxMetricHistory.TabIndex = 1;
@@ -194,7 +194,7 @@
             // xbgMetricStatistics
             // 
             this.xbgMetricStatistics.Controls.Add(this.tabctlMetricStatistics);
-            this.xbgMetricStatistics.Location = new System.Drawing.Point(12, 316);
+            this.xbgMetricStatistics.Location = new System.Drawing.Point(12, 296);
             this.xbgMetricStatistics.Name = "xbgMetricStatistics";
             this.xbgMetricStatistics.Size = new System.Drawing.Size(462, 145);
             this.xbgMetricStatistics.TabIndex = 2;
@@ -518,7 +518,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 472);
+            this.ClientSize = new System.Drawing.Size(482, 451);
             this.Controls.Add(this.xbgMetricStatistics);
             this.Controls.Add(this.gbxMetricHistory);
             this.Controls.Add(this.gbxMetricData);
