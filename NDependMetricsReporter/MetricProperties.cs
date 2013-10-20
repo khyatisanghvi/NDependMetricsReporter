@@ -31,6 +31,9 @@ namespace NDependMetricsReporter
         Dictionary<string, string> codeElementsTypePlurals = new Dictionary<string,string>() { { "Assembly", "Assemblies" }, { "Namespace", "Namepaces" }, { "Type", "Types" }, { "Method", "Methods" } };
         Dictionary<string, string> codeElementsTypePrecedences = new Dictionary<string, string>() { { "Assembly", "Application" }, { "Namespace", "Assembly" }, { "Type", "Namespace" }, { "Method", "Type" } };
 
+        List<double> metricsValuesFromAllBrotherCodeElements;
+        List<double> metricsValuesOfAllSameCodeElementsInAssembly;
+
         public MetricProperties(
             NDependMetricDefinition nDependMetricDefinition,
             string codeElementName,
@@ -75,28 +78,48 @@ namespace NDependMetricsReporter
 
             FillMetricDescriptionRTFBox(nDependMetricDefinition);
 
-            tabParentCondeElement.Text = "All " + codeElementTypePlural + " in parent " + parentCodeElementType;
-            tabAsemblyName.Text = "All " + codeElementTypePlural + " in Assembly";
+            //tabParentCondeElement.Text = "All " + codeElementTypePlural + " in parent " + parentCodeElementType;
+            //tabAsemblyName.Text = "All " + codeElementTypePlural + " in Assembly";
+            tabParentCondeElement.Text = "All " + codeElementTypePlural + " in " + parentCodeElementName;
+            tabAsemblyName.Text = "All " + codeElementTypePlural + " in " + assemblyName;
             Type metricsType = Type.GetType(nDependMetricDefinition.NDependMetricType);
             Type[] types = new Type[] { metricsType };
             GenericsHelper.InvokeInstanceGenericMethod(this, this.GetType().FullName, "FillBaseStatistics", types, null);
+
+            FillStatisticChartSelector();
         }
 
         public void FillBaseStatistics<CodeElementType>()
         {
-            List<CodeElementType> metricsValuesFromAllBrotherCodeElements = DataTableHelper.GetDataTableColumn <CodeElementType>(
+            double minValue;
+            double maxValue;
+
+            List<CodeElementType> metricsValuesFromAllBrotherCodeElements_GenericValues = DataTableHelper.GetDataTableColumn<CodeElementType>(
                 selectedCodeElementMatricsDataTable, nDependMetricDefinition.PropertyName);
-            List<double> doubleList = metricsValuesFromAllBrotherCodeElements.Select(val => Convert.ToDouble(val)).ToList();           
-            tboxParentCodeElementMinValue.Text = metricsValuesFromAllBrotherCodeElements.Min().ToString();
-            tboxParentCodeElementMaxValue.Text = metricsValuesFromAllBrotherCodeElements.Max().ToString();
-            tboxParentCodeElementAverageValue.Text = doubleList.Average().ToString("0.0000");
-            tboxParentCodeElementStdDevValue.Text = Statistics.StandardDeviation<double>(doubleList).ToString("0.0000");
+            metricsValuesFromAllBrotherCodeElements = metricsValuesFromAllBrotherCodeElements_GenericValues.Select(val => Convert.ToDouble(val)).ToList();
+            minValue = metricsValuesFromAllBrotherCodeElements.Min();
+            maxValue = metricsValuesFromAllBrotherCodeElements.Max();
+            tboxParentCodeElementMinValue.Text = minValue % 1 == 0 ? minValue.ToString() : minValue.ToString("0.0000");
+            tboxParentCodeElementMaxValue.Text = maxValue % 1 == 0 ? maxValue.ToString() : maxValue.ToString("0.0000");
+            tboxParentCodeElementAverageValue.Text = metricsValuesFromAllBrotherCodeElements.Average().ToString("0.0000");
+            tboxParentCodeElementStdDevValue.Text = Statistics.StandardDeviation<double>(metricsValuesFromAllBrotherCodeElements).ToString("0.0000");
             
-            List<double> metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);
-            tboxAllInAssemblyMinValue.Text = metricsValuesOfAllSameCodeElementsInAssembly.Min().ToString();
-            tboxAllInAssemblyMaxValue.Text = metricsValuesOfAllSameCodeElementsInAssembly.Max().ToString();
+            metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);
+            minValue = metricsValuesOfAllSameCodeElementsInAssembly.Min();
+            maxValue = metricsValuesOfAllSameCodeElementsInAssembly.Max();
+            tboxAllInAssemblyMinValue.Text = minValue % 1 == 0 ? minValue.ToString() : minValue.ToString("0.0000");
+            tboxAllInAssemblyMaxValue.Text = maxValue % 1 == 0 ? maxValue.ToString() : maxValue.ToString("0.0000");
             tboxAllInAssemblyAverageValue.Text = metricsValuesOfAllSameCodeElementsInAssembly.Average().ToString("0.0000");
             tboxAllInAssemblyStdDevValue .Text = Statistics.StandardDeviation<double>(metricsValuesOfAllSameCodeElementsInAssembly).ToString("0.0000");
+        }
+
+        private void FillStatisticChartSelector()
+        {
+            this.cboxAllCodeElementsInAssemblyChartSelector.Items.Add("Frequencies Bar Chart");
+            this.cboxParentCodeElementChartSelector.Items.Add("Frequencies Bar Chart");
+
+            cboxAllCodeElementsInAssemblyChartSelector.SelectedIndex = 0;
+            cboxParentCodeElementChartSelector.SelectedIndex = 0;
         }
 
         private void FillMetricDescriptionRTFBox(NDependMetricDefinition nDependMetricDefinition)
@@ -110,8 +133,6 @@ namespace NDependMetricsReporter
             rtboxMetricDescription.SelectionFont = rtboxMetricDescription.Font;
             rtboxMetricDescription.AppendText(Environment.NewLine + nDependMetricDefinition.Description);
         }
-
-
 
         private void ShowMetricHistoricTrendChart(string chartTitle, string serieName, IList chartData)
         {
@@ -135,22 +156,34 @@ namespace NDependMetricsReporter
         private void btnParentCodeElementDrawChart_Click(object sender, EventArgs e)
         {
             string columnName = nDependMetricDefinition.PropertyName;
-            string chartTitle = parentCodeElementName + ": " + nDependMetricDefinition.PropertyName;
-            Type metricType = Type.GetType(nDependMetricDefinition.NDependMetricType);
+            string chartTitle = tabParentCondeElement.Text + ": " + nDependMetricDefinition.PropertyName;
 
-            //Not Generic Solution - only uint -
-            /*
-            List<uint> metricsValues = DataTableHelper.GetDataTableColumn<uint>(metricsDataTable, columnName);
-            Dictionary<uint, int> metricsFrequencies= Statistics.FrequencesList<uint>(metricsValues);
-            IList xValues = metricsFrequencies.Keys.ToList();
-            IList yValues = metricsFrequencies.Values.ToList();*/
+            Dictionary<double, int> frequencies = Statistics.FrequencesList<double>(metricsValuesFromAllBrotherCodeElements);
+            IList xValues = frequencies.Keys.ToList();
+            IList yValues = frequencies.Values.ToList();
 
+            //Generic types solution
+            /*Type metricType = Type.GetType(nDependMetricDefinition.NDependMetricType);
             object[] methodParameters = new object[] { selectedCodeElementMatricsDataTable, columnName };
             var frequencies = GenericsHelper.InvokeStaticGenericMethod("NDependMetricsReporter.DataTableHelper", "GetDataTableColumnFrequencies", new Type[] {metricType}, methodParameters);
             IList xValues = (IList)GenericsHelper.InvokeStaticGenericMethod("NDependMetricsReporter.GenericsHelper", "GetDictionaryKeys", new Type[] { metricType, typeof(int) }, new object[] { frequencies });
-            IList yValues = (IList)GenericsHelper.InvokeStaticGenericMethod("NDependMetricsReporter.GenericsHelper", "GetDictionaryValues", new Type[] { metricType, typeof(int) }, new object[] { frequencies });
+            IList yValues = (IList)GenericsHelper.InvokeStaticGenericMethod("NDependMetricsReporter.GenericsHelper", "GetDictionaryValues", new Type[] { metricType, typeof(int) }, new object[] { frequencies });*/
 
             ShowMetricFrequencyBarChart(chartTitle, "Frequecies", xValues, yValues);
+        }
+
+        private void btnAllCodeElementsInAssemblyDrawChart_Click(object sender, EventArgs e)
+        {
+            string columnName = nDependMetricDefinition.PropertyName;
+            string chartTitle = tabAsemblyName.Text + ": " + nDependMetricDefinition.PropertyName;
+            Type metricType = Type.GetType(nDependMetricDefinition.NDependMetricType);
+
+            Dictionary<double, int> frequencies = Statistics.FrequencesList<double>(metricsValuesFromAllBrotherCodeElements);
+            IList xValues = frequencies.Keys.ToList();
+            IList yValues = frequencies.Values.ToList();
+
+            ShowMetricFrequencyBarChart(chartTitle, "Frequecies", xValues, yValues);
+
         }
     }
 }

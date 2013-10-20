@@ -1,0 +1,20 @@
+En metrics Viewer
+	- Arreglar que, al hacer click sobre un DatGridViewer, aunque no cambie la fila seleccionada, se presenten los datos de la fila seleccionada. ¿Interceptar el evento 'GetFocus'?
+	- Añadir metricas personalizadas
+		- Añadir método que calcule metricas personalizadas:
+			- Añadir clase de metricas personalizadas
+			- Cada metrica es un metodo
+			- Añadir un metodo que tome todas las métricas y las añada a la DataTable despues de cargar las metricas normales 
+				- Llamar directamente a los metodos
+				   ó
+				- Tener las metricas en XML, como las otras, cargarlas y usar Invoke
+			
+		- Poner un tab selector donde las metricListView para elegir entre metricas normales y personalizadas
+
+En Metrics Properties
+	- Evitar errores en la 'metric Info' de una assembly
+		* Pestaña de MetricStatisticas (parentCodeElement y Assemblies)
+
+En las gráficas 
+	- Arreglar los rotulos del eje x y los intervalos
+	

@@ -73,12 +73,6 @@
     <Compile Include="MetricsViewer.Designer.cs">
       <DependentUpon>MetricsViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="MetricTrendChart.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MetricTrendChart.Designer.cs">
-      <DependentUpon>MetricTrendChart.cs</DependentUpon>
-    </Compile>
     <Compile Include="AnalysisHistoryManager.cs" />
     <Compile Include="CodeBaseManager.cs" />
     <Compile Include="CodeElementsManager.cs" />
@@ -97,9 +91,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MetricsViewer.resx">
       <DependentUpon>MetricsViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MetricTrendChart.resx">
-      <DependentUpon>MetricTrendChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

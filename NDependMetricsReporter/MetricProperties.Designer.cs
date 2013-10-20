@@ -43,7 +43,7 @@
             this.tabParentCondeElement = new System.Windows.Forms.TabPage();
             this.gbxCharts = new System.Windows.Forms.GroupBox();
             this.btnParentCodeElementDrawChart = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboxParentCodeElementChartSelector = new System.Windows.Forms.ComboBox();
             this.gbxBasicStats = new System.Windows.Forms.GroupBox();
             this.tboxParentCodeElementMinValue = new System.Windows.Forms.TextBox();
             this.tboxParentCodeElementStdDevValue = new System.Windows.Forms.TextBox();
@@ -61,8 +61,8 @@
             this.lblAssemblyName = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.btnAllCodeElementsInAssemblyDrawChart = new System.Windows.Forms.Button();
+            this.cboxAllCodeElementsInAssemblyChartSelector = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tboxAllInAssemblyMinValue = new System.Windows.Forms.TextBox();
             this.tboxAllInAssemblyStdDevValue = new System.Windows.Forms.TextBox();
@@ -101,24 +101,24 @@
             this.gbxMetricData.Controls.Add(this.label1);
             this.gbxMetricData.Location = new System.Drawing.Point(12, 12);
             this.gbxMetricData.Name = "gbxMetricData";
-            this.gbxMetricData.Size = new System.Drawing.Size(507, 237);
+            this.gbxMetricData.Size = new System.Drawing.Size(462, 217);
             this.gbxMetricData.TabIndex = 0;
             this.gbxMetricData.TabStop = false;
             this.gbxMetricData.Text = "Metric Info";
             // 
             // rtboxMetricDescription
             // 
-            this.rtboxMetricDescription.Location = new System.Drawing.Point(6, 167);
+            this.rtboxMetricDescription.Location = new System.Drawing.Point(6, 37);
             this.rtboxMetricDescription.Name = "rtboxMetricDescription";
-            this.rtboxMetricDescription.Size = new System.Drawing.Size(495, 65);
+            this.rtboxMetricDescription.Size = new System.Drawing.Size(450, 65);
             this.rtboxMetricDescription.TabIndex = 6;
             this.rtboxMetricDescription.Text = "";
             // 
             // lblCodeElementType
             // 
             this.lblCodeElementType.AutoSize = true;
-            this.lblCodeElementType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCodeElementType.Location = new System.Drawing.Point(345, 67);
+            this.lblCodeElementType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodeElementType.Location = new System.Drawing.Point(132, 113);
             this.lblCodeElementType.Name = "lblCodeElementType";
             this.lblCodeElementType.Size = new System.Drawing.Size(117, 13);
             this.lblCodeElementType.TabIndex = 5;
@@ -127,17 +127,17 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(345, 51);
+            this.label3.Location = new System.Drawing.Point(16, 113);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 13);
+            this.label3.Size = new System.Drawing.Size(103, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Code Element Type";
+            this.label3.Text = "Code Element Type:";
             // 
             // lblCodeElementName
             // 
             this.lblCodeElementName.AutoSize = true;
-            this.lblCodeElementName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCodeElementName.Location = new System.Drawing.Point(11, 67);
+            this.lblCodeElementName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodeElementName.Location = new System.Drawing.Point(132, 126);
             this.lblCodeElementName.Name = "lblCodeElementName";
             this.lblCodeElementName.Size = new System.Drawing.Size(121, 13);
             this.lblCodeElementName.TabIndex = 3;
@@ -146,17 +146,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 51);
+            this.label2.Location = new System.Drawing.Point(16, 126);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 13);
+            this.label2.Size = new System.Drawing.Size(110, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Code Element Name";
+            this.label2.Text = "Code Element Name: ";
             // 
             // lblMetricName
             // 
             this.lblMetricName.AutoSize = true;
-            this.lblMetricName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMetricName.Location = new System.Drawing.Point(208, 21);
+            this.lblMetricName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMetricName.Location = new System.Drawing.Point(87, 21);
             this.lblMetricName.Name = "lblMetricName";
             this.lblMetricName.Size = new System.Drawing.Size(76, 13);
             this.lblMetricName.TabIndex = 1;
@@ -165,25 +165,25 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(125, 21);
+            this.label1.Location = new System.Drawing.Point(16, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Metric Name";
+            this.label1.Text = "Metric Name:";
             // 
             // gbxMetricHistory
             // 
             this.gbxMetricHistory.Controls.Add(this.btnDrawTrendChart);
             this.gbxMetricHistory.Location = new System.Drawing.Point(12, 258);
             this.gbxMetricHistory.Name = "gbxMetricHistory";
-            this.gbxMetricHistory.Size = new System.Drawing.Size(507, 48);
+            this.gbxMetricHistory.Size = new System.Drawing.Size(462, 48);
             this.gbxMetricHistory.TabIndex = 1;
             this.gbxMetricHistory.TabStop = false;
             this.gbxMetricHistory.Text = "Metric Historic Data";
             // 
             // btnDrawTrendChart
             // 
-            this.btnDrawTrendChart.Location = new System.Drawing.Point(176, 15);
+            this.btnDrawTrendChart.Location = new System.Drawing.Point(155, 15);
             this.btnDrawTrendChart.Name = "btnDrawTrendChart";
             this.btnDrawTrendChart.Size = new System.Drawing.Size(155, 23);
             this.btnDrawTrendChart.TabIndex = 0;
@@ -196,7 +196,7 @@
             this.xbgMetricStatistics.Controls.Add(this.tabctlMetricStatistics);
             this.xbgMetricStatistics.Location = new System.Drawing.Point(12, 316);
             this.xbgMetricStatistics.Name = "xbgMetricStatistics";
-            this.xbgMetricStatistics.Size = new System.Drawing.Size(507, 145);
+            this.xbgMetricStatistics.Size = new System.Drawing.Size(462, 145);
             this.xbgMetricStatistics.TabIndex = 2;
             this.xbgMetricStatistics.TabStop = false;
             this.xbgMetricStatistics.Text = "Metric Statistics";
@@ -208,7 +208,7 @@
             this.tabctlMetricStatistics.Location = new System.Drawing.Point(14, 21);
             this.tabctlMetricStatistics.Name = "tabctlMetricStatistics";
             this.tabctlMetricStatistics.SelectedIndex = 0;
-            this.tabctlMetricStatistics.Size = new System.Drawing.Size(487, 115);
+            this.tabctlMetricStatistics.Size = new System.Drawing.Size(442, 115);
             this.tabctlMetricStatistics.TabIndex = 0;
             // 
             // tabParentCondeElement
@@ -218,7 +218,7 @@
             this.tabParentCondeElement.Location = new System.Drawing.Point(4, 22);
             this.tabParentCondeElement.Name = "tabParentCondeElement";
             this.tabParentCondeElement.Padding = new System.Windows.Forms.Padding(3);
-            this.tabParentCondeElement.Size = new System.Drawing.Size(479, 89);
+            this.tabParentCondeElement.Size = new System.Drawing.Size(434, 89);
             this.tabParentCondeElement.TabIndex = 0;
             this.tabParentCondeElement.Text = "Parent Code Element Name";
             this.tabParentCondeElement.UseVisualStyleBackColor = true;
@@ -226,31 +226,32 @@
             // gbxCharts
             // 
             this.gbxCharts.Controls.Add(this.btnParentCodeElementDrawChart);
-            this.gbxCharts.Controls.Add(this.comboBox1);
+            this.gbxCharts.Controls.Add(this.cboxParentCodeElementChartSelector);
             this.gbxCharts.Location = new System.Drawing.Point(231, 10);
             this.gbxCharts.Name = "gbxCharts";
-            this.gbxCharts.Size = new System.Drawing.Size(242, 70);
+            this.gbxCharts.Size = new System.Drawing.Size(197, 70);
             this.gbxCharts.TabIndex = 9;
             this.gbxCharts.TabStop = false;
             this.gbxCharts.Text = "Charts";
             // 
             // btnParentCodeElementDrawChart
             // 
-            this.btnParentCodeElementDrawChart.Location = new System.Drawing.Point(6, 41);
+            this.btnParentCodeElementDrawChart.Location = new System.Drawing.Point(23, 41);
             this.btnParentCodeElementDrawChart.Name = "btnParentCodeElementDrawChart";
-            this.btnParentCodeElementDrawChart.Size = new System.Drawing.Size(230, 23);
+            this.btnParentCodeElementDrawChart.Size = new System.Drawing.Size(152, 23);
             this.btnParentCodeElementDrawChart.TabIndex = 1;
             this.btnParentCodeElementDrawChart.Text = "Draw Chart";
             this.btnParentCodeElementDrawChart.UseVisualStyleBackColor = true;
             this.btnParentCodeElementDrawChart.Click += new System.EventHandler(this.btnParentCodeElementDrawChart_Click);
             // 
-            // comboBox1
+            // cboxParentCodeElementChartSelector
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(3, 16);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(233, 21);
-            this.comboBox1.TabIndex = 0;
+            this.cboxParentCodeElementChartSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxParentCodeElementChartSelector.FormattingEnabled = true;
+            this.cboxParentCodeElementChartSelector.Location = new System.Drawing.Point(3, 16);
+            this.cboxParentCodeElementChartSelector.Name = "cboxParentCodeElementChartSelector";
+            this.cboxParentCodeElementChartSelector.Size = new System.Drawing.Size(188, 21);
+            this.cboxParentCodeElementChartSelector.TabIndex = 0;
             // 
             // gbxBasicStats
             // 
@@ -340,7 +341,7 @@
             this.tabAsemblyName.Location = new System.Drawing.Point(4, 22);
             this.tabAsemblyName.Name = "tabAsemblyName";
             this.tabAsemblyName.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAsemblyName.Size = new System.Drawing.Size(479, 89);
+            this.tabAsemblyName.Size = new System.Drawing.Size(434, 89);
             this.tabAsemblyName.TabIndex = 1;
             this.tabAsemblyName.Text = "Assembly Name";
             this.tabAsemblyName.UseVisualStyleBackColor = true;
@@ -348,8 +349,8 @@
             // lblParentCodeElementName
             // 
             this.lblParentCodeElementName.AutoSize = true;
-            this.lblParentCodeElementName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblParentCodeElementName.Location = new System.Drawing.Point(11, 108);
+            this.lblParentCodeElementName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblParentCodeElementName.Location = new System.Drawing.Point(156, 161);
             this.lblParentCodeElementName.Name = "lblParentCodeElementName";
             this.lblParentCodeElementName.Size = new System.Drawing.Size(158, 13);
             this.lblParentCodeElementName.TabIndex = 8;
@@ -358,17 +359,17 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 92);
+            this.label9.Location = new System.Drawing.Point(16, 161);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(138, 13);
+            this.label9.Size = new System.Drawing.Size(141, 13);
             this.label9.TabIndex = 7;
-            this.label9.Text = "Parent Code Element Name";
+            this.label9.Text = "Parent Code Element Name:";
             // 
             // lblParentCodeElementType
             // 
             this.lblParentCodeElementType.AutoSize = true;
-            this.lblParentCodeElementType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblParentCodeElementType.Location = new System.Drawing.Point(345, 108);
+            this.lblParentCodeElementType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblParentCodeElementType.Location = new System.Drawing.Point(156, 148);
             this.lblParentCodeElementType.Name = "lblParentCodeElementType";
             this.lblParentCodeElementType.Size = new System.Drawing.Size(158, 13);
             this.lblParentCodeElementType.TabIndex = 10;
@@ -377,17 +378,17 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(345, 92);
+            this.label11.Location = new System.Drawing.Point(16, 148);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(134, 13);
+            this.label11.Size = new System.Drawing.Size(137, 13);
             this.label11.TabIndex = 9;
-            this.label11.Text = "Parent Code Element Type";
+            this.label11.Text = "Parent Code Element Type:";
             // 
             // lblAssemblyName
             // 
             this.lblAssemblyName.AutoSize = true;
-            this.lblAssemblyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAssemblyName.Location = new System.Drawing.Point(208, 139);
+            this.lblAssemblyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAssemblyName.Location = new System.Drawing.Point(107, 186);
             this.lblAssemblyName.Name = "lblAssemblyName";
             this.lblAssemblyName.Size = new System.Drawing.Size(95, 13);
             this.lblAssemblyName.TabIndex = 11;
@@ -396,39 +397,41 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(104, 139);
+            this.label8.Location = new System.Drawing.Point(16, 186);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(82, 13);
+            this.label8.Size = new System.Drawing.Size(85, 13);
             this.label8.TabIndex = 12;
-            this.label8.Text = "Assembly Name";
+            this.label8.Text = "Assembly Name:";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.btnAllCodeElementsInAssemblyDrawChart);
+            this.groupBox1.Controls.Add(this.cboxAllCodeElementsInAssemblyChartSelector);
             this.groupBox1.Location = new System.Drawing.Point(231, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(242, 70);
+            this.groupBox1.Size = new System.Drawing.Size(197, 70);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Charts";
             // 
-            // button1
+            // btnAllCodeElementsInAssemblyDrawChart
             // 
-            this.button1.Location = new System.Drawing.Point(6, 41);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(230, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Draw Chart";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAllCodeElementsInAssemblyDrawChart.Location = new System.Drawing.Point(23, 41);
+            this.btnAllCodeElementsInAssemblyDrawChart.Name = "btnAllCodeElementsInAssemblyDrawChart";
+            this.btnAllCodeElementsInAssemblyDrawChart.Size = new System.Drawing.Size(152, 23);
+            this.btnAllCodeElementsInAssemblyDrawChart.TabIndex = 1;
+            this.btnAllCodeElementsInAssemblyDrawChart.Text = "Draw Chart";
+            this.btnAllCodeElementsInAssemblyDrawChart.UseVisualStyleBackColor = true;
+            this.btnAllCodeElementsInAssemblyDrawChart.Click += new System.EventHandler(this.btnAllCodeElementsInAssemblyDrawChart_Click);
             // 
-            // comboBox2
+            // cboxAllCodeElementsInAssemblyChartSelector
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(3, 16);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(233, 21);
-            this.comboBox2.TabIndex = 0;
+            this.cboxAllCodeElementsInAssemblyChartSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxAllCodeElementsInAssemblyChartSelector.FormattingEnabled = true;
+            this.cboxAllCodeElementsInAssemblyChartSelector.Location = new System.Drawing.Point(3, 16);
+            this.cboxAllCodeElementsInAssemblyChartSelector.Name = "cboxAllCodeElementsInAssemblyChartSelector";
+            this.cboxAllCodeElementsInAssemblyChartSelector.Size = new System.Drawing.Size(188, 21);
+            this.cboxAllCodeElementsInAssemblyChartSelector.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -515,7 +518,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 472);
+            this.ClientSize = new System.Drawing.Size(482, 472);
             this.Controls.Add(this.xbgMetricStatistics);
             this.Controls.Add(this.gbxMetricHistory);
             this.Controls.Add(this.gbxMetricData);
@@ -562,7 +565,7 @@
         private System.Windows.Forms.TextBox tboxParentCodeElementMaxValue;
         private System.Windows.Forms.GroupBox gbxCharts;
         private System.Windows.Forms.Button btnParentCodeElementDrawChart;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboxParentCodeElementChartSelector;
         private System.Windows.Forms.GroupBox gbxBasicStats;
         private System.Windows.Forms.TextBox tboxParentCodeElementStdDevValue;
         private System.Windows.Forms.Label label7;
@@ -574,8 +577,8 @@
         private System.Windows.Forms.Label lblParentCodeElementName;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button btnAllCodeElementsInAssemblyDrawChart;
+        private System.Windows.Forms.ComboBox cboxAllCodeElementsInAssemblyChartSelector;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox tboxAllInAssemblyMinValue;
         private System.Windows.Forms.TextBox tboxAllInAssemblyStdDevValue;
