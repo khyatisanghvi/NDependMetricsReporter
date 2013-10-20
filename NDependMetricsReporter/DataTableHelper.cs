@@ -31,6 +31,11 @@ namespace NDependMetricsReporter
             return metricsDataTable.AsEnumerable().Select(s => s.Field<T>(columnName)).ToList<T>();
         }
 
+        public static List<object> GetDataTableColumn(DataTable metricsDataTable, string columnName)
+        {
+            return metricsDataTable.AsEnumerable().Select(s => s.Field<object>(columnName)).ToList<object>();
+        }
+
         public static Dictionary<ColumnType, int> GetDataTableColumnFrequencies<ColumnType>(DataTable metricsDataTable, string columnName)
         {
             List<ColumnType> metricsValues = DataTableHelper.GetDataTableColumn<ColumnType>(metricsDataTable, columnName);

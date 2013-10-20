@@ -63,31 +63,34 @@ namespace NDependMetricsReporter
 
         private void FillControls()
         {
+            string codeElementTypePlural = codeElementsTypePlurals[codeElementType];
+            string parentCodeElementType = codeElementsTypePrecedences[codeElementType];
+
             this.lblMetricName.Text = nDependMetricDefinition.PropertyName;
             this.lblCodeElementName.Text = codeElementName;
             this.lblCodeElementType.Text = codeElementType;
-            FillMetricDescriptionRTFBox(nDependMetricDefinition);
-            string codeElementTypePlural = codeElementsTypePlurals[codeElementType];
-            string codeElementParentType = codeElementsTypePrecedences[codeElementType];
+            this.lblParentCodeElementName.Text = parentCodeElementName;
+            this.lblParentCodeElementType.Text = parentCodeElementType;
+            this.lblAssemblyName.Text = assemblyName;
 
-            /*
+            FillMetricDescriptionRTFBox(nDependMetricDefinition);
+
+            tabParentCondeElement.Text = "All " + codeElementTypePlural + " in parent " + parentCodeElementType;
+            tabAsemblyName.Text = "All " + codeElementTypePlural + " in Assembly";
             Type metricsType = Type.GetType(nDependMetricDefinition.NDependMetricType);
             Type[] types = new Type[] { metricsType };
-            GenericsHelper.InvokeInstanceGenericMethod(this.GetType().FullName, "FillBaseStatistics", types, null);
-
-            tabParentCondeElement.Text = "All " + codeElementTypePlural + " in parent " + codeElementParentType;
-            tabAsemblyName.Text = "All " + codeElementTypePlural + " in Assembly";
-             */
+            GenericsHelper.InvokeInstanceGenericMethod(this, this.GetType().FullName, "FillBaseStatistics", types, null);
         }
 
         public void FillBaseStatistics<CodeElementType>()
         {
-            List<CodeElementType> metricsValues = DataTableHelper.GetDataTableColumn<CodeElementType>(
+            List<CodeElementType> metricsValues = DataTableHelper.GetDataTableColumn <CodeElementType>(
                 selectedCodeElementMatricsDataTable, nDependMetricDefinition.PropertyName);
             tboxParentCodeElementMinValue.Text = metricsValues.Min().ToString();
             tboxParentCodeElementMaxValue.Text = metricsValues.Max().ToString();
-            //double mean = metricsValues.ToList<double>().Average(); 
-            //tboxParentCodeElementAverageValue.Text = metricsValues.Average<decimal>().ToString();
+            List<double> doubleList = metricsValues.Select(val => Convert.ToDouble(val)).ToList();
+            tboxParentCodeElementAverageValue.Text = doubleList.Average().ToString("0.0000");
+            tboxParentCodeElementStdDevValue.Text = Statistics.StandardDeviation<double>(doubleList).ToString("0.0000");
         }
 
         private void FillMetricDescriptionRTFBox(NDependMetricDefinition nDependMetricDefinition)

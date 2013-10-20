@@ -52,13 +52,12 @@ namespace NDependMetricsReporter
             return myDictionary.Values.ToList<ValueType>();
         }
 
-        public static object InvokeInstanceGenericMethod(string className, string methodName, Type[] genericType, object[] parameters)
+        public static object InvokeInstanceGenericMethod(object objectInstance, string className, string methodName, Type[] genericType, object[] parameters)
         {
             Type classType = Type.GetType(className);
             MethodInfo methodInfo = classType.GetMethod(methodName);
-            var tmpInstance = Activator.CreateInstance(classType);
             MethodInfo genericMethodInfo = methodInfo.MakeGenericMethod(genericType);
-            return genericMethodInfo.Invoke(tmpInstance, parameters);
+            return genericMethodInfo.Invoke(objectInstance, parameters);
         }
 
         public static object InvokeStaticGenericMethod(string className, string methodName, Type[] genericTypes, object[] parameters)
