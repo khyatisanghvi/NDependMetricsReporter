@@ -56,6 +56,8 @@ namespace NDependMetricsReporter
         {
             Type classType = Type.GetType(className);
             MethodInfo methodInfo = classType.GetMethod(methodName);
+            //Type[] parameterTypes = parameters==null ? null : parameters.Select(p=> p.GetType()).ToArray();
+            //MethodInfo methodInfo = parameterTypes == null ? classType.GetMethod(methodName) : classType.GetMethod(methodName, parameterTypes);
             MethodInfo genericMethodInfo = methodInfo.MakeGenericMethod(genericType);
             return genericMethodInfo.Invoke(objectInstance, parameters);
         }
@@ -64,6 +66,8 @@ namespace NDependMetricsReporter
         {
             Type classType = Type.GetType(className);
             MethodInfo methodInfo = classType.GetMethod(methodName);
+            //Type[] parameterTypes = parameters.Select(p => p.GetType()).ToArray();
+            //MethodInfo methodInfo = classType.GetMethod(methodName, parameterTypes);
             MethodInfo genericMethodInfo = methodInfo.MakeGenericMethod(genericTypes);
             return genericMethodInfo.Invoke(null, parameters);
         }

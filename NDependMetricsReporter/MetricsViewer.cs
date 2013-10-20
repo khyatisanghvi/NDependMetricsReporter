@@ -348,7 +348,9 @@ namespace NDependMetricsReporter
                 DataGridView sourceDataGridView = (DataGridView)senderListView.Tag;
                 DataTable metricsDataTable = (DataTable)sourceDataGridView.DataSource;
                 DataGridViewTagInfo dataGridViewTagInfo = ((DataGridViewTagInfo)sourceDataGridView.Tag);
-                string parentCodeElementName = dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                string parentCodeElementName = 
+                    dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView==null ? 
+                    String.Empty : dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 DataGridView assembliesDatagrid = GetAssebliesDataGridView(sourceDataGridView);
                 string assemblyName = assembliesDatagrid.SelectedRows[0].Cells[0].Value.ToString();
                 MetricProperties metricProperties = new MetricProperties(

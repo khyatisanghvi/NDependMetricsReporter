@@ -14,7 +14,7 @@ namespace NDependMetricsReporter
         {
         }
 
-        public MetricType GetCodeElementMetricUsingReflection<CodeElementType, MetricType>(CodeElementType codeElement, string metricInternalPropertyName)
+        /*public MetricType GetCodeElementMetricUsingReflection<CodeElementType, MetricType>(CodeElementType codeElement, string metricInternalPropertyName)
         {
             return (MetricType)codeElement.GetType().GetProperty(metricInternalPropertyName).GetValue(codeElement);
         }
@@ -25,6 +25,6 @@ namespace NDependMetricsReporter
             MethodInfo method = this.GetType().GetMethod("GetCodeElementMetricUsingReflection");
             MethodInfo genericMethod = method.MakeGenericMethod(new Type[] { codeElementType, metricType });
             return genericMethod.Invoke(this, new[] { codeElement, metricName });
-        }
+        }*/
     }
 }

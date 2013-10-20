@@ -58,38 +58,42 @@ namespace NDependMetricsReporter
                     case "NDepend.CodeModel.IAssembly":
                         IAssembly selectedAssemblyFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetAssemblyByName(codeElementName);
                         if (selectedAssemblyFromCurrentAnalysisResultCodebase != null)
-                            metricValue = reflectionHelper.GetCodeElementMetric(
+                            /*metricValue = reflectionHelper.GetCodeElementMetric(
                                 selectedAssemblyFromCurrentAnalysisResultCodebase,
                                 typeof(IAssembly),
                                 metricDefinition.InternalPropertyName,
-                                metricDefinition.NDependMetricType);
+                                metricDefinition.NDependMetricType);*/
+                            metricValue = currenAnalysisResultCodeBaseManager.GetCodeElementMetricValue(selectedAssemblyFromCurrentAnalysisResultCodebase, typeof(IAssembly), metricDefinition);
                         break;
                     case "NDepend.CodeModel.INamespace":
                         INamespace selectedNamespaceFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetNamespaceByName(codeElementName);
                         if (selectedNamespaceFromCurrentAnalysisResultCodebase != null)
-                            metricValue = reflectionHelper.GetCodeElementMetric(
+                            /*metricValue = reflectionHelper.GetCodeElementMetric(
                                 selectedNamespaceFromCurrentAnalysisResultCodebase,
                                 typeof(INamespace),
                                 metricDefinition.InternalPropertyName,
-                                metricDefinition.NDependMetricType);
+                                metricDefinition.NDependMetricType);*/
+                            metricValue = currenAnalysisResultCodeBaseManager.GetCodeElementMetricValue(selectedNamespaceFromCurrentAnalysisResultCodebase,typeof(INamespace), metricDefinition);
                         break;
                     case "NDepend.CodeModel.IType":
                         IType selectedTypeFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetTypeByName(codeElementName);
                         if (selectedTypeFromCurrentAnalysisResultCodebase != null)
-                            metricValue = reflectionHelper.GetCodeElementMetric(
+                            /*metricValue = reflectionHelper.GetCodeElementMetric(
                                 selectedTypeFromCurrentAnalysisResultCodebase,
                                 typeof(IType),
                                 metricDefinition.InternalPropertyName,
-                                metricDefinition.NDependMetricType);
+                                metricDefinition.NDependMetricType);*/
+                            metricValue = currenAnalysisResultCodeBaseManager.GetCodeElementMetricValue(selectedTypeFromCurrentAnalysisResultCodebase, typeof(IType), metricDefinition);
                         break;
                     case "NDepend.CodeModel.IMethod":
                         IMethod selectedMethodFromCurrentAnalysisResultCodebase = currenAnalysisResultCodeBaseManager.GetMethodByName(codeElementName);
                         if (selectedMethodFromCurrentAnalysisResultCodebase != null)
-                            metricValue = (reflectionHelper.GetCodeElementMetric(
+                            /*metricValue = (reflectionHelper.GetCodeElementMetric(
                                 selectedMethodFromCurrentAnalysisResultCodebase,
                                 typeof(IMethod),
                                 metricDefinition.InternalPropertyName,
-                                metricDefinition.NDependMetricType));
+                                metricDefinition.NDependMetricType));*/
+                            metricValue = currenAnalysisResultCodeBaseManager.GetCodeElementMetricValue(selectedMethodFromCurrentAnalysisResultCodebase, typeof(IMethod), metricDefinition);
                         break;
                 }
                 metricValues.Add(metricValue);

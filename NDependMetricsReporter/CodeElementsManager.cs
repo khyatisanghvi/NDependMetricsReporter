@@ -55,12 +55,45 @@ namespace NDependMetricsReporter
             return null;
         }
 
+        public List<double> GetMetricFromAllCodeElementsInAssembly(NDependMetricDefinition codeElementMetricDefinition, string assemblyName)
+        {
+            string codeElementType = codeElementMetricDefinition.NDependCodeElementType;
+            switch (codeElementType)
+            {
+                case "NDepend.CodeModel.IAssembly":
+                    return null;
+                case "NDepend.CodeModel.INamespace":
+                    return (from m in codeBase.Assemblies.WithName(assemblyName).ChildNamespaces()
+                            select GetCodeElementMetricValue<INamespace>((INamespace)m, codeElementMetricDefinition)).ToList();
+                case "NDepend.CodeModel.IType":
+                    return (from m in codeBase.Assemblies.WithName(assemblyName).ChildTypes()
+                            select GetCodeElementMetricValue<IType>((IType)m, codeElementMetricDefinition)).ToList();
+                case "NDepend.CodeModel.IMethod":
+                    return (from m in codeBase.Assemblies.WithName(assemblyName).ChildMethods()
+                            select GetCodeElementMetricValue<IMethod>((IMethod)m, codeElementMetricDefinition)).ToList();
+            }
+            return null;
+        }
+
         public double GetCodeElementMetricValue<CodeElementType>(CodeElementType codeElement, NDependMetricDefinition codeElementMetricDefinition)
         {
             Double metricValue = 0;
             PropertyInfo property = codeElement.GetType().GetProperty(codeElementMetricDefinition.InternalPropertyName);
             if (property != null) metricValue = Convert.ToDouble(property.GetValue(codeElement));
             return metricValue;
+        }
+
+        public MetricType GetGenericCodeElementMetricValue<CodeElementType, MetricType>(CodeElementType codeElement, NDependMetricDefinition codeElementMetricDefinition)
+        {
+            PropertyInfo property = codeElement.GetType().GetProperty(codeElementMetricDefinition.InternalPropertyName);
+            return (MetricType)property.GetValue(codeElement);
+        }
+
+        public object GetCodeElementMetricValue(object codeElement, Type codeElementType, NDependMetricDefinition codeElementMetricDefinition)
+        {
+            Type[] genericTypes = new Type[] { codeElementType, Type.GetType(codeElementMetricDefinition.NDependMetricType) };
+            object[] methodParameters = new object[] { codeElement, codeElementMetricDefinition };
+            return GenericsHelper.InvokeInstanceGenericMethod(this, this.GetType().FullName, "GetGenericCodeElementMetricValue", genericTypes, methodParameters);
         }
 
         public Dictionary<NDependMetricDefinition, double> GetCodeElementMetrics<CodeElementType>(CodeElementType codeElement, string xmlMetricDefinitionFile)
@@ -78,5 +111,6 @@ namespace NDependMetricsReporter
             }
             return codeElementMetrics;
         }
+
     }
 }

@@ -84,13 +84,19 @@ namespace NDependMetricsReporter
 
         public void FillBaseStatistics<CodeElementType>()
         {
-            List<CodeElementType> metricsValues = DataTableHelper.GetDataTableColumn <CodeElementType>(
+            List<CodeElementType> metricsValuesFromAllBrotherCodeElements = DataTableHelper.GetDataTableColumn <CodeElementType>(
                 selectedCodeElementMatricsDataTable, nDependMetricDefinition.PropertyName);
-            tboxParentCodeElementMinValue.Text = metricsValues.Min().ToString();
-            tboxParentCodeElementMaxValue.Text = metricsValues.Max().ToString();
-            List<double> doubleList = metricsValues.Select(val => Convert.ToDouble(val)).ToList();
+            List<double> doubleList = metricsValuesFromAllBrotherCodeElements.Select(val => Convert.ToDouble(val)).ToList();           
+            tboxParentCodeElementMinValue.Text = metricsValuesFromAllBrotherCodeElements.Min().ToString();
+            tboxParentCodeElementMaxValue.Text = metricsValuesFromAllBrotherCodeElements.Max().ToString();
             tboxParentCodeElementAverageValue.Text = doubleList.Average().ToString("0.0000");
             tboxParentCodeElementStdDevValue.Text = Statistics.StandardDeviation<double>(doubleList).ToString("0.0000");
+            
+            List<double> metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);
+            tboxAllInAssemblyMinValue.Text = metricsValuesOfAllSameCodeElementsInAssembly.Min().ToString();
+            tboxAllInAssemblyMaxValue.Text = metricsValuesOfAllSameCodeElementsInAssembly.Max().ToString();
+            tboxAllInAssemblyAverageValue.Text = metricsValuesOfAllSameCodeElementsInAssembly.Average().ToString("0.0000");
+            tboxAllInAssemblyStdDevValue .Text = Statistics.StandardDeviation<double>(metricsValuesOfAllSameCodeElementsInAssembly).ToString("0.0000");
         }
 
         private void FillMetricDescriptionRTFBox(NDependMetricDefinition nDependMetricDefinition)
