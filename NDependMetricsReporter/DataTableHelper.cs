@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using ExtensionMethods;
+using System.Reflection;
 
 namespace NDependMetricsReporter
 {
@@ -19,7 +20,7 @@ namespace NDependMetricsReporter
             this.userDefinedMetrics = userDefinedMetrics;
         }
 
-        public DataTable CreateCodeElemetMetricsDataTable<CodeElementType>(IEnumerable<CodeElementType> codeElementLists, List<NDependMetricDefinition> nDependMetricsDefinitionList, List<UserDefinedMetricDefinition> userDefinedMetricsDefinitionList)
+        public DataTable CreateCodeElementMetricsDataTable<CodeElementType>(IEnumerable<CodeElementType> codeElementLists, List<NDependMetricDefinition> nDependMetricsDefinitionList, List<UserDefinedMetricDefinition> userDefinedMetricsDefinitionList)
         {
             DataTable metricsTable = new DataTable();
             AddCodeElementsColumnToTable(metricsTable);
@@ -54,10 +55,17 @@ namespace NDependMetricsReporter
 
         private void AddMetricsColumnsToTable(DataTable metricsTable, List<NDependMetricDefinition> nDependMetricsDefinitionList, List<UserDefinedMetricDefinition> userDefinedMetricDefinetionList)
         {
-            foreach (NDependMetricDefinition metricDefinition in nDependMetricsDefinitionList)
+            foreach (NDependMetricDefinition nDependMetricDefinition in nDependMetricsDefinitionList)
             {
-                DataColumn metricColumn = new DataColumn(metricDefinition.PropertyName);
-                metricColumn.DataType = Type.GetType(metricDefinition.NDependMetricType);
+                DataColumn metricColumn = new DataColumn(nDependMetricDefinition.PropertyName);
+                metricColumn.DataType = Type.GetType(nDependMetricDefinition.NDependMetricType);
+                metricsTable.Columns.Add(metricColumn);
+            }
+
+            foreach (UserDefinedMetricDefinition userdefinedMetricDefinition in userDefinedMetricDefinetionList)
+            {
+                DataColumn metricColumn = new DataColumn(userdefinedMetricDefinition.ResumedMetricName);
+                metricColumn.DataType = Type.GetType(userdefinedMetricDefinition.MetricType);
                 metricsTable.Columns.Add(metricColumn);
             }
         }
@@ -69,12 +77,25 @@ namespace NDependMetricsReporter
                 DataRow row = metricsTable.NewRow();
                 string codeElementName = (string)typeof(CodeElementType).GetPublicProperty("Name").GetValue(codeElement);
                 row[0] = codeElementName;
-                foreach (NDependMetricDefinition metricDefinition in nDependMetricsDefinitionList)
+                foreach (NDependMetricDefinition nDependMetricDefinition in nDependMetricsDefinitionList)
                 {
-                    row[metricDefinition.PropertyName] = codeElementsManager.GetCodeElementMetricValue<CodeElementType>((CodeElementType)codeElement, metricDefinition);
+                    row[nDependMetricDefinition.PropertyName] = codeElementsManager.GetCodeElementMetricValue<CodeElementType>((CodeElementType)codeElement, nDependMetricDefinition);
+                }
+                foreach (UserDefinedMetricDefinition userDefinedMetricDefinition in userDefinedMetricDefinetionList)
+                {
+                    row[userDefinedMetricDefinition.ResumedMetricName] = InvokeUserDefinedMetric(codeElementName, userDefinedMetricDefinition.MethodNameToInvoke);
                 }
                 metricsTable.Rows.Add(row);
             }
+        }
+
+        private double InvokeUserDefinedMetric(string codeElementName, string methodNameToInvoke)
+        {
+            string[] parameters = new string[] { codeElementName };
+            Type userDefinedClassType = typeof(UserDefinedMetrics);
+            MethodInfo methodInfo = userDefinedClassType.GetMethod(methodNameToInvoke);
+            var returnedValue = methodInfo.Invoke(userDefinedMetrics, parameters);
+            return Convert.ToDouble(returnedValue);
         }
 
 /*        private void AddUserDefinedMetricsColumnToTable(DataTable metricsTable)

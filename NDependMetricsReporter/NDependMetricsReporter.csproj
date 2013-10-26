@@ -130,6 +130,7 @@
     </Content>
     <Content Include="XMLMetricDefinitions\MethodUserDefinedMetrics.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="XMLMetricDefinitions\NamespaceMetrics.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

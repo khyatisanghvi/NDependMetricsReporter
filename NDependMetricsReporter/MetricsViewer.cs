@@ -85,7 +85,7 @@ namespace NDependMetricsReporter
             IEnumerable<IAssembly> lastAnalysisAssembliesList = codeElementsManager.GetNonThirdPartyAssembliesInApplication();
             List<NDependMetricDefinition> nDependAssemblyMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("AssemblyMetrics.xml");
             List<UserDefinedMetricDefinition> userDefinedAssemblyMetricsDefinitionList = new List<UserDefinedMetricDefinition>();
-            DataTable assemblyMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IAssembly>(lastAnalysisAssembliesList, nDependAssemblyMetricsDefinionsList, null);
+            DataTable assemblyMetricsDataTable = dataTableHelper.CreateCodeElementMetricsDataTable<IAssembly>(lastAnalysisAssembliesList, nDependAssemblyMetricsDefinionsList, userDefinedAssemblyMetricsDefinitionList);
             FillCodeAsembliestDataGridView(assemblyMetricsDataTable);
             FillTestAssembliesDataGridView(assemblyMetricsDataTable);
             FillSpecFlowBDDAssembliesDataGridView(assemblyMetricsDataTable);
@@ -240,7 +240,7 @@ namespace NDependMetricsReporter
 
                 List<NDependMetricDefinition> nDependNamespaceMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("NamespaceMetrics.xml");
                 List<UserDefinedMetricDefinition> userDefinedNamespaceMetricsDefinitionList = new List<UserDefinedMetricDefinition>();
-                DataTable namespaceMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<INamespace>(assembly.ChildNamespaces, nDependNamespaceMetricsDefinionsList, userDefinedNamespaceMetricsDefinitionList);
+                DataTable namespaceMetricsDataTable = dataTableHelper.CreateCodeElementMetricsDataTable<INamespace>(assembly.ChildNamespaces, nDependNamespaceMetricsDefinionsList, userDefinedNamespaceMetricsDefinitionList);
                 FillCodeElementsDataGridView(targetNamespacesDataGridView, namespaceMetricsDataTable, true);
             }
         }
@@ -254,7 +254,7 @@ namespace NDependMetricsReporter
 
                 List<NDependMetricDefinition> nDependTypeMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("TypeMetrics.xml");
                 List<UserDefinedMetricDefinition> userDefinedTypeMetricsDefinitionList = new List<UserDefinedMetricDefinition>();
-                DataTable typeMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IType>(nNamespace.ChildTypes, nDependTypeMetricsDefinionsList, userDefinedTypeMetricsDefinitionList);
+                DataTable typeMetricsDataTable = dataTableHelper.CreateCodeElementMetricsDataTable<IType>(nNamespace.ChildTypes, nDependTypeMetricsDefinionsList, userDefinedTypeMetricsDefinitionList);
                 FillCodeElementsDataGridView(targetTypesDataGridView, typeMetricsDataTable, true);
             }
         }
@@ -268,7 +268,7 @@ namespace NDependMetricsReporter
 
                 List<NDependMetricDefinition> nDependMethodMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("MethodMetrics.xml");
                 List<UserDefinedMetricDefinition> userDefinedMethodMetricsDefinitionList = new XMLMetricsDefinitionLoader().LoadUserDefinedMetricsDefinitions("MethodUserDefinedMetrics.xml");
-                DataTable methodMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IMethod>(nType.MethodsAndContructors, nDependMethodMetricsDefinionsList, userDefinedMethodMetricsDefinitionList);
+                DataTable methodMetricsDataTable = dataTableHelper.CreateCodeElementMetricsDataTable<IMethod>(nType.MethodsAndContructors, nDependMethodMetricsDefinionsList, userDefinedMethodMetricsDefinitionList);
                 bool isTestMethodsDataViewGrid = targetMethodsDataGridView.Name == "dgvUnitTestsMethods" || targetMethodsDataGridView.Name == "dgvBDDMethods";
                 FillCodeElementsDataGridView(targetMethodsDataGridView, methodMetricsDataTable, !isTestMethodsDataViewGrid);
             }
