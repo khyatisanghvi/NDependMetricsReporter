@@ -609,11 +609,5 @@ namespace NDependMetricsReporter
                 targetElementNameLabel.Text = selectedMethod;
             }
         }
-
-
-
-
-
-
     }
 }

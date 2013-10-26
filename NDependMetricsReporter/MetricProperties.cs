@@ -102,6 +102,7 @@ namespace NDependMetricsReporter
             List<CodeElementType> metricsValuesFromAllBrotherCodeElements_GenericValues = DataTableHelper.GetDataTableColumn<CodeElementType>(
                 selectedCodeElementMatricsDataTable, nDependMetricDefinition.PropertyName);
             metricsValuesFromAllBrotherCodeElements = metricsValuesFromAllBrotherCodeElements_GenericValues.Select(val => Convert.ToDouble(val)).ToList();
+            gbxParentCodeElementNameBasicStats.Text = "Basic Stats - Count: " + metricsValuesFromAllBrotherCodeElements.Count;
             minValue = metricsValuesFromAllBrotherCodeElements.Min();
             maxValue = metricsValuesFromAllBrotherCodeElements.Max();
             tboxParentCodeElementMinValue.Text = minValue % 1 == 0 ? minValue.ToString() : minValue.ToString("0.0000");
@@ -112,6 +113,7 @@ namespace NDependMetricsReporter
             if (codeElementType != "Assembly")
             {
                 metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);
+                this.gbxAssemplyBasicStats.Text = "Basic Stats - Count: " + metricsValuesFromAllBrotherCodeElements.Count;
                 minValue = metricsValuesOfAllSameCodeElementsInAssembly.Min();
                 maxValue = metricsValuesOfAllSameCodeElementsInAssembly.Max();
                 tboxAllInAssemblyMinValue.Text = minValue % 1 == 0 ? minValue.ToString() : minValue.ToString("0.0000");

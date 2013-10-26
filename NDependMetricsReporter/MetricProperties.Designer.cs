@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.gbxMetricData = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblAssemblyName = new System.Windows.Forms.Label();
+            this.lblParentCodeElementType = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lblParentCodeElementName = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.rtboxMetricDescription = new System.Windows.Forms.RichTextBox();
             this.lblCodeElementType = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,7 +50,7 @@
             this.gbxCharts = new System.Windows.Forms.GroupBox();
             this.btnParentCodeElementDrawChart = new System.Windows.Forms.Button();
             this.cboxParentCodeElementChartSelector = new System.Windows.Forms.ComboBox();
-            this.gbxBasicStats = new System.Windows.Forms.GroupBox();
+            this.gbxParentCodeElementNameBasicStats = new System.Windows.Forms.GroupBox();
             this.tboxParentCodeElementMinValue = new System.Windows.Forms.TextBox();
             this.tboxParentCodeElementStdDevValue = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,16 +60,10 @@
             this.tboxParentCodeElementMaxValue = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabAsemblyName = new System.Windows.Forms.TabPage();
-            this.lblParentCodeElementName = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lblParentCodeElementType = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lblAssemblyName = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAllCodeElementsInAssemblyDrawChart = new System.Windows.Forms.Button();
             this.cboxAllCodeElementsInAssemblyChartSelector = new System.Windows.Forms.ComboBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbxAssemplyBasicStats = new System.Windows.Forms.GroupBox();
             this.tboxAllInAssemblyMinValue = new System.Windows.Forms.TextBox();
             this.tboxAllInAssemblyStdDevValue = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -78,10 +78,10 @@
             this.tabctlMetricStatistics.SuspendLayout();
             this.tabParentCondeElement.SuspendLayout();
             this.gbxCharts.SuspendLayout();
-            this.gbxBasicStats.SuspendLayout();
+            this.gbxParentCodeElementNameBasicStats.SuspendLayout();
             this.tabAsemblyName.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbxAssemplyBasicStats.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxMetricData
@@ -105,6 +105,63 @@
             this.gbxMetricData.TabIndex = 0;
             this.gbxMetricData.TabStop = false;
             this.gbxMetricData.Text = "Metric Info";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(16, 186);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(85, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Assembly Name:";
+            // 
+            // lblAssemblyName
+            // 
+            this.lblAssemblyName.AutoSize = true;
+            this.lblAssemblyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAssemblyName.Location = new System.Drawing.Point(107, 186);
+            this.lblAssemblyName.Name = "lblAssemblyName";
+            this.lblAssemblyName.Size = new System.Drawing.Size(95, 13);
+            this.lblAssemblyName.TabIndex = 11;
+            this.lblAssemblyName.Text = "Assembly Name";
+            // 
+            // lblParentCodeElementType
+            // 
+            this.lblParentCodeElementType.AutoSize = true;
+            this.lblParentCodeElementType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblParentCodeElementType.Location = new System.Drawing.Point(156, 148);
+            this.lblParentCodeElementType.Name = "lblParentCodeElementType";
+            this.lblParentCodeElementType.Size = new System.Drawing.Size(158, 13);
+            this.lblParentCodeElementType.TabIndex = 10;
+            this.lblParentCodeElementType.Text = "Parent Code Element Type";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(16, 148);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(137, 13);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Parent Code Element Type:";
+            // 
+            // lblParentCodeElementName
+            // 
+            this.lblParentCodeElementName.AutoSize = true;
+            this.lblParentCodeElementName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblParentCodeElementName.Location = new System.Drawing.Point(156, 161);
+            this.lblParentCodeElementName.Name = "lblParentCodeElementName";
+            this.lblParentCodeElementName.Size = new System.Drawing.Size(158, 13);
+            this.lblParentCodeElementName.TabIndex = 8;
+            this.lblParentCodeElementName.Text = "Parent Code Element Type";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(16, 161);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(141, 13);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Parent Code Element Name:";
             // 
             // rtboxMetricDescription
             // 
@@ -214,7 +271,7 @@
             // tabParentCondeElement
             // 
             this.tabParentCondeElement.Controls.Add(this.gbxCharts);
-            this.tabParentCondeElement.Controls.Add(this.gbxBasicStats);
+            this.tabParentCondeElement.Controls.Add(this.gbxParentCodeElementNameBasicStats);
             this.tabParentCondeElement.Location = new System.Drawing.Point(4, 22);
             this.tabParentCondeElement.Name = "tabParentCondeElement";
             this.tabParentCondeElement.Padding = new System.Windows.Forms.Padding(3);
@@ -253,22 +310,22 @@
             this.cboxParentCodeElementChartSelector.Size = new System.Drawing.Size(188, 21);
             this.cboxParentCodeElementChartSelector.TabIndex = 0;
             // 
-            // gbxBasicStats
+            // gbxParentCodeElementNameBasicStats
             // 
-            this.gbxBasicStats.Controls.Add(this.tboxParentCodeElementMinValue);
-            this.gbxBasicStats.Controls.Add(this.tboxParentCodeElementStdDevValue);
-            this.gbxBasicStats.Controls.Add(this.label4);
-            this.gbxBasicStats.Controls.Add(this.label7);
-            this.gbxBasicStats.Controls.Add(this.label5);
-            this.gbxBasicStats.Controls.Add(this.tboxParentCodeElementAverageValue);
-            this.gbxBasicStats.Controls.Add(this.tboxParentCodeElementMaxValue);
-            this.gbxBasicStats.Controls.Add(this.label6);
-            this.gbxBasicStats.Location = new System.Drawing.Point(6, 6);
-            this.gbxBasicStats.Name = "gbxBasicStats";
-            this.gbxBasicStats.Size = new System.Drawing.Size(219, 74);
-            this.gbxBasicStats.TabIndex = 8;
-            this.gbxBasicStats.TabStop = false;
-            this.gbxBasicStats.Text = "Basic Stats";
+            this.gbxParentCodeElementNameBasicStats.Controls.Add(this.tboxParentCodeElementMinValue);
+            this.gbxParentCodeElementNameBasicStats.Controls.Add(this.tboxParentCodeElementStdDevValue);
+            this.gbxParentCodeElementNameBasicStats.Controls.Add(this.label4);
+            this.gbxParentCodeElementNameBasicStats.Controls.Add(this.label7);
+            this.gbxParentCodeElementNameBasicStats.Controls.Add(this.label5);
+            this.gbxParentCodeElementNameBasicStats.Controls.Add(this.tboxParentCodeElementAverageValue);
+            this.gbxParentCodeElementNameBasicStats.Controls.Add(this.tboxParentCodeElementMaxValue);
+            this.gbxParentCodeElementNameBasicStats.Controls.Add(this.label6);
+            this.gbxParentCodeElementNameBasicStats.Location = new System.Drawing.Point(6, 6);
+            this.gbxParentCodeElementNameBasicStats.Name = "gbxParentCodeElementNameBasicStats";
+            this.gbxParentCodeElementNameBasicStats.Size = new System.Drawing.Size(219, 74);
+            this.gbxParentCodeElementNameBasicStats.TabIndex = 8;
+            this.gbxParentCodeElementNameBasicStats.TabStop = false;
+            this.gbxParentCodeElementNameBasicStats.Text = "Basic Stats";
             // 
             // tboxParentCodeElementMinValue
             // 
@@ -337,7 +394,7 @@
             // tabAsemblyName
             // 
             this.tabAsemblyName.Controls.Add(this.groupBox1);
-            this.tabAsemblyName.Controls.Add(this.groupBox2);
+            this.tabAsemblyName.Controls.Add(this.gbxAssemplyBasicStats);
             this.tabAsemblyName.Location = new System.Drawing.Point(4, 22);
             this.tabAsemblyName.Name = "tabAsemblyName";
             this.tabAsemblyName.Padding = new System.Windows.Forms.Padding(3);
@@ -345,63 +402,6 @@
             this.tabAsemblyName.TabIndex = 1;
             this.tabAsemblyName.Text = "Assembly Name";
             this.tabAsemblyName.UseVisualStyleBackColor = true;
-            // 
-            // lblParentCodeElementName
-            // 
-            this.lblParentCodeElementName.AutoSize = true;
-            this.lblParentCodeElementName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblParentCodeElementName.Location = new System.Drawing.Point(156, 161);
-            this.lblParentCodeElementName.Name = "lblParentCodeElementName";
-            this.lblParentCodeElementName.Size = new System.Drawing.Size(158, 13);
-            this.lblParentCodeElementName.TabIndex = 8;
-            this.lblParentCodeElementName.Text = "Parent Code Element Type";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 161);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(141, 13);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "Parent Code Element Name:";
-            // 
-            // lblParentCodeElementType
-            // 
-            this.lblParentCodeElementType.AutoSize = true;
-            this.lblParentCodeElementType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblParentCodeElementType.Location = new System.Drawing.Point(156, 148);
-            this.lblParentCodeElementType.Name = "lblParentCodeElementType";
-            this.lblParentCodeElementType.Size = new System.Drawing.Size(158, 13);
-            this.lblParentCodeElementType.TabIndex = 10;
-            this.lblParentCodeElementType.Text = "Parent Code Element Type";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(16, 148);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(137, 13);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "Parent Code Element Type:";
-            // 
-            // lblAssemblyName
-            // 
-            this.lblAssemblyName.AutoSize = true;
-            this.lblAssemblyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAssemblyName.Location = new System.Drawing.Point(107, 186);
-            this.lblAssemblyName.Name = "lblAssemblyName";
-            this.lblAssemblyName.Size = new System.Drawing.Size(95, 13);
-            this.lblAssemblyName.TabIndex = 11;
-            this.lblAssemblyName.Text = "Assembly Name";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 186);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(85, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Assembly Name:";
             // 
             // groupBox1
             // 
@@ -433,22 +433,22 @@
             this.cboxAllCodeElementsInAssemblyChartSelector.Size = new System.Drawing.Size(188, 21);
             this.cboxAllCodeElementsInAssemblyChartSelector.TabIndex = 0;
             // 
-            // groupBox2
+            // gbxAssemplyBasicStats
             // 
-            this.groupBox2.Controls.Add(this.tboxAllInAssemblyMinValue);
-            this.groupBox2.Controls.Add(this.tboxAllInAssemblyStdDevValue);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.tboxAllInAssemblyAverageValue);
-            this.groupBox2.Controls.Add(this.tboxAllInAssemblyMaxValue);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Location = new System.Drawing.Point(6, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(219, 74);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Basic Stats";
+            this.gbxAssemplyBasicStats.Controls.Add(this.tboxAllInAssemblyMinValue);
+            this.gbxAssemplyBasicStats.Controls.Add(this.tboxAllInAssemblyStdDevValue);
+            this.gbxAssemplyBasicStats.Controls.Add(this.label10);
+            this.gbxAssemplyBasicStats.Controls.Add(this.label12);
+            this.gbxAssemplyBasicStats.Controls.Add(this.label13);
+            this.gbxAssemplyBasicStats.Controls.Add(this.tboxAllInAssemblyAverageValue);
+            this.gbxAssemplyBasicStats.Controls.Add(this.tboxAllInAssemblyMaxValue);
+            this.gbxAssemplyBasicStats.Controls.Add(this.label14);
+            this.gbxAssemplyBasicStats.Location = new System.Drawing.Point(6, 6);
+            this.gbxAssemplyBasicStats.Name = "gbxAssemplyBasicStats";
+            this.gbxAssemplyBasicStats.Size = new System.Drawing.Size(219, 74);
+            this.gbxAssemplyBasicStats.TabIndex = 10;
+            this.gbxAssemplyBasicStats.TabStop = false;
+            this.gbxAssemplyBasicStats.Text = "Basic Stats";
             // 
             // tboxAllInAssemblyMinValue
             // 
@@ -532,12 +532,12 @@
             this.tabctlMetricStatistics.ResumeLayout(false);
             this.tabParentCondeElement.ResumeLayout(false);
             this.gbxCharts.ResumeLayout(false);
-            this.gbxBasicStats.ResumeLayout(false);
-            this.gbxBasicStats.PerformLayout();
+            this.gbxParentCodeElementNameBasicStats.ResumeLayout(false);
+            this.gbxParentCodeElementNameBasicStats.PerformLayout();
             this.tabAsemblyName.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbxAssemplyBasicStats.ResumeLayout(false);
+            this.gbxAssemplyBasicStats.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -566,7 +566,7 @@
         private System.Windows.Forms.GroupBox gbxCharts;
         private System.Windows.Forms.Button btnParentCodeElementDrawChart;
         private System.Windows.Forms.ComboBox cboxParentCodeElementChartSelector;
-        private System.Windows.Forms.GroupBox gbxBasicStats;
+        private System.Windows.Forms.GroupBox gbxParentCodeElementNameBasicStats;
         private System.Windows.Forms.TextBox tboxParentCodeElementStdDevValue;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tboxParentCodeElementAverageValue;
@@ -579,7 +579,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAllCodeElementsInAssemblyDrawChart;
         private System.Windows.Forms.ComboBox cboxAllCodeElementsInAssemblyChartSelector;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbxAssemplyBasicStats;
         private System.Windows.Forms.TextBox tboxAllInAssemblyMinValue;
         private System.Windows.Forms.TextBox tboxAllInAssemblyStdDevValue;
         private System.Windows.Forms.Label label10;
