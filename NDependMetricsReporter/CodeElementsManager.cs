@@ -98,7 +98,7 @@ namespace NDependMetricsReporter
 
         public Dictionary<NDependMetricDefinition, double> GetCodeElementMetrics<CodeElementType>(CodeElementType codeElement, string xmlMetricDefinitionFile)
         {
-            List<NDependMetricDefinition> codeElementMetricsDefinitionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions(xmlMetricDefinitionFile);
+            List<NDependMetricDefinition> codeElementMetricsDefinitionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions(xmlMetricDefinitionFile);
             return GetCodeElementMetricsValues<CodeElementType>(codeElement, codeElementMetricsDefinitionsList);
         }
 

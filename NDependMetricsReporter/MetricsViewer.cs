@@ -19,9 +19,13 @@ namespace NDependMetricsReporter
     public partial class MetricsViewer : Form
     {
         bool inhibitAutocheckOnDoubleClick;
+
         NDependServicesProvider nDependServicesProvider;
-        CodeElementsManager codeElementsManager;
         IProject nDependProject;
+
+        CodeElementsManager codeElementsManager;
+        UserDefinedMetrics userDefinedMetrics;
+
         DataTableHelper dataTableHelper;
 
         public MetricsViewer()
@@ -37,7 +41,8 @@ namespace NDependMetricsReporter
             if (nDependProject == null) return;
             ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
             codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
-            dataTableHelper = new DataTableHelper(codeElementsManager);
+            userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
+            dataTableHelper = new DataTableHelper(codeElementsManager, userDefinedMetrics);
             FillBaseControls();
         }
 
@@ -77,7 +82,7 @@ namespace NDependMetricsReporter
         private void FillBaseControls()
         {
             FillNDependProjectInfo();
-            List<NDependMetricDefinition> assemblyMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("AssemblyMetrics.xml");
+            List<NDependMetricDefinition> assemblyMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("AssemblyMetrics.xml");
             IEnumerable<IAssembly> lastAnalysisAssembliesList = codeElementsManager.GetNonThirdPartyAssembliesInApplication();
             DataTable assemblyMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IAssembly>(lastAnalysisAssembliesList, assemblyMetricsDefinionsList);
             FillCodeAsembliestDataGridView(assemblyMetricsDataTable);
@@ -232,13 +237,7 @@ namespace NDependMetricsReporter
                 string selectedAssemblyName = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
 
-                //List<NDependMetricDefinition> assemblyMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("AssemblyMetrics.xml");
-                //FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], assemblyMetricsDefinionsList);
-
-                //targetElementTypeLabel.Text = "Assembly";
-                //targetElementNameLabel.Text = selectedAssemblyName;
-
-                List<NDependMetricDefinition> namespaceMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("NamespaceMetrics.xml");
+                List<NDependMetricDefinition> namespaceMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("NamespaceMetrics.xml");
                 DataTable namespaceMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<INamespace>(assembly.ChildNamespaces, namespaceMetricsDefinionsList);
                 FillCodeElementsDataGridView(targetNamespacesDataGridView, namespaceMetricsDataTable, true);
             }
@@ -251,13 +250,7 @@ namespace NDependMetricsReporter
                 string selectedNamespaceName = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 INamespace nNamespace = codeElementsManager.GetNamespaceByName(selectedNamespaceName);
 
-                //List<NDependMetricDefinition> namespaceMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("NamespaceMetrics.xml");
-                //FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], namespaceMetricsDefinionsList);
-
-                //targetElementTypeLabel.Text = "Namespace";
-                //targetElementNameLabel.Text = selectedNamespaceName;
-
-                List<NDependMetricDefinition> typeMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("TypeMetrics.xml");
+                List<NDependMetricDefinition> typeMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("TypeMetrics.xml");
                 DataTable typeMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IType>(nNamespace.ChildTypes, typeMetricsDefinionsList);
                 FillCodeElementsDataGridView(targetTypesDataGridView, typeMetricsDataTable, true);
             }
@@ -270,13 +263,7 @@ namespace NDependMetricsReporter
                 string selectedType = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 IType nType = codeElementsManager.GetTypeByName(selectedType);
 
-                //List<NDependMetricDefinition> typesMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("TypeMetrics.xml");
-                //FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], typesMetricsDefinionsList);
-
-                //targetElementTypeLabel.Text = "Type";
-                //targetElementNameLabel.Text = selectedType;
-
-                List<NDependMetricDefinition> methodMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("MethodMetrics.xml");
+                List<NDependMetricDefinition> methodMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("MethodMetrics.xml");
                 DataTable methodMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IMethod>(nType.MethodsAndContructors, methodMetricsDefinionsList);
                 bool isTestMethodsDataViewGrid = targetMethodsDataGridView.Name == "dgvUnitTestsMethods" || targetMethodsDataGridView.Name == "dgvBDDMethods";
                 FillCodeElementsDataGridView(targetMethodsDataGridView, methodMetricsDataTable, !isTestMethodsDataViewGrid);
@@ -285,16 +272,7 @@ namespace NDependMetricsReporter
 
         private void MethodsDataGridViewSelectionChangedEventManager(DataGridView senderDataGridView, ListView targetMetricsListView, Label targetElementTypeLabel, Label targetElementNameLabel)
         {
-            if (senderDataGridView.SelectedRows.Count > 0)
-            {
-                string selectedMethod = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
 
-                //List<NDependMetricDefinition> methodsMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("MethodMetrics.xml");
-                //FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], methodsMetricsDefinionsList);
-
-                //targetElementTypeLabel.Text = "Method";
-                //targetElementNameLabel.Text = selectedMethod;
-            }
         }
 
         private void lvwCodeMetricsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -446,6 +424,9 @@ namespace NDependMetricsReporter
             List<int> list = new List<int> { 1, 1, 2, 4, 4, 4, 5, 7, 7, 7, 9, 10 };
             Dictionary <int,int> frequenceList = Statistics.FrequencesList(list);*/
 
+            ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
+            UserDefinedMetrics userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
+            userDefinedMetrics.CountAppLogicMethodsCalled("InvoicesAcceptTransactionsWithZeroCost()");
         }
 
 
@@ -560,7 +541,7 @@ namespace NDependMetricsReporter
             {
                 string selectedAssemblyName = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
 
-                List<NDependMetricDefinition> assemblyMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("AssemblyMetrics.xml");
+                List<NDependMetricDefinition> assemblyMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("AssemblyMetrics.xml");
                 FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], assemblyMetricsDefinionsList);
 
                 targetElementTypeLabel.Text = "Assembly";
@@ -574,7 +555,7 @@ namespace NDependMetricsReporter
             {
                 string selectedNamespaceName = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
 
-                List<NDependMetricDefinition> namespaceMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("NamespaceMetrics.xml");
+                List<NDependMetricDefinition> namespaceMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("NamespaceMetrics.xml");
                 FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], namespaceMetricsDefinionsList);
 
                 targetElementTypeLabel.Text = "Namespace";
@@ -588,7 +569,7 @@ namespace NDependMetricsReporter
             {
                 string selectedType = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
 
-                List<NDependMetricDefinition> typesMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("TypeMetrics.xml");
+                List<NDependMetricDefinition> typesMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("TypeMetrics.xml");
                 FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], typesMetricsDefinionsList);
 
                 targetElementTypeLabel.Text = "Type";
@@ -602,7 +583,7 @@ namespace NDependMetricsReporter
             {
                 string selectedMethod = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
 
-                List<NDependMetricDefinition> methodsMetricsDefinionsList = new NDependXMLMetricsDefinitionLoader().LoadMetricsDefinitions("MethodMetrics.xml");
+                List<NDependMetricDefinition> methodsMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("MethodMetrics.xml");
                 FillMetricsListView(targetMetricsListView, senderDataGridView.SelectedRows[0], methodsMetricsDefinionsList);
 
                 targetElementTypeLabel.Text = "Method";

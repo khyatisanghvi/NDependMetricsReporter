@@ -11,10 +11,12 @@ namespace NDependMetricsReporter
     class DataTableHelper
     {
         CodeElementsManager codeElementsManager;
+        UserDefinedMetrics userDefinedMetrics;
 
-        public DataTableHelper(CodeElementsManager codeElementsManager)
+        public DataTableHelper(CodeElementsManager codeElementsManager, UserDefinedMetrics userDefinedMetrics)
         {
             this.codeElementsManager = codeElementsManager;
+            this.userDefinedMetrics = userDefinedMetrics;
         }
 
         public DataTable CreateCodeElemetMetricsDataTable<CodeElementType>(IEnumerable<CodeElementType> codeElementLists, List<NDependMetricDefinition> metricsDefinitionList)
@@ -74,5 +76,21 @@ namespace NDependMetricsReporter
                 metricsTable.Rows.Add(row);
             }
         }
+
+        private void AddUserDefinedMetricsColumnToTable(DataTable metricsTable)
+        {
+            DataColumn userDefinedMetricColumn = new DataColumn("NbAppMethodsCalled");
+            userDefinedMetricColumn.DataType = typeof(int);
+            metricsTable.Columns.Add(userDefinedMetricColumn);
+        }
+
+        private void AddUserDefinedMetricRowsToTable<CodeElementType>(DataTable metricsTable)
+        {
+            foreach (DataRow row in metricsTable.Rows)
+            {
+                row["NbAppMethodsCalled"] = 1;
+            }
+        }
+
     }
 }

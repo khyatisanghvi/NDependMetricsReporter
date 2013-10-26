@@ -12,10 +12,12 @@ namespace NDependMetricsReporter
     class UserDefinedMetrics
     {
         ICodeBase codeBaseToStudy;
+        CodeElementsManager codeElementsManager;
 
         public UserDefinedMetrics(ICodeBase codeBaseToStudy)
         {
             this.codeBaseToStudy = codeBaseToStudy;
+            codeElementsManager = new CodeElementsManager(codeBaseToStudy);
         }
 
         public void CheckStringCodeQuery(ICodeBase codeBase)
@@ -59,5 +61,23 @@ namespace NDependMetricsReporter
                     select new { m.Name, appMethodsCalledCount };
             return 1;
         }
+
+        public int CountAppLogicMethodsCalled(string methodName)
+        {
+            return CountMethodsCalledFromAssembly(methodName, "RCNGCMembersManagementAppLogic");
+        }
+
+        private int CountMethodsCalledFromAssembly(string methodName, string assemblyName)
+        {
+            IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
+            IMethod method = codeElementsManager.GetMethodByName(methodName);
+            int i = method.MethodsCalled.Select(m => m).Where(m => m.ParentAssembly == assembly).Count();
+            /*List<IMethod> methodsInAssembly = codeBaseToStudy.Assemblies.WithNameIn(assemblyName).ChildMethods().ToList();
+            List<IMethod> methodsCalled = method.MethodsCalled.ToList();
+            int j = methodsCalled.Intersect(methodsInAssembly).Count();*/
+            return i;
+        }
+
+
     }
 }

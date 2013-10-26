@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ArrayOfUserDefinedMetricDefinition>
+  <UserDefinedMetricDefinition>
+    <MetricType>System.UInt16</MetricType>
+    <ResumedMetricName>AppNbMethodsCalled</ResumedMetricName>
+    <MethodNameToInvoke>CountAppLogicMethodsCalled</MethodNameToInvoke>
+    <MetricName>Number Of Application Methods Called</MetricName>
+    <Description xml:space="preserve">Number of methods called only from the application assembly</Description>
+  </UserDefinedMetricDefinition>
+</ArrayOfUserDefinedMetricDefinition>

@@ -77,11 +77,12 @@
     <Compile Include="CodeBaseManager.cs" />
     <Compile Include="CodeElementsManager.cs" />
     <Compile Include="NDependMetricDefinition.cs" />
-    <Compile Include="NDependXMLMetricsDefinitionLoader.cs" />
+    <Compile Include="XMLMetricsDefinitionLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeElementsManagerReflectionHelper.cs" />
     <Compile Include="Statistics.cs" />
+    <Compile Include="UserDefinedMetricDefinition.cs" />
     <Compile Include="UserDefinedMetrics.cs" />
     <EmbeddedResource Include="MetricProperties.resx">
       <DependentUpon>MetricProperties.cs</DependentUpon>
@@ -125,6 +126,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="XMLMetricDefinitions\MethodMetrics.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XMLMetricDefinitions\MethodUserDefinedMetrics.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="XMLMetricDefinitions\NamespaceMetrics.xml">

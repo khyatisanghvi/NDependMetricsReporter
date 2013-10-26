@@ -25,8 +25,9 @@ namespace NDependMetricsReporter
 
         IProject nDependProject;
         CodeElementsManager codeElementsManager;
+        //UserDefinedMetrics userDefinedMetrics;
 
-        DataTableHelper dataTableHelper;
+        //DataTableHelper dataTableHelper;
 
         Dictionary<string, string> codeElementsTypePlurals = new Dictionary<string,string>() { { "Assembly", "Assemblies" }, { "Namespace", "Namepaces" }, { "Type", "Types" }, { "Method", "Methods" } };
         Dictionary<string, string> codeElementsTypePrecedences = new Dictionary<string, string>() { { "Assembly", "Application" }, { "Namespace", "Assembly" }, { "Type", "Namespace" }, { "Method", "Type" } };
@@ -61,7 +62,8 @@ namespace NDependMetricsReporter
             this.nDependProject = nDependProject;
             ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
             codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
-            dataTableHelper = new DataTableHelper(codeElementsManager);
+            //userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
+            //dataTableHelper = new DataTableHelper(codeElementsManager, userDefinedMetrics);
         }
 
         private void FillControls()
