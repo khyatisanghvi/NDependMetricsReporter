@@ -47,6 +47,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.codeSectionsTabs = new System.Windows.Forms.TabControl();
             this.tabCodeMetrics = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabUnitTests = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvUnitTestsAssemblies = new System.Windows.Forms.DataGridView();
@@ -85,7 +86,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tBoxProjectPath = new System.Windows.Forms.TextBox();
             this.lblNDependProjectPath = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeNamespaces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeMethods)).BeginInit();
@@ -226,9 +226,11 @@
             this.dgvCodeNamespaces.MultiSelect = false;
             this.dgvCodeNamespaces.Name = "dgvCodeNamespaces";
             this.dgvCodeNamespaces.ReadOnly = true;
+            this.dgvCodeNamespaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCodeNamespaces.Size = new System.Drawing.Size(674, 88);
             this.dgvCodeNamespaces.TabIndex = 23;
             this.dgvCodeNamespaces.SelectionChanged += new System.EventHandler(this.dgvCodeNamespaces_SelectionChanged);
+            this.dgvCodeNamespaces.Click += new System.EventHandler(this.dgvCodeNamespaces_Click);
             // 
             // dgvCodeTypes
             // 
@@ -240,9 +242,11 @@
             this.dgvCodeTypes.MultiSelect = false;
             this.dgvCodeTypes.Name = "dgvCodeTypes";
             this.dgvCodeTypes.ReadOnly = true;
+            this.dgvCodeTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCodeTypes.Size = new System.Drawing.Size(674, 131);
             this.dgvCodeTypes.TabIndex = 24;
             this.dgvCodeTypes.SelectionChanged += new System.EventHandler(this.dgvCodeTypes_SelectionChanged);
+            this.dgvCodeTypes.Click += new System.EventHandler(this.dgvCodeTypes_Click);
             // 
             // dgvCodeMethods
             // 
@@ -254,9 +258,11 @@
             this.dgvCodeMethods.MultiSelect = false;
             this.dgvCodeMethods.Name = "dgvCodeMethods";
             this.dgvCodeMethods.ReadOnly = true;
+            this.dgvCodeMethods.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCodeMethods.Size = new System.Drawing.Size(674, 157);
             this.dgvCodeMethods.TabIndex = 25;
             this.dgvCodeMethods.SelectionChanged += new System.EventHandler(this.dgvCodeMethods_SelectionChanged);
+            this.dgvCodeMethods.Click += new System.EventHandler(this.dgvCodeMethods_Click);
             // 
             // dgvCodeAssemblies
             // 
@@ -268,9 +274,11 @@
             this.dgvCodeAssemblies.MultiSelect = false;
             this.dgvCodeAssemblies.Name = "dgvCodeAssemblies";
             this.dgvCodeAssemblies.ReadOnly = true;
+            this.dgvCodeAssemblies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCodeAssemblies.Size = new System.Drawing.Size(674, 89);
             this.dgvCodeAssemblies.TabIndex = 26;
             this.dgvCodeAssemblies.SelectionChanged += new System.EventHandler(this.dgvCodeAssemblies_SelectionChanged);
+            this.dgvCodeAssemblies.Click += new System.EventHandler(this.dgvCodeAssemblies_Click);
             // 
             // label1
             // 
@@ -318,6 +326,16 @@
             this.tabCodeMetrics.TabIndex = 0;
             this.tabCodeMetrics.Text = "Code";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(899, 10);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 23);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // tabUnitTests
             // 
             this.tabUnitTests.BackColor = System.Drawing.SystemColors.Control;
@@ -360,9 +378,11 @@
             this.dgvUnitTestsAssemblies.MultiSelect = false;
             this.dgvUnitTestsAssemblies.Name = "dgvUnitTestsAssemblies";
             this.dgvUnitTestsAssemblies.ReadOnly = true;
+            this.dgvUnitTestsAssemblies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUnitTestsAssemblies.Size = new System.Drawing.Size(674, 89);
             this.dgvUnitTestsAssemblies.TabIndex = 39;
             this.dgvUnitTestsAssemblies.SelectionChanged += new System.EventHandler(this.dgvUnitTestsAssemblies_SelectionChanged);
+            this.dgvUnitTestsAssemblies.Click += new System.EventHandler(this.dgvUnitTestsAssemblies_Click);
             // 
             // dgvUnitTestsMethods
             // 
@@ -374,9 +394,11 @@
             this.dgvUnitTestsMethods.MultiSelect = false;
             this.dgvUnitTestsMethods.Name = "dgvUnitTestsMethods";
             this.dgvUnitTestsMethods.ReadOnly = true;
+            this.dgvUnitTestsMethods.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUnitTestsMethods.Size = new System.Drawing.Size(674, 157);
             this.dgvUnitTestsMethods.TabIndex = 38;
             this.dgvUnitTestsMethods.SelectionChanged += new System.EventHandler(this.dgvUnitTestsMethods_SelectionChanged);
+            this.dgvUnitTestsMethods.Click += new System.EventHandler(this.dgvUnitTestsMethods_Click);
             // 
             // lblUnitTestsAssembliesDataGridView
             // 
@@ -397,9 +419,11 @@
             this.dgvUnitTestsTypes.MultiSelect = false;
             this.dgvUnitTestsTypes.Name = "dgvUnitTestsTypes";
             this.dgvUnitTestsTypes.ReadOnly = true;
+            this.dgvUnitTestsTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUnitTestsTypes.Size = new System.Drawing.Size(674, 131);
             this.dgvUnitTestsTypes.TabIndex = 37;
             this.dgvUnitTestsTypes.SelectionChanged += new System.EventHandler(this.dgvUnitTestsTypes_SelectionChanged);
+            this.dgvUnitTestsTypes.Click += new System.EventHandler(this.dgvUnitTestsTypes_Click);
             // 
             // label4
             // 
@@ -421,9 +445,11 @@
             this.dgvUnitTestsNamespaces.MultiSelect = false;
             this.dgvUnitTestsNamespaces.Name = "dgvUnitTestsNamespaces";
             this.dgvUnitTestsNamespaces.ReadOnly = true;
+            this.dgvUnitTestsNamespaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUnitTestsNamespaces.Size = new System.Drawing.Size(674, 88);
             this.dgvUnitTestsNamespaces.TabIndex = 36;
             this.dgvUnitTestsNamespaces.SelectionChanged += new System.EventHandler(this.dgvUnitTestsNamespaces_SelectionChanged);
+            this.dgvUnitTestsNamespaces.Click += new System.EventHandler(this.dgvUnitTestsNamespaces_Click);
             // 
             // lvwUnitTestsMetricsList
             // 
@@ -541,9 +567,11 @@
             this.dgvBDDAssemblies.MultiSelect = false;
             this.dgvBDDAssemblies.Name = "dgvBDDAssemblies";
             this.dgvBDDAssemblies.ReadOnly = true;
+            this.dgvBDDAssemblies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBDDAssemblies.Size = new System.Drawing.Size(674, 89);
             this.dgvBDDAssemblies.TabIndex = 52;
             this.dgvBDDAssemblies.SelectionChanged += new System.EventHandler(this.dgvBDDAssemblies_SelectionChanged);
+            this.dgvBDDAssemblies.Click += new System.EventHandler(this.dgvBDDAssemblies_Click);
             // 
             // dgvBDDMethods
             // 
@@ -555,9 +583,11 @@
             this.dgvBDDMethods.MultiSelect = false;
             this.dgvBDDMethods.Name = "dgvBDDMethods";
             this.dgvBDDMethods.ReadOnly = true;
+            this.dgvBDDMethods.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBDDMethods.Size = new System.Drawing.Size(674, 157);
             this.dgvBDDMethods.TabIndex = 51;
             this.dgvBDDMethods.SelectionChanged += new System.EventHandler(this.dgvBDDMethods_SelectionChanged);
+            this.dgvBDDMethods.Click += new System.EventHandler(this.dgvBDDMethods_Click);
             // 
             // label5
             // 
@@ -578,9 +608,11 @@
             this.dgvBDDTypes.MultiSelect = false;
             this.dgvBDDTypes.Name = "dgvBDDTypes";
             this.dgvBDDTypes.ReadOnly = true;
+            this.dgvBDDTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBDDTypes.Size = new System.Drawing.Size(674, 131);
             this.dgvBDDTypes.TabIndex = 50;
             this.dgvBDDTypes.SelectionChanged += new System.EventHandler(this.dgvBDDTypes_SelectionChanged);
+            this.dgvBDDTypes.Click += new System.EventHandler(this.dgvBDDTypes_Click);
             // 
             // label7
             // 
@@ -602,9 +634,11 @@
             this.dgvBDDNamespaces.MultiSelect = false;
             this.dgvBDDNamespaces.Name = "dgvBDDNamespaces";
             this.dgvBDDNamespaces.ReadOnly = true;
+            this.dgvBDDNamespaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBDDNamespaces.Size = new System.Drawing.Size(674, 88);
             this.dgvBDDNamespaces.TabIndex = 49;
             this.dgvBDDNamespaces.SelectionChanged += new System.EventHandler(this.dgvBDDNamespaces_SelectionChanged);
+            this.dgvBDDNamespaces.Click += new System.EventHandler(this.dgvBDDNamespaces_Click);
             // 
             // lvwBDDMetricsList
             // 
@@ -730,16 +764,6 @@
             this.lblNDependProjectPath.Size = new System.Drawing.Size(65, 13);
             this.lblNDependProjectPath.TabIndex = 31;
             this.lblNDependProjectPath.Text = "Project Path";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(899, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 23);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MetricsViewer
             // 

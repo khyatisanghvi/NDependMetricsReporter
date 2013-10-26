@@ -78,10 +78,15 @@ namespace NDependMetricsReporter
 
             FillMetricDescriptionRTFBox(nDependMetricDefinition);
 
-            //tabParentCondeElement.Text = "All " + codeElementTypePlural + " in parent " + parentCodeElementType;
-            //tabAsemblyName.Text = "All " + codeElementTypePlural + " in Assembly";
             tabParentCondeElement.Text = "All " + codeElementTypePlural + " in " + parentCodeElementName;
-            tabAsemblyName.Text = "All " + codeElementTypePlural + " in " + assemblyName;
+            if (codeElementType == "Assembly")
+            {
+                tabctlMetricStatistics.TabPages.Remove(tabAsemblyName);
+            }
+            else
+            {
+                tabAsemblyName.Text = "All " + codeElementTypePlural + " in " + assemblyName;
+            }
             Type metricsType = Type.GetType(nDependMetricDefinition.NDependMetricType);
             Type[] types = new Type[] { metricsType };
             GenericsHelper.InvokeInstanceGenericMethod(this, this.GetType().FullName, "FillBaseStatistics", types, null);
@@ -103,23 +108,26 @@ namespace NDependMetricsReporter
             tboxParentCodeElementMaxValue.Text = maxValue % 1 == 0 ? maxValue.ToString() : maxValue.ToString("0.0000");
             tboxParentCodeElementAverageValue.Text = metricsValuesFromAllBrotherCodeElements.Average().ToString("0.0000");
             tboxParentCodeElementStdDevValue.Text = Statistics.StandardDeviation<double>(metricsValuesFromAllBrotherCodeElements).ToString("0.0000");
-            
-            metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);
-            minValue = metricsValuesOfAllSameCodeElementsInAssembly.Min();
-            maxValue = metricsValuesOfAllSameCodeElementsInAssembly.Max();
-            tboxAllInAssemblyMinValue.Text = minValue % 1 == 0 ? minValue.ToString() : minValue.ToString("0.0000");
-            tboxAllInAssemblyMaxValue.Text = maxValue % 1 == 0 ? maxValue.ToString() : maxValue.ToString("0.0000");
-            tboxAllInAssemblyAverageValue.Text = metricsValuesOfAllSameCodeElementsInAssembly.Average().ToString("0.0000");
-            tboxAllInAssemblyStdDevValue .Text = Statistics.StandardDeviation<double>(metricsValuesOfAllSameCodeElementsInAssembly).ToString("0.0000");
+
+            if (codeElementType != "Assembly")
+            {
+                metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);
+                minValue = metricsValuesOfAllSameCodeElementsInAssembly.Min();
+                maxValue = metricsValuesOfAllSameCodeElementsInAssembly.Max();
+                tboxAllInAssemblyMinValue.Text = minValue % 1 == 0 ? minValue.ToString() : minValue.ToString("0.0000");
+                tboxAllInAssemblyMaxValue.Text = maxValue % 1 == 0 ? maxValue.ToString() : maxValue.ToString("0.0000");
+                tboxAllInAssemblyAverageValue.Text = metricsValuesOfAllSameCodeElementsInAssembly.Average().ToString("0.0000");
+                tboxAllInAssemblyStdDevValue.Text = Statistics.StandardDeviation<double>(metricsValuesOfAllSameCodeElementsInAssembly).ToString("0.0000");
+            }
         }
 
         private void FillStatisticChartSelector()
         {
-            this.cboxAllCodeElementsInAssemblyChartSelector.Items.Add("Frequencies Bar Chart");
             this.cboxParentCodeElementChartSelector.Items.Add("Frequencies Bar Chart");
-
-            cboxAllCodeElementsInAssemblyChartSelector.SelectedIndex = 0;
             cboxParentCodeElementChartSelector.SelectedIndex = 0;
+
+            this.cboxAllCodeElementsInAssemblyChartSelector.Items.Add("Frequencies Bar Chart");
+            cboxAllCodeElementsInAssemblyChartSelector.SelectedIndex = 0;
         }
 
         private void FillMetricDescriptionRTFBox(NDependMetricDefinition nDependMetricDefinition)
@@ -149,7 +157,7 @@ namespace NDependMetricsReporter
         private void btnDrawTrendChart_Click(object sender, EventArgs e)
         {
             IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
-            string chartTitle = codeElementName.ToUpper() + ": " + codeElementName;
+            string chartTitle = parentCodeElementName.ToUpper() + ": " + codeElementName;
             ShowMetricHistoricTrendChart(chartTitle, nDependMetricDefinition.MetricName, metricValues);
         }
 
@@ -177,7 +185,7 @@ namespace NDependMetricsReporter
             string chartTitle = tabAsemblyName.Text + ": " + nDependMetricDefinition.PropertyName;
             Type metricType = Type.GetType(nDependMetricDefinition.NDependMetricType);
 
-            Dictionary<double, int> frequencies = Statistics.FrequencesList<double>(metricsValuesFromAllBrotherCodeElements);
+            Dictionary<double, int> frequencies = Statistics.FrequencesList<double>(metricsValuesOfAllSameCodeElementsInAssembly);
             IList xValues = frequencies.Keys.ToList();
             IList yValues = frequencies.Values.ToList();
 
