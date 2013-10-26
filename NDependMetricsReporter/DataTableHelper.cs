@@ -19,12 +19,12 @@ namespace NDependMetricsReporter
             this.userDefinedMetrics = userDefinedMetrics;
         }
 
-        public DataTable CreateCodeElemetMetricsDataTable<CodeElementType>(IEnumerable<CodeElementType> codeElementLists, List<NDependMetricDefinition> metricsDefinitionList)
+        public DataTable CreateCodeElemetMetricsDataTable<CodeElementType>(IEnumerable<CodeElementType> codeElementLists, List<NDependMetricDefinition> nDependMetricsDefinitionList, List<UserDefinedMetricDefinition> userDefinedMetricsList)
         {
             DataTable metricsTable = new DataTable();
             AddCodeElementsColumnToTable(metricsTable);
-            AddMetricsColumnsToTable(metricsTable, metricsDefinitionList);
-            AddMetricRowsToTable<CodeElementType>(metricsTable, codeElementLists, metricsDefinitionList);
+            AddMetricsColumnsToTable(metricsTable, nDependMetricsDefinitionList);
+            AddMetricRowsToTable<CodeElementType>(metricsTable, codeElementLists, nDependMetricsDefinitionList);
             return metricsTable;
         }
 
@@ -52,9 +52,9 @@ namespace NDependMetricsReporter
             metricsTable.Columns.Add(codeElementNameColumn);
         }
 
-        private void AddMetricsColumnsToTable(DataTable metricsTable, List<NDependMetricDefinition> metricsDefinitionList)
+        private void AddMetricsColumnsToTable(DataTable metricsTable, List<NDependMetricDefinition> nDependMetricsDefinitionList)
         {
-            foreach (NDependMetricDefinition metricDefinition in metricsDefinitionList)
+            foreach (NDependMetricDefinition metricDefinition in nDependMetricsDefinitionList)
             {
                 DataColumn metricColumn = new DataColumn(metricDefinition.PropertyName);
                 metricColumn.DataType = Type.GetType(metricDefinition.NDependMetricType);
@@ -62,14 +62,14 @@ namespace NDependMetricsReporter
             }
         }
 
-        private void AddMetricRowsToTable<CodeElementType>(DataTable metricsTable, IEnumerable<CodeElementType> codeElementLists, List<NDependMetricDefinition> metricsDefinitionList)
+        private void AddMetricRowsToTable<CodeElementType>(DataTable metricsTable, IEnumerable<CodeElementType> codeElementLists, List<NDependMetricDefinition> nDependMetricsDefinitionList)
         {
             foreach (CodeElementType codeElement in codeElementLists)
             {
                 DataRow row = metricsTable.NewRow();
                 string codeElementName = (string)typeof(CodeElementType).GetPublicProperty("Name").GetValue(codeElement);
                 row[0] = codeElementName;
-                foreach (NDependMetricDefinition metricDefinition in metricsDefinitionList)
+                foreach (NDependMetricDefinition metricDefinition in nDependMetricsDefinitionList)
                 {
                     row[metricDefinition.PropertyName] = codeElementsManager.GetCodeElementMetricValue<CodeElementType>((CodeElementType)codeElement, metricDefinition);
                 }

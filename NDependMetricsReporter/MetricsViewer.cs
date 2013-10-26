@@ -82,9 +82,10 @@ namespace NDependMetricsReporter
         private void FillBaseControls()
         {
             FillNDependProjectInfo();
-            List<NDependMetricDefinition> assemblyMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("AssemblyMetrics.xml");
             IEnumerable<IAssembly> lastAnalysisAssembliesList = codeElementsManager.GetNonThirdPartyAssembliesInApplication();
-            DataTable assemblyMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IAssembly>(lastAnalysisAssembliesList, assemblyMetricsDefinionsList);
+            List<NDependMetricDefinition> nDependAssemblyMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("AssemblyMetrics.xml");
+            List<UserDefinedMetricDefinition> userDefinedAssemblyMetricsDefinitionList = new List<UserDefinedMetricDefinition>();
+            DataTable assemblyMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IAssembly>(lastAnalysisAssembliesList, nDependAssemblyMetricsDefinionsList, null);
             FillCodeAsembliestDataGridView(assemblyMetricsDataTable);
             FillTestAssembliesDataGridView(assemblyMetricsDataTable);
             FillSpecFlowBDDAssembliesDataGridView(assemblyMetricsDataTable);
@@ -237,8 +238,9 @@ namespace NDependMetricsReporter
                 string selectedAssemblyName = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
 
-                List<NDependMetricDefinition> namespaceMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("NamespaceMetrics.xml");
-                DataTable namespaceMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<INamespace>(assembly.ChildNamespaces, namespaceMetricsDefinionsList);
+                List<NDependMetricDefinition> nDependNamespaceMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("NamespaceMetrics.xml");
+                List<UserDefinedMetricDefinition> userDefinedNamespaceMetricsDefinitionList = new List<UserDefinedMetricDefinition>();
+                DataTable namespaceMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<INamespace>(assembly.ChildNamespaces, nDependNamespaceMetricsDefinionsList, userDefinedNamespaceMetricsDefinitionList);
                 FillCodeElementsDataGridView(targetNamespacesDataGridView, namespaceMetricsDataTable, true);
             }
         }
@@ -250,8 +252,9 @@ namespace NDependMetricsReporter
                 string selectedNamespaceName = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 INamespace nNamespace = codeElementsManager.GetNamespaceByName(selectedNamespaceName);
 
-                List<NDependMetricDefinition> typeMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("TypeMetrics.xml");
-                DataTable typeMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IType>(nNamespace.ChildTypes, typeMetricsDefinionsList);
+                List<NDependMetricDefinition> nDependTypeMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("TypeMetrics.xml");
+                List<UserDefinedMetricDefinition> userDefinedTypeMetricsDefinitionList = new List<UserDefinedMetricDefinition>();
+                DataTable typeMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IType>(nNamespace.ChildTypes, nDependTypeMetricsDefinionsList, userDefinedTypeMetricsDefinitionList);
                 FillCodeElementsDataGridView(targetTypesDataGridView, typeMetricsDataTable, true);
             }
         }
@@ -263,8 +266,9 @@ namespace NDependMetricsReporter
                 string selectedType = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 IType nType = codeElementsManager.GetTypeByName(selectedType);
 
-                List<NDependMetricDefinition> methodMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("MethodMetrics.xml");
-                DataTable methodMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IMethod>(nType.MethodsAndContructors, methodMetricsDefinionsList);
+                List<NDependMetricDefinition> nDependMethodMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("MethodMetrics.xml");
+                List<UserDefinedMetricDefinition> userDefinedMethodMetricsDefinitionList = new XMLMetricsDefinitionLoader().LoadUserDefinedMetricsDefinitions("MethodUserDefinedMetrics.xml");
+                DataTable methodMetricsDataTable = dataTableHelper.CreateCodeElemetMetricsDataTable<IMethod>(nType.MethodsAndContructors, nDependMethodMetricsDefinionsList, userDefinedMethodMetricsDefinitionList);
                 bool isTestMethodsDataViewGrid = targetMethodsDataGridView.Name == "dgvUnitTestsMethods" || targetMethodsDataGridView.Name == "dgvBDDMethods";
                 FillCodeElementsDataGridView(targetMethodsDataGridView, methodMetricsDataTable, !isTestMethodsDataViewGrid);
             }
@@ -424,9 +428,12 @@ namespace NDependMetricsReporter
             List<int> list = new List<int> { 1, 1, 2, 4, 4, 4, 5, 7, 7, 7, 9, 10 };
             Dictionary <int,int> frequenceList = Statistics.FrequencesList(list);*/
 
-            ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
+            /*ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
             UserDefinedMetrics userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
-            userDefinedMetrics.CountAppLogicMethodsCalled("InvoicesAcceptTransactionsWithZeroCost()");
+            userDefinedMetrics.CountAppLogicMethodsCalled("InvoicesAcceptTransactionsWithZeroCost()");*/
+
+            XMLMetricsDefinitionLoader xMLdefinitionLoader = new XMLMetricsDefinitionLoader();
+            List<UserDefinedMetricDefinition> userDefinedMetricsList = xMLdefinitionLoader.LoadUserDefinedMetricsDefinitions("MethodUserDefinedMetrics.xml");
         }
 
 

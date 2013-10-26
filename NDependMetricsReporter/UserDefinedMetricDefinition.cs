@@ -3,7 +3,7 @@
 namespace NDependMetricsReporter
 {
     [System.Serializable()]
-    class UserDefinedMetricDefinition
+    public class UserDefinedMetricDefinition
     {
         private string metricTypeField;
         private string resumedMetricNameField;
