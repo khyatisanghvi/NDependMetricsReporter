@@ -86,6 +86,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tBoxProjectPath = new System.Windows.Forms.TextBox();
             this.lblNDependProjectPath = new System.Windows.Forms.Label();
+            this.lvwCodeUserDefinedMetricsList = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeNamespaces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeMethods)).BeginInit();
@@ -298,12 +301,13 @@
             this.codeSectionsTabs.Location = new System.Drawing.Point(12, 60);
             this.codeSectionsTabs.Name = "codeSectionsTabs";
             this.codeSectionsTabs.SelectedIndex = 0;
-            this.codeSectionsTabs.Size = new System.Drawing.Size(966, 584);
+            this.codeSectionsTabs.Size = new System.Drawing.Size(1241, 584);
             this.codeSectionsTabs.TabIndex = 28;
             // 
             // tabCodeMetrics
             // 
             this.tabCodeMetrics.BackColor = System.Drawing.SystemColors.Control;
+            this.tabCodeMetrics.Controls.Add(this.lvwCodeUserDefinedMetricsList);
             this.tabCodeMetrics.Controls.Add(this.button1);
             this.tabCodeMetrics.Controls.Add(this.label1);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeAssemblies);
@@ -322,7 +326,7 @@
             this.tabCodeMetrics.Location = new System.Drawing.Point(4, 4);
             this.tabCodeMetrics.Name = "tabCodeMetrics";
             this.tabCodeMetrics.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCodeMetrics.Size = new System.Drawing.Size(958, 558);
+            this.tabCodeMetrics.Size = new System.Drawing.Size(1233, 558);
             this.tabCodeMetrics.TabIndex = 0;
             this.tabCodeMetrics.Text = "Code";
             // 
@@ -722,7 +726,7 @@
             this.exitToolStripMenuItem});
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
-            this.menuMain.Size = new System.Drawing.Size(989, 24);
+            this.menuMain.Size = new System.Drawing.Size(1265, 24);
             this.menuMain.TabIndex = 29;
             this.menuMain.Text = "menuStrip1";
             // 
@@ -765,12 +769,36 @@
             this.lblNDependProjectPath.TabIndex = 31;
             this.lblNDependProjectPath.Text = "Project Path";
             // 
+            // lvwCodeUserDefinedMetricsList
+            // 
+            this.lvwCodeUserDefinedMetricsList.CheckBoxes = true;
+            this.lvwCodeUserDefinedMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
+            this.columnHeader6});
+            this.lvwCodeUserDefinedMetricsList.GridLines = true;
+            this.lvwCodeUserDefinedMetricsList.Location = new System.Drawing.Point(965, 51);
+            this.lvwCodeUserDefinedMetricsList.Name = "lvwCodeUserDefinedMetricsList";
+            this.lvwCodeUserDefinedMetricsList.Size = new System.Drawing.Size(262, 386);
+            this.lvwCodeUserDefinedMetricsList.TabIndex = 29;
+            this.lvwCodeUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
+            this.lvwCodeUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Metric Name";
+            this.columnHeader5.Width = 195;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Value";
+            this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(989, 649);
+            this.ClientSize = new System.Drawing.Size(1265, 649);
             this.Controls.Add(this.lblNDependProjectPath);
             this.Controls.Add(this.tBoxProjectPath);
             this.Controls.Add(this.tboxProjectName);
@@ -866,6 +894,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.RichTextBox rtfBDDMetricProperties;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListView lvwCodeUserDefinedMetricsList;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }
 

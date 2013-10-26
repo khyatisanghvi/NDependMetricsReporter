@@ -97,21 +97,5 @@ namespace NDependMetricsReporter
             var returnedValue = methodInfo.Invoke(userDefinedMetrics, parameters);
             return Convert.ToDouble(returnedValue);
         }
-
-/*        private void AddUserDefinedMetricsColumnToTable(DataTable metricsTable)
-        {
-            DataColumn userDefinedMetricColumn = new DataColumn("NbAppMethodsCalled");
-            userDefinedMetricColumn.DataType = typeof(int);
-            metricsTable.Columns.Add(userDefinedMetricColumn);
-        }
-
-        private void AddUserDefinedMetricRowsToTable<CodeElementType>(DataTable metricsTable)
-        {
-            foreach (DataRow row in metricsTable.Rows)
-            {
-                row["NbAppMethodsCalled"] = 1;
-            }
-        }*/
-
     }
 }
