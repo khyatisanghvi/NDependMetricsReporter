@@ -17,6 +17,7 @@ namespace NDependMetricsReporter
     public partial class MetricProperties : Form
     {
         NDependMetricDefinition nDependMetricDefinition;
+        UserDefinedMetricDefinition userDefinedMetricDefinition;
         string codeElementName;
         string codeElementType;
         DataTable selectedCodeElementMatricsDataTable;
@@ -25,9 +26,6 @@ namespace NDependMetricsReporter
 
         IProject nDependProject;
         CodeElementsManager codeElementsManager;
-        //UserDefinedMetrics userDefinedMetrics;
-
-        //DataTableHelper dataTableHelper;
 
         Dictionary<string, string> codeElementsTypePlurals = new Dictionary<string,string>() { { "Assembly", "Assemblies" }, { "Namespace", "Namepaces" }, { "Type", "Types" }, { "Method", "Methods" } };
         Dictionary<string, string> codeElementsTypePrecedences = new Dictionary<string, string>() { { "Assembly", "Application" }, { "Namespace", "Assembly" }, { "Type", "Namespace" }, { "Method", "Type" } };
@@ -35,8 +33,43 @@ namespace NDependMetricsReporter
         List<double> metricsValuesFromAllBrotherCodeElements;
         List<double> metricsValuesOfAllSameCodeElementsInAssembly;
 
+        private MetricProperties(
+            string codeElementName,
+            DataTable selectedCodeElementMatricsDataTable,
+            string parentCodeElementName,
+            string assemblyName,
+            IProject nDependProject)
+        {
+            InitializeComponent();
+            
+            this.codeElementName = codeElementName;
+            this.selectedCodeElementMatricsDataTable = selectedCodeElementMatricsDataTable;
+            this.parentCodeElementName = parentCodeElementName;
+            this.assemblyName = assemblyName;
+
+            InitNDependProjectElements(nDependProject);
+        }
+
         public MetricProperties(
             NDependMetricDefinition nDependMetricDefinition,
+            UserDefinedMetricDefinition userDefinedMetricDefinition,
+            string codeElementName,
+            DataTable selectedCodeElementMatricsDataTable,
+            string parentCodeElementName,
+            string assemblyName,
+            IProject nDependProject)
+            :this(codeElementName, selectedCodeElementMatricsDataTable, parentCodeElementName, assemblyName, nDependProject)
+        {
+            this.nDependMetricDefinition = nDependMetricDefinition;
+            this.codeElementType = nDependMetricDefinition.NDependCodeElementType.Split('.').Last<string>().Substring(1);
+            this.userDefinedMetricDefinition = userDefinedMetricDefinition;
+              
+            FillControls();
+        }
+        
+/*        public MetricProperties(
+            NDependMetricDefinition nDependMetricDefinition,
+            UserDefinedMetricDefinition userDefinedMetricDefinition,
             string codeElementName,
             DataTable selectedCodeElementMatricsDataTable,
             string parentCodeElementName,
@@ -55,15 +88,13 @@ namespace NDependMetricsReporter
             InitNDependProjectElements(nDependProject);
             
             FillControls();
-        }
+        }*/
 
         private void InitNDependProjectElements(IProject nDependProject)
         {
             this.nDependProject = nDependProject;
             ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
             codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
-            //userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
-            //dataTableHelper = new DataTableHelper(codeElementsManager, userDefinedMetrics);
         }
 
         private void FillControls()

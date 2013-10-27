@@ -606,29 +606,45 @@ namespace NDependMetricsReporter
         {
             if (senderListView.SelectedItems.Count > 0)
             {
+                MetricProperties metricProperties;
+
                 DataGridView sourceDataGridView = (DataGridView)senderListView.Tag;
                 string codeElementName = sourceDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                DataTable metricsDataTable = (DataTable)sourceDataGridView.DataSource;
+                DataGridViewTagInfo dataGridViewTagInfo = ((DataGridViewTagInfo)sourceDataGridView.Tag);
+                DataGridView assembliesDatagrid = GetAssebliesDataGridView(sourceDataGridView);
+                string assemblyName = assembliesDatagrid.SelectedRows[0].Cells[0].Value.ToString();
+                string parentCodeElementName = dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView == null ?
+                    ((IAssembly)codeElementsManager.CodeBase.Assemblies.WithName(assemblyName).First()).VisualStudioProjectFilePath.FileName :
+                    dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+
                 ListViewItem lvi = senderListView.SelectedItems[0];
-                if (lvi.Tag.GetType()==typeof(NDependMetricDefinition))
+                if (lvi.Tag.GetType() == typeof(NDependMetricDefinition))
                 {
                     NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
-                    DataTable metricsDataTable = (DataTable)sourceDataGridView.DataSource;
-                    DataGridViewTagInfo dataGridViewTagInfo = ((DataGridViewTagInfo)sourceDataGridView.Tag);
-                    DataGridView assembliesDatagrid = GetAssebliesDataGridView(sourceDataGridView);
-                    string assemblyName = assembliesDatagrid.SelectedRows[0].Cells[0].Value.ToString();
-                    string parentCodeElementName = dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView == null ?
-                        ((IAssembly)codeElementsManager.CodeBase.Assemblies.WithName(assemblyName).First()).VisualStudioProjectFilePath.FileName :
-                        dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
-                    MetricProperties metricProperties = new MetricProperties(
+                    metricProperties = new MetricProperties(
                         nDependMetricDefinition,
+                        null, 
+                        codeElementName,
+                        metricsDataTable,
+                        parentCodeElementName,
+                        assemblyName,
+                        nDependProject);        
+                }
+                else
+                {                   
+                    UserDefinedMetricDefinition userDefinedMetricDefinition = (UserDefinedMetricDefinition)lvi.Tag;
+                    metricProperties = new MetricProperties(
+                        null,
+                        userDefinedMetricDefinition,
                         codeElementName,
                         metricsDataTable,
                         parentCodeElementName,
                         assemblyName,
                         nDependProject);
-
-                    metricProperties.Show();
                 }
+
+                metricProperties.Show();
             }
         }
 
