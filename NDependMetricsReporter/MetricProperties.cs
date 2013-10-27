@@ -18,6 +18,8 @@ namespace NDependMetricsReporter
     {
         NDependMetricDefinition nDependMetricDefinition;
         UserDefinedMetricDefinition userDefinedMetricDefinition;
+        MetricDefinitionType metricDefinitionType;
+
         DataTable selectedCodeElementMatricsDataTable;
         string codeElementName;
         string codeElementType;
@@ -63,6 +65,7 @@ namespace NDependMetricsReporter
             IProject nDependProject)
             :this(codeElementName, selectedCodeElementMatricsDataTable, parentCodeElementName, assemblyName, nDependProject)
         {
+            this.metricDefinitionType = MetricDefinitionType.NDependMetric;
             this.nDependMetricDefinition = nDependMetricDefinition;
             this.codeElementType = nDependMetricDefinition.NDependCodeElementType.Split('.').Last<string>().Substring(1);
             this.metricResumedName = nDependMetricDefinition.PropertyName;
@@ -82,6 +85,7 @@ namespace NDependMetricsReporter
             IProject nDependProject)
             : this(codeElementName, selectedCodeElementMatricsDataTable, parentCodeElementName, assemblyName, nDependProject)
         {
+            this.metricDefinitionType = MetricDefinitionType.UserDefinedMetric;
             this.userDefinedMetricDefinition = userDefinedMetricDefinition;
             this.codeElementType = userDefinedMetricDefinition.NDependCodeElementType.Split('.').Last<string>().Substring(1);
             this.metricResumedName = userDefinedMetricDefinition.ResumedMetricName;
@@ -91,6 +95,8 @@ namespace NDependMetricsReporter
 
             FillControls();
         }
+
+        enum MetricDefinitionType {NDependMetric, UserDefinedMetric};
         
 /*        public MetricProperties(
             NDependMetricDefinition nDependMetricDefinition,
@@ -173,8 +179,17 @@ namespace NDependMetricsReporter
 
             if (codeElementType != "Assembly")
             {
-                metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);
-                this.gbxAssemplyBasicStats.Text = "Basic Stats - Count: " + metricsValuesFromAllBrotherCodeElements.Count;
+                switch (metricDefinitionType)
+                {
+                    case MetricDefinitionType.NDependMetric:
+                        metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);
+                        break;
+                    case MetricDefinitionType.UserDefinedMetric:
+                        metricsValuesOfAllSameCodeElementsInAssembly = new List<double>();
+                        break;
+                }
+                //metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);
+                this.gbxAssemplyBasicStats.Text = "Basic Stats - Count: " + metricsValuesOfAllSameCodeElementsInAssembly.Count;
                 minValue = metricsValuesOfAllSameCodeElementsInAssembly.Min();
                 maxValue = metricsValuesOfAllSameCodeElementsInAssembly.Max();
                 tboxAllInAssemblyMinValue.Text = minValue % 1 == 0 ? minValue.ToString() : minValue.ToString("0.0000");
@@ -219,7 +234,17 @@ namespace NDependMetricsReporter
 
         private void btnDrawTrendChart_Click(object sender, EventArgs e)
         {
-            IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
+            IList metricValues = new List<double>();
+            switch (metricDefinitionType)
+            {
+                case MetricDefinitionType.NDependMetric:
+                    metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
+                    break;
+                case MetricDefinitionType.UserDefinedMetric:
+                    metricValues = new List<double>();
+                    break;
+            }
+            //IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
             string chartTitle = parentCodeElementName.ToUpper() + ": " + codeElementName;
             //ShowMetricHistoricTrendChart(chartTitle, nDependMetricDefinition.MetricName, metricValues);
             ShowMetricHistoricTrendChart(chartTitle, this.metricFullName, metricValues);
@@ -249,14 +274,14 @@ namespace NDependMetricsReporter
             //string columnName = nDependMetricDefinition.PropertyName;
             //string chartTitle = tabAsemblyName.Text + ": " + nDependMetricDefinition.PropertyName;
             string chartTitle = tabAsemblyName.Text + ": " + this.metricResumedName;
-            Type metricType = Type.GetType(nDependMetricDefinition.NDependMetricType);
+            //Type metricType = Type.GetType(nDependMetricDefinition.NDependMetricType);
+            Type metricType = Type.GetType(this.metricType);
 
             Dictionary<double, int> frequencies = Statistics.FrequencesList<double>(metricsValuesOfAllSameCodeElementsInAssembly);
             IList xValues = frequencies.Keys.ToList();
             IList yValues = frequencies.Values.ToList();
 
             ShowMetricFrequencyBarChart(chartTitle, "Frequecies", xValues, yValues);
-
         }
     }
 }

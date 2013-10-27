@@ -49,7 +49,7 @@ namespace NDependMetricsReporter
 
         private int GetBestIntervalValue(double min, double max, int expectedNumberOfIntervals)
         {
-            List<double> possibleIntervals = new List<double> { 1, 5, 10, 20, 50, 100 };
+            List<double> possibleIntervals = new List<double> { 1, 5, 10, 20, 50, 100, 500, 1000 };
             double valuesRange = max - min;
             double roughInterval = (double)(valuesRange / expectedNumberOfIntervals);
             int closestInterval = (int)possibleIntervals.OrderBy(item => Math.Abs(roughInterval - item)).First();
