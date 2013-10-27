@@ -350,6 +350,7 @@
             this.lvwCodeUserDefinedMetricsList.TabIndex = 29;
             this.lvwCodeUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwCodeUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwCodeUserDefinedMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwCodeUserDefinedMetricsList_ItemCheck);
             this.lvwCodeUserDefinedMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwCodeUserDefinedMetricsList_SelectedIndexChanged);
             // 
             // columnHeader5
@@ -816,6 +817,7 @@
             this.lvwUnitTestsUserDefinedMetricsList.TabIndex = 41;
             this.lvwUnitTestsUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwUnitTestsUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwUnitTestsUserDefinedMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwUnitTestsUserDefinedMetricsList_ItemCheck);
             this.lvwUnitTestsUserDefinedMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwUnitTestsUserDefinedMetricsList_SelectedIndexChanged);
             // 
             // columnHeader7
@@ -841,6 +843,7 @@
             this.lvwBDDUserDefinedMetricsList.TabIndex = 54;
             this.lvwBDDUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwBDDUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwBDDUserDefinedMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwBDDUserDefinedMetricsList_ItemCheck);
             // 
             // columnHeader9
             // 
