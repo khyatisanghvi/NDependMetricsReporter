@@ -5,11 +5,19 @@ namespace NDependMetricsReporter
     [System.Serializable()]
     public class UserDefinedMetricDefinition
     {
+        private string nDependCodeElementTypeField;
         private string metricTypeField;
         private string resumedMetricNameField;
         private string methodNameToInvokeField;
         private string metricNameField;
         private string descriptionField;
+
+        [XmlElement("NDependCodeElementType")]
+        public string NDependCodeElementType
+        {
+            get { return this.nDependCodeElementTypeField; }
+            set { this.nDependCodeElementTypeField = value; }
+        }
 
         [XmlElement("MetricType")]
         public string MetricType

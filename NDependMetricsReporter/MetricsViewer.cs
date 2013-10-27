@@ -624,7 +624,6 @@ namespace NDependMetricsReporter
                     NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
                     metricProperties = new MetricProperties(
                         nDependMetricDefinition,
-                        null, 
                         codeElementName,
                         metricsDataTable,
                         parentCodeElementName,
@@ -635,7 +634,6 @@ namespace NDependMetricsReporter
                 {                   
                     UserDefinedMetricDefinition userDefinedMetricDefinition = (UserDefinedMetricDefinition)lvi.Tag;
                     metricProperties = new MetricProperties(
-                        null,
                         userDefinedMetricDefinition,
                         codeElementName,
                         metricsDataTable,

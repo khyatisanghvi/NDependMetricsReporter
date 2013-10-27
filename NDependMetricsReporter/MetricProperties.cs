@@ -18,11 +18,15 @@ namespace NDependMetricsReporter
     {
         NDependMetricDefinition nDependMetricDefinition;
         UserDefinedMetricDefinition userDefinedMetricDefinition;
+        DataTable selectedCodeElementMatricsDataTable;
         string codeElementName;
         string codeElementType;
-        DataTable selectedCodeElementMatricsDataTable;
         string parentCodeElementName;
         string assemblyName;
+        string metricResumedName;
+        string metricFullName;
+        string metricDescription;
+        string metricType;
 
         IProject nDependProject;
         CodeElementsManager codeElementsManager;
@@ -52,7 +56,6 @@ namespace NDependMetricsReporter
 
         public MetricProperties(
             NDependMetricDefinition nDependMetricDefinition,
-            UserDefinedMetricDefinition userDefinedMetricDefinition,
             string codeElementName,
             DataTable selectedCodeElementMatricsDataTable,
             string parentCodeElementName,
@@ -62,8 +65,30 @@ namespace NDependMetricsReporter
         {
             this.nDependMetricDefinition = nDependMetricDefinition;
             this.codeElementType = nDependMetricDefinition.NDependCodeElementType.Split('.').Last<string>().Substring(1);
-            this.userDefinedMetricDefinition = userDefinedMetricDefinition;
+            this.metricResumedName = nDependMetricDefinition.PropertyName;
+            this.metricFullName = nDependMetricDefinition.MetricName;
+            this.metricDescription = nDependMetricDefinition.Description;
+            this.metricType = nDependMetricDefinition.NDependMetricType;
               
+            FillControls();
+        }
+
+        public MetricProperties(
+            UserDefinedMetricDefinition userDefinedMetricDefinition,
+            string codeElementName,
+            DataTable selectedCodeElementMatricsDataTable,
+            string parentCodeElementName,
+            string assemblyName,
+            IProject nDependProject)
+            : this(codeElementName, selectedCodeElementMatricsDataTable, parentCodeElementName, assemblyName, nDependProject)
+        {
+            this.userDefinedMetricDefinition = userDefinedMetricDefinition;
+            this.codeElementType = userDefinedMetricDefinition.NDependCodeElementType.Split('.').Last<string>().Substring(1);
+            this.metricResumedName = userDefinedMetricDefinition.ResumedMetricName;
+            this.metricFullName = userDefinedMetricDefinition.MetricName;
+            this.metricDescription = userDefinedMetricDefinition.Description;
+            this.metricType = userDefinedMetricDefinition.MetricType;
+
             FillControls();
         }
         
@@ -102,14 +127,14 @@ namespace NDependMetricsReporter
             string codeElementTypePlural = codeElementsTypePlurals[codeElementType];
             string parentCodeElementType = codeElementsTypePrecedences[codeElementType];
 
-            this.lblMetricName.Text = nDependMetricDefinition.PropertyName;
+            this.lblMetricName.Text = metricResumedName;
             this.lblCodeElementName.Text = codeElementName;
             this.lblCodeElementType.Text = codeElementType;
             this.lblParentCodeElementName.Text = parentCodeElementName;
             this.lblParentCodeElementType.Text = parentCodeElementType;
             this.lblAssemblyName.Text = assemblyName;
 
-            FillMetricDescriptionRTFBox(nDependMetricDefinition);
+            FillMetricDescriptionRTFBox(metricFullName, metricDescription);
 
             tabParentCondeElement.Text = "All " + codeElementTypePlural + " in " + parentCodeElementName;
             if (codeElementType == "Assembly")
@@ -120,7 +145,8 @@ namespace NDependMetricsReporter
             {
                 tabAsemblyName.Text = "All " + codeElementTypePlural + " in " + assemblyName;
             }
-            Type metricsType = Type.GetType(nDependMetricDefinition.NDependMetricType);
+            //Type metricsType = Type.GetType(nDependMetricDefinition.NDependMetricType);
+            Type metricsType = Type.GetType(this.metricType);
             Type[] types = new Type[] { metricsType };
             GenericsHelper.InvokeInstanceGenericMethod(this, this.GetType().FullName, "FillBaseStatistics", types, null);
 
@@ -132,8 +158,10 @@ namespace NDependMetricsReporter
             double minValue;
             double maxValue;
 
+            //List<CodeElementType> metricsValuesFromAllBrotherCodeElements_GenericValues = DataTableHelper.GetDataTableColumn<CodeElementType>(
+            //    selectedCodeElementMatricsDataTable, nDependMetricDefinition.PropertyName);
             List<CodeElementType> metricsValuesFromAllBrotherCodeElements_GenericValues = DataTableHelper.GetDataTableColumn<CodeElementType>(
-                selectedCodeElementMatricsDataTable, nDependMetricDefinition.PropertyName);
+                selectedCodeElementMatricsDataTable, this.metricResumedName);
             metricsValuesFromAllBrotherCodeElements = metricsValuesFromAllBrotherCodeElements_GenericValues.Select(val => Convert.ToDouble(val)).ToList();
             gbxParentCodeElementNameBasicStats.Text = "Basic Stats - Count: " + metricsValuesFromAllBrotherCodeElements.Count;
             minValue = metricsValuesFromAllBrotherCodeElements.Min();
@@ -165,16 +193,16 @@ namespace NDependMetricsReporter
             cboxAllCodeElementsInAssemblyChartSelector.SelectedIndex = 0;
         }
 
-        private void FillMetricDescriptionRTFBox(NDependMetricDefinition nDependMetricDefinition)
+        private void FillMetricDescriptionRTFBox(string metricName, string metricDescription)
         {
             rtboxMetricDescription.Clear();
-            rtboxMetricDescription.AppendText(nDependMetricDefinition.MetricName);
-            rtboxMetricDescription.Find(nDependMetricDefinition.MetricName);
+            rtboxMetricDescription.AppendText(metricName);
+            rtboxMetricDescription.Find(metricName);
             rtboxMetricDescription.SelectionFont = new Font(rtboxMetricDescription.Font, rtboxMetricDescription.Font.Style ^ FontStyle.Bold);
             rtboxMetricDescription.SelectionStart = this.rtboxMetricDescription.Text.Length;
             rtboxMetricDescription.SelectionLength = 0;
             rtboxMetricDescription.SelectionFont = rtboxMetricDescription.Font;
-            rtboxMetricDescription.AppendText(Environment.NewLine + nDependMetricDefinition.Description);
+            rtboxMetricDescription.AppendText(Environment.NewLine + metricDescription);
         }
 
         private void ShowMetricHistoricTrendChart(string chartTitle, string serieName, IList chartData)
@@ -193,13 +221,15 @@ namespace NDependMetricsReporter
         {
             IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
             string chartTitle = parentCodeElementName.ToUpper() + ": " + codeElementName;
-            ShowMetricHistoricTrendChart(chartTitle, nDependMetricDefinition.MetricName, metricValues);
+            //ShowMetricHistoricTrendChart(chartTitle, nDependMetricDefinition.MetricName, metricValues);
+            ShowMetricHistoricTrendChart(chartTitle, this.metricFullName, metricValues);
         }
 
         private void btnParentCodeElementDrawChart_Click(object sender, EventArgs e)
         {
-            string columnName = nDependMetricDefinition.PropertyName;
-            string chartTitle = tabParentCondeElement.Text + ": " + nDependMetricDefinition.PropertyName;
+            //string columnName = this.metricResumedName; ;
+            //string chartTitle = tabParentCondeElement.Text + ": " + nDependMetricDefinition.PropertyName;
+            string chartTitle = tabParentCondeElement.Text + ": " + this.metricResumedName;
 
             Dictionary<double, int> frequencies = Statistics.FrequencesList<double>(metricsValuesFromAllBrotherCodeElements);
             IList xValues = frequencies.Keys.ToList();
@@ -216,8 +246,9 @@ namespace NDependMetricsReporter
 
         private void btnAllCodeElementsInAssemblyDrawChart_Click(object sender, EventArgs e)
         {
-            string columnName = nDependMetricDefinition.PropertyName;
-            string chartTitle = tabAsemblyName.Text + ": " + nDependMetricDefinition.PropertyName;
+            //string columnName = nDependMetricDefinition.PropertyName;
+            //string chartTitle = tabAsemblyName.Text + ": " + nDependMetricDefinition.PropertyName;
+            string chartTitle = tabAsemblyName.Text + ": " + this.metricResumedName;
             Type metricType = Type.GetType(nDependMetricDefinition.NDependMetricType);
 
             Dictionary<double, int> frequencies = Statistics.FrequencesList<double>(metricsValuesOfAllSameCodeElementsInAssembly);
