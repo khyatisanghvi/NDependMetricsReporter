@@ -95,6 +95,15 @@
             this.lvwBDDUserDefinedMetricsList = new System.Windows.Forms.ListView();
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.codeMetricsTabsControl = new System.Windows.Forms.TabControl();
+            this.tabNDepend = new System.Windows.Forms.TabPage();
+            this.tabUserDefined = new System.Windows.Forms.TabPage();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeNamespaces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeMethods)).BeginInit();
@@ -112,6 +121,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDNamespaces)).BeginInit();
             this.menuMain.SuspendLayout();
+            this.codeMetricsTabsControl.SuspendLayout();
+            this.tabNDepend.SuspendLayout();
+            this.tabUserDefined.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tboxProjectName
@@ -156,7 +174,7 @@
             this.MetricName,
             this.MetricValue});
             this.lvwCodeMetricsList.GridLines = true;
-            this.lvwCodeMetricsList.Location = new System.Drawing.Point(687, 51);
+            this.lvwCodeMetricsList.Location = new System.Drawing.Point(0, 0);
             this.lvwCodeMetricsList.Name = "lvwCodeMetricsList";
             this.lvwCodeMetricsList.Size = new System.Drawing.Size(262, 386);
             this.lvwCodeMetricsList.TabIndex = 13;
@@ -198,9 +216,9 @@
             // 
             // rtfCodeMetricProperties
             // 
-            this.rtfCodeMetricProperties.Location = new System.Drawing.Point(686, 442);
+            this.rtfCodeMetricProperties.Location = new System.Drawing.Point(686, 469);
             this.rtfCodeMetricProperties.Name = "rtfCodeMetricProperties";
-            this.rtfCodeMetricProperties.Size = new System.Drawing.Size(262, 108);
+            this.rtfCodeMetricProperties.Size = new System.Drawing.Size(262, 81);
             this.rtfCodeMetricProperties.TabIndex = 20;
             this.rtfCodeMetricProperties.Text = "";
             // 
@@ -307,13 +325,13 @@
             this.codeSectionsTabs.Location = new System.Drawing.Point(12, 60);
             this.codeSectionsTabs.Name = "codeSectionsTabs";
             this.codeSectionsTabs.SelectedIndex = 0;
-            this.codeSectionsTabs.Size = new System.Drawing.Size(1241, 584);
+            this.codeSectionsTabs.Size = new System.Drawing.Size(973, 584);
             this.codeSectionsTabs.TabIndex = 28;
             // 
             // tabCodeMetrics
             // 
             this.tabCodeMetrics.BackColor = System.Drawing.SystemColors.Control;
-            this.tabCodeMetrics.Controls.Add(this.lvwCodeUserDefinedMetricsList);
+            this.tabCodeMetrics.Controls.Add(this.codeMetricsTabsControl);
             this.tabCodeMetrics.Controls.Add(this.button1);
             this.tabCodeMetrics.Controls.Add(this.label1);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeAssemblies);
@@ -322,7 +340,6 @@
             this.tabCodeMetrics.Controls.Add(this.dgvCodeTypes);
             this.tabCodeMetrics.Controls.Add(this.lblCodeNamespacesDataGridView);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeNamespaces);
-            this.tabCodeMetrics.Controls.Add(this.lvwCodeMetricsList);
             this.tabCodeMetrics.Controls.Add(this.lblCodeElementName);
             this.tabCodeMetrics.Controls.Add(this.lblCodeTypesDataGridView);
             this.tabCodeMetrics.Controls.Add(this.lblCodeElementType);
@@ -343,7 +360,7 @@
             this.columnHeader5,
             this.columnHeader6});
             this.lvwCodeUserDefinedMetricsList.GridLines = true;
-            this.lvwCodeUserDefinedMetricsList.Location = new System.Drawing.Point(955, 51);
+            this.lvwCodeUserDefinedMetricsList.Location = new System.Drawing.Point(0, 0);
             this.lvwCodeUserDefinedMetricsList.Name = "lvwCodeUserDefinedMetricsList";
             this.lvwCodeUserDefinedMetricsList.Size = new System.Drawing.Size(262, 386);
             this.lvwCodeUserDefinedMetricsList.TabIndex = 29;
@@ -378,7 +395,7 @@
             // tabUnitTests
             // 
             this.tabUnitTests.BackColor = System.Drawing.SystemColors.Control;
-            this.tabUnitTests.Controls.Add(this.lvwUnitTestsUserDefinedMetricsList);
+            this.tabUnitTests.Controls.Add(this.tabControl1);
             this.tabUnitTests.Controls.Add(this.label2);
             this.tabUnitTests.Controls.Add(this.dgvUnitTestsAssemblies);
             this.tabUnitTests.Controls.Add(this.dgvUnitTestsMethods);
@@ -386,7 +403,6 @@
             this.tabUnitTests.Controls.Add(this.dgvUnitTestsTypes);
             this.tabUnitTests.Controls.Add(this.label4);
             this.tabUnitTests.Controls.Add(this.dgvUnitTestsNamespaces);
-            this.tabUnitTests.Controls.Add(this.lvwUnitTestsMetricsList);
             this.tabUnitTests.Controls.Add(this.lblUnitTestsCodeElementName);
             this.tabUnitTests.Controls.Add(this.label6);
             this.tabUnitTests.Controls.Add(this.lblUnitTestsCodeElementType);
@@ -498,7 +514,7 @@
             this.columnHeader1,
             this.columnHeader2});
             this.lvwUnitTestsMetricsList.GridLines = true;
-            this.lvwUnitTestsMetricsList.Location = new System.Drawing.Point(687, 51);
+            this.lvwUnitTestsMetricsList.Location = new System.Drawing.Point(0, 0);
             this.lvwUnitTestsMetricsList.Name = "lvwUnitTestsMetricsList";
             this.lvwUnitTestsMetricsList.Size = new System.Drawing.Size(262, 386);
             this.lvwUnitTestsMetricsList.TabIndex = 30;
@@ -560,16 +576,16 @@
             // 
             // rtfUnitTestsMetricProperties
             // 
-            this.rtfUnitTestsMetricProperties.Location = new System.Drawing.Point(686, 442);
+            this.rtfUnitTestsMetricProperties.Location = new System.Drawing.Point(686, 466);
             this.rtfUnitTestsMetricProperties.Name = "rtfUnitTestsMetricProperties";
-            this.rtfUnitTestsMetricProperties.Size = new System.Drawing.Size(262, 108);
+            this.rtfUnitTestsMetricProperties.Size = new System.Drawing.Size(268, 84);
             this.rtfUnitTestsMetricProperties.TabIndex = 33;
             this.rtfUnitTestsMetricProperties.Text = "";
             // 
             // tabSpecFlowBDD
             // 
             this.tabSpecFlowBDD.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSpecFlowBDD.Controls.Add(this.lvwBDDUserDefinedMetricsList);
+            this.tabSpecFlowBDD.Controls.Add(this.tabControl2);
             this.tabSpecFlowBDD.Controls.Add(this.label3);
             this.tabSpecFlowBDD.Controls.Add(this.dgvBDDAssemblies);
             this.tabSpecFlowBDD.Controls.Add(this.dgvBDDMethods);
@@ -577,7 +593,6 @@
             this.tabSpecFlowBDD.Controls.Add(this.dgvBDDTypes);
             this.tabSpecFlowBDD.Controls.Add(this.label7);
             this.tabSpecFlowBDD.Controls.Add(this.dgvBDDNamespaces);
-            this.tabSpecFlowBDD.Controls.Add(this.lvwBDDMetricsList);
             this.tabSpecFlowBDD.Controls.Add(this.lblBDDCodeElementName);
             this.tabSpecFlowBDD.Controls.Add(this.label10);
             this.tabSpecFlowBDD.Controls.Add(this.lblBDDCodeElementType);
@@ -585,7 +600,7 @@
             this.tabSpecFlowBDD.Controls.Add(this.rtfBDDMetricProperties);
             this.tabSpecFlowBDD.Location = new System.Drawing.Point(4, 4);
             this.tabSpecFlowBDD.Name = "tabSpecFlowBDD";
-            this.tabSpecFlowBDD.Size = new System.Drawing.Size(1233, 558);
+            this.tabSpecFlowBDD.Size = new System.Drawing.Size(965, 558);
             this.tabSpecFlowBDD.TabIndex = 2;
             this.tabSpecFlowBDD.Text = "SpecFlow BDD";
             // 
@@ -688,7 +703,7 @@
             this.columnHeader3,
             this.columnHeader4});
             this.lvwBDDMetricsList.GridLines = true;
-            this.lvwBDDMetricsList.Location = new System.Drawing.Point(687, 51);
+            this.lvwBDDMetricsList.Location = new System.Drawing.Point(0, 0);
             this.lvwBDDMetricsList.Name = "lvwBDDMetricsList";
             this.lvwBDDMetricsList.Size = new System.Drawing.Size(262, 386);
             this.lvwBDDMetricsList.TabIndex = 43;
@@ -750,9 +765,9 @@
             // 
             // rtfBDDMetricProperties
             // 
-            this.rtfBDDMetricProperties.Location = new System.Drawing.Point(686, 442);
+            this.rtfBDDMetricProperties.Location = new System.Drawing.Point(686, 469);
             this.rtfBDDMetricProperties.Name = "rtfBDDMetricProperties";
-            this.rtfBDDMetricProperties.Size = new System.Drawing.Size(262, 108);
+            this.rtfBDDMetricProperties.Size = new System.Drawing.Size(272, 81);
             this.rtfBDDMetricProperties.TabIndex = 46;
             this.rtfBDDMetricProperties.Text = "";
             // 
@@ -763,7 +778,7 @@
             this.exitToolStripMenuItem});
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
-            this.menuMain.Size = new System.Drawing.Size(1265, 24);
+            this.menuMain.Size = new System.Drawing.Size(995, 24);
             this.menuMain.TabIndex = 29;
             this.menuMain.Text = "menuStrip1";
             // 
@@ -813,9 +828,9 @@
             this.columnHeader7,
             this.columnHeader8});
             this.lvwUnitTestsUserDefinedMetricsList.GridLines = true;
-            this.lvwUnitTestsUserDefinedMetricsList.Location = new System.Drawing.Point(955, 51);
+            this.lvwUnitTestsUserDefinedMetricsList.Location = new System.Drawing.Point(0, 0);
             this.lvwUnitTestsUserDefinedMetricsList.Name = "lvwUnitTestsUserDefinedMetricsList";
-            this.lvwUnitTestsUserDefinedMetricsList.Size = new System.Drawing.Size(262, 386);
+            this.lvwUnitTestsUserDefinedMetricsList.Size = new System.Drawing.Size(260, 386);
             this.lvwUnitTestsUserDefinedMetricsList.TabIndex = 41;
             this.lvwUnitTestsUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
             this.lvwUnitTestsUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
@@ -842,7 +857,7 @@
             this.columnHeader9,
             this.columnHeader10});
             this.lvwBDDUserDefinedMetricsList.GridLines = true;
-            this.lvwBDDUserDefinedMetricsList.Location = new System.Drawing.Point(955, 51);
+            this.lvwBDDUserDefinedMetricsList.Location = new System.Drawing.Point(0, 0);
             this.lvwBDDUserDefinedMetricsList.Name = "lvwBDDUserDefinedMetricsList";
             this.lvwBDDUserDefinedMetricsList.Size = new System.Drawing.Size(262, 386);
             this.lvwBDDUserDefinedMetricsList.TabIndex = 54;
@@ -864,12 +879,111 @@
             this.columnHeader10.Text = "Value";
             this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // codeMetricsTabsControl
+            // 
+            this.codeMetricsTabsControl.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.codeMetricsTabsControl.Controls.Add(this.tabNDepend);
+            this.codeMetricsTabsControl.Controls.Add(this.tabUserDefined);
+            this.codeMetricsTabsControl.Location = new System.Drawing.Point(686, 51);
+            this.codeMetricsTabsControl.Name = "codeMetricsTabsControl";
+            this.codeMetricsTabsControl.SelectedIndex = 0;
+            this.codeMetricsTabsControl.Size = new System.Drawing.Size(272, 412);
+            this.codeMetricsTabsControl.TabIndex = 30;
+            // 
+            // tabNDepend
+            // 
+            this.tabNDepend.Controls.Add(this.lvwCodeMetricsList);
+            this.tabNDepend.Location = new System.Drawing.Point(4, 4);
+            this.tabNDepend.Name = "tabNDepend";
+            this.tabNDepend.Padding = new System.Windows.Forms.Padding(3);
+            this.tabNDepend.Size = new System.Drawing.Size(264, 386);
+            this.tabNDepend.TabIndex = 0;
+            this.tabNDepend.Text = "NDepend";
+            this.tabNDepend.UseVisualStyleBackColor = true;
+            // 
+            // tabUserDefined
+            // 
+            this.tabUserDefined.Controls.Add(this.lvwCodeUserDefinedMetricsList);
+            this.tabUserDefined.Location = new System.Drawing.Point(4, 4);
+            this.tabUserDefined.Name = "tabUserDefined";
+            this.tabUserDefined.Padding = new System.Windows.Forms.Padding(3);
+            this.tabUserDefined.Size = new System.Drawing.Size(264, 386);
+            this.tabUserDefined.TabIndex = 1;
+            this.tabUserDefined.Text = "UserDefined";
+            this.tabUserDefined.UseVisualStyleBackColor = true;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(686, 51);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(272, 412);
+            this.tabControl1.TabIndex = 42;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.lvwUnitTestsMetricsList);
+            this.tabPage1.Location = new System.Drawing.Point(4, 4);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(264, 386);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "NDepend";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.lvwUnitTestsUserDefinedMetricsList);
+            this.tabPage2.Location = new System.Drawing.Point(4, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(264, 386);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "UserDefined";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Location = new System.Drawing.Point(686, 51);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(272, 412);
+            this.tabControl2.TabIndex = 55;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.lvwBDDMetricsList);
+            this.tabPage3.Location = new System.Drawing.Point(4, 4);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(264, 386);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "NDepend";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.lvwBDDUserDefinedMetricsList);
+            this.tabPage4.Location = new System.Drawing.Point(4, 4);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(264, 386);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "UserDefined";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // MetricsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1265, 649);
+            this.ClientSize = new System.Drawing.Size(995, 649);
             this.Controls.Add(this.lblNDependProjectPath);
             this.Controls.Add(this.tBoxProjectPath);
             this.Controls.Add(this.tboxProjectName);
@@ -900,6 +1014,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDNamespaces)).EndInit();
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
+            this.codeMetricsTabsControl.ResumeLayout(false);
+            this.tabNDepend.ResumeLayout(false);
+            this.tabUserDefined.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -974,6 +1097,15 @@
         private System.Windows.Forms.ListView lvwBDDUserDefinedMetricsList;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.TabControl codeMetricsTabsControl;
+        private System.Windows.Forms.TabPage tabNDepend;
+        private System.Windows.Forms.TabPage tabUserDefined;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
     }
 }
 

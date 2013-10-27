@@ -720,15 +720,5 @@ namespace NDependMetricsReporter
                 get { return childDataGridView; }
             }
         }
-
-
-
-
-
-
-
-
-
-
     }
 }
