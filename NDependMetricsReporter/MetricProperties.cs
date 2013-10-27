@@ -32,6 +32,7 @@ namespace NDependMetricsReporter
 
         IProject nDependProject;
         CodeElementsManager codeElementsManager;
+        UserDefinedMetrics userDefinedMetrics;
 
         Dictionary<string, string> codeElementsTypePlurals = new Dictionary<string,string>() { { "Assembly", "Assemblies" }, { "Namespace", "Namepaces" }, { "Type", "Types" }, { "Method", "Methods" } };
         Dictionary<string, string> codeElementsTypePrecedences = new Dictionary<string, string>() { { "Assembly", "Application" }, { "Namespace", "Assembly" }, { "Type", "Namespace" }, { "Method", "Type" } };
@@ -53,7 +54,7 @@ namespace NDependMetricsReporter
             this.parentCodeElementName = parentCodeElementName;
             this.assemblyName = assemblyName;
 
-            InitNDependProjectElements(nDependProject);
+            InitCodeAnalisysElements(nDependProject);
         }
 
         public MetricProperties(
@@ -121,11 +122,12 @@ namespace NDependMetricsReporter
             FillControls();
         }*/
 
-        private void InitNDependProjectElements(IProject nDependProject)
+        private void InitCodeAnalisysElements(IProject nDependProject)
         {
             this.nDependProject = nDependProject;
             ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
             codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);
+            userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
         }
 
         private void FillControls()
@@ -185,7 +187,7 @@ namespace NDependMetricsReporter
                         metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);
                         break;
                     case MetricDefinitionType.UserDefinedMetric:
-                        metricsValuesOfAllSameCodeElementsInAssembly = new List<double>();
+                        metricsValuesOfAllSameCodeElementsInAssembly = userDefinedMetrics.GetUserDefinedMetricFromAllCodeElementsInAssembly(userDefinedMetricDefinition, assemblyName);
                         break;
                 }
                 //metricsValuesOfAllSameCodeElementsInAssembly = codeElementsManager.GetMetricFromAllCodeElementsInAssembly(nDependMetricDefinition, assemblyName);

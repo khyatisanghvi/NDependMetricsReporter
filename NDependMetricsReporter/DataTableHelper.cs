@@ -83,19 +83,10 @@ namespace NDependMetricsReporter
                 }
                 foreach (UserDefinedMetricDefinition userDefinedMetricDefinition in userDefinedMetricDefinetionList)
                 {
-                    row[userDefinedMetricDefinition.ResumedMetricName] = InvokeUserDefinedMetric(codeElementName, userDefinedMetricDefinition.MethodNameToInvoke);
+                    row[userDefinedMetricDefinition.ResumedMetricName] = userDefinedMetrics.InvokeUserDefinedMetric(codeElementName, userDefinedMetricDefinition.MethodNameToInvoke);
                 }
                 metricsTable.Rows.Add(row);
             }
-        }
-
-        private double InvokeUserDefinedMetric(string codeElementName, string methodNameToInvoke)
-        {
-            string[] parameters = new string[] { codeElementName };
-            Type userDefinedClassType = typeof(UserDefinedMetrics);
-            MethodInfo methodInfo = userDefinedClassType.GetMethod(methodNameToInvoke);
-            var returnedValue = methodInfo.Invoke(userDefinedMetrics, parameters);
-            return Convert.ToDouble(returnedValue);
         }
     }
 }

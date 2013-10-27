@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using NDepend.CodeModel;
 using NDepend.CodeQuery;
 using NDepend.Analysis;
+using System.Reflection;
 
 namespace NDependMetricsReporter
 {
-    class UserDefinedMetrics
+    public class UserDefinedMetrics
     {
         ICodeBase codeBaseToStudy;
         CodeElementsManager codeElementsManager;
@@ -20,24 +21,20 @@ namespace NDependMetricsReporter
             codeElementsManager = new CodeElementsManager(codeBaseToStudy);
         }
 
-        public void CheckStringCodeQuery(ICodeBase codeBase)
+/*        public void CheckStringCodeQuery(ICodeBase codeBase)
         {
             string s = "from m in Assemblies.WithNameLike(\"UnitTest\") select new { m, m.NbLinesOfCode }";
             IQueryCompiled compiledString = s.Compile(codeBase);
             IQueryExecutionResult result = compiledString.QueryCompiledSuccess.Execute();
             IQueryExecutionSuccessResult successResult = result.SuccessResult;
-        }
+        }*/
 
-        public List<IMethod> GetUnitTestFromType(ICodeBase codeBase)
+        /*public List<IMethod> GetUnitTestFromType(ICodeBase codeBase)
         {
             var complexMethods = (from m in codeBase.Application.Methods
                                   where m.ILCyclomaticComplexity > 10
                                   orderby m.ILCyclomaticComplexity descending
                                   select m).ToList();
-
-            /*var implementing = from t in codeBase.Application.Types
-                               where t.Implement("System.IDisposable".AllowNoMatch())
-                               select t;*/
 
             var r = from m in codeBase.Application.Methods
                     where m.NbLinesOfCode > 10
@@ -49,9 +46,9 @@ namespace NDependMetricsReporter
                     select new { m, CRAP, CC, uncoveredPercentage = uncov * 100, m.NbLinesOfCode };
             
             return complexMethods;
-        }
+        }*/
 
-        public int GetDistribition(ICodeBase codeBase, string codeElementName)
+        /*public int GetDistribition(ICodeBase codeBase, string codeElementName)
         {
             INamespace mynamespace = codeBase.Namespaces.WithName("RCNGCMembersManagementAppLogic.Billing").First();
             var r = from m in codeBase.Types.WithNameIn("BillUnitTests").ChildMethods()
@@ -60,6 +57,35 @@ namespace NDependMetricsReporter
                     //select new { m.Name, m.MethodsCalled};
                     select new { m.Name, appMethodsCalledCount };
             return 1;
+        }*/
+
+        public List<double> GetUserDefinedMetricFromAllCodeElementsInAssembly(UserDefinedMetricDefinition userDefinedMetricDefinition, string assemblyName)
+        {
+            string codeElementType = userDefinedMetricDefinition.NDependCodeElementType;
+            switch (codeElementType)
+            {
+                case "NDepend.CodeModel.IAssembly":
+                    return null;
+                case "NDepend.CodeModel.INamespace":
+                    return (from m in codeBaseToStudy.Assemblies.WithName(assemblyName).ChildNamespaces()
+                            select InvokeUserDefinedMetric(m.Name, userDefinedMetricDefinition.MethodNameToInvoke)).ToList();
+                case "NDepend.CodeModel.IType":
+                    return (from m in codeBaseToStudy.Assemblies.WithName(assemblyName).ChildTypes()
+                            select InvokeUserDefinedMetric(m.Name, userDefinedMetricDefinition.MethodNameToInvoke)).ToList();
+                case "NDepend.CodeModel.IMethod":
+                    return (from m in codeBaseToStudy.Assemblies.WithName(assemblyName).ChildMethods()
+                            select InvokeUserDefinedMetric(m.Name, userDefinedMetricDefinition.MethodNameToInvoke)).ToList();
+            }
+            return null;
+        }
+
+        public double InvokeUserDefinedMetric(string codeElementName, string methodNameToInvoke)
+        {
+            string[] parameters = new string[] { codeElementName };
+            Type userDefinedClassType = typeof(UserDefinedMetrics);
+            MethodInfo methodInfo = userDefinedClassType.GetMethod(methodNameToInvoke);
+            var returnedValue = methodInfo.Invoke(this, parameters);
+            return Convert.ToDouble(returnedValue);
         }
 
         public int CountAppLogicMethodsCalled(string methodName)
@@ -77,6 +103,8 @@ namespace NDependMetricsReporter
             int j = methodsCalled.Intersect(methodsInAssembly).Count();*/
             return i;
         }
+
+
 
 
     }
