@@ -2,7 +2,7 @@
 <ArrayOfUserDefinedMetricDefinition>
   <UserDefinedMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
-    <MetricType>System.UInt16</MetricType>
+    <MetricType>System.Double</MetricType>
     <ResumedMetricName>AppNbMethodsCalled</ResumedMetricName>
     <MethodNameToInvoke>CountAppLogicMethodsCalled</MethodNameToInvoke>
     <MetricName>Number Of Application Methods Called</MetricName>

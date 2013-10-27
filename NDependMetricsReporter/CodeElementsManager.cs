@@ -11,12 +11,10 @@ namespace NDependMetricsReporter
     class CodeElementsManager
     {
         ICodeBase codeBase;
-        //UserDefinedMetrics userDefinedMetrics;
         
         public CodeElementsManager(ICodeBase codeBase)
         {
             this.codeBase = codeBase;
-            //userDefinedMetrics = new UserDefinedMetrics(codeBase);
         }
 
         public ICodeBase CodeBase
@@ -77,26 +75,6 @@ namespace NDependMetricsReporter
             }
             return null;
         }
-
-/*        public List<double> GetUserDefinedMetricFromAllCodeElementsInAssembly(UserDefinedMetricDefinition userDefinedMetricDefinition, string assemblyName)
-        {
-            string codeElementType = userDefinedMetricDefinition.NDependCodeElementType;
-            switch (codeElementType)
-            {
-                case "NDepend.CodeModel.IAssembly":
-                    return null;
-                case "NDepend.CodeModel.INamespace":
-                    return (from m in codeBase.Assemblies.WithName(assemblyName).ChildNamespaces()
-                            select userDefinedMetrics.InvokeUserDefinedMetric(m.Name, userDefinedMetricDefinition.MethodNameToInvoke)).ToList();
-                case "NDepend.CodeModel.IType":
-                    return (from m in codeBase.Assemblies.WithName(assemblyName).ChildTypes()
-                            select userDefinedMetrics.InvokeUserDefinedMetric(m.Name, userDefinedMetricDefinition.MethodNameToInvoke)).ToList();
-                case "NDepend.CodeModel.IMethod":
-                    return (from m in codeBase.Assemblies.WithName(assemblyName).ChildMethods()
-                            select userDefinedMetrics.InvokeUserDefinedMetric(m.Name, userDefinedMetricDefinition.MethodNameToInvoke)).ToList();
-            }
-            return null;
-        }*/
 
         public double GetCodeElementMetricValue<CodeElementType>(CodeElementType codeElement, NDependMetricDefinition codeElementMetricDefinition)
         {

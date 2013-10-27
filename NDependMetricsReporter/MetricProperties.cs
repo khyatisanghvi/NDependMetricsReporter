@@ -243,7 +243,7 @@ namespace NDependMetricsReporter
                     metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
                     break;
                 case MetricDefinitionType.UserDefinedMetric:
-                    metricValues = new List<double>();
+                    metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, userDefinedMetricDefinition);
                     break;
             }
             //IList metricValues = new AnalysisHistoryManager(nDependProject).GetMetricHistory(codeElementName, nDependMetricDefinition);
