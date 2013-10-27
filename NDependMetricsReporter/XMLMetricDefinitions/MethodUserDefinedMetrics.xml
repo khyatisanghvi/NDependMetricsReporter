@@ -7,5 +7,9 @@
     <MethodNameToInvoke>CountAppLogicMethodsCalled</MethodNameToInvoke>
     <MetricName>Number Of Application Methods Called</MetricName>
     <Description xml:space="preserve">Number of methods called only from the application assembly</Description>
+    <CodeSections>
+      <CodeSection>UnitTest</CodeSection>
+      <CodeSection>BDD</CodeSection> 
+    </CodeSections>
   </UserDefinedMetricDefinition>
 </ArrayOfUserDefinedMetricDefinition>

@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using System.Collections.Generic;
 
 namespace NDependMetricsReporter
 {
@@ -11,6 +12,7 @@ namespace NDependMetricsReporter
         private string methodNameToInvokeField;
         private string metricNameField;
         private string descriptionField;
+        private List<string> codeSectionsField;
 
         [XmlElement("NDependCodeElementType")]
         public string NDependCodeElementType
@@ -52,6 +54,14 @@ namespace NDependMetricsReporter
         {
             get { return this.descriptionField; }
             set { this.descriptionField = value; }
+        }
+
+        [XmlArray("CodeSections")]
+        [XmlArrayItem("CodeSection")]
+        public List<string> CodeSections
+        {
+            get { return this.codeSectionsField; }
+            set { this.codeSectionsField = value; }
         }
     }
 }

@@ -29,35 +29,14 @@ namespace NDependMetricsReporter
             IQueryExecutionSuccessResult successResult = result.SuccessResult;
         }*/
 
-        /*public List<IMethod> GetUnitTestFromType(ICodeBase codeBase)
+        public double InvokeUserDefinedMetric(string codeElementName, string methodNameToInvoke)
         {
-            var complexMethods = (from m in codeBase.Application.Methods
-                                  where m.ILCyclomaticComplexity > 10
-                                  orderby m.ILCyclomaticComplexity descending
-                                  select m).ToList();
-
-            var r = from m in codeBase.Application.Methods
-                    where m.NbLinesOfCode > 10
-                    let CC = m.CyclomaticComplexity
-                    let uncov = (100 - m.PercentageCoverage) / 100f
-                    let CRAP = (CC * CC * uncov * uncov * uncov) + CC
-                    where CRAP != null && CRAP > 30
-                    orderby CRAP descending, m.NbLinesOfCode descending
-                    select new { m, CRAP, CC, uncoveredPercentage = uncov * 100, m.NbLinesOfCode };
-            
-            return complexMethods;
-        }*/
-
-        /*public int GetDistribition(ICodeBase codeBase, string codeElementName)
-        {
-            INamespace mynamespace = codeBase.Namespaces.WithName("RCNGCMembersManagementAppLogic.Billing").First();
-            var r = from m in codeBase.Types.WithNameIn("BillUnitTests").ChildMethods()
-                    let appMethodsCalledCount = m.MethodsCalled.Intersect(codeBase.Assemblies.WithNameIn("RCNGCMembersManagementAppLogic").ChildMethods()).Count()
-                    where m.IsUsingNamespace(mynamespace)
-                    //select new { m.Name, m.MethodsCalled};
-                    select new { m.Name, appMethodsCalledCount };
-            return 1;
-        }*/
+            string[] parameters = new string[] { codeElementName };
+            Type userDefinedClassType = typeof(UserDefinedMetrics);
+            MethodInfo methodInfo = userDefinedClassType.GetMethod(methodNameToInvoke);
+            var returnedValue = methodInfo.Invoke(this, parameters);
+            return Convert.ToDouble(returnedValue);
+        }
 
         public List<double> GetUserDefinedMetricFromAllCodeElementsInAssembly(UserDefinedMetricDefinition userDefinedMetricDefinition, string assemblyName)
         {
@@ -79,15 +58,6 @@ namespace NDependMetricsReporter
             return null;
         }
 
-        public double InvokeUserDefinedMetric(string codeElementName, string methodNameToInvoke)
-        {
-            string[] parameters = new string[] { codeElementName };
-            Type userDefinedClassType = typeof(UserDefinedMetrics);
-            MethodInfo methodInfo = userDefinedClassType.GetMethod(methodNameToInvoke);
-            var returnedValue = methodInfo.Invoke(this, parameters);
-            return Convert.ToDouble(returnedValue);
-        }
-
         public int CountAppLogicMethodsCalled(string methodName)
         {
             return CountMethodsCalledFromAssembly(methodName, "RCNGCMembersManagementAppLogic");
@@ -97,11 +67,7 @@ namespace NDependMetricsReporter
         {
             IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
             IMethod method = codeElementsManager.GetMethodByName(methodName);
-            int i = method.MethodsCalled.Select(m => m).Where(m => m.ParentAssembly == assembly).Count();
-            /*List<IMethod> methodsInAssembly = codeBaseToStudy.Assemblies.WithNameIn(assemblyName).ChildMethods().ToList();
-            List<IMethod> methodsCalled = method.MethodsCalled.ToList();
-            int j = methodsCalled.Intersect(methodsInAssembly).Count();*/
-            return i;
+            return method.MethodsCalled.Select(m => m).Where(m => m.ParentAssembly == assembly).Count();
         }
 
 

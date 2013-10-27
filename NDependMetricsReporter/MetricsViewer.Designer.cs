@@ -50,7 +50,6 @@
             this.lvwCodeUserDefinedMetricsList = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button1 = new System.Windows.Forms.Button();
             this.tabUnitTests = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvUnitTestsAssemblies = new System.Windows.Forms.DataGridView();
@@ -332,7 +331,6 @@
             // 
             this.tabCodeMetrics.BackColor = System.Drawing.SystemColors.Control;
             this.tabCodeMetrics.Controls.Add(this.codeMetricsTabsControl);
-            this.tabCodeMetrics.Controls.Add(this.button1);
             this.tabCodeMetrics.Controls.Add(this.label1);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeAssemblies);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeMethods);
@@ -349,7 +347,7 @@
             this.tabCodeMetrics.Location = new System.Drawing.Point(4, 4);
             this.tabCodeMetrics.Name = "tabCodeMetrics";
             this.tabCodeMetrics.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCodeMetrics.Size = new System.Drawing.Size(1233, 558);
+            this.tabCodeMetrics.Size = new System.Drawing.Size(965, 558);
             this.tabCodeMetrics.TabIndex = 0;
             this.tabCodeMetrics.Text = "Code";
             // 
@@ -382,16 +380,6 @@
             this.columnHeader6.Text = "Value";
             this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(899, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 23);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // tabUnitTests
             // 
             this.tabUnitTests.BackColor = System.Drawing.SystemColors.Control;
@@ -411,7 +399,7 @@
             this.tabUnitTests.Location = new System.Drawing.Point(4, 4);
             this.tabUnitTests.Name = "tabUnitTests";
             this.tabUnitTests.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUnitTests.Size = new System.Drawing.Size(1233, 558);
+            this.tabUnitTests.Size = new System.Drawing.Size(965, 558);
             this.tabUnitTests.TabIndex = 1;
             this.tabUnitTests.Text = "Unit Tests";
             // 
@@ -1087,7 +1075,6 @@
         private System.Windows.Forms.Label lblBDDCodeElementType;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.RichTextBox rtfBDDMetricProperties;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView lvwCodeUserDefinedMetricsList;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;

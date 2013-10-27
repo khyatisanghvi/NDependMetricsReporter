@@ -38,58 +38,9 @@ namespace NDependMetricsReporter
             get { return analysisResultRefsList; }
         }
 
-/*        public IList GetMetricHistory(string codeElementName, NDependMetricDefinition metricDefinition)
-        {
-            CodeBaseManager codeBaseManager = new CodeBaseManager(analysisResultRefsList[0].Project);
-            CodeElementsManagerReflectionHelper reflectionHelper = new CodeElementsManagerReflectionHelper();
-             
-            Type metricType = Type.GetType(metricDefinition.NDependMetricType);
-            Type nullableMetricType = typeof(Nullable<>).MakeGenericType(metricType);
-            var metricValue = Activator.CreateInstance(nullableMetricType);
-            IList metricValues = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(nullableMetricType));
-
-            foreach (var analysisResultRef in analysisResultRefsList)
-            {
-                ICodeBase currentAnalysisResultCodeBase = codeBaseManager.LoadCodeBase(analysisResultRef);
-                CodeElementsManager currentAnalysisResultCodeBaseManager = new CodeElementsManager(currentAnalysisResultCodeBase);
-                metricValue = null;
-                switch (metricDefinition.NDependCodeElementType)
-                {
-                    case "NDepend.CodeModel.IAssembly":
-                        IAssembly selectedAssemblyFromCurrentAnalysisResultCodebase = currentAnalysisResultCodeBaseManager.GetAssemblyByName(codeElementName);
-                        if (selectedAssemblyFromCurrentAnalysisResultCodebase != null)
-                            metricValue = currentAnalysisResultCodeBaseManager.GetCodeElementMetricValue(selectedAssemblyFromCurrentAnalysisResultCodebase, typeof(IAssembly), metricDefinition);
-                        break;
-                    case "NDepend.CodeModel.INamespace":
-                        INamespace selectedNamespaceFromCurrentAnalysisResultCodebase = currentAnalysisResultCodeBaseManager.GetNamespaceByName(codeElementName);
-                        if (selectedNamespaceFromCurrentAnalysisResultCodebase != null)
-                            metricValue = currentAnalysisResultCodeBaseManager.GetCodeElementMetricValue(selectedNamespaceFromCurrentAnalysisResultCodebase,typeof(INamespace), metricDefinition);
-                        break;
-                    case "NDepend.CodeModel.IType":
-                        IType selectedTypeFromCurrentAnalysisResultCodebase = currentAnalysisResultCodeBaseManager.GetTypeByName(codeElementName);
-                        if (selectedTypeFromCurrentAnalysisResultCodebase != null)
-                            metricValue = currentAnalysisResultCodeBaseManager.GetCodeElementMetricValue(selectedTypeFromCurrentAnalysisResultCodebase, typeof(IType), metricDefinition);
-                        break;
-                    case "NDepend.CodeModel.IMethod":
-                        IMethod selectedMethodFromCurrentAnalysisResultCodebase = currentAnalysisResultCodeBaseManager.GetMethodByName(codeElementName);
-                        if (selectedMethodFromCurrentAnalysisResultCodebase != null)
-                            //metricValue = (reflectionHelper.GetCodeElementMetric(
-                            //    selectedMethodFromCurrentAnalysisResultCodebase,
-                            //    typeof(IMethod),
-                            //    metricDefinition.InternalPropertyName,
-                            //    metricDefinition.NDependMetricType));
-                            metricValue = currentAnalysisResultCodeBaseManager.GetCodeElementMetricValue(selectedMethodFromCurrentAnalysisResultCodebase, typeof(IMethod), metricDefinition);
-                        break;
-                }
-                metricValues.Add(metricValue);
-            }
-            return metricValues;
-        }*/
-
         public IList GetMetricHistory(string codeElementName, object metricDefinition)
         {
             CodeBaseManager codeBaseManager = new CodeBaseManager(analysisResultRefsList[0].Project);
-            CodeElementsManagerReflectionHelper reflectionHelper = new CodeElementsManagerReflectionHelper();
             
             Type metricType;
             string codeElementType;
