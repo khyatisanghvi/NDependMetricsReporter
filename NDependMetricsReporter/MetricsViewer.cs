@@ -144,6 +144,7 @@ namespace NDependMetricsReporter
         {
             string formatSpecifier = "0.####";
             DataGridView sourceDataGridView = selectedDataGridViewRow.DataGridView;
+ 
             targetNDependMetricsListview.Tag = sourceDataGridView;
             targetNDependMetricsListview.Items.Clear();
             foreach (NDependMetricDefinition metricDefinition in nDependMetricDefinitionsList)
@@ -155,18 +156,31 @@ namespace NDependMetricsReporter
                 lvi.Checked = selectedDataGridViewRow.Cells[metricDefinition.PropertyName].Displayed;
                 targetNDependMetricsListview.Items.Add(lvi);
             }
+
+            targetUserDefinedMetricsListview.Tag = sourceDataGridView;
+            targetUserDefinedMetricsListview.Items.Clear();
+            foreach (UserDefinedMetricDefinition userDefinedMetricDefinition in userDefinedMetricsDefinitionsList)
+            {
+                double cellValue = Double.Parse(selectedDataGridViewRow.Cells[userDefinedMetricDefinition.ResumedMetricName].Value.ToString());
+                string formatedCellValue = cellValue.ToString(formatSpecifier);
+                ListViewItem lvi = new ListViewItem(new[] { userDefinedMetricDefinition.ResumedMetricName, formatedCellValue });
+                lvi.Tag = userDefinedMetricDefinition;
+                lvi.Checked = selectedDataGridViewRow.Cells[userDefinedMetricDefinition.ResumedMetricName].Displayed;
+                targetUserDefinedMetricsListview.Items.Add(lvi);
+            }
+
         }
 
-        private void FillMetricDescriptionRTFBox(RichTextBox targetRichBox, NDependMetricDefinition nDependMetricDefinition)
+        private void FillMetricDescriptionRTFBox(RichTextBox targetRichBox, string metricname, string metricDefinition)
         {
             targetRichBox.Clear();
-            targetRichBox.AppendText(nDependMetricDefinition.MetricName);
-            targetRichBox.Find(nDependMetricDefinition.MetricName);
+            targetRichBox.AppendText(metricname);
+            targetRichBox.Find(metricname);
             targetRichBox.SelectionFont = new Font(rtfCodeMetricProperties.Font, rtfCodeMetricProperties.Font.Style ^ FontStyle.Bold);
             targetRichBox.SelectionStart = this.rtfCodeMetricProperties.Text.Length;
             targetRichBox.SelectionLength = 0;
             targetRichBox.SelectionFont = rtfCodeMetricProperties.Font;
-            targetRichBox.AppendText(Environment.NewLine + nDependMetricDefinition.Description);
+            targetRichBox.AppendText(Environment.NewLine + metricDefinition);
         }
 
         private DataGridView GetAssebliesDataGridView(DataGridView selectedDataGridView)
@@ -286,26 +300,52 @@ namespace NDependMetricsReporter
 
         private void lvwCodeMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewSelectedIndexEventManager(this.lvwCodeMetricsList, this.rtfCodeMetricProperties);
+            ListViewSelectedIndexEventManager(lvwCodeMetricsList, false, rtfCodeMetricProperties);
         }
 
         private void lvwUnitTestsMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewSelectedIndexEventManager(this.lvwUnitTestsMetricsList, this.rtfUnitTestsMetricProperties);
+            ListViewSelectedIndexEventManager(lvwUnitTestsMetricsList, false, rtfUnitTestsMetricProperties);
         }
 
         private void lvwBDDMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewSelectedIndexEventManager(this.lvwBDDMetricsList, this.rtfBDDMetricProperties);
+            ListViewSelectedIndexEventManager(lvwBDDMetricsList, false, rtfBDDMetricProperties);
         }
 
-        private void ListViewSelectedIndexEventManager(ListView senderListView, RichTextBox targetRichTextBox)
+        private void lvwCodeUserDefinedMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ListViewSelectedIndexEventManager(lvwCodeUserDefinedMetricsList, true, this.rtfCodeMetricProperties);
+        }
+
+        private void lvwUnitTestsUserDefinedMetricsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListViewSelectedIndexEventManager(lvwUnitTestsUserDefinedMetricsList, true, this.rtfUnitTestsMetricProperties);
+        }
+
+        private void codeSectionsTabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListViewSelectedIndexEventManager(lvwBDDUserDefinedMetricsList, true, this.rtfBDDMetricProperties);
+        }
+
+        private void ListViewSelectedIndexEventManager(ListView senderListView, bool userDefinedMetric, RichTextBox targetRichTextBox)
+        {
+            string metricName="";
+            string metricDescription="";
             if (senderListView.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = senderListView.SelectedItems[0];
-                NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
-                FillMetricDescriptionRTFBox(targetRichTextBox, nDependMetricDefinition);
+                if (userDefinedMetric)
+                {
+                    metricName = ((UserDefinedMetricDefinition)lvi.Tag).MetricName;
+                    metricDescription = ((UserDefinedMetricDefinition)lvi.Tag).Description;
+                }
+                else
+                {
+                    metricName = ((NDependMetricDefinition)lvi.Tag).MetricName;
+                    metricDescription = ((NDependMetricDefinition)lvi.Tag).Description;                    
+                }
+                FillMetricDescriptionRTFBox(targetRichTextBox, metricName, metricDescription);                
             }
         }
 
@@ -411,140 +451,64 @@ namespace NDependMetricsReporter
             inhibitAutocheckOnDoubleClick = false;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenNdependProject();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*
-            ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
-            UserDefinedMetrics userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
-            userDefinedMetrics.CheckStringCodeQuery(lastAnalysisCodebase);*/
-            //userDefinedMetrics.GetDistribition(lastAnalysisCodebase, "");
-
-            /*
-            List<int> list = new List<int> { 1, 1, 2, 4, 4, 4, 5, 7, 7, 7, 9, 10 };
-            Dictionary <int,int> frequenceList = Statistics.FrequencesList(list);*/
-
-            /*ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
-            UserDefinedMetrics userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
-            userDefinedMetrics.CountAppLogicMethodsCalled("InvoicesAcceptTransactionsWithZeroCost()");*/
-
-            XMLMetricsDefinitionLoader xMLdefinitionLoader = new XMLMetricsDefinitionLoader();
-            List<UserDefinedMetricDefinition> userDefinedMetricsList = xMLdefinitionLoader.LoadUserDefinedMetricsDefinitions("MethodUserDefinedMetrics.xml");
-        }
-
-
-        class DataGridViewTagInfo
-        {
-            Type codeElementsType;
-            LinkedDatagrids linkedDataGrids;
-
-            public DataGridViewTagInfo(Type codeElementsType, LinkedDatagrids linkedDataGrids)
-            {
-                this.codeElementsType = codeElementsType;
-                this.linkedDataGrids = linkedDataGrids;
-            }
-
-            public Type CodeElementsType
-            {
-                get { return codeElementsType; }
-            }
-
-            public LinkedDatagrids LinkedDataGrids
-            {
-                get { return linkedDataGrids; }
-            }
-        }
-        
-        
-        class LinkedDatagrids
-        {
-            DataGridView parentDataGridView;
-            DataGridView childDataGridView;
-
-            public LinkedDatagrids(DataGridView parent, DataGridView child)
-            {
-                this.parentDataGridView = parent;
-                this.childDataGridView = child;
-            }
-
-            public DataGridView ParentDataGridView
-            {
-                get{return parentDataGridView;}
-            }
-
-            public DataGridView ChildDataGridView
-            {
-                get { return childDataGridView; }
-            }
-        }
-
         private void dgvCodeAssemblies_Click(object sender, EventArgs e)
         {
-            AssembliesDataGridViewClickEventManager((DataGridView)sender, lvwCodeMetricsList, null, lblCodeElementType, lblCodeElementName);
+            AssembliesDataGridViewClickEventManager((DataGridView)sender, lvwCodeMetricsList, lvwCodeUserDefinedMetricsList, lblCodeElementType, lblCodeElementName);
         }
 
         private void dgvCodeNamespaces_Click(object sender, EventArgs e)
         {
-            NamespacesDataGridViewClickEventManager((DataGridView)sender, lvwCodeMetricsList, null, lblCodeElementType, lblCodeElementName);
+            NamespacesDataGridViewClickEventManager((DataGridView)sender, lvwCodeMetricsList, lvwCodeUserDefinedMetricsList, lblCodeElementType, lblCodeElementName);
         }
 
         private void dgvCodeTypes_Click(object sender, EventArgs e)
         {
-            TypesDataGridViewClickEventManager((DataGridView)sender, lvwCodeMetricsList, null, lblCodeElementType, lblCodeElementName);
+            TypesDataGridViewClickEventManager((DataGridView)sender, lvwCodeMetricsList, lvwCodeUserDefinedMetricsList, lblCodeElementType, lblCodeElementName);
         }
 
         private void dgvCodeMethods_Click(object sender, EventArgs e)
         {
-            MethodsDataGridViewClickEventManager((DataGridView)sender, lvwCodeMetricsList, null, lblCodeElementType, lblCodeElementName);
+            MethodsDataGridViewClickEventManager((DataGridView)sender, lvwCodeMetricsList, lvwCodeUserDefinedMetricsList, lblCodeElementType, lblCodeElementName);
         }
 
         private void dgvUnitTestsAssemblies_Click(object sender, EventArgs e)
         {
-            AssembliesDataGridViewClickEventManager((DataGridView)sender, lvwUnitTestsMetricsList, null, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
+            AssembliesDataGridViewClickEventManager((DataGridView)sender, lvwUnitTestsMetricsList, lvwUnitTestsUserDefinedMetricsList, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
         }
 
         private void dgvUnitTestsNamespaces_Click(object sender, EventArgs e)
         {
-            NamespacesDataGridViewClickEventManager((DataGridView)sender, lvwUnitTestsMetricsList, null, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
+            NamespacesDataGridViewClickEventManager((DataGridView)sender, lvwUnitTestsMetricsList, lvwUnitTestsUserDefinedMetricsList, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
         }
 
         private void dgvUnitTestsTypes_Click(object sender, EventArgs e)
         {
-            TypesDataGridViewClickEventManager((DataGridView)sender, lvwUnitTestsMetricsList, null, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
+            TypesDataGridViewClickEventManager((DataGridView)sender, lvwUnitTestsMetricsList, lvwUnitTestsUserDefinedMetricsList, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
         }
 
         private void dgvUnitTestsMethods_Click(object sender, EventArgs e)
         {
-            MethodsDataGridViewClickEventManager((DataGridView)sender, lvwUnitTestsMetricsList, null, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
+            MethodsDataGridViewClickEventManager((DataGridView)sender, lvwUnitTestsMetricsList, lvwUnitTestsUserDefinedMetricsList, lblUnitTestsCodeElementType, lblUnitTestsCodeElementName);
         }
 
         private void dgvBDDAssemblies_Click(object sender, EventArgs e)
         {
-            AssembliesDataGridViewClickEventManager((DataGridView)sender, lvwBDDMetricsList, null, lblBDDCodeElementType, lblBDDCodeElementName);
+            AssembliesDataGridViewClickEventManager((DataGridView)sender, lvwBDDMetricsList, lvwBDDUserDefinedMetricsList, lblBDDCodeElementType, lblBDDCodeElementName);
         }
 
         private void dgvBDDNamespaces_Click(object sender, EventArgs e)
         {
-            NamespacesDataGridViewClickEventManager((DataGridView)sender, lvwBDDMetricsList, null, lblBDDCodeElementType, lblBDDCodeElementName);
+            NamespacesDataGridViewClickEventManager((DataGridView)sender, lvwBDDMetricsList, lvwBDDUserDefinedMetricsList, lblBDDCodeElementType, lblBDDCodeElementName);
         }
 
         private void dgvBDDTypes_Click(object sender, EventArgs e)
         {
-            TypesDataGridViewClickEventManager((DataGridView)sender, lvwBDDMetricsList, null, lblBDDCodeElementType, lblBDDCodeElementName);
+            TypesDataGridViewClickEventManager((DataGridView)sender, lvwBDDMetricsList, lvwBDDUserDefinedMetricsList, lblBDDCodeElementType, lblBDDCodeElementName);
         }
 
         private void dgvBDDMethods_Click(object sender, EventArgs e)
         {
-            MethodsDataGridViewClickEventManager((DataGridView)sender, lvwBDDMetricsList, null, lblBDDCodeElementType, lblBDDCodeElementName);
+            MethodsDataGridViewClickEventManager((DataGridView)sender, lvwBDDMetricsList, lvwBDDUserDefinedMetricsList, lblBDDCodeElementType, lblBDDCodeElementName);
         }
 
         private void AssembliesDataGridViewClickEventManager(DataGridView senderDataGridView, ListView targetNDependMetricsListView, ListView targetUserDefinedMetricsListView, Label targetElementTypeLabel, Label targetElementNameLabel)
@@ -606,5 +570,82 @@ namespace NDependMetricsReporter
                 targetElementNameLabel.Text = selectedMethod;
             }
         }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenNdependProject();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            /*
+            ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
+            UserDefinedMetrics userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
+            userDefinedMetrics.CheckStringCodeQuery(lastAnalysisCodebase);*/
+            //userDefinedMetrics.GetDistribition(lastAnalysisCodebase, "");
+
+            /*
+            List<int> list = new List<int> { 1, 1, 2, 4, 4, 4, 5, 7, 7, 7, 9, 10 };
+            Dictionary <int,int> frequenceList = Statistics.FrequencesList(list);*/
+
+            /*ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
+            UserDefinedMetrics userDefinedMetrics = new UserDefinedMetrics(lastAnalysisCodebase);
+            userDefinedMetrics.CountAppLogicMethodsCalled("InvoicesAcceptTransactionsWithZeroCost()");*/
+
+            XMLMetricsDefinitionLoader xMLdefinitionLoader = new XMLMetricsDefinitionLoader();
+            List<UserDefinedMetricDefinition> userDefinedMetricsList = xMLdefinitionLoader.LoadUserDefinedMetricsDefinitions("MethodUserDefinedMetrics.xml");
+        }
+
+        class DataGridViewTagInfo
+        {
+            Type codeElementsType;
+            LinkedDatagrids linkedDataGrids;
+
+            public DataGridViewTagInfo(Type codeElementsType, LinkedDatagrids linkedDataGrids)
+            {
+                this.codeElementsType = codeElementsType;
+                this.linkedDataGrids = linkedDataGrids;
+            }
+
+            public Type CodeElementsType
+            {
+                get { return codeElementsType; }
+            }
+
+            public LinkedDatagrids LinkedDataGrids
+            {
+                get { return linkedDataGrids; }
+            }
+        }
+
+
+        class LinkedDatagrids
+        {
+            DataGridView parentDataGridView;
+            DataGridView childDataGridView;
+
+            public LinkedDatagrids(DataGridView parent, DataGridView child)
+            {
+                this.parentDataGridView = parent;
+                this.childDataGridView = child;
+            }
+
+            public DataGridView ParentDataGridView
+            {
+                get { return parentDataGridView; }
+            }
+
+            public DataGridView ChildDataGridView
+            {
+                get { return childDataGridView; }
+            }
+        }
+
+
     }
 }

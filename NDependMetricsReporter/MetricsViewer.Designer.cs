@@ -47,6 +47,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.codeSectionsTabs = new System.Windows.Forms.TabControl();
             this.tabCodeMetrics = new System.Windows.Forms.TabPage();
+            this.lvwCodeUserDefinedMetricsList = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button1 = new System.Windows.Forms.Button();
             this.tabUnitTests = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
@@ -86,9 +89,12 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tBoxProjectPath = new System.Windows.Forms.TextBox();
             this.lblNDependProjectPath = new System.Windows.Forms.Label();
-            this.lvwCodeUserDefinedMetricsList = new System.Windows.Forms.ListView();
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwUnitTestsUserDefinedMetricsList = new System.Windows.Forms.ListView();
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwBDDUserDefinedMetricsList = new System.Windows.Forms.ListView();
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeNamespaces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeMethods)).BeginInit();
@@ -303,6 +309,7 @@
             this.codeSectionsTabs.SelectedIndex = 0;
             this.codeSectionsTabs.Size = new System.Drawing.Size(1241, 584);
             this.codeSectionsTabs.TabIndex = 28;
+            this.codeSectionsTabs.SelectedIndexChanged += new System.EventHandler(this.codeSectionsTabs_SelectedIndexChanged);
             // 
             // tabCodeMetrics
             // 
@@ -330,6 +337,31 @@
             this.tabCodeMetrics.TabIndex = 0;
             this.tabCodeMetrics.Text = "Code";
             // 
+            // lvwCodeUserDefinedMetricsList
+            // 
+            this.lvwCodeUserDefinedMetricsList.CheckBoxes = true;
+            this.lvwCodeUserDefinedMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
+            this.columnHeader6});
+            this.lvwCodeUserDefinedMetricsList.GridLines = true;
+            this.lvwCodeUserDefinedMetricsList.Location = new System.Drawing.Point(955, 51);
+            this.lvwCodeUserDefinedMetricsList.Name = "lvwCodeUserDefinedMetricsList";
+            this.lvwCodeUserDefinedMetricsList.Size = new System.Drawing.Size(262, 386);
+            this.lvwCodeUserDefinedMetricsList.TabIndex = 29;
+            this.lvwCodeUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
+            this.lvwCodeUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwCodeUserDefinedMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwCodeUserDefinedMetricsList_SelectedIndexChanged);
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Metric Name";
+            this.columnHeader5.Width = 195;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Value";
+            this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(899, 10);
@@ -343,6 +375,7 @@
             // tabUnitTests
             // 
             this.tabUnitTests.BackColor = System.Drawing.SystemColors.Control;
+            this.tabUnitTests.Controls.Add(this.lvwUnitTestsUserDefinedMetricsList);
             this.tabUnitTests.Controls.Add(this.label2);
             this.tabUnitTests.Controls.Add(this.dgvUnitTestsAssemblies);
             this.tabUnitTests.Controls.Add(this.dgvUnitTestsMethods);
@@ -359,7 +392,7 @@
             this.tabUnitTests.Location = new System.Drawing.Point(4, 4);
             this.tabUnitTests.Name = "tabUnitTests";
             this.tabUnitTests.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUnitTests.Size = new System.Drawing.Size(958, 558);
+            this.tabUnitTests.Size = new System.Drawing.Size(1233, 558);
             this.tabUnitTests.TabIndex = 1;
             this.tabUnitTests.Text = "Unit Tests";
             // 
@@ -533,6 +566,7 @@
             // tabSpecFlowBDD
             // 
             this.tabSpecFlowBDD.BackColor = System.Drawing.SystemColors.Control;
+            this.tabSpecFlowBDD.Controls.Add(this.lvwBDDUserDefinedMetricsList);
             this.tabSpecFlowBDD.Controls.Add(this.label3);
             this.tabSpecFlowBDD.Controls.Add(this.dgvBDDAssemblies);
             this.tabSpecFlowBDD.Controls.Add(this.dgvBDDMethods);
@@ -548,7 +582,7 @@
             this.tabSpecFlowBDD.Controls.Add(this.rtfBDDMetricProperties);
             this.tabSpecFlowBDD.Location = new System.Drawing.Point(4, 4);
             this.tabSpecFlowBDD.Name = "tabSpecFlowBDD";
-            this.tabSpecFlowBDD.Size = new System.Drawing.Size(958, 558);
+            this.tabSpecFlowBDD.Size = new System.Drawing.Size(1233, 558);
             this.tabSpecFlowBDD.TabIndex = 2;
             this.tabSpecFlowBDD.Text = "SpecFlow BDD";
             // 
@@ -769,29 +803,54 @@
             this.lblNDependProjectPath.TabIndex = 31;
             this.lblNDependProjectPath.Text = "Project Path";
             // 
-            // lvwCodeUserDefinedMetricsList
+            // lvwUnitTestsUserDefinedMetricsList
             // 
-            this.lvwCodeUserDefinedMetricsList.CheckBoxes = true;
-            this.lvwCodeUserDefinedMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader5,
-            this.columnHeader6});
-            this.lvwCodeUserDefinedMetricsList.GridLines = true;
-            this.lvwCodeUserDefinedMetricsList.Location = new System.Drawing.Point(965, 51);
-            this.lvwCodeUserDefinedMetricsList.Name = "lvwCodeUserDefinedMetricsList";
-            this.lvwCodeUserDefinedMetricsList.Size = new System.Drawing.Size(262, 386);
-            this.lvwCodeUserDefinedMetricsList.TabIndex = 29;
-            this.lvwCodeUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
-            this.lvwCodeUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwUnitTestsUserDefinedMetricsList.CheckBoxes = true;
+            this.lvwUnitTestsUserDefinedMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader7,
+            this.columnHeader8});
+            this.lvwUnitTestsUserDefinedMetricsList.GridLines = true;
+            this.lvwUnitTestsUserDefinedMetricsList.Location = new System.Drawing.Point(955, 51);
+            this.lvwUnitTestsUserDefinedMetricsList.Name = "lvwUnitTestsUserDefinedMetricsList";
+            this.lvwUnitTestsUserDefinedMetricsList.Size = new System.Drawing.Size(262, 386);
+            this.lvwUnitTestsUserDefinedMetricsList.TabIndex = 41;
+            this.lvwUnitTestsUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
+            this.lvwUnitTestsUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwUnitTestsUserDefinedMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwUnitTestsUserDefinedMetricsList_SelectedIndexChanged);
             // 
-            // columnHeader5
+            // columnHeader7
             // 
-            this.columnHeader5.Text = "Metric Name";
-            this.columnHeader5.Width = 195;
+            this.columnHeader7.Text = "Metric Name";
+            this.columnHeader7.Width = 195;
             // 
-            // columnHeader6
+            // columnHeader8
             // 
-            this.columnHeader6.Text = "Value";
-            this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader8.Text = "Value";
+            this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lvwBDDUserDefinedMetricsList
+            // 
+            this.lvwBDDUserDefinedMetricsList.CheckBoxes = true;
+            this.lvwBDDUserDefinedMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader9,
+            this.columnHeader10});
+            this.lvwBDDUserDefinedMetricsList.GridLines = true;
+            this.lvwBDDUserDefinedMetricsList.Location = new System.Drawing.Point(955, 51);
+            this.lvwBDDUserDefinedMetricsList.Name = "lvwBDDUserDefinedMetricsList";
+            this.lvwBDDUserDefinedMetricsList.Size = new System.Drawing.Size(262, 386);
+            this.lvwBDDUserDefinedMetricsList.TabIndex = 54;
+            this.lvwBDDUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
+            this.lvwBDDUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Metric Name";
+            this.columnHeader9.Width = 195;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Value";
+            this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // MetricsViewer
             // 
@@ -897,6 +956,12 @@
         private System.Windows.Forms.ListView lvwCodeUserDefinedMetricsList;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ListView lvwUnitTestsUserDefinedMetricsList;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ListView lvwBDDUserDefinedMetricsList;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
     }
 }
 
