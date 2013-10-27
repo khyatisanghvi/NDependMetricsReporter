@@ -420,95 +420,52 @@ namespace NDependMetricsReporter
 
         private void lvwCodeMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewSelectedIndexEventManager(lvwCodeMetricsList, false, rtfCodeMetricProperties);
+            ListViewSelectedIndexEventManager((ListView)sender, rtfCodeMetricProperties);
         }
 
         private void lvwUnitTestsMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewSelectedIndexEventManager(lvwUnitTestsMetricsList, false, rtfUnitTestsMetricProperties);
+            ListViewSelectedIndexEventManager((ListView)sender, rtfUnitTestsMetricProperties);
         }
 
         private void lvwBDDMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewSelectedIndexEventManager(lvwBDDMetricsList, false, rtfBDDMetricProperties);
+            ListViewSelectedIndexEventManager((ListView)sender, rtfBDDMetricProperties);
         }
 
         private void lvwCodeUserDefinedMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewSelectedIndexEventManager(lvwCodeUserDefinedMetricsList, true, this.rtfCodeMetricProperties);
+            ListViewSelectedIndexEventManager((ListView)sender, rtfCodeMetricProperties);
         }
 
         private void lvwUnitTestsUserDefinedMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewSelectedIndexEventManager(lvwUnitTestsUserDefinedMetricsList, true, this.rtfUnitTestsMetricProperties);
+            ListViewSelectedIndexEventManager((ListView)sender, rtfUnitTestsMetricProperties);
         }
 
-        private void codeSectionsTabs_SelectedIndexChanged(object sender, EventArgs e)
+        private void lvwBDDUserDefinedMetricsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewSelectedIndexEventManager(lvwBDDUserDefinedMetricsList, true, this.rtfBDDMetricProperties);
+            ListViewSelectedIndexEventManager((ListView)sender, rtfBDDMetricProperties);
         }
 
-        private void ListViewSelectedIndexEventManager(ListView senderListView, bool userDefinedMetric, RichTextBox targetRichTextBox)
+        private void ListViewSelectedIndexEventManager(ListView senderListView, RichTextBox targetRichTextBox)
         {
             string metricName="";
             string metricDescription="";
             if (senderListView.SelectedItems.Count > 0)
             {
-                ListViewItem lvi = senderListView.SelectedItems[0];
-                if (userDefinedMetric)
+                object lviTag = senderListView.SelectedItems[0].Tag;
+                if (lviTag.GetType()==typeof(UserDefinedMetricDefinition))
                 {
-                    metricName = ((UserDefinedMetricDefinition)lvi.Tag).MetricName;
-                    metricDescription = ((UserDefinedMetricDefinition)lvi.Tag).Description;
+                    metricName = ((UserDefinedMetricDefinition)lviTag).MetricName;
+                    metricDescription = ((UserDefinedMetricDefinition)lviTag).Description;
                 }
                 else
                 {
-                    metricName = ((NDependMetricDefinition)lvi.Tag).MetricName;
-                    metricDescription = ((NDependMetricDefinition)lvi.Tag).Description;                    
+                    metricName = ((NDependMetricDefinition)lviTag).MetricName;
+                    metricDescription = ((NDependMetricDefinition)lviTag).Description;                    
                 }
                 FillMetricDescriptionRTFBox(targetRichTextBox, metricName, metricDescription);                
-            }
-        }
-
-        private void lvwCodeMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            ListViewmCheckEventManager(lvwCodeMetricsList, e);
-        }
-
-        private void lvwUnitTestsMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            ListViewmCheckEventManager(lvwUnitTestsMetricsList, e);
-        }
-
-        private void lvwBDDMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            ListViewmCheckEventManager(lvwBDDMetricsList, e);
-        }
-
-        private void lvwCodeUserDefinedMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            ListViewmCheckEventManager(lvwCodeUserDefinedMetricsList, e);
-        }
-
-        private void lvwUnitTestsUserDefinedMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            ListViewmCheckEventManager(lvwUnitTestsUserDefinedMetricsList, e);
-        }
-
-        private void lvwBDDUserDefinedMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            ListViewmCheckEventManager(lvwBDDUserDefinedMetricsList, e);
-        }
-
-        private void ListViewmCheckEventManager(ListView senderListView, ItemCheckEventArgs eventArguments)
-        {
-            if (inhibitAutocheckOnDoubleClick)
-            {
-                eventArguments.NewValue = eventArguments.CurrentValue;
-            }
-            else
-            {
-                DataGridView sourceDataGridView = (DataGridView)senderListView.Tag;
-                sourceDataGridView.Columns[senderListView.Items[eventArguments.Index].Text].Visible = (eventArguments.NewValue == CheckState.Checked);
             }
         }
 
@@ -542,53 +499,138 @@ namespace NDependMetricsReporter
             inhibitAutocheckOnDoubleClick = false;
         }
 
+        private void lvwCodeUserDefinedMetricsList_MouseDown(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = true;
+        }
+
+        private void lvwCodeUserDefinedMetricsList_MouseUp(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = false;
+        }
+
+        private void lvwUnitTestsUserDefinedMetricsList_MouseDown(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = true;
+        }
+
+        private void lvwUnitTestsUserDefinedMetricsList_MouseUp(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = false;
+        }
+
+        private void lvwBDDUserDefinedMetricsList_MouseDown(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = true;
+        }
+
+        private void lvwBDDUserDefinedMetricsList_MouseUp(object sender, MouseEventArgs e)
+        {
+            inhibitAutocheckOnDoubleClick = false;
+        }
+
+        private void lvwCodeMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ListViewmCheckEventManager((ListView)sender, e);
+        }
+
+        private void lvwUnitTestsMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ListViewmCheckEventManager((ListView)sender, e);
+        }
+
+        private void lvwBDDMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ListViewmCheckEventManager((ListView)sender, e);
+        }
+
+        private void lvwCodeUserDefinedMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ListViewmCheckEventManager((ListView)sender, e);
+        }
+
+        private void lvwUnitTestsUserDefinedMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ListViewmCheckEventManager((ListView)sender, e);
+        }
+
+        private void lvwBDDUserDefinedMetricsList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ListViewmCheckEventManager((ListView)sender, e);
+        }
+
+        private void ListViewmCheckEventManager(ListView senderListView, ItemCheckEventArgs eventArguments)
+        {
+            if (inhibitAutocheckOnDoubleClick)
+            {
+                eventArguments.NewValue = eventArguments.CurrentValue;
+            }
+            else
+            {
+                DataGridView sourceDataGridView = (DataGridView)senderListView.Tag;
+                sourceDataGridView.Columns[senderListView.Items[eventArguments.Index].Text].Visible = (eventArguments.NewValue == CheckState.Checked);
+            }
+        }
+
         private void lvwCodeMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string selectedCodeElementName = this.lblCodeElementName.Text;
-            ListViewMouseDoubleClickEventManager(this.lvwCodeMetricsList, selectedCodeElementName);
+            ListViewMouseDoubleClickEventManager((ListView)sender);
         }
 
         private void lvwUnitTestsMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string selectedCodeElementName = this.lblUnitTestsCodeElementName.Text;
-            ListViewMouseDoubleClickEventManager(this.lvwUnitTestsMetricsList, selectedCodeElementName);
+            ListViewMouseDoubleClickEventManager((ListView)sender);
         }
 
         private void lvwBDDMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string selectedCodeElementName = this.lblBDDCodeElementName.Text;
-            ListViewMouseDoubleClickEventManager(this.lvwBDDMetricsList, selectedCodeElementName);
+            ListViewMouseDoubleClickEventManager((ListView)sender);
         }
 
-        private void ListViewMouseDoubleClickEventManager(ListView senderListView, string codeElementName)
+        private void lvwCodeUserDefinedMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ListViewMouseDoubleClickEventManager((ListView)sender);
+        }
+
+        private void lvwUnitTestsUserDefinedMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ListViewMouseDoubleClickEventManager((ListView)sender);
+        }
+
+        private void lvwBDDUserDefinedMetricsList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ListViewMouseDoubleClickEventManager((ListView)sender);
+        }
+
+        private void ListViewMouseDoubleClickEventManager(ListView senderListView)
         {
             if (senderListView.SelectedItems.Count > 0)
             {
-                ListViewItem lvi = senderListView.SelectedItems[0];
-                NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
                 DataGridView sourceDataGridView = (DataGridView)senderListView.Tag;
-                DataTable metricsDataTable = (DataTable)sourceDataGridView.DataSource;
-                DataGridViewTagInfo dataGridViewTagInfo = ((DataGridViewTagInfo)sourceDataGridView.Tag);
-                DataGridView assembliesDatagrid = GetAssebliesDataGridView(sourceDataGridView);
-                string assemblyName = assembliesDatagrid.SelectedRows[0].Cells[0].Value.ToString();
-                string parentCodeElementName = dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView == null ?
-                    ((IAssembly)codeElementsManager.CodeBase.Assemblies.WithName(assemblyName).First()).VisualStudioProjectFilePath.FileName :
-                    dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
-                MetricProperties metricProperties = new MetricProperties(
-                    nDependMetricDefinition,
-                    codeElementName,
-                    metricsDataTable,
-                    parentCodeElementName,
-                    assemblyName,
-                    nDependProject);
+                string codeElementName = sourceDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                ListViewItem lvi = senderListView.SelectedItems[0];
+                if (lvi.Tag.GetType()==typeof(NDependMetricDefinition))
+                {
+                    NDependMetricDefinition nDependMetricDefinition = (NDependMetricDefinition)lvi.Tag;
+                    DataTable metricsDataTable = (DataTable)sourceDataGridView.DataSource;
+                    DataGridViewTagInfo dataGridViewTagInfo = ((DataGridViewTagInfo)sourceDataGridView.Tag);
+                    DataGridView assembliesDatagrid = GetAssebliesDataGridView(sourceDataGridView);
+                    string assemblyName = assembliesDatagrid.SelectedRows[0].Cells[0].Value.ToString();
+                    string parentCodeElementName = dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView == null ?
+                        ((IAssembly)codeElementsManager.CodeBase.Assemblies.WithName(assemblyName).First()).VisualStudioProjectFilePath.FileName :
+                        dataGridViewTagInfo.LinkedDataGrids.ParentDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+                    MetricProperties metricProperties = new MetricProperties(
+                        nDependMetricDefinition,
+                        codeElementName,
+                        metricsDataTable,
+                        parentCodeElementName,
+                        assemblyName,
+                        nDependProject);
 
-                metricProperties.Show();
+                    metricProperties.Show();
+                }
             }
         }
-
-
-
-
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -664,6 +706,12 @@ namespace NDependMetricsReporter
                 get { return childDataGridView; }
             }
         }
+
+
+
+
+
+
 
 
 
