@@ -47,10 +47,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.codeSectionsTabs = new System.Windows.Forms.TabControl();
             this.tabCodeMetrics = new System.Windows.Forms.TabPage();
+            this.codeMetricsTabsControl = new System.Windows.Forms.TabControl();
+            this.tabNDepend = new System.Windows.Forms.TabPage();
+            this.tabUserDefined = new System.Windows.Forms.TabPage();
             this.lvwCodeUserDefinedMetricsList = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabUnitTests = new System.Windows.Forms.TabPage();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lvwUnitTestsMetricsList = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lvwUnitTestsUserDefinedMetricsList = new System.Windows.Forms.ListView();
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label2 = new System.Windows.Forms.Label();
             this.dgvUnitTestsAssemblies = new System.Windows.Forms.DataGridView();
             this.dgvUnitTestsMethods = new System.Windows.Forms.DataGridView();
@@ -58,15 +70,21 @@
             this.dgvUnitTestsTypes = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvUnitTestsNamespaces = new System.Windows.Forms.DataGridView();
-            this.lvwUnitTestsMetricsList = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblUnitTestsCodeElementName = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblUnitTestsCodeElementType = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.rtfUnitTestsMetricProperties = new System.Windows.Forms.RichTextBox();
             this.tabSpecFlowBDD = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lvwBDDMetricsList = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lvwBDDUserDefinedMetricsList = new System.Windows.Forms.ListView();
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.dgvBDDAssemblies = new System.Windows.Forms.DataGridView();
             this.dgvBDDMethods = new System.Windows.Forms.DataGridView();
@@ -74,9 +92,6 @@
             this.dgvBDDTypes = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
             this.dgvBDDNamespaces = new System.Windows.Forms.DataGridView();
-            this.lvwBDDMetricsList = new System.Windows.Forms.ListView();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblBDDCodeElementName = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.lblBDDCodeElementType = new System.Windows.Forms.Label();
@@ -88,51 +103,37 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tBoxProjectPath = new System.Windows.Forms.TextBox();
             this.lblNDependProjectPath = new System.Windows.Forms.Label();
-            this.lvwUnitTestsUserDefinedMetricsList = new System.Windows.Forms.ListView();
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwBDDUserDefinedMetricsList = new System.Windows.Forms.ListView();
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.codeMetricsTabsControl = new System.Windows.Forms.TabControl();
-            this.tabNDepend = new System.Windows.Forms.TabPage();
-            this.tabUserDefined = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeNamespaces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeMethods)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeAssemblies)).BeginInit();
             this.codeSectionsTabs.SuspendLayout();
             this.tabCodeMetrics.SuspendLayout();
+            this.codeMetricsTabsControl.SuspendLayout();
+            this.tabNDepend.SuspendLayout();
+            this.tabUserDefined.SuspendLayout();
             this.tabUnitTests.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsAssemblies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsMethods)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsNamespaces)).BeginInit();
             this.tabSpecFlowBDD.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDAssemblies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDMethods)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDNamespaces)).BeginInit();
             this.menuMain.SuspendLayout();
-            this.codeMetricsTabsControl.SuspendLayout();
-            this.tabNDepend.SuspendLayout();
-            this.tabUserDefined.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tboxProjectName
             // 
+            this.tboxProjectName.BackColor = System.Drawing.SystemColors.Control;
             this.tboxProjectName.Location = new System.Drawing.Point(89, 30);
             this.tboxProjectName.Name = "tboxProjectName";
             this.tboxProjectName.ReadOnly = true;
@@ -329,7 +330,7 @@
             // 
             // tabCodeMetrics
             // 
-            this.tabCodeMetrics.BackColor = System.Drawing.SystemColors.Control;
+            this.tabCodeMetrics.BackColor = System.Drawing.Color.White;
             this.tabCodeMetrics.Controls.Add(this.codeMetricsTabsControl);
             this.tabCodeMetrics.Controls.Add(this.label1);
             this.tabCodeMetrics.Controls.Add(this.dgvCodeAssemblies);
@@ -350,6 +351,39 @@
             this.tabCodeMetrics.Size = new System.Drawing.Size(965, 558);
             this.tabCodeMetrics.TabIndex = 0;
             this.tabCodeMetrics.Text = "Code";
+            // 
+            // codeMetricsTabsControl
+            // 
+            this.codeMetricsTabsControl.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.codeMetricsTabsControl.Controls.Add(this.tabNDepend);
+            this.codeMetricsTabsControl.Controls.Add(this.tabUserDefined);
+            this.codeMetricsTabsControl.Location = new System.Drawing.Point(686, 51);
+            this.codeMetricsTabsControl.Name = "codeMetricsTabsControl";
+            this.codeMetricsTabsControl.SelectedIndex = 0;
+            this.codeMetricsTabsControl.Size = new System.Drawing.Size(272, 412);
+            this.codeMetricsTabsControl.TabIndex = 30;
+            // 
+            // tabNDepend
+            // 
+            this.tabNDepend.Controls.Add(this.lvwCodeMetricsList);
+            this.tabNDepend.Location = new System.Drawing.Point(4, 4);
+            this.tabNDepend.Name = "tabNDepend";
+            this.tabNDepend.Padding = new System.Windows.Forms.Padding(3);
+            this.tabNDepend.Size = new System.Drawing.Size(264, 386);
+            this.tabNDepend.TabIndex = 0;
+            this.tabNDepend.Text = "NDepend";
+            this.tabNDepend.UseVisualStyleBackColor = true;
+            // 
+            // tabUserDefined
+            // 
+            this.tabUserDefined.Controls.Add(this.lvwCodeUserDefinedMetricsList);
+            this.tabUserDefined.Location = new System.Drawing.Point(4, 4);
+            this.tabUserDefined.Name = "tabUserDefined";
+            this.tabUserDefined.Padding = new System.Windows.Forms.Padding(3);
+            this.tabUserDefined.Size = new System.Drawing.Size(264, 386);
+            this.tabUserDefined.TabIndex = 1;
+            this.tabUserDefined.Text = "UserDefined";
+            this.tabUserDefined.UseVisualStyleBackColor = true;
             // 
             // lvwCodeUserDefinedMetricsList
             // 
@@ -402,6 +436,97 @@
             this.tabUnitTests.Size = new System.Drawing.Size(965, 558);
             this.tabUnitTests.TabIndex = 1;
             this.tabUnitTests.Text = "Unit Tests";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(686, 51);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(272, 412);
+            this.tabControl1.TabIndex = 42;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.lvwUnitTestsMetricsList);
+            this.tabPage1.Location = new System.Drawing.Point(4, 4);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(264, 386);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "NDepend";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lvwUnitTestsMetricsList
+            // 
+            this.lvwUnitTestsMetricsList.CheckBoxes = true;
+            this.lvwUnitTestsMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.lvwUnitTestsMetricsList.GridLines = true;
+            this.lvwUnitTestsMetricsList.Location = new System.Drawing.Point(0, 0);
+            this.lvwUnitTestsMetricsList.Name = "lvwUnitTestsMetricsList";
+            this.lvwUnitTestsMetricsList.Size = new System.Drawing.Size(262, 386);
+            this.lvwUnitTestsMetricsList.TabIndex = 30;
+            this.lvwUnitTestsMetricsList.UseCompatibleStateImageBehavior = false;
+            this.lvwUnitTestsMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwUnitTestsMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwUnitTestsMetricsList_ItemCheck);
+            this.lvwUnitTestsMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwUnitTestsMetricsList_SelectedIndexChanged);
+            this.lvwUnitTestsMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsMetricsList_MouseDoubleClick);
+            this.lvwUnitTestsMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsMetricsList_MouseDown);
+            this.lvwUnitTestsMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsMetricsList_MouseUp);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Metric Name";
+            this.columnHeader1.Width = 195;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Value";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.lvwUnitTestsUserDefinedMetricsList);
+            this.tabPage2.Location = new System.Drawing.Point(4, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(264, 386);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "UserDefined";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lvwUnitTestsUserDefinedMetricsList
+            // 
+            this.lvwUnitTestsUserDefinedMetricsList.CheckBoxes = true;
+            this.lvwUnitTestsUserDefinedMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader7,
+            this.columnHeader8});
+            this.lvwUnitTestsUserDefinedMetricsList.GridLines = true;
+            this.lvwUnitTestsUserDefinedMetricsList.Location = new System.Drawing.Point(0, 0);
+            this.lvwUnitTestsUserDefinedMetricsList.Name = "lvwUnitTestsUserDefinedMetricsList";
+            this.lvwUnitTestsUserDefinedMetricsList.Size = new System.Drawing.Size(260, 386);
+            this.lvwUnitTestsUserDefinedMetricsList.TabIndex = 41;
+            this.lvwUnitTestsUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
+            this.lvwUnitTestsUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwUnitTestsUserDefinedMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwUnitTestsUserDefinedMetricsList_ItemCheck);
+            this.lvwUnitTestsUserDefinedMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwUnitTestsUserDefinedMetricsList_SelectedIndexChanged);
+            this.lvwUnitTestsUserDefinedMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsUserDefinedMetricsList_MouseDoubleClick);
+            this.lvwUnitTestsUserDefinedMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsUserDefinedMetricsList_MouseDown);
+            this.lvwUnitTestsUserDefinedMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsUserDefinedMetricsList_MouseUp);
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Metric Name";
+            this.columnHeader7.Width = 195;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Value";
+            this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
             // 
@@ -495,35 +620,6 @@
             this.dgvUnitTestsNamespaces.SelectionChanged += new System.EventHandler(this.dgvUnitTestsNamespaces_SelectionChanged);
             this.dgvUnitTestsNamespaces.Click += new System.EventHandler(this.dgvUnitTestsNamespaces_Click);
             // 
-            // lvwUnitTestsMetricsList
-            // 
-            this.lvwUnitTestsMetricsList.CheckBoxes = true;
-            this.lvwUnitTestsMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.lvwUnitTestsMetricsList.GridLines = true;
-            this.lvwUnitTestsMetricsList.Location = new System.Drawing.Point(0, 0);
-            this.lvwUnitTestsMetricsList.Name = "lvwUnitTestsMetricsList";
-            this.lvwUnitTestsMetricsList.Size = new System.Drawing.Size(262, 386);
-            this.lvwUnitTestsMetricsList.TabIndex = 30;
-            this.lvwUnitTestsMetricsList.UseCompatibleStateImageBehavior = false;
-            this.lvwUnitTestsMetricsList.View = System.Windows.Forms.View.Details;
-            this.lvwUnitTestsMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwUnitTestsMetricsList_ItemCheck);
-            this.lvwUnitTestsMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwUnitTestsMetricsList_SelectedIndexChanged);
-            this.lvwUnitTestsMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsMetricsList_MouseDoubleClick);
-            this.lvwUnitTestsMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsMetricsList_MouseDown);
-            this.lvwUnitTestsMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsMetricsList_MouseUp);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Metric Name";
-            this.columnHeader1.Width = 195;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Value";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // lblUnitTestsCodeElementName
             // 
             this.lblUnitTestsCodeElementName.AutoSize = true;
@@ -591,6 +687,97 @@
             this.tabSpecFlowBDD.Size = new System.Drawing.Size(965, 558);
             this.tabSpecFlowBDD.TabIndex = 2;
             this.tabSpecFlowBDD.Text = "SpecFlow BDD";
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Location = new System.Drawing.Point(686, 51);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(272, 412);
+            this.tabControl2.TabIndex = 55;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.lvwBDDMetricsList);
+            this.tabPage3.Location = new System.Drawing.Point(4, 4);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(264, 386);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "NDepend";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // lvwBDDMetricsList
+            // 
+            this.lvwBDDMetricsList.CheckBoxes = true;
+            this.lvwBDDMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4});
+            this.lvwBDDMetricsList.GridLines = true;
+            this.lvwBDDMetricsList.Location = new System.Drawing.Point(0, 0);
+            this.lvwBDDMetricsList.Name = "lvwBDDMetricsList";
+            this.lvwBDDMetricsList.Size = new System.Drawing.Size(262, 386);
+            this.lvwBDDMetricsList.TabIndex = 43;
+            this.lvwBDDMetricsList.UseCompatibleStateImageBehavior = false;
+            this.lvwBDDMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwBDDMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwBDDMetricsList_ItemCheck);
+            this.lvwBDDMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwBDDMetricsList_SelectedIndexChanged);
+            this.lvwBDDMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwBDDMetricsList_MouseDoubleClick);
+            this.lvwBDDMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwBDDMetricsList_MouseDown);
+            this.lvwBDDMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwBDDMetricsList_MouseUp);
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Metric Name";
+            this.columnHeader3.Width = 195;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Value";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.lvwBDDUserDefinedMetricsList);
+            this.tabPage4.Location = new System.Drawing.Point(4, 4);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(264, 386);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "UserDefined";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // lvwBDDUserDefinedMetricsList
+            // 
+            this.lvwBDDUserDefinedMetricsList.CheckBoxes = true;
+            this.lvwBDDUserDefinedMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader9,
+            this.columnHeader10});
+            this.lvwBDDUserDefinedMetricsList.GridLines = true;
+            this.lvwBDDUserDefinedMetricsList.Location = new System.Drawing.Point(0, 0);
+            this.lvwBDDUserDefinedMetricsList.Name = "lvwBDDUserDefinedMetricsList";
+            this.lvwBDDUserDefinedMetricsList.Size = new System.Drawing.Size(262, 386);
+            this.lvwBDDUserDefinedMetricsList.TabIndex = 54;
+            this.lvwBDDUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
+            this.lvwBDDUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
+            this.lvwBDDUserDefinedMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwBDDUserDefinedMetricsList_ItemCheck);
+            this.lvwBDDUserDefinedMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwBDDUserDefinedMetricsList_SelectedIndexChanged);
+            this.lvwBDDUserDefinedMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwBDDUserDefinedMetricsList_MouseDoubleClick);
+            this.lvwBDDUserDefinedMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwBDDUserDefinedMetricsList_MouseDown);
+            this.lvwBDDUserDefinedMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwBDDUserDefinedMetricsList_MouseUp);
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Metric Name";
+            this.columnHeader9.Width = 195;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Value";
+            this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
@@ -684,35 +871,6 @@
             this.dgvBDDNamespaces.SelectionChanged += new System.EventHandler(this.dgvBDDNamespaces_SelectionChanged);
             this.dgvBDDNamespaces.Click += new System.EventHandler(this.dgvBDDNamespaces_Click);
             // 
-            // lvwBDDMetricsList
-            // 
-            this.lvwBDDMetricsList.CheckBoxes = true;
-            this.lvwBDDMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4});
-            this.lvwBDDMetricsList.GridLines = true;
-            this.lvwBDDMetricsList.Location = new System.Drawing.Point(0, 0);
-            this.lvwBDDMetricsList.Name = "lvwBDDMetricsList";
-            this.lvwBDDMetricsList.Size = new System.Drawing.Size(262, 386);
-            this.lvwBDDMetricsList.TabIndex = 43;
-            this.lvwBDDMetricsList.UseCompatibleStateImageBehavior = false;
-            this.lvwBDDMetricsList.View = System.Windows.Forms.View.Details;
-            this.lvwBDDMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwBDDMetricsList_ItemCheck);
-            this.lvwBDDMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwBDDMetricsList_SelectedIndexChanged);
-            this.lvwBDDMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwBDDMetricsList_MouseDoubleClick);
-            this.lvwBDDMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwBDDMetricsList_MouseDown);
-            this.lvwBDDMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwBDDMetricsList_MouseUp);
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Metric Name";
-            this.columnHeader3.Width = 195;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Value";
-            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // lblBDDCodeElementName
             // 
             this.lblBDDCodeElementName.AutoSize = true;
@@ -761,6 +919,7 @@
             // 
             // menuMain
             // 
+            this.menuMain.BackColor = System.Drawing.SystemColors.Window;
             this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ndependProjectToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -774,19 +933,24 @@
             // 
             this.ndependProjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
+            this.ndependProjectToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ndependProjectToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ndependProjectToolStripMenuItem.Name = "ndependProjectToolStripMenuItem";
             this.ndependProjectToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
             this.ndependProjectToolStripMenuItem.Text = "Ndepend Project";
             // 
             // openToolStripMenuItem
             // 
+            this.openToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
+            this.exitToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.exitToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "Exit";
@@ -794,6 +958,7 @@
             // 
             // tBoxProjectPath
             // 
+            this.tBoxProjectPath.BackColor = System.Drawing.SystemColors.Control;
             this.tBoxProjectPath.Location = new System.Drawing.Point(466, 30);
             this.tBoxProjectPath.Name = "tBoxProjectPath";
             this.tBoxProjectPath.ReadOnly = true;
@@ -808,163 +973,6 @@
             this.lblNDependProjectPath.Size = new System.Drawing.Size(65, 13);
             this.lblNDependProjectPath.TabIndex = 31;
             this.lblNDependProjectPath.Text = "Project Path";
-            // 
-            // lvwUnitTestsUserDefinedMetricsList
-            // 
-            this.lvwUnitTestsUserDefinedMetricsList.CheckBoxes = true;
-            this.lvwUnitTestsUserDefinedMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7,
-            this.columnHeader8});
-            this.lvwUnitTestsUserDefinedMetricsList.GridLines = true;
-            this.lvwUnitTestsUserDefinedMetricsList.Location = new System.Drawing.Point(0, 0);
-            this.lvwUnitTestsUserDefinedMetricsList.Name = "lvwUnitTestsUserDefinedMetricsList";
-            this.lvwUnitTestsUserDefinedMetricsList.Size = new System.Drawing.Size(260, 386);
-            this.lvwUnitTestsUserDefinedMetricsList.TabIndex = 41;
-            this.lvwUnitTestsUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
-            this.lvwUnitTestsUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
-            this.lvwUnitTestsUserDefinedMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwUnitTestsUserDefinedMetricsList_ItemCheck);
-            this.lvwUnitTestsUserDefinedMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwUnitTestsUserDefinedMetricsList_SelectedIndexChanged);
-            this.lvwUnitTestsUserDefinedMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsUserDefinedMetricsList_MouseDoubleClick);
-            this.lvwUnitTestsUserDefinedMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsUserDefinedMetricsList_MouseDown);
-            this.lvwUnitTestsUserDefinedMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwUnitTestsUserDefinedMetricsList_MouseUp);
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Metric Name";
-            this.columnHeader7.Width = 195;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "Value";
-            this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lvwBDDUserDefinedMetricsList
-            // 
-            this.lvwBDDUserDefinedMetricsList.CheckBoxes = true;
-            this.lvwBDDUserDefinedMetricsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader9,
-            this.columnHeader10});
-            this.lvwBDDUserDefinedMetricsList.GridLines = true;
-            this.lvwBDDUserDefinedMetricsList.Location = new System.Drawing.Point(0, 0);
-            this.lvwBDDUserDefinedMetricsList.Name = "lvwBDDUserDefinedMetricsList";
-            this.lvwBDDUserDefinedMetricsList.Size = new System.Drawing.Size(262, 386);
-            this.lvwBDDUserDefinedMetricsList.TabIndex = 54;
-            this.lvwBDDUserDefinedMetricsList.UseCompatibleStateImageBehavior = false;
-            this.lvwBDDUserDefinedMetricsList.View = System.Windows.Forms.View.Details;
-            this.lvwBDDUserDefinedMetricsList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvwBDDUserDefinedMetricsList_ItemCheck);
-            this.lvwBDDUserDefinedMetricsList.SelectedIndexChanged += new System.EventHandler(this.lvwBDDUserDefinedMetricsList_SelectedIndexChanged);
-            this.lvwBDDUserDefinedMetricsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwBDDUserDefinedMetricsList_MouseDoubleClick);
-            this.lvwBDDUserDefinedMetricsList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvwBDDUserDefinedMetricsList_MouseDown);
-            this.lvwBDDUserDefinedMetricsList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwBDDUserDefinedMetricsList_MouseUp);
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "Metric Name";
-            this.columnHeader9.Width = 195;
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "Value";
-            this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // codeMetricsTabsControl
-            // 
-            this.codeMetricsTabsControl.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.codeMetricsTabsControl.Controls.Add(this.tabNDepend);
-            this.codeMetricsTabsControl.Controls.Add(this.tabUserDefined);
-            this.codeMetricsTabsControl.Location = new System.Drawing.Point(686, 51);
-            this.codeMetricsTabsControl.Name = "codeMetricsTabsControl";
-            this.codeMetricsTabsControl.SelectedIndex = 0;
-            this.codeMetricsTabsControl.Size = new System.Drawing.Size(272, 412);
-            this.codeMetricsTabsControl.TabIndex = 30;
-            // 
-            // tabNDepend
-            // 
-            this.tabNDepend.Controls.Add(this.lvwCodeMetricsList);
-            this.tabNDepend.Location = new System.Drawing.Point(4, 4);
-            this.tabNDepend.Name = "tabNDepend";
-            this.tabNDepend.Padding = new System.Windows.Forms.Padding(3);
-            this.tabNDepend.Size = new System.Drawing.Size(264, 386);
-            this.tabNDepend.TabIndex = 0;
-            this.tabNDepend.Text = "NDepend";
-            this.tabNDepend.UseVisualStyleBackColor = true;
-            // 
-            // tabUserDefined
-            // 
-            this.tabUserDefined.Controls.Add(this.lvwCodeUserDefinedMetricsList);
-            this.tabUserDefined.Location = new System.Drawing.Point(4, 4);
-            this.tabUserDefined.Name = "tabUserDefined";
-            this.tabUserDefined.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUserDefined.Size = new System.Drawing.Size(264, 386);
-            this.tabUserDefined.TabIndex = 1;
-            this.tabUserDefined.Text = "UserDefined";
-            this.tabUserDefined.UseVisualStyleBackColor = true;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(686, 51);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(272, 412);
-            this.tabControl1.TabIndex = 42;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.lvwUnitTestsMetricsList);
-            this.tabPage1.Location = new System.Drawing.Point(4, 4);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(264, 386);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "NDepend";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.lvwUnitTestsUserDefinedMetricsList);
-            this.tabPage2.Location = new System.Drawing.Point(4, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(264, 386);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "UserDefined";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Location = new System.Drawing.Point(686, 51);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(272, 412);
-            this.tabControl2.TabIndex = 55;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.lvwBDDMetricsList);
-            this.tabPage3.Location = new System.Drawing.Point(4, 4);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(264, 386);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "NDepend";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.lvwBDDUserDefinedMetricsList);
-            this.tabPage4.Location = new System.Drawing.Point(4, 4);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(264, 386);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "UserDefined";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // MetricsViewer
             // 
@@ -988,29 +996,29 @@
             this.codeSectionsTabs.ResumeLayout(false);
             this.tabCodeMetrics.ResumeLayout(false);
             this.tabCodeMetrics.PerformLayout();
+            this.codeMetricsTabsControl.ResumeLayout(false);
+            this.tabNDepend.ResumeLayout(false);
+            this.tabUserDefined.ResumeLayout(false);
             this.tabUnitTests.ResumeLayout(false);
             this.tabUnitTests.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsAssemblies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsMethods)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsTypes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnitTestsNamespaces)).EndInit();
             this.tabSpecFlowBDD.ResumeLayout(false);
             this.tabSpecFlowBDD.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDAssemblies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDMethods)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDTypes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBDDNamespaces)).EndInit();
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
-            this.codeMetricsTabsControl.ResumeLayout(false);
-            this.tabNDepend.ResumeLayout(false);
-            this.tabUserDefined.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
