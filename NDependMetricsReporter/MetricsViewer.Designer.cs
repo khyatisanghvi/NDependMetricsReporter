@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MetricsViewer));
             this.tboxProjectName = new System.Windows.Forms.TextBox();
             this.lblNDependProjectName = new System.Windows.Forms.Label();
             this.lblCodeAssembliesDataGridView = new System.Windows.Forms.Label();
@@ -943,7 +944,7 @@
             // 
             this.openToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -986,9 +987,10 @@
             this.Controls.Add(this.codeSectionsTabs);
             this.Controls.Add(this.menuMain);
             this.Controls.Add(this.lblNDependProjectName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuMain;
             this.Name = "MetricsViewer";
-            this.Text = "Metrics Viewer";
+            this.Text = "NDepend Metrics Reporter";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeNamespaces)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeTypes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeMethods)).EndInit();
