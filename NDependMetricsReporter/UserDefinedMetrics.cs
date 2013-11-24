@@ -78,6 +78,13 @@ namespace NDependMetricsReporter
             return (averageLines.HasValue ? (double)averageLines.Value : 0);
         }
 
+        public double AverageCyclomaticComplexity(string assemblyName)
+        {
+            IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
+            List<ushort?> ciclomaticComplexityOfAllMethods = assembly.ChildMethods.Select(method => method.CyclomaticComplexity).ToList();
+            decimal? average = ciclomaticComplexityOfAllMethods.Average(value => (decimal?)value);
+            return (average.HasValue ? (double)average.Value : 0);
+        }
         private int CountMethodsCalledFromAssembly(string methodName, string assemblyName)
         {
             IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);

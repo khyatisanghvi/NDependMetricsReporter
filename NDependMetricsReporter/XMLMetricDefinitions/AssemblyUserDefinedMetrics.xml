@@ -3,10 +3,10 @@
   <UserDefinedMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <MetricType>System.Double</MetricType>
-    <ResumedMetricName>AverageLCOM</ResumedMetricName>
+    <ResumedMetricName>AvgLCOM</ResumedMetricName>
     <MethodNameToInvoke>AverageLCOM</MethodNameToInvoke>
-    <MetricName>Average LCOM</MetricName>
-    <Description xml:space="preserve">LCOM average of all types in assembly</Description>
+    <MetricName>Average Types LCOM</MetricName>
+    <Description xml:space="preserve">Average LCOM of all types in assembly</Description>
     <CodeSections>
       <CodeSection>Code</CodeSection>
       <CodeSection>UnitTest</CodeSection>
@@ -16,10 +16,23 @@
   <UserDefinedMetricDefinition>
     <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
     <MetricType>System.Double</MetricType>
-    <ResumedMetricName>AverageLOC</ResumedMetricName>
+    <ResumedMetricName>AvgLOC</ResumedMetricName>
     <MethodNameToInvoke>AverageLinesOfCodeInMethods</MethodNameToInvoke>
-    <MetricName>Average Lines Of Code in Methods</MetricName>
-    <Description xml:space="preserve">LOC average of all methods in assembly</Description>
+    <MetricName>Average Methods Lines Of Code</MetricName>
+    <Description xml:space="preserve">Average LOC of all methods in assembly</Description>
+    <CodeSections>
+      <CodeSection>Code</CodeSection>
+      <CodeSection>UnitTest</CodeSection>
+      <CodeSection>BDD</CodeSection>
+    </CodeSections>
+  </UserDefinedMetricDefinition>
+  <UserDefinedMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
+    <MetricType>System.Double</MetricType>
+    <ResumedMetricName>AvgCiclomaticComplexity</ResumedMetricName>
+    <MethodNameToInvoke>AverageCyclomaticComplexity</MethodNameToInvoke>
+    <MetricName>Average Methods Cyclomatic Complexity</MetricName>
+    <Description xml:space="preserve">Average Cyclomatic Complexity of all methods in assembly</Description>
     <CodeSections>
       <CodeSection>Code</CodeSection>
       <CodeSection>UnitTest</CodeSection>
