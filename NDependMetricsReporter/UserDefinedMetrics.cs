@@ -63,6 +63,21 @@ namespace NDependMetricsReporter
             return CountMethodsCalledFromAssembly(methodName, "RCNGCMembersManagementAppLogic");
         }
 
+        public double AverageLCOM(string assemblyName)
+        {
+            IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
+            float? average = assembly.ChildTypes.Select(type => type.LCOM).Average();
+            return (average.HasValue ? average.Value : 0);
+        }
+
+        public double AverageLinesOfCodeInMethods(string assemblyName)
+        {
+            IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
+            List<uint?> linesOfCodeOfAllMethods = assembly.ChildMethods.Select(method => method.NbLinesOfCode).ToList();
+            decimal? averageLines = linesOfCodeOfAllMethods.Average(value=> (decimal?)value);
+            return (averageLines.HasValue ? (double)averageLines.Value : 0);
+        }
+
         private int CountMethodsCalledFromAssembly(string methodName, string assemblyName)
         {
             IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);

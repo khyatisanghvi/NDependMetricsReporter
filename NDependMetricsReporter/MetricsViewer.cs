@@ -84,7 +84,7 @@ namespace NDependMetricsReporter
             FillNDependProjectInfo();
             IEnumerable<IAssembly> lastAnalysisAssembliesList = codeElementsManager.GetNonThirdPartyAssembliesInApplication();
             List<NDependMetricDefinition> nDependAssemblyMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("AssemblyMetrics.xml");
-            List<UserDefinedMetricDefinition> userDefinedAssemblyMetricsDefinitionList = new List<UserDefinedMetricDefinition>();
+            List<UserDefinedMetricDefinition> userDefinedAssemblyMetricsDefinitionList = new XMLMetricsDefinitionLoader().LoadUserDefinedMetricsDefinitions("AssemblyUserDefinedMetrics.xml");
             DataTable assemblyMetricsDataTable = dataTableHelper.CreateCodeElementMetricsDataTable<IAssembly>(lastAnalysisAssembliesList, nDependAssemblyMetricsDefinionsList, userDefinedAssemblyMetricsDefinitionList);
             FillCodeAsembliestDataGridView(assemblyMetricsDataTable);
             FillTestAssembliesDataGridView(assemblyMetricsDataTable);
@@ -262,7 +262,7 @@ namespace NDependMetricsReporter
                 IAssembly assembly = codeElementsManager.GetAssemblyByName(selectedAssemblyName);
 
                 List<NDependMetricDefinition> nDependNamespaceMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("NamespaceMetrics.xml");
-                List<UserDefinedMetricDefinition> userDefinedNamespaceMetricsDefinitionList = new List<UserDefinedMetricDefinition>();
+                List<UserDefinedMetricDefinition> userDefinedNamespaceMetricsDefinitionList = new XMLMetricsDefinitionLoader().LoadUserDefinedMetricsDefinitions("NamespaceUserDefinedMetrics.xml");
                 DataTable namespaceMetricsDataTable = dataTableHelper.CreateCodeElementMetricsDataTable<INamespace>(assembly.ChildNamespaces, nDependNamespaceMetricsDefinionsList, userDefinedNamespaceMetricsDefinitionList);
                 FillCodeElementsDataGridView(targetNamespacesDataGridView, namespaceMetricsDataTable, true);
             }
@@ -276,7 +276,7 @@ namespace NDependMetricsReporter
                 INamespace nNamespace = codeElementsManager.GetNamespaceByName(selectedNamespaceName);
 
                 List<NDependMetricDefinition> nDependTypeMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("TypeMetrics.xml");
-                List<UserDefinedMetricDefinition> userDefinedTypeMetricsDefinitionList = new List<UserDefinedMetricDefinition>();
+                List<UserDefinedMetricDefinition> userDefinedTypeMetricsDefinitionList = new XMLMetricsDefinitionLoader().LoadUserDefinedMetricsDefinitions("TypeUserDefinedMetrics.xml");
                 DataTable typeMetricsDataTable = dataTableHelper.CreateCodeElementMetricsDataTable<IType>(nNamespace.ChildTypes, nDependTypeMetricsDefinionsList, userDefinedTypeMetricsDefinitionList);
                 FillCodeElementsDataGridView(targetTypesDataGridView, typeMetricsDataTable, true);
             }
@@ -369,7 +369,7 @@ namespace NDependMetricsReporter
                 string selectedAssemblyName = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
 
                 List<NDependMetricDefinition> assemblyNDependMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("AssemblyMetrics.xml");
-                List<UserDefinedMetricDefinition> assemblyUserDefinedMetricsDefinitionsList = new List<UserDefinedMetricDefinition>();
+                List<UserDefinedMetricDefinition> assemblyUserDefinedMetricsDefinitionsList = new XMLMetricsDefinitionLoader().LoadUserDefinedMetricsDefinitions("AssemblyUserDefinedMetrics.xml");
                 FillMetricsListView(targetNDependMetricsListView, targetUserDefinedMetricsListView, codeSection, senderDataGridView.SelectedRows[0], assemblyNDependMetricsDefinionsList, assemblyUserDefinedMetricsDefinitionsList);
 
                 targetElementTypeLabel.Text = "Assembly";
@@ -384,7 +384,7 @@ namespace NDependMetricsReporter
                 string selectedNamespaceName = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
 
                 List<NDependMetricDefinition> namespaceNDependMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("NamespaceMetrics.xml");
-                List<UserDefinedMetricDefinition> namespaceUserDefinedMetricsDefinitionsList = new List<UserDefinedMetricDefinition>();
+                List<UserDefinedMetricDefinition> namespaceUserDefinedMetricsDefinitionsList = new XMLMetricsDefinitionLoader().LoadUserDefinedMetricsDefinitions("NamespaceUserDefinedMetrics.xml");
                 FillMetricsListView(targetNDependMetricsListView, targetUserDefinedMetricsListView, codeSection, senderDataGridView.SelectedRows[0], namespaceNDependMetricsDefinionsList, namespaceUserDefinedMetricsDefinitionsList);
 
                 targetElementTypeLabel.Text = "Namespace";
@@ -399,7 +399,7 @@ namespace NDependMetricsReporter
                 string selectedType = senderDataGridView.SelectedRows[0].Cells[0].Value.ToString();
 
                 List<NDependMetricDefinition> typesNDependMetricsDefinionsList = new XMLMetricsDefinitionLoader().LoadNDependMetricsDefinitions("TypeMetrics.xml");
-                List<UserDefinedMetricDefinition> typesUserDefinedMetricsDefinitionsList = new List<UserDefinedMetricDefinition>();
+                List<UserDefinedMetricDefinition> typesUserDefinedMetricsDefinitionsList = new XMLMetricsDefinitionLoader().LoadUserDefinedMetricsDefinitions("TypeUserDefinedMetrics.xml");
                 FillMetricsListView(targetNDependMetricsListView, targetUserDefinedMetricsListView, codeSection, senderDataGridView.SelectedRows[0], typesNDependMetricsDefinionsList, typesUserDefinedMetricsDefinitionsList);
 
                 targetElementTypeLabel.Text = "Type";

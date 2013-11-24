@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ArrayOfUserDefinedMetricDefinition>
+  <UserDefinedMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
+    <MetricType>System.Double</MetricType>
+    <ResumedMetricName>AverageLCOM</ResumedMetricName>
+    <MethodNameToInvoke>AverageLCOM</MethodNameToInvoke>
+    <MetricName>Average LCOM</MetricName>
+    <Description xml:space="preserve">LCOM average of all types in assembly</Description>
+    <CodeSections>
+      <CodeSection>Code</CodeSection>
+      <CodeSection>UnitTest</CodeSection>
+      <CodeSection>BDD</CodeSection> 
+    </CodeSections>
+  </UserDefinedMetricDefinition>
+  <UserDefinedMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
+    <MetricType>System.Double</MetricType>
+    <ResumedMetricName>AverageLOC</ResumedMetricName>
+    <MethodNameToInvoke>AverageLinesOfCodeInMethods</MethodNameToInvoke>
+    <MetricName>Average Lines Of Code in Methods</MetricName>
+    <Description xml:space="preserve">LOC average of all methods in assembly</Description>
+    <CodeSections>
+      <CodeSection>Code</CodeSection>
+      <CodeSection>UnitTest</CodeSection>
+      <CodeSection>BDD</CodeSection>
+    </CodeSections>
+  </UserDefinedMetricDefinition>
+</ArrayOfUserDefinedMetricDefinition>
