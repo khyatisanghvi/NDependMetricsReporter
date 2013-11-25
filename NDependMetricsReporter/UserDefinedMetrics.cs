@@ -85,6 +85,41 @@ namespace NDependMetricsReporter
             decimal? average = ciclomaticComplexityOfAllMethods.Average(value => (decimal?)value);
             return (average.HasValue ? (double)average.Value : 0);
         }
+
+        public double AverageNestingDepth(string assemblyName)
+        {
+            IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
+            List<ushort?> nestingDepthOfAllMethods = assembly.ChildMethods.Select(method => method.ILNestingDepth).ToList();
+            decimal? average = nestingDepthOfAllMethods.Average(value => (decimal?)value);
+            return (average.HasValue ? (double)average.Value : 0);
+        }
+
+        public double AverageMethodCe(string assemblyName)
+        {
+            IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
+            List<uint?> metodCeOfAllMethods = assembly.ChildMethods.Select(method => method.NbMethodsCalled).ToList();
+            decimal? average = metodCeOfAllMethods.Average(value => (decimal?)value);
+            return (average.HasValue ? (double)average.Value : 0);
+        }
+
+        public double AverageLCOMHS(string assemblyName)
+        {
+            IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
+            List<float?> lCOMHSOfAllTypes = assembly.ChildTypes.Select(type => type.LCOMHS).ToList();
+            double? average = lCOMHSOfAllTypes.Average(value => (double?)value);
+            return (average.HasValue ? (double)average.Value : 0);
+        }
+
+        public int MethodsCallingMeNotFromTests(string methodName)
+        {
+            IAssembly testAssembly = codeElementsManager.GetAssemblyByName("RCNGCMembersManagementUnitTests");
+            IAssembly bDDAssembly = codeElementsManager.GetAssemblyByName("RCNGCMembersManagementSpecFlowBDD");
+            IMethod method = codeElementsManager.GetMethodByName(methodName);
+            return method.MethodsCalled
+                .Select(m => m)
+                .Where(m => (m.ParentAssembly != testAssembly && m.ParentAssembly != bDDAssembly)).Count();
+        }
+
         private int CountMethodsCalledFromAssembly(string methodName, string assemblyName)
         {
             IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
@@ -92,6 +127,12 @@ namespace NDependMetricsReporter
             return method.MethodsCalled.Select(m => m).Where(m => m.ParentAssembly == assembly).Count();
         }
 
+        private int CountMethodsCallingMeNotFromAssembly(string methodName, string assemblyName)
+        {
+            IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
+            IMethod method = codeElementsManager.GetMethodByName(methodName);
+            return method.MethodsCalled.Select(m => m).Where(m => m.ParentAssembly != assembly).Count();
+        }
 
 
 

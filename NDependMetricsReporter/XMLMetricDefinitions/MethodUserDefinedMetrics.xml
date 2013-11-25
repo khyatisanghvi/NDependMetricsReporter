@@ -12,4 +12,15 @@
       <CodeSection>BDD</CodeSection> 
     </CodeSections>
   </UserDefinedMetricDefinition>
+  <UserDefinedMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IMethod</NDependCodeElementType>
+    <MetricType>System.Double</MetricType>
+    <ResumedMetricName>AppNbMethodsCallingMe</ResumedMetricName>
+    <MethodNameToInvoke>MethodsCallingMeNotFromTests</MethodNameToInvoke>
+    <MetricName>Number Of Application Methods Calling Me</MetricName>
+    <Description xml:space="preserve">Afferent Coupling excluding calls from Unit Tests or BDD</Description>
+    <CodeSections>
+      <CodeSection>Code</CodeSection>
+    </CodeSections>
+  </UserDefinedMetricDefinition>
 </ArrayOfUserDefinedMetricDefinition>
