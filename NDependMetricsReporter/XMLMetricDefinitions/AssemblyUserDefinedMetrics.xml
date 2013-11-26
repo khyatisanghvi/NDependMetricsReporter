@@ -71,7 +71,33 @@
     <ResumedMetricName>AvgMethodCe</ResumedMetricName>
     <MethodNameToInvoke>AverageMethodCe</MethodNameToInvoke>
     <MetricName>Average Method Efferent Coupling</MetricName>
-    <Description xml:space="preserve">Average Methods Called on all methods in assembly</Description>
+    <Description xml:space="preserve">Average Methods called on all methods in assembly</Description>
+    <CodeSections>
+      <CodeSection>Code</CodeSection>
+      <CodeSection>UnitTest</CodeSection>
+      <CodeSection>BDD</CodeSection>
+    </CodeSections>
+  </UserDefinedMetricDefinition>
+  <UserDefinedMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
+    <MetricType>System.Double</MetricType>
+    <ResumedMetricName>AvgTypeCe</ResumedMetricName>
+    <MethodNameToInvoke>AverageTypeCe</MethodNameToInvoke>
+    <MetricName>Average Type Efferent Coupling</MetricName>
+    <Description xml:space="preserve">Average Types used on all methods in assembly</Description>
+    <CodeSections>
+      <CodeSection>Code</CodeSection>
+      <CodeSection>UnitTest</CodeSection>
+      <CodeSection>BDD</CodeSection>
+    </CodeSections>
+  </UserDefinedMetricDefinition>
+  <UserDefinedMetricDefinition>
+    <NDependCodeElementType>NDepend.CodeModel.IAssembly</NDependCodeElementType>
+    <MetricType>System.Double</MetricType>
+    <ResumedMetricName>AvgABC</ResumedMetricName>
+    <MethodNameToInvoke>AverageABC</MethodNameToInvoke>
+    <MetricName>Average Type Association Between Classes</MetricName>
+    <Description xml:space="preserve">Average ABC on all methods in assembly</Description>
     <CodeSections>
       <CodeSection>Code</CodeSection>
       <CodeSection>UnitTest</CodeSection>

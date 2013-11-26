@@ -127,7 +127,7 @@ namespace NDependMetricsReporter
                 codeElementMetricsDataGridView.RowHeadersWidth = 25;
                 foreach (DataGridViewColumn dvgc in codeElementMetricsDataGridView.Columns)
                 {
-                    //dvgc.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    dvgc.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     dvgc.Visible = false;
                 }
                 codeElementMetricsDataGridView.Columns[0].Visible = true;

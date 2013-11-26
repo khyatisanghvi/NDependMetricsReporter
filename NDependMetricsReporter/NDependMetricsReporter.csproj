@@ -134,6 +134,7 @@
     </Content>
     <Content Include="XMLMetricDefinitions\AssemblyUserDefinedMetrics.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="XMLMetricDefinitions\MethodMetrics.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -102,6 +102,22 @@ namespace NDependMetricsReporter
             return (average.HasValue ? (double)average.Value : 0);
         }
 
+        public double AverageTypeCe(string assemblyName)
+        {
+            IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
+            List<uint?> typeCeOfAllTypes = assembly.ChildTypes.Select(method => method.NbTypesUsed).ToList();
+            decimal? average = typeCeOfAllTypes.Average(value => (decimal?)value);
+            return (average.HasValue ? (double)average.Value : 0);
+        }
+
+        public double AverageABC(string assemblyName)
+        {
+            IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
+            List<ushort?> abcOfAllTypes = assembly.ChildTypes.Select(method => method.ABT).ToList();
+            decimal? average = abcOfAllTypes.Average(value => (decimal?)value);
+            return (average.HasValue ? (double)average.Value : 0);
+        }
+
         public double AverageLCOMHS(string assemblyName)
         {
             IAssembly assembly = codeElementsManager.GetAssemblyByName(assemblyName);
