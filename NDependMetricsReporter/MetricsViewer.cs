@@ -37,7 +37,7 @@ namespace NDependMetricsReporter
 
         private void OpenNdependProject()
         {
-            nDependServicesProvider.ProjectManager.ShowDialogChooseAnExistingProject(out nDependProject);
+            nDependServicesProvider.ProjectManager.ShowDialogChooseAnExistingProject(IntPtr.Zero, out nDependProject);
             if (nDependProject == null) return;
             ICodeBase lastAnalysisCodebase = new CodeBaseManager(nDependProject).LoadLastCodebase();
             codeElementsManager = new CodeElementsManager(lastAnalysisCodebase);

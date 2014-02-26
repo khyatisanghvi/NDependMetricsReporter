@@ -23,13 +23,15 @@ namespace NDependMetricsReporter
             var projectManager = nDependServicesProvider.ProjectManager;
             IAbsoluteFilePath pathToNDependProject = PathHelpers.ToAbsoluteFilePath(nDpendProjectpath);
             IProject nDependProject = projectManager.LoadProject(pathToNDependProject);
-            ICollection<IAnalysisResultRef> analysisResultRefs = nDependProject.GetAvailableAnalysisResultsRefs();
+            //ICollection<IAnalysisResultRef> analysisResultRefs = nDependProject.GetAvailableAnalysisResultsRefs();
+            var analysisResultRefs = nDependProject.GetAvailableAnalysisResultsRefs();
             analysisResultRefsList = analysisResultRefs.OrderBy(analysisResultRef => analysisResultRef.Date).ToList();
         }
 
         public AnalysisHistoryManager(IProject nDependProject)
         {
-            ICollection<IAnalysisResultRef> analysisResultRefs = nDependProject.GetAvailableAnalysisResultsRefs();
+            //ICollection<IAnalysisResultRef> analysisResultRefs = nDependProject.GetAvailableAnalysisResultsRefs();
+            var analysisResultRefs = nDependProject.GetAvailableAnalysisResultsRefs();
             analysisResultRefsList = analysisResultRefs.OrderBy(analysisResultRef => analysisResultRef.Date).ToList();
         }
 
